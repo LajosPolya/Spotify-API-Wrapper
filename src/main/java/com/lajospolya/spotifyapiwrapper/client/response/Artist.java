@@ -10,7 +10,7 @@ public class Artist
     private List<String> genres;
     private String href;
     private String id;
-    private Image images;
+    private List<Image> images;
     private String name;
     private Integer popularity;
     private String type;
@@ -66,12 +66,12 @@ public class Artist
         this.id = id;
     }
 
-    public Image getImages()
+    public List<Image> getImages()
     {
         return images;
     }
 
-    public void setImages(Image images)
+    public void setImages(List<Image> images)
     {
         this.images = images;
     }
