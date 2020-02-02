@@ -3,37 +3,36 @@ package com.lajospolya.spotifyapiwrapper.client.response;
 import java.util.List;
 import java.util.Map;
 
-public class Track
+public class Album
 {
-    private SimplifiedAlbum album;
+    private String album_type;
     private List<SimplifiedArtist> artists;
     private List<String> available_markets;
-    private Integer disc_number;
-    private Integer duration_ms;
-    private Boolean explicit;
+    private List<Map<String, String>> copyrights;
     private Map<String, String> external_ids;
     private Map<String, String> external_urls;
+    private List<String> genres;
     private String href;
     private String id;
-    private Boolean is_playable;
-    private TrackLink linked_form;
-    private Map<String, String> restrictions;
+    private List<Image> images;
+    private String label;
     private String name;
     private Integer popularity;
-    private String preview_url;
-    private Integer track_number;
+    private String release_date;
+    private String release_date_precision;
+    private Map<String, String> restrictions;
+    private Paging<SimplifiedTrack> tracks;
     private String type;
     private String uri;
-    private Boolean is_local;
 
-    public SimplifiedAlbum getAlbum()
+    public String getAlbum_type()
     {
-        return album;
+        return album_type;
     }
 
-    public void setAlbum(SimplifiedAlbum album)
+    public void setAlbum_type(String album_type)
     {
-        this.album = album;
+        this.album_type = album_type;
     }
 
     public List<SimplifiedArtist> getArtists()
@@ -56,34 +55,14 @@ public class Track
         this.available_markets = available_markets;
     }
 
-    public Integer getDisc_number()
+    public List<Map<String, String>> getCopyrights()
     {
-        return disc_number;
+        return copyrights;
     }
 
-    public void setDisc_number(Integer disc_number)
+    public void setCopyrights(List<Map<String, String>> copyrights)
     {
-        this.disc_number = disc_number;
-    }
-
-    public Integer getDuration_ms()
-    {
-        return duration_ms;
-    }
-
-    public void setDuration_ms(Integer duration_ms)
-    {
-        this.duration_ms = duration_ms;
-    }
-
-    public Boolean getExplicit()
-    {
-        return explicit;
-    }
-
-    public void setExplicit(Boolean explicit)
-    {
-        this.explicit = explicit;
+        this.copyrights = copyrights;
     }
 
     public Map<String, String> getExternal_ids()
@@ -106,6 +85,16 @@ public class Track
         this.external_urls = external_urls;
     }
 
+    public List<String> getGenres()
+    {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres)
+    {
+        this.genres = genres;
+    }
+
     public String getHref()
     {
         return href;
@@ -126,34 +115,24 @@ public class Track
         this.id = id;
     }
 
-    public Boolean getIs_playable()
+    public List<Image> getImages()
     {
-        return is_playable;
+        return images;
     }
 
-    public void setIs_playable(Boolean is_playable)
+    public void setImages(List<Image> images)
     {
-        this.is_playable = is_playable;
+        this.images = images;
     }
 
-    public TrackLink getLinked_form()
+    public String getLabel()
     {
-        return linked_form;
+        return label;
     }
 
-    public void setLinked_form(TrackLink linked_form)
+    public void setLabel(String label)
     {
-        this.linked_form = linked_form;
-    }
-
-    public Map<String, String> getRestrictions()
-    {
-        return restrictions;
-    }
-
-    public void setRestrictions(Map<String, String> restrictions)
-    {
-        this.restrictions = restrictions;
+        this.label = label;
     }
 
     public String getName()
@@ -176,24 +155,44 @@ public class Track
         this.popularity = popularity;
     }
 
-    public String getPreview_url()
+    public String getRelease_date()
     {
-        return preview_url;
+        return release_date;
     }
 
-    public void setPreview_url(String preview_url)
+    public void setRelease_date(String release_date)
     {
-        this.preview_url = preview_url;
+        this.release_date = release_date;
     }
 
-    public Integer getTrack_number()
+    public String getRelease_date_precision()
     {
-        return track_number;
+        return release_date_precision;
     }
 
-    public void setTrack_number(Integer track_number)
+    public void setRelease_date_precision(String release_date_precision)
     {
-        this.track_number = track_number;
+        this.release_date_precision = release_date_precision;
+    }
+
+    public Map<String, String> getRestrictions()
+    {
+        return restrictions;
+    }
+
+    public void setRestrictions(Map<String, String> restrictions)
+    {
+        this.restrictions = restrictions;
+    }
+
+    public Paging<SimplifiedTrack> getTracks()
+    {
+        return tracks;
+    }
+
+    public void setTracks(Paging<SimplifiedTrack> tracks)
+    {
+        this.tracks = tracks;
     }
 
     public String getType()
@@ -214,15 +213,5 @@ public class Track
     public void setUri(String uri)
     {
         this.uri = uri;
-    }
-
-    public Boolean getIs_local()
-    {
-        return is_local;
-    }
-
-    public void setIs_local(Boolean is_local)
-    {
-        this.is_local = is_local;
     }
 }

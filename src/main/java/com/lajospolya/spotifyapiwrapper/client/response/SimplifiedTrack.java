@@ -3,15 +3,13 @@ package com.lajospolya.spotifyapiwrapper.client.response;
 import java.util.List;
 import java.util.Map;
 
-public class Track
+public class SimplifiedTrack
 {
-    private SimplifiedAlbum album;
     private List<SimplifiedArtist> artists;
     private List<String> available_markets;
     private Integer disc_number;
     private Integer duration_ms;
     private Boolean explicit;
-    private Map<String, String> external_ids;
     private Map<String, String> external_urls;
     private String href;
     private String id;
@@ -19,22 +17,11 @@ public class Track
     private TrackLink linked_form;
     private Map<String, String> restrictions;
     private String name;
-    private Integer popularity;
     private String preview_url;
     private Integer track_number;
     private String type;
     private String uri;
     private Boolean is_local;
-
-    public SimplifiedAlbum getAlbum()
-    {
-        return album;
-    }
-
-    public void setAlbum(SimplifiedAlbum album)
-    {
-        this.album = album;
-    }
 
     public List<SimplifiedArtist> getArtists()
     {
@@ -84,16 +71,6 @@ public class Track
     public void setExplicit(Boolean explicit)
     {
         this.explicit = explicit;
-    }
-
-    public Map<String, String> getExternal_ids()
-    {
-        return external_ids;
-    }
-
-    public void setExternal_ids(Map<String, String> external_ids)
-    {
-        this.external_ids = external_ids;
     }
 
     public Map<String, String> getExternal_urls()
@@ -164,16 +141,6 @@ public class Track
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    public Integer getPopularity()
-    {
-        return popularity;
-    }
-
-    public void setPopularity(Integer popularity)
-    {
-        this.popularity = popularity;
     }
 
     public String getPreview_url()

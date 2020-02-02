@@ -38,6 +38,9 @@ public class SpotifyApiClient
     private static final String GET_TRACKS_AUDIO_FEATURES = SPOTIFY_V1_API_URI + "audio-features";
     private static final String GET_TRACKS_AUDIO_ANALYSIS = SPOTIFY_V1_API_URI + "audio-analysis/";
 
+    // Albums API
+    private static final String GET_ALBUMS = SPOTIFY_V1_API_URI + "albums";
+
     public SpotifyApiClient(AuthorizationResponse authorizationResponse)
     {
         this.apiTokenResponse = authorizationResponse;
@@ -316,17 +319,17 @@ public class SpotifyApiClient
 
     public String getAudioAnalysis(String trackId)
     {
-        UriComponentsBuilder tracksAudioFeaturesBuilder =  UriComponentsBuilder.fromUriString(GET_TRACKS_AUDIO_ANALYSIS + trackId);
+        UriComponentsBuilder tracksAudioAnalysisBuilder =  UriComponentsBuilder.fromUriString(GET_TRACKS_AUDIO_ANALYSIS + trackId);
 
-        HttpRequest getTracksAudioFeaturesRequest = HttpRequest.newBuilder()
-                .uri(tracksAudioFeaturesBuilder.build().toUri())
+        HttpRequest getTracksAudioAnalysisRequest = HttpRequest.newBuilder()
+                .uri(tracksAudioAnalysisBuilder.build().toUri())
                 .header(AUTHORIZATION_HEADER, this.builtToken)
                 .GET()
                 .build();
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getTracksAudioFeaturesRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> resp = httpClient.send(getTracksAudioAnalysisRequest, HttpResponse.BodyHandlers.ofString());
             String body = resp.body();
             return body;
         }
@@ -338,6 +341,37 @@ public class SpotifyApiClient
         {
             System.out.println(e.getMessage());
             throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+        }
+    }
+
+    public List<Album> getAlbums(List<String> albumIds)
+    {
+        String commaSeparatedIds = String.join(",", albumIds);
+        UriComponentsBuilder albumsBuilder =  UriComponentsBuilder.fromUriString(GET_ALBUMS);
+        albumsBuilder.queryParam("ids", commaSeparatedIds);
+
+        HttpRequest getAlbumsRequest = HttpRequest.newBuilder()
+                .uri(albumsBuilder.build().toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getAlbumsRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+
+            Albums albums = gson.fromJson(body, Albums.class);
+            return albums.getAlbums();
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch albums");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize albums" + e.getMessage(), e);
         }
     }
 }
