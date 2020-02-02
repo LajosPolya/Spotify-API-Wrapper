@@ -40,6 +40,7 @@ public class SpotifyApiClient
 
     // Albums API
     private static final String GET_ALBUMS = SPOTIFY_V1_API_URI + "albums";
+    private static final String GET_ALBUM = SPOTIFY_V1_API_URI + "albums/";
 
     public SpotifyApiClient(AuthorizationResponse authorizationResponse)
     {
@@ -363,6 +364,35 @@ public class SpotifyApiClient
 
             Albums albums = gson.fromJson(body, Albums.class);
             return albums.getAlbums();
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch albums");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize albums" + e.getMessage(), e);
+        }
+    }
+
+    public Album getAlbum(String albumId)
+    {
+        UriComponentsBuilder albumsBuilder =  UriComponentsBuilder.fromUriString(GET_ALBUM + albumId);
+
+        HttpRequest getAlbumsRequest = HttpRequest.newBuilder()
+                .uri(albumsBuilder.build().toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getAlbumsRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+
+            Album album = gson.fromJson(body, Album.class);
+            return album;
         }
         catch (InterruptedException | IOException e)
         {
