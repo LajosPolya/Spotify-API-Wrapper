@@ -81,6 +81,7 @@ public class SpotifyApiClient
         {
             HttpResponse<String> resp = httpClient.send(getTracksRequest, HttpResponse.BodyHandlers.ofString());
             String body = resp.body();
+            
             Artists artist = gson.fromJson(body, Artists.class);
             return artist.getArtists();
         }
