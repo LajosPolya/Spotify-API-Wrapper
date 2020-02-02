@@ -23,10 +23,17 @@ public class SpotifyApiClient
     private static final String AUTHORIZATION_HEADER = "Authorization";
 
     private static final String SPOTIFY_V1_API_URI = "https://api.spotify.com/v1/";
+
+    // Artists API
     private static final String GET_ARTIST = SPOTIFY_V1_API_URI + "artists/";
     private static final String GET_ARTISTS = SPOTIFY_V1_API_URI + "artists";
     private static final String GET_ARTISTS_ALBUMS = SPOTIFY_V1_API_URI + "artists/{id}/albums";
     private static final String GET_ARTISTS_TOP_TRACKS = SPOTIFY_V1_API_URI + "artists/{id}/top-tracks";
+    private static final String GET_ARTISTS_RELATED_ARTISTS = SPOTIFY_V1_API_URI + "artists/{id}/related-artists";
+
+    // Tracks API
+    private static final String GET_TRACKS = SPOTIFY_V1_API_URI + "tracks";
+    private static final String GET_TRACK = SPOTIFY_V1_API_URI + "tracks/";
 
     public SpotifyApiClient(AuthorizationResponse authorizationResponse)
     {
@@ -143,6 +150,95 @@ public class SpotifyApiClient
 
             ArtistsTopTracks artistsTopTracks = gson.fromJson(body, ArtistsTopTracks.class);
             return artistsTopTracks.getTracks();
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch tracks");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+        }
+    }
+
+    public List<Artist> getArtistsRelatedArtists(String artistId)
+    {
+        UriComponentsBuilder artistsRelatedArtistsBuilder =  UriComponentsBuilder.fromUriString(GET_ARTISTS_RELATED_ARTISTS);
+
+        HttpRequest getArtistsRelatedArtistsRequest = HttpRequest.newBuilder()
+                .uri(artistsRelatedArtistsBuilder.buildAndExpand(artistId).toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getArtistsRelatedArtistsRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+
+            Artists artistsTopTracks = gson.fromJson(body, Artists.class);
+            return artistsTopTracks.getArtists();
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch tracks");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+        }
+    }
+
+    public List<Track> getTracks(List<String> trackIds)
+    {
+        String commaSeparatedIds = String.join(",", trackIds);
+        UriComponentsBuilder tracksBuilder =  UriComponentsBuilder.fromUriString(GET_TRACKS);
+        tracksBuilder.queryParam("ids", commaSeparatedIds);
+
+        HttpRequest getArtistsRelatedArtistsRequest = HttpRequest.newBuilder()
+                .uri(tracksBuilder.build().toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getArtistsRelatedArtistsRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+
+            Tracks artistsTopTracks = gson.fromJson(body, Tracks.class);
+            return artistsTopTracks.getTracks();
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch tracks");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+        }
+    }
+
+    public Track getTrack(String trackId)
+    {
+        UriComponentsBuilder tracksBuilder =  UriComponentsBuilder.fromUriString(GET_TRACK + trackId);
+
+        HttpRequest getArtistsRelatedArtistsRequest = HttpRequest.newBuilder()
+                .uri(tracksBuilder.build().toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getArtistsRelatedArtistsRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+
+            Track track = gson.fromJson(body, Track.class);
+            return track;
         }
         catch (InterruptedException | IOException e)
         {
