@@ -36,6 +36,7 @@ public class SpotifyApiClient
     private static final String GET_TRACK = SPOTIFY_V1_API_URI + "tracks/";
     private static final String GET_TRACK_AUDIO_FEATURES = SPOTIFY_V1_API_URI + "audio-features/";
     private static final String GET_TRACKS_AUDIO_FEATURES = SPOTIFY_V1_API_URI + "audio-features";
+    private static final String GET_TRACKS_AUDIO_ANALYSIS = SPOTIFY_V1_API_URI + "audio-analysis/";
 
     public SpotifyApiClient(AuthorizationResponse authorizationResponse)
     {
@@ -301,6 +302,33 @@ public class SpotifyApiClient
 
             TracksAudioFeatures tracksAudioFeatures = gson.fromJson(body, TracksAudioFeatures.class);
             return tracksAudioFeatures.getAudio_features();
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch tracks");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+        }
+    }
+
+    public String getAudioAnalysis(String trackId)
+    {
+        UriComponentsBuilder tracksAudioFeaturesBuilder =  UriComponentsBuilder.fromUriString(GET_TRACKS_AUDIO_ANALYSIS + trackId);
+
+        HttpRequest getTracksAudioFeaturesRequest = HttpRequest.newBuilder()
+                .uri(tracksAudioFeaturesBuilder.build().toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getTracksAudioFeaturesRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+            return body;
         }
         catch (InterruptedException | IOException e)
         {
