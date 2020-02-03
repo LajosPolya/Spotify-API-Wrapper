@@ -3,7 +3,7 @@ package com.lajospolya.spotifyapiwrapper.client.response;
 import java.util.List;
 import java.util.Map;
 
-public class Album extends CommonAlbum
+public class Album extends AlbumBase
 {
     private List<Map<String, String>> copyrights;
     private Map<String, String> external_ids;

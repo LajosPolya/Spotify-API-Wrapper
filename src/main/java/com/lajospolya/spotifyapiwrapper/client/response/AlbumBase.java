@@ -3,7 +3,7 @@ package com.lajospolya.spotifyapiwrapper.client.response;
 import java.util.List;
 import java.util.Map;
 
-public class CommonAlbum
+public class AlbumBase
 {
     private String album_type;
     private List<SimplifiedArtist> artists;

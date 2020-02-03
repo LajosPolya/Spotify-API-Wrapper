@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.client.response;
 
-public class SimplifiedAlbum extends CommonAlbum
+public class SimplifiedAlbum extends AlbumBase
 {
     private String album_group;
 
