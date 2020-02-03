@@ -2,11 +2,13 @@ package com.lajospolya.spotifyapiwrapper.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.lajospolya.spotifyapiwrapper.authorization.AuthorizationResponse;
 import com.lajospolya.spotifyapiwrapper.client.response.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -41,6 +43,7 @@ public class SpotifyApiClient
     // Albums API
     private static final String GET_ALBUMS = SPOTIFY_V1_API_URI + "albums";
     private static final String GET_ALBUM = SPOTIFY_V1_API_URI + "albums/";
+    private static final String GET_ALBUM_TRACKS = SPOTIFY_V1_API_URI + "albums/{id}/tracks";
 
     public SpotifyApiClient(AuthorizationResponse authorizationResponse)
     {
@@ -393,6 +396,36 @@ public class SpotifyApiClient
 
             Album album = gson.fromJson(body, Album.class);
             return album;
+        }
+        catch (InterruptedException | IOException e)
+        {
+            throw new RuntimeException("Unable to fetch albums");
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Unable to serialize albums" + e.getMessage(), e);
+        }
+    }
+
+    public Paging<SimplifiedTrack> getAlbumTracks(String albumId)
+    {
+        UriComponentsBuilder albumsBuilder =  UriComponentsBuilder.fromUriString(GET_ALBUM_TRACKS);
+
+        HttpRequest getAlbumsRequest = HttpRequest.newBuilder()
+                .uri(albumsBuilder.buildAndExpand(albumId).toUri())
+                .header(AUTHORIZATION_HEADER, this.builtToken)
+                .GET()
+                .build();
+
+        try
+        {
+            HttpResponse<String> resp = httpClient.send(getAlbumsRequest, HttpResponse.BodyHandlers.ofString());
+            String body = resp.body();
+
+            Type collectionType = new TypeToken<Paging<SimplifiedTrack>>(){}.getType();
+            Paging<SimplifiedTrack> albumTracks = gson.fromJson(body, collectionType);
+            return albumTracks;
         }
         catch (InterruptedException | IOException e)
         {
