@@ -66,19 +66,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-            Artist artist = gson.fromJson(body, Artist.class);
-            return artist;
+            return sendRequestAndFetchResponse(getArtistRequest, Artist.class);
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Artist");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize tracks");
+            throw new RuntimeException("Unable to serialize Artist");
         }
     }
 
@@ -96,20 +93,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-            
-            Artists artist = gson.fromJson(body, Artists.class);
-            return artist.getArtists();
+            return sendRequestAndFetchResponse(getArtistsRequest, Artists.class).getArtists();
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Artists");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Artists" + e.getMessage(), e);
         }
     }
 
@@ -125,20 +118,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistsAlbumsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            ArtistsAlbums artistsAlbums = gson.fromJson(body, ArtistsAlbums.class);
-            return artistsAlbums.getItems();
+            return sendRequestAndFetchResponse(getArtistsAlbumsRequest, ArtistsAlbums.class).getItems();
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Artist's Albums");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Artist's Albums" + e.getMessage(), e);
         }
     }
 
@@ -155,20 +144,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistsTopTracksRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            ArtistsTopTracks artistsTopTracks = gson.fromJson(body, ArtistsTopTracks.class);
-            return artistsTopTracks.getTracks();
+            return sendRequestAndFetchResponse(getArtistsTopTracksRequest, ArtistsTopTracks.class).getTracks();
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Artist's Top Tracks");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Artist's Top Tracks" + e.getMessage(), e);
         }
     }
 
@@ -184,20 +169,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistsRelatedArtistsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            Artists artistsTopTracks = gson.fromJson(body, Artists.class);
-            return artistsTopTracks.getArtists();
+            return sendRequestAndFetchResponse(getArtistsRelatedArtistsRequest, Artists.class).getArtists();
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Artist's Related Artists");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Artist's Related Artists" + e.getMessage(), e);
         }
     }
 
@@ -207,7 +188,7 @@ public class SpotifyApiClient
         UriComponentsBuilder tracksBuilder =  UriComponentsBuilder.fromUriString(GET_TRACKS);
         tracksBuilder.queryParam("ids", commaSeparatedIds);
 
-        HttpRequest getArtistsRelatedArtistsRequest = HttpRequest.newBuilder()
+        HttpRequest getTracksRequest = HttpRequest.newBuilder()
                 .uri(tracksBuilder.build().toUri())
                 .header(AUTHORIZATION_HEADER, this.builtToken)
                 .GET()
@@ -215,11 +196,7 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistsRelatedArtistsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            Tracks artistsTopTracks = gson.fromJson(body, Tracks.class);
-            return artistsTopTracks.getTracks();
+            return sendRequestAndFetchResponse(getTracksRequest, Tracks.class).getTracks();
         }
         catch (InterruptedException | IOException e)
         {
@@ -228,36 +205,32 @@ public class SpotifyApiClient
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize tracks" + e.getMessage(), e);
         }
     }
 
     public Track getTrack(String trackId)
     {
-        UriComponentsBuilder tracksBuilder =  UriComponentsBuilder.fromUriString(GET_TRACK + trackId);
+        UriComponentsBuilder trackBuilder =  UriComponentsBuilder.fromUriString(GET_TRACK + trackId);
 
-        HttpRequest getArtistsRelatedArtistsRequest = HttpRequest.newBuilder()
-                .uri(tracksBuilder.build().toUri())
+        HttpRequest getTrackRequest = HttpRequest.newBuilder()
+                .uri(trackBuilder.build().toUri())
                 .header(AUTHORIZATION_HEADER, this.builtToken)
                 .GET()
                 .build();
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getArtistsRelatedArtistsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            Track track = gson.fromJson(body, Track.class);
-            return track;
+            return sendRequestAndFetchResponse(getTrackRequest, Track.class);
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch track");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize artist" + e.getMessage(), e);
         }
     }
 
@@ -273,20 +246,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getAudioFeaturesRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            AudioFeatures audioFeatures = gson.fromJson(body, AudioFeatures.class);
-            return audioFeatures;
+            return sendRequestAndFetchResponse(getAudioFeaturesRequest, AudioFeatures.class);
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Audio Features");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Audio Features " + e.getMessage(), e);
         }
     }
 
@@ -304,20 +273,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getTracksAudioFeaturesRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            TracksAudioFeatures tracksAudioFeatures = gson.fromJson(body, TracksAudioFeatures.class);
-            return tracksAudioFeatures.getAudio_features();
+            return sendRequestAndFetchResponse(getTracksAudioFeaturesRequest, TracksAudioFeatures.class).getAudio_features();
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch several Audio Features");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize several Audio Features" + e.getMessage(), e);
         }
     }
 
@@ -339,12 +304,12 @@ public class SpotifyApiClient
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch tracks");
+            throw new RuntimeException("Unable to fetch Audio Analysis");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize artists" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Audio Analysis" + e.getMessage(), e);
         }
     }
 
@@ -362,11 +327,7 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getAlbumsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            Albums albums = gson.fromJson(body, Albums.class);
-            return albums.getAlbums();
+            return sendRequestAndFetchResponse(getAlbumsRequest, Albums.class).getAlbums();
         }
         catch (InterruptedException | IOException e)
         {
@@ -383,7 +344,7 @@ public class SpotifyApiClient
     {
         UriComponentsBuilder albumsBuilder =  UriComponentsBuilder.fromUriString(GET_ALBUM + albumId);
 
-        HttpRequest getAlbumsRequest = HttpRequest.newBuilder()
+        HttpRequest getAlbumRequest = HttpRequest.newBuilder()
                 .uri(albumsBuilder.build().toUri())
                 .header(AUTHORIZATION_HEADER, this.builtToken)
                 .GET()
@@ -391,20 +352,16 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getAlbumsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
-            Album album = gson.fromJson(body, Album.class);
-            return album;
+            return sendRequestAndFetchResponse(getAlbumRequest, Album.class);
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch albums");
+            throw new RuntimeException("Unable to fetch album");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize albums" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize album" + e.getMessage(), e);
         }
     }
 
@@ -420,21 +377,35 @@ public class SpotifyApiClient
 
         try
         {
-            HttpResponse<String> resp = httpClient.send(getAlbumsRequest, HttpResponse.BodyHandlers.ofString());
-            String body = resp.body();
-
             Type collectionType = new TypeToken<Paging<SimplifiedTrack>>(){}.getType();
-            Paging<SimplifiedTrack> albumTracks = gson.fromJson(body, collectionType);
-            return albumTracks;
+            return sendRequestAndFetchResponse(getAlbumsRequest, collectionType);
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("Unable to fetch albums");
+            throw new RuntimeException("Unable to fetch Album's Tracks");
         }
         catch (JsonSyntaxException e)
         {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Unable to serialize albums" + e.getMessage(), e);
+            throw new RuntimeException("Unable to serialize Album's Tracks" + e.getMessage(), e);
         }
+    }
+
+    private <T> T sendRequestAndFetchResponse(HttpRequest request, Class<T> dtoClass) throws IOException, InterruptedException
+    {
+        HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        String body = resp.body();
+
+        T response = gson.fromJson(body, dtoClass);
+        return response;
+    }
+
+    private <T> T sendRequestAndFetchResponse(HttpRequest request, Type collectionType) throws IOException, InterruptedException
+    {
+        HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        String body = resp.body();
+
+        T response = gson.fromJson(body, collectionType);
+        return response;
     }
 }
