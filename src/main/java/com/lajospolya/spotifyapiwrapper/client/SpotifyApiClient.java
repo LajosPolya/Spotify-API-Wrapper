@@ -399,11 +399,11 @@ public class SpotifyApiClient
         return gson.fromJson(body, dtoClass);
     }
 
-    private <T> T sendRequestAndFetchResponse(HttpRequest request, Type collectionType) throws IOException, InterruptedException
+    private <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfT) throws IOException, InterruptedException
     {
         HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         String body = resp.body();
 
-        return gson.fromJson(body, collectionType);
+        return gson.fromJson(body, typeOfT);
     }
 }
