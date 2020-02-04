@@ -396,8 +396,7 @@ public class SpotifyApiClient
         HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         String body = resp.body();
 
-        T response = gson.fromJson(body, dtoClass);
-        return response;
+        return gson.fromJson(body, dtoClass);
     }
 
     private <T> T sendRequestAndFetchResponse(HttpRequest request, Type collectionType) throws IOException, InterruptedException
@@ -405,7 +404,6 @@ public class SpotifyApiClient
         HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         String body = resp.body();
 
-        T response = gson.fromJson(body, collectionType);
-        return response;
+        return gson.fromJson(body, collectionType);
     }
 }
