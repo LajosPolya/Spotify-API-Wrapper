@@ -26,12 +26,6 @@ public class GetArtist extends SpotifyRequest<Artist>
                 .build();
     }
 
-    @Override
-    public Artist sendRequest()
-    {
-        return null;
-    }
-
     public static class Builder
     {
         private String id;
