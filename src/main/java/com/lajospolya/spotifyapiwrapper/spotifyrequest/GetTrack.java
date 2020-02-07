@@ -1,21 +1,20 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.client.response.Artists;
+import com.lajospolya.spotifyapiwrapper.client.response.Track;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
-import java.util.List;
 
-public class GetArtists extends SpotifyRequest<Artists>
+public class GetTrack extends SpotifyRequest<Track>
 {
-    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists";
+    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "tracks/{id}";
     private static final UriComponentsBuilder REQUEST_URI =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
     private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
     private String accessToken;
 
-    private GetArtists(HttpRequest.Builder requestBuilder)
+    private GetTrack(HttpRequest.Builder requestBuilder)
     {
         this.requestBuilder = requestBuilder;
     }
@@ -29,23 +28,20 @@ public class GetArtists extends SpotifyRequest<Artists>
 
     public static class Builder
     {
-        private List<String> artistIds;
+        private String trackId;
 
-        public Builder(List<String> artistIds)
+        public Builder(String trackId)
         {
-            this.artistIds = artistIds;
+            this.trackId = trackId;
         }
 
-        public GetArtists build()
+        public GetTrack build()
         {
             // Requires param validation
-            String commaSeparatedIds = String.join(",", this.artistIds);
-            UriComponentsBuilder artistsBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            artistsBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(artistsBuilder.build().toUri())
+                    .uri(REQUEST_URI.buildAndExpand(this.trackId).toUri())
                     .GET();
-            return new GetArtists(requestBuilder);
+            return new GetTrack(requestBuilder);
         }
     }
 }
