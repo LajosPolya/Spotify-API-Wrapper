@@ -25,12 +25,13 @@ public class GetAudioFeatures extends SpotifyRequest<AudioFeatures>
                 .build();
     }
 
-    public static class Builder
+    public static class Builder extends AbstractBuilder
     {
         private String trackId;
 
-        public Builder(String trackId)
+        public Builder(String trackId) throws IllegalArgumentException
         {
+            validateParametersNotNull(trackId);
             this.trackId = trackId;
         }
 

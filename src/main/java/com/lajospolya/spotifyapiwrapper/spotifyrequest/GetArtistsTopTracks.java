@@ -25,13 +25,14 @@ public class GetArtistsTopTracks extends SpotifyRequest<ArtistsTopTracks>
                 .build();
     }
 
-    public static class Builder
+    public static class Builder extends AbstractBuilder
     {
         private String artistId;
         private String market;
 
-        public Builder(String artistId, String market)
+        public Builder(String artistId, String market) throws IllegalArgumentException
         {
+            validateParametersNotNull(artistId, market);
             this.artistId = artistId;
             this.market = market;
         }

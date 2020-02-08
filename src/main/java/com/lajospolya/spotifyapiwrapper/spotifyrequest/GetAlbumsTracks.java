@@ -26,12 +26,13 @@ public class GetAlbumsTracks extends SpotifyRequest<Paging<SimplifiedTrack>>
                 .build();
     }
 
-    public static class Builder
+    public static class Builder extends AbstractBuilder
     {
         private String albumId;
 
-        public Builder(String albumId)
+        public Builder(String albumId) throws IllegalArgumentException
         {
+            validateParametersNotNull(albumId);
             this.albumId = albumId;
         }
 

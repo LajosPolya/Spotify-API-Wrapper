@@ -25,12 +25,13 @@ public class GetTrack extends SpotifyRequest<Track>
                 .build();
     }
 
-    public static class Builder
+    public static class Builder extends AbstractBuilder
     {
         private String trackId;
 
         public Builder(String trackId)
         {
+            validateParametersNotNull(trackId);
             this.trackId = trackId;
         }
 

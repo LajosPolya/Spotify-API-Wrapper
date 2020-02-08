@@ -25,13 +25,14 @@ public class GetArtist extends SpotifyRequest<Artist>
                 .build();
     }
 
-    public static class Builder
+    public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String artistId;
 
-        public Builder(String id)
+        public Builder(String artistId) throws IllegalArgumentException
         {
-            this.id = id;
+            validateParametersNotNull(artistId);
+            this.artistId = artistId;
         }
 
         public GetArtist build()
@@ -39,7 +40,7 @@ public class GetArtist extends SpotifyRequest<Artist>
             // Required param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.id).toUri())
+                    .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
                     .GET();
             return new GetArtist(requestBuilder);
         }

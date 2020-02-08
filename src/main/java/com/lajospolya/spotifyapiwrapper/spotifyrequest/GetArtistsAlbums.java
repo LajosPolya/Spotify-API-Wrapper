@@ -25,12 +25,13 @@ public class GetArtistsAlbums extends SpotifyRequest<ArtistsAlbums>
                 .build();
     }
 
-    public static class Builder
+    public static class Builder extends AbstractBuilder
     {
         private String artistId;
 
-        public Builder(String artistId)
+        public Builder(String artistId) throws IllegalArgumentException
         {
+            validateParametersNotNull(artistId);
             this.artistId = artistId;
         }
 
