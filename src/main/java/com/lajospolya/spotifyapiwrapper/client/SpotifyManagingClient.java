@@ -36,7 +36,7 @@ public class SpotifyManagingClient
         this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
     }
 
-    public <T> T sendRequest(SpotifyRequest<T> spotifyRequest)
+    public <T> T sendRequest(SpotifyRequest<T> spotifyRequest) throws SpotifyResponseException
     {
         try
         {
@@ -55,9 +55,7 @@ public class SpotifyManagingClient
         {
             System.out.println("IO Error " + e.getMessage());
         }
-
-        // Invalid Case, should instead rethrow an exception
-        return null;
+        throw new SpotifyResponseException("Unknown error occurred while sending the response");
     }
 
     private <T> void setAccessTokenOfRequest(SpotifyRequest<T> spotifyRequest) throws NoSuchFieldException, IllegalAccessException
@@ -77,7 +75,7 @@ public class SpotifyManagingClient
         return (HttpRequest) buildRequest.invoke(spotifyRequest, (Object[]) null);
     }
 
-    private <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException
+    private <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
     {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         validateResponse(response);
@@ -90,7 +88,7 @@ public class SpotifyManagingClient
         return gson.fromJson(body, typeOfReturnValue);
     }
 
-    private void validateResponse(HttpResponse<String> response)
+    private void validateResponse(HttpResponse<String> response) throws SpotifyResponseException
     {
         int statusCode = response.statusCode();
         if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
