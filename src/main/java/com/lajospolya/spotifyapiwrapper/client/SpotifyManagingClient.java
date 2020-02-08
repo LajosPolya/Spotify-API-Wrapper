@@ -80,7 +80,7 @@ public class SpotifyManagingClient
         HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         String body = resp.body();
 
-        if(String.class.getTypeName().equals(((Class<?>) typeOfReturnValue).getName()))
+        if(String.class.getTypeName().equals(typeOfReturnValue.getTypeName()))
         {
             return (T) body;
         }
