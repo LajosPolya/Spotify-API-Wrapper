@@ -2,6 +2,8 @@ package com.lajospolya.spotifyapiwrapper.client;
 
 import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.authorization.AuthorizationResponse;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.SpotifyRequest;
 
 import java.io.IOException;
@@ -77,14 +79,40 @@ public class SpotifyManagingClient
 
     private <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException
     {
-        HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        String body = resp.body();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        validateResponse(response);
+        String body = response.body();
 
-        if(String.class.getTypeName().equals(typeOfReturnValue.getTypeName()))
+        if(isStringType(typeOfReturnValue))
         {
             return (T) body;
         }
         return gson.fromJson(body, typeOfReturnValue);
+    }
+
+    private void validateResponse(HttpResponse<String> response)
+    {
+        int statusCode = response.statusCode();
+        if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
+        {
+            SpotifyErrorContainer error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
+            throw new SpotifyResponseException(error);
+        }
+    }
+
+    private Boolean isClientErrorStatusCode(int statusCode)
+    {
+        return statusCode / 100 == 4;
+    }
+
+    private Boolean isServerErrorStatusCode(int statusCode)
+    {
+        return statusCode / 100 == 5;
+    }
+
+    private Boolean isStringType(Type typeOfReturnValue)
+    {
+        return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 
     private <T> Type getGenericTypeOfRequest(SpotifyRequest<T> spotifyRequest)
