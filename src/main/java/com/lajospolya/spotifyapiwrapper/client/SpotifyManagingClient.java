@@ -80,6 +80,10 @@ public class SpotifyManagingClient
         HttpResponse<String> resp = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         String body = resp.body();
 
+        if(String.class.getTypeName().equals(((Class<?>) typeOfReturnValue).getName()))
+        {
+            return (T) body;
+        }
         return gson.fromJson(body, typeOfReturnValue);
     }
 

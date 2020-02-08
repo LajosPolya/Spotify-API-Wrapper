@@ -1,21 +1,19 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.client.response.TracksAudioFeatures;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
-import java.util.List;
 
-public class GetSeveralAudioFeatures extends SpotifyRequest<TracksAudioFeatures>
+public class GetAudioAnalysis extends SpotifyRequest<String>
 {
-    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-features";
+    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-analysis/{id}";
     private static final UriComponentsBuilder REQUEST_URI =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
     private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
     private String accessToken;
 
-    private GetSeveralAudioFeatures(HttpRequest.Builder requestBuilder)
+    private GetAudioAnalysis(HttpRequest.Builder requestBuilder)
     {
         this.requestBuilder = requestBuilder;
     }
@@ -29,22 +27,20 @@ public class GetSeveralAudioFeatures extends SpotifyRequest<TracksAudioFeatures>
 
     public static class Builder
     {
-        private List<String> trackIds;
+        private String trackId;
 
-        public Builder(List<String> trackIds)
+        public Builder(String trackId)
         {
-            this.trackIds = trackIds;
+            this.trackId = trackId;
         }
 
-        public GetSeveralAudioFeatures build()
+        public GetAudioAnalysis build()
         {
             // Requires param validation
-            String commaSeparatedIds = String.join(",", this.trackIds);
-            REQUEST_URI.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(REQUEST_URI.build().toUri())
+                    .uri(REQUEST_URI.buildAndExpand(this.trackId).toUri())
                     .GET();
-            return new GetSeveralAudioFeatures(requestBuilder);
+            return new GetAudioAnalysis(requestBuilder);
         }
     }
 }

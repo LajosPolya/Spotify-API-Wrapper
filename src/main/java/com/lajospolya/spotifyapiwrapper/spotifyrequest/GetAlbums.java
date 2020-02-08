@@ -1,21 +1,21 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.client.response.TracksAudioFeatures;
+import com.lajospolya.spotifyapiwrapper.client.response.Albums;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class GetSeveralAudioFeatures extends SpotifyRequest<TracksAudioFeatures>
+public class GetAlbums extends SpotifyRequest<Albums>
 {
-    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-features";
+    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums";
     private static final UriComponentsBuilder REQUEST_URI =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
     private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
     private String accessToken;
 
-    private GetSeveralAudioFeatures(HttpRequest.Builder requestBuilder)
+    private GetAlbums(HttpRequest.Builder requestBuilder)
     {
         this.requestBuilder = requestBuilder;
     }
@@ -29,22 +29,22 @@ public class GetSeveralAudioFeatures extends SpotifyRequest<TracksAudioFeatures>
 
     public static class Builder
     {
-        private List<String> trackIds;
+        private List<String> albumIds;
 
-        public Builder(List<String> trackIds)
+        public Builder(List<String> albumIds)
         {
-            this.trackIds = trackIds;
+            this.albumIds = albumIds;
         }
 
-        public GetSeveralAudioFeatures build()
+        public GetAlbums build()
         {
             // Requires param validation
-            String commaSeparatedIds = String.join(",", this.trackIds);
+            String commaSeparatedIds = String.join(",", this.albumIds);
             REQUEST_URI.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(REQUEST_URI.build().toUri())
                     .GET();
-            return new GetSeveralAudioFeatures(requestBuilder);
+            return new GetAlbums(requestBuilder);
         }
     }
 }
