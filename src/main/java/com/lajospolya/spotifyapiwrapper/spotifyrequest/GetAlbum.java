@@ -37,9 +37,9 @@ public class GetAlbum extends SpotifyRequest<Album>
         public GetAlbum build()
         {
             // Required param validation
-            UriComponentsBuilder requestUri =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUri.buildAndExpand(this.albumId).toUri())
+                    .uri(requestUriBuilder.buildAndExpand(this.albumId).toUri())
                     .GET();
             return new GetAlbum(requestBuilder);
         }

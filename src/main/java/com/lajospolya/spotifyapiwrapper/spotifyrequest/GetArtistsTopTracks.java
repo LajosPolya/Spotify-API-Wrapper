@@ -8,7 +8,6 @@ import java.net.http.HttpRequest;
 public class GetArtistsTopTracks extends SpotifyRequest<ArtistsTopTracks>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/top-tracks";
-    private static final UriComponentsBuilder REQUEST_URI =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
     private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
@@ -40,9 +39,10 @@ public class GetArtistsTopTracks extends SpotifyRequest<ArtistsTopTracks>
         public GetArtistsTopTracks build()
         {
             // Requires param validation
-            REQUEST_URI.queryParam(MARKET_QUERY_PARAM, market);
+            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(REQUEST_URI.buildAndExpand(this.artistId).toUri())
+                    .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
                     .GET();
             return new GetArtistsTopTracks(requestBuilder);
         }

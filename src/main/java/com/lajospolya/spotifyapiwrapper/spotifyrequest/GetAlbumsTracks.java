@@ -38,9 +38,9 @@ public class GetAlbumsTracks extends SpotifyRequest<Paging<SimplifiedTrack>>
         public GetAlbumsTracks build()
         {
             // Requires param validation
-            UriComponentsBuilder requestUri =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUri.buildAndExpand(this.albumId).toUri())
+                    .uri(requestUriBuilder.buildAndExpand(this.albumId).toUri())
                     .GET();
             return new GetAlbumsTracks(requestBuilder);
         }

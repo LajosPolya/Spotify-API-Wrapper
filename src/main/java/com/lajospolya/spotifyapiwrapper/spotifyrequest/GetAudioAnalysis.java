@@ -7,7 +7,6 @@ import java.net.http.HttpRequest;
 public class GetAudioAnalysis extends SpotifyRequest<String>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-analysis/{id}";
-    private static final UriComponentsBuilder REQUEST_URI =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
     private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
@@ -37,8 +36,9 @@ public class GetAudioAnalysis extends SpotifyRequest<String>
         public GetAudioAnalysis build()
         {
             // Requires param validation
+            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(REQUEST_URI.buildAndExpand(this.trackId).toUri())
+                    .uri(requestUriBuilder.buildAndExpand(this.trackId).toUri())
                     .GET();
             return new GetAudioAnalysis(requestBuilder);
         }

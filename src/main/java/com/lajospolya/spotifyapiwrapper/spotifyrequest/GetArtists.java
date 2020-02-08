@@ -9,7 +9,6 @@ import java.util.List;
 public class GetArtists extends SpotifyRequest<Artists>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists";
-    private static final UriComponentsBuilder REQUEST_URI =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
     private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
@@ -39,11 +38,11 @@ public class GetArtists extends SpotifyRequest<Artists>
         public GetArtists build()
         {
             // Requires param validation
+            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             String commaSeparatedIds = String.join(",", this.artistIds);
-            UriComponentsBuilder artistsBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            artistsBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
+            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(artistsBuilder.build().toUri())
+                    .uri(requestUriBuilder.build().toUri())
                     .GET();
             return new GetArtists(requestBuilder);
         }
