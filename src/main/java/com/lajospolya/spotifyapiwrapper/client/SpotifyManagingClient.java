@@ -3,6 +3,8 @@ package com.lajospolya.spotifyapiwrapper.client;
 import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.authorization.AuthorizationResponse;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.SpotifyRequest;
 
@@ -36,7 +38,8 @@ public class SpotifyManagingClient
         this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
     }
 
-    public <T> T sendRequest(SpotifyRequest<T> spotifyRequest) throws SpotifyResponseException
+    public <T> T sendRequest(SpotifyRequest<T> spotifyRequest)
+            throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
         try
         {
@@ -47,15 +50,18 @@ public class SpotifyManagingClient
 
             return sendRequestAndFetchResponse(request, genericType);
         }
-        catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
+        catch (NoSuchMethodException | InvocationTargetException e)
         {
-            System.out.println("Oops " + e.getMessage());
+            throw new SpotifyRequestBuilderException("Unable to build the request");
+        }
+        catch (NoSuchFieldException | IllegalAccessException e)
+        {
+            throw new SpotifyRequestAuthorizationException("Unable to set the access token");
         }
         catch (InterruptedException | IOException e)
         {
-            System.out.println("IO Error " + e.getMessage());
+            throw new SpotifyResponseException("An exception occurred while sending the request");
         }
-        throw new SpotifyResponseException("Unknown error occurred while sending the response");
     }
 
     private <T> void setAccessTokenOfRequest(SpotifyRequest<T> spotifyRequest) throws NoSuchFieldException, IllegalAccessException
