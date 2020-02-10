@@ -28,6 +28,7 @@ public class GetAlbum extends SpotifyRequest<Album>
     public static class Builder extends AbstractBuilder
     {
         private String albumId;
+        private String market;
 
         public Builder(String albumId) throws IllegalArgumentException
         {
@@ -39,10 +40,27 @@ public class GetAlbum extends SpotifyRequest<Album>
         {
             // Required param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+
+            addOptionalQueryParams(requestUriBuilder);
+
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.albumId).toUri())
                     .GET();
             return new GetAlbum(requestBuilder);
+        }
+
+        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        {
+            if(this.market != null)
+            {
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+            }
+        }
+
+        public Builder market(String market)
+        {
+            this.market = market;
+            return this;
         }
     }
 }

@@ -29,6 +29,7 @@ public class GetTracks extends SpotifyRequest<Tracks>
     public static class Builder extends AbstractBuilder
     {
         private List<String> trackIds;
+        private String market;
 
         public Builder(List<String> trackIds)
         {
@@ -42,10 +43,27 @@ public class GetTracks extends SpotifyRequest<Tracks>
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             String commaSeparatedIds = String.join(",", this.trackIds);
             requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
+
+            addOptionalQueryParams(requestUriBuilder);
+
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .GET();
             return new GetTracks(requestBuilder);
+        }
+
+        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        {
+            if(this.market != null)
+            {
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+            }
+        }
+
+        public Builder market(String market)
+        {
+            this.market = market;
+            return this;
         }
     }
 }

@@ -28,6 +28,7 @@ public class GetTrack extends SpotifyRequest<Track>
     public static class Builder extends AbstractBuilder
     {
         private String trackId;
+        private String market;
 
         public Builder(String trackId)
         {
@@ -39,10 +40,27 @@ public class GetTrack extends SpotifyRequest<Track>
         {
             // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+
+            addOptionalQueryParams(requestUriBuilder);
+
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.trackId).toUri())
                     .GET();
             return new GetTrack(requestBuilder);
+        }
+
+        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        {
+            if(this.market != null)
+            {
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+            }
+        }
+
+        public Builder market(String market)
+        {
+            this.market = market;
+            return this;
         }
     }
 }
