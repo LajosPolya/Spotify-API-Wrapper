@@ -6,7 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
-public class GetAlbumsTracks extends SpotifyRequest<Paging<SimplifiedTrack>>
+public final class GetAlbumsTracks extends SpotifyRequest<Paging<SimplifiedTrack>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums/{id}/tracks";
 

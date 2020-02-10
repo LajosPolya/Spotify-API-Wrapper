@@ -6,7 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class GetArtists extends SpotifyRequest<Artists>
+public final class GetArtists extends SpotifyRequest<Artists>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists";
 

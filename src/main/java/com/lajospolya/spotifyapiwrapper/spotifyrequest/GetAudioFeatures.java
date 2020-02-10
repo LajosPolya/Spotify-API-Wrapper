@@ -5,7 +5,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
-public class GetAudioFeatures extends SpotifyRequest<AudioFeatures>
+public final class GetAudioFeatures extends SpotifyRequest<AudioFeatures>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-features/{id}";
 

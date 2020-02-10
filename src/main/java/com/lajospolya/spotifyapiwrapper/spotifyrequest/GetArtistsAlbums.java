@@ -8,7 +8,7 @@ import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetArtistsAlbums extends SpotifyRequest<ArtistsAlbums>
+public final class GetArtistsAlbums extends SpotifyRequest<ArtistsAlbums>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/albums";
 
