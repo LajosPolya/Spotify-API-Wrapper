@@ -24,6 +24,7 @@ public class SpotifyManagingClient
     private AuthorizationResponse apiTokenResponse;
     private String builtToken;
     private Gson gson;
+    private Long timeOfAuthorization;
 
     private static final String TOKEN_FIELD_NAME = "accessToken";
     private static final String BUILD_REQUEST_METHOD_NAME = "buildRequest";
@@ -46,6 +47,7 @@ public class SpotifyManagingClient
 
         ClientCredentialsFlow authorizedClient = new ClientCredentialsFlow.Builder().build();
         String base64EncodedAuthKey = getBase64EncodedAuthorizationKey(clientId, clientSecret);
+        this.timeOfAuthorization = System.currentTimeMillis();
         AuthorizationResponse authResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
 
         this.apiTokenResponse = authResponse;
@@ -58,21 +60,24 @@ public class SpotifyManagingClient
         return Base64.getEncoder().encodeToString(authorizationKey);
     }
 
-    public SpotifyManagingClient(AuthorizationResponse authorizationResponse)
-    {
-        this.apiTokenResponse = authorizationResponse;
-        this.httpClient = HttpClient.newBuilder()
-                .version(HttpClient.Version.HTTP_2)
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .build();
-        this.gson =  new Gson();
-        this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
-    }
-
     public <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
+        if(hasTokenExpired())
+        {
+            throw new SpotifyRequestAuthorizationException("Access Token Has Expired");
+        }
+
         return sendRequest(spotifyRequest, this.builtToken);
+    }
+
+    private Boolean hasTokenExpired()
+    {
+        if((System.currentTimeMillis() - this.timeOfAuthorization) / 1000L > this.apiTokenResponse.getExpiresIn())
+        {
+            return true;
+        }
+        return false;
     }
 
     private <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
