@@ -6,13 +6,16 @@ import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.SpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.spotifyrequest.ClientCredentialsFlow;
 
 import java.io.IOException;
 import java.lang.reflect.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class SpotifyManagingClient
 {
@@ -24,8 +27,36 @@ public class SpotifyManagingClient
 
     private static final String TOKEN_FIELD_NAME = "accessToken";
     private static final String BUILD_REQUEST_METHOD_NAME = "buildRequest";
+    private static final String BASIC_AUTHORIZATION = "Basic ";
+
+    public static SpotifyManagingClient createClientCredentialsAuthorizedClient(String clientId, String clientSecret)
+    {
+        return new SpotifyManagingClient(clientId, clientSecret);
+    }
 
     private SpotifyManagingClient(){}
+
+    private SpotifyManagingClient(String clientId, String clientSecret)
+    {
+        this.httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
+        this.gson =  new Gson();
+
+        ClientCredentialsFlow authorizedClient = new ClientCredentialsFlow.Builder().build();
+        String base64EncodedAuthKey = getBase64EncodedAuthorizationKey(clientId, clientSecret);
+        AuthorizationResponse authResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
+
+        this.apiTokenResponse = authResponse;
+        this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
+    }
+
+    private static String getBase64EncodedAuthorizationKey(String clientId, String clientSecret)
+    {
+        byte[] authorizationKey = (clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8);
+        return Base64.getEncoder().encodeToString(authorizationKey);
+    }
 
     public SpotifyManagingClient(AuthorizationResponse authorizationResponse)
     {
@@ -38,12 +69,18 @@ public class SpotifyManagingClient
         this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
     }
 
-    public <T> T sendRequest(SpotifyRequest<T> spotifyRequest)
+    public <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest)
+            throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
+    {
+        return sendRequest(spotifyRequest, this.builtToken);
+    }
+
+    private <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
         try
         {
-            setAccessTokenOfRequest(spotifyRequest);
+            setAccessTokenOfRequest(spotifyRequest, accessToken);
             HttpRequest request = buildRequest(spotifyRequest);
 
             Type genericType = getGenericTypeOfRequest(spotifyRequest);
@@ -64,15 +101,15 @@ public class SpotifyManagingClient
         }
     }
 
-    private <T> void setAccessTokenOfRequest(SpotifyRequest<T> spotifyRequest) throws NoSuchFieldException, IllegalAccessException
+    private <T> void setAccessTokenOfRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken) throws NoSuchFieldException, IllegalAccessException
     {
         Class<?> runtimeRequest = spotifyRequest.getClass();
-        Field accessToken = runtimeRequest.getDeclaredField(TOKEN_FIELD_NAME);
-        accessToken.setAccessible(true);
-        accessToken.set(spotifyRequest, this.builtToken);
+        Field accessTokenField = runtimeRequest.getDeclaredField(TOKEN_FIELD_NAME);
+        accessTokenField.setAccessible(true);
+        accessTokenField.set(spotifyRequest, accessToken);
     }
 
-    private <T> HttpRequest buildRequest(SpotifyRequest<T> spotifyRequest) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
+    private <T> HttpRequest buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
     {
         Class<?> requestType = spotifyRequest.getClass();
         Method buildRequest = requestType.getDeclaredMethod(BUILD_REQUEST_METHOD_NAME, (Class<?>[]) null);
@@ -119,7 +156,7 @@ public class SpotifyManagingClient
         return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 
-    private <T> Type getGenericTypeOfRequest(SpotifyRequest<T> spotifyRequest)
+    private <T> Type getGenericTypeOfRequest(AbstractSpotifyRequest<T> spotifyRequest)
     {
 
         return ((ParameterizedType)spotifyRequest.getClass().getGenericSuperclass()).getActualTypeArguments()[0];

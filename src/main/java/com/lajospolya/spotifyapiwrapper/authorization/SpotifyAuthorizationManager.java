@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.authorization;
 
 import com.lajospolya.spotifyapiwrapper.client.SpotifyApiClient;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ public class SpotifyAuthorizationManager
         }
         catch (InterruptedException | IOException e)
         {
-            throw new RuntimeException("There was an error authorizing the client");
+            throw new SpotifyRequestAuthorizationException("There was an error authorizing the client");
         }
     }
 }
