@@ -1,8 +1,8 @@
-package com.lajospolya.spotifyapiwrapper.client.response;
+package com.lajospolya.spotifyapiwrapper.response;
 
 import java.util.List;
 
-public class Tracks
+public class ArtistsTopTracks
 {
     List<Track> tracks;
 

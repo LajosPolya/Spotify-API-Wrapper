@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.client.response.Paging;
-import com.lajospolya.spotifyapiwrapper.client.response.SimplifiedTrack;
+import com.lajospolya.spotifyapiwrapper.response.Paging;
+import com.lajospolya.spotifyapiwrapper.response.SimplifiedTrack;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;

@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.authorization.AuthorizationResponse;
+import com.lajospolya.spotifyapiwrapper.response.AuthorizationResponse;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;

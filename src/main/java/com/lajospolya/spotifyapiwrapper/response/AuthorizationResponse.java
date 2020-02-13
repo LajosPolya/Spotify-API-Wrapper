@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.authorization;
+package com.lajospolya.spotifyapiwrapper.response;
 
 public class AuthorizationResponse
 {

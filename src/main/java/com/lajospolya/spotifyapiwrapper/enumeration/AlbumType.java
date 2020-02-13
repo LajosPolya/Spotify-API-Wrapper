@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.client;
+package com.lajospolya.spotifyapiwrapper.enumeration;
 
 public enum AlbumType
 {
