@@ -83,6 +83,11 @@ public class SpotifyApiClient
     {
         try
         {
+            /* set access token should set the header since
+        each .header adds a new header
+
+        .setHeader just overwrites it but it only had to be done once
+         */
             this.reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
 
             HttpRequest request = this.reflectiveSpotifyClientService.buildRequest(spotifyRequest);

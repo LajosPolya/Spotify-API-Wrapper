@@ -25,7 +25,7 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizationR
     private HttpRequest buildRequest()
     {
         return requestBuilder
-                .header(AUTHORIZATION_HEADER, this.accessToken)
+                .setHeader(AUTHORIZATION_HEADER, this.accessToken)
                 .build();
     }
 

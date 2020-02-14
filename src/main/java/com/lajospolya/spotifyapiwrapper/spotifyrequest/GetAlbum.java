@@ -21,7 +21,7 @@ public final class GetAlbum extends AbstractSpotifyRequest<Album>
     private HttpRequest buildRequest()
     {
         return requestBuilder
-                .header(AUTHORIZATION_HEADER, this.accessToken)
+                .setHeader(AUTHORIZATION_HEADER, this.accessToken)
                 .build();
     }
 

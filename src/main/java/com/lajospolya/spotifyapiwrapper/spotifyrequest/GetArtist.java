@@ -21,7 +21,7 @@ public final class GetArtist extends AbstractSpotifyRequest<Artist>
     private HttpRequest buildRequest()
     {
         return requestBuilder
-                .header(AUTHORIZATION_HEADER, this.accessToken)
+                .setHeader(AUTHORIZATION_HEADER, this.accessToken)
                 .build();
     }
 
