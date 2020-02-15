@@ -96,13 +96,9 @@ public class SpotifyApiClient
 
             return sendRequestAndFetchResponse(request, genericType);
         }
-        catch (NoSuchMethodException | InvocationTargetException e)
+        catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
         {
             throw new SpotifyRequestBuilderException("Unable to build the request");
-        }
-        catch (NoSuchFieldException | IllegalAccessException e)
-        {
-            throw new SpotifyRequestAuthorizationException("Unable to set the access token");
         }
         catch (InterruptedException | IOException e)
         {

@@ -7,7 +7,7 @@ import java.net.http.HttpRequest;
 
 public interface IReflectiveSpotifyClientService
 {
-    <T> void setAccessTokenOfRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken) throws NoSuchFieldException, IllegalAccessException;
+    <T> void setAccessTokenOfRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException;
 
     <T> HttpRequest buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 

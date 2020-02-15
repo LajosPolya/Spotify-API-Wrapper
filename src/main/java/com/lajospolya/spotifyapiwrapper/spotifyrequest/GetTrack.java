@@ -21,8 +21,13 @@ public final class GetTrack extends AbstractSpotifyRequest<Track>
     private HttpRequest buildRequest()
     {
         return requestBuilder
-                .setHeader(AUTHORIZATION_HEADER, this.accessToken)
                 .build();
+    }
+
+    private void setAccessToken(String accessToken)
+    {
+        this.accessToken = accessToken;
+        requestBuilder.setHeader(AUTHORIZATION_HEADER, this.accessToken);
     }
 
     public static class Builder extends AbstractBuilder
