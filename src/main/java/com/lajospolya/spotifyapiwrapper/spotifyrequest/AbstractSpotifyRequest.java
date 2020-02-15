@@ -17,13 +17,13 @@ public abstract class AbstractSpotifyRequest<T>
         this.requestBuilder = requestBuilder;
     }
 
-    private HttpRequest buildRequest()
+    private HttpRequest reflectiveBuildRequest()
     {
         return this.requestBuilder
                 .build();
     }
 
-    private void setAccessToken(String accessToken)
+    private void reflectiveSetAccessToken(String accessToken)
     {
         this.accessToken = accessToken;
         requestBuilder.setHeader(AUTHORIZATION_HEADER, this.accessToken);

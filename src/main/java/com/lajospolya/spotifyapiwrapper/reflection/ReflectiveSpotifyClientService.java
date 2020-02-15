@@ -7,8 +7,8 @@ import java.net.http.HttpRequest;
 
 public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientService
 {
-    private static final String SET_ACCESS_TOKEN_METHOD_NAME = "setAccessToken";
-    private static final String BUILD_REQUEST_METHOD_NAME = "buildRequest";
+    private static final String SET_ACCESS_TOKEN_METHOD_NAME = "reflectiveSetAccessToken";
+    private static final String BUILD_REQUEST_METHOD_NAME = "reflectiveBuildRequest";
     private static final Class<?> ABSTRACT_SPOTIFY_REQUEST_CLASS = AbstractSpotifyRequest.class;
 
     public <T> void setAccessTokenOfRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
