@@ -10,25 +10,9 @@ public final class GetAlbums extends AbstractSpotifyRequest<Albums>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums";
 
-    private HttpRequest request;
-    private HttpRequest.Builder requestBuilder;
-    private String accessToken;
-
     private GetAlbums(HttpRequest.Builder requestBuilder)
     {
-        this.requestBuilder = requestBuilder;
-    }
-
-    private HttpRequest buildRequest()
-    {
-        return requestBuilder
-                .build();
-    }
-
-    private void setAccessToken(String accessToken)
-    {
-        this.accessToken = accessToken;
-        requestBuilder.setHeader(AUTHORIZATION_HEADER, this.accessToken);
+        super(requestBuilder);
     }
 
     public static class Builder extends AbstractBuilder

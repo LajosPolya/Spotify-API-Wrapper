@@ -8,25 +8,9 @@ public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-analysis/{id}";
 
-    private HttpRequest request;
-    private HttpRequest.Builder requestBuilder;
-    private String accessToken;
-
     private GetAudioAnalysis(HttpRequest.Builder requestBuilder)
     {
-        this.requestBuilder = requestBuilder;
-    }
-
-    private HttpRequest buildRequest()
-    {
-        return requestBuilder
-                .build();
-    }
-
-    private void setAccessToken(String accessToken)
-    {
-        this.accessToken = accessToken;
-        requestBuilder.setHeader(AUTHORIZATION_HEADER, this.accessToken);
+        super(requestBuilder);
     }
 
     public static class Builder extends AbstractBuilder

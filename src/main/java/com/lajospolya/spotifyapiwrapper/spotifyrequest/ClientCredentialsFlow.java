@@ -13,25 +13,9 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizationR
     private static final String URL_ENCODED_CONTENT_TYPE = "application/x-www-form-urlencoded";
     private static final byte[] GRANT_TYPE_BODY_PARAMS = "grant_type=client_credentials".getBytes(StandardCharsets.UTF_8);
 
-    private HttpRequest request;
-    private HttpRequest.Builder requestBuilder;
-    private String accessToken;
-
     private ClientCredentialsFlow(HttpRequest.Builder requestBuilder)
     {
-        this.requestBuilder = requestBuilder;
-    }
-
-    private HttpRequest buildRequest()
-    {
-        return requestBuilder
-                .build();
-    }
-
-    private void setAccessToken(String accessToken)
-    {
-        this.accessToken = accessToken;
-        requestBuilder.setHeader(AUTHORIZATION_HEADER, this.accessToken);
+        super(requestBuilder);
     }
 
     public static class Builder extends AbstractBuilder
