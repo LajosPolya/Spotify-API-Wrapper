@@ -18,7 +18,7 @@ class SpotifyApiClientTest
 
     private IReflectiveSpotifyClientService reflectiveSpotifyClientService = mock(IReflectiveSpotifyClientService.class);
     private ISpotifyApiClientService spotifyApiClientService = mock(ISpotifyApiClientService.class);
-    private AbstractSpotifyRequest request = mock(AbstractSpotifyRequest.class);
+    private AbstractSpotifyRequest<?> request = mock(AbstractSpotifyRequest.class);
     private AuthorizationResponse authorizationResponse = mock(AuthorizationResponse.class);
 
     @Test
