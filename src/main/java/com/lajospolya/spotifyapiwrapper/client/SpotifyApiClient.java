@@ -1,10 +1,8 @@
 package com.lajospolya.spotifyapiwrapper.client;
 
-import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.response.AuthorizationResponse;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.ReflectiveSpotifyClientService;
-import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.response.AuthorizationResponse;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
@@ -12,22 +10,18 @@ import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.ClientCredentialsFlow;
 
 import java.io.IOException;
-import java.lang.reflect.*;
-import java.net.http.HttpClient;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
 public class SpotifyApiClient
 {
-    private HttpClient httpClient;
     private AuthorizationResponse apiTokenResponse;
     private String builtToken;
 
-    private Gson gson;
     private Long timeOfAuthorization;
     private IReflectiveSpotifyClientService reflectiveSpotifyClientService;
+    private ISpotifyApiClientService spotifyApiClientService;
 
     private static final String BASIC_AUTHORIZATION = "Basic ";
 
@@ -40,26 +34,16 @@ public class SpotifyApiClient
 
     private SpotifyApiClient(String clientId, String clientSecret) throws SpotifyRequestAuthorizationException
     {
-        this.httpClient = HttpClient.newBuilder()
-                .version(HttpClient.Version.HTTP_2)
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .build();
-        this.gson =  new Gson();
         this.reflectiveSpotifyClientService = new ReflectiveSpotifyClientService();
+        this.spotifyApiClientService = new SpotifyApiClientService();
 
         ClientCredentialsFlow authorizedClient = new ClientCredentialsFlow.Builder().build();
-        String base64EncodedAuthKey = getBase64EncodedAuthorizationKey(clientId, clientSecret);
+        String base64EncodedAuthKey = spotifyApiClientService.getBase64EncodedAuthorizationKey(clientId, clientSecret);
         this.timeOfAuthorization = System.currentTimeMillis();
         AuthorizationResponse authResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
 
         this.apiTokenResponse = authResponse;
         this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
-    }
-
-    private static String getBase64EncodedAuthorizationKey(String clientId, String clientSecret)
-    {
-        byte[] authorizationKey = (clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8);
-        return Base64.getEncoder().encodeToString(authorizationKey);
     }
 
     public <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest)
@@ -89,7 +73,7 @@ public class SpotifyApiClient
 
             Type genericType = this.reflectiveSpotifyClientService.getGenericTypeOfRequest(spotifyRequest);
 
-            return sendRequestAndFetchResponse(request, genericType);
+            return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
         }
         catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
         {
@@ -99,43 +83,5 @@ public class SpotifyApiClient
         {
             throw new SpotifyResponseException("An exception occurred while sending the request");
         }
-    }
-
-    private <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
-    {
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        validateResponse(response);
-        String body = response.body();
-
-        if(isStringType(typeOfReturnValue))
-        {
-            return (T) body;
-        }
-        return gson.fromJson(body, typeOfReturnValue);
-    }
-
-    private void validateResponse(HttpResponse<String> response) throws SpotifyResponseException
-    {
-        int statusCode = response.statusCode();
-        if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
-        {
-            SpotifyErrorContainer error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
-            throw new SpotifyResponseException(error);
-        }
-    }
-
-    private Boolean isClientErrorStatusCode(int statusCode)
-    {
-        return statusCode / 100 == 4;
-    }
-
-    private Boolean isServerErrorStatusCode(int statusCode)
-    {
-        return statusCode / 100 == 5;
-    }
-
-    private Boolean isStringType(Type typeOfReturnValue)
-    {
-        return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 }
