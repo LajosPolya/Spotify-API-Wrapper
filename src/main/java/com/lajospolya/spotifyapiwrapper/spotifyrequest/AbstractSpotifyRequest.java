@@ -1,5 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
+
 import java.net.http.HttpRequest;
 
 // This must be an abstract class in order to get the Generic type later
@@ -8,7 +10,6 @@ public abstract class AbstractSpotifyRequest<T>
     static final String SPOTIFY_V1_API_URI = "https://api.spotify.com/v1/";
     static final String AUTHORIZATION_HEADER = "Authorization";
 
-    private HttpRequest request;
     private HttpRequest.Builder requestBuilder;
     private String accessToken;
 
@@ -19,6 +20,10 @@ public abstract class AbstractSpotifyRequest<T>
 
     private HttpRequest reflectiveBuildRequest()
     {
+        if(accessToken == null)
+        {
+            throw new SpotifyRequestBuilderException("Cannot Build a request with a null access token");
+        }
         return this.requestBuilder
                 .build();
     }
