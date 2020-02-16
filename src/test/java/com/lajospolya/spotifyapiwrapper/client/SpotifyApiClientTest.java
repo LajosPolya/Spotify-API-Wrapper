@@ -30,9 +30,7 @@ class SpotifyApiClientTest
         when(spotifyApiClientService.hasTokenExpired(nullable(Long.class), nullable(Integer.class))).thenReturn(true);
 
         SpotifyRequestAuthorizationException e = assertThrows(SpotifyRequestAuthorizationException.class, () ->
-        {
-            spotifyApiClient.sendRequest(request);
-        });
+                spotifyApiClient.sendRequest(request));
 
         assertEquals(e.getMessage(), "Access Token Has Expired");
     }
