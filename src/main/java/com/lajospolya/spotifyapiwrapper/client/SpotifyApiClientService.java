@@ -69,4 +69,9 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         byte[] authorizationKey = (clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8);
         return Base64.getEncoder().encodeToString(authorizationKey);
     }
+
+    public Boolean hasTokenExpired(Long timeOfAuthorization, Integer expiredIn)
+    {
+        return (System.currentTimeMillis() - timeOfAuthorization) / 1000L > expiredIn;
+    }
 }

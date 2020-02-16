@@ -11,4 +11,6 @@ public interface ISpotifyApiClientService
     <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException;
 
     String getBase64EncodedAuthorizationKey(String clientId, String clientSecret);
+
+    Boolean hasTokenExpired(Long timeOfAuthorization, Integer expiredIn);
 }

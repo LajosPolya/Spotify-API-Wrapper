@@ -16,12 +16,12 @@ import java.net.http.HttpRequest;
 
 public class SpotifyApiClient
 {
-    private AuthorizationResponse apiTokenResponse;
+    AuthorizationResponse apiTokenResponse;
     private String builtToken;
 
     private Long timeOfAuthorization;
-    private IReflectiveSpotifyClientService reflectiveSpotifyClientService;
-    private ISpotifyApiClientService spotifyApiClientService;
+    IReflectiveSpotifyClientService reflectiveSpotifyClientService;
+    ISpotifyApiClientService spotifyApiClientService;
 
     private static final String BASIC_AUTHORIZATION = "Basic ";
 
@@ -30,7 +30,7 @@ public class SpotifyApiClient
         return new SpotifyApiClient(clientId, clientSecret);
     }
 
-    private SpotifyApiClient(){}
+    SpotifyApiClient(){}
 
     private SpotifyApiClient(String clientId, String clientSecret) throws SpotifyRequestAuthorizationException
     {
@@ -49,17 +49,12 @@ public class SpotifyApiClient
     public <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
-        if(hasTokenExpired())
+        if(spotifyApiClientService.hasTokenExpired(this.timeOfAuthorization, this.apiTokenResponse.getExpiresIn()))
         {
             throw new SpotifyRequestAuthorizationException("Access Token Has Expired");
         }
 
         return sendRequest(spotifyRequest, this.builtToken);
-    }
-
-    private Boolean hasTokenExpired()
-    {
-        return (System.currentTimeMillis() - this.timeOfAuthorization) / 1000L > this.apiTokenResponse.getExpiresIn();
     }
 
     private <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
