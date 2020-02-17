@@ -18,19 +18,16 @@ import static org.mockito.Mockito.*;
 
 class SpotifyApiClientTest
 {
-    private SpotifyApiClient spotifyApiClient = new SpotifyApiClient();
-
     private IReflectiveSpotifyClientService reflectiveSpotifyClientMock = mock(IReflectiveSpotifyClientService.class);
     private ISpotifyApiClientService spotifyApiClientMock = mock(ISpotifyApiClientService.class);
-    private AbstractSpotifyRequest<?> requestMock = mock(AbstractSpotifyRequest.class);
     private AuthorizationResponse authorizationResponseMock = mock(AuthorizationResponse.class);
+    private AbstractSpotifyRequest<?> requestMock = mock(AbstractSpotifyRequest.class);
+
+    private SpotifyApiClient spotifyApiClient = new SpotifyApiClient(reflectiveSpotifyClientMock, spotifyApiClientMock, authorizationResponseMock);
 
     @Test
     void verify_sendRequest_throwsExceptionWhenTokenHasExpired()
     {
-        spotifyApiClient.spotifyApiClientService = spotifyApiClientMock;
-        spotifyApiClient.apiTokenResponse = authorizationResponseMock;
-
         when(spotifyApiClientMock.hasTokenExpired(nullable(Long.class), nullable(Integer.class))).thenReturn(true);
 
         SpotifyRequestAuthorizationException e = assertThrows(SpotifyRequestAuthorizationException.class, () ->
@@ -42,10 +39,6 @@ class SpotifyApiClientTest
     @Test
     void verify_sendRequest_buildsAndSendsRequest() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, IOException, InterruptedException
     {
-        spotifyApiClient.reflectiveSpotifyClientService = reflectiveSpotifyClientMock;
-        spotifyApiClient.spotifyApiClientService = spotifyApiClientMock;
-        spotifyApiClient.apiTokenResponse = authorizationResponseMock;
-
         when(spotifyApiClientMock.hasTokenExpired(nullable(Long.class), nullable(Integer.class))).thenReturn(false);
 
         spotifyApiClient.sendRequest(requestMock);

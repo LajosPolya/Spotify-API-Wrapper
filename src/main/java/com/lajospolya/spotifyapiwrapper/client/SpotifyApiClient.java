@@ -16,12 +16,12 @@ import java.net.http.HttpRequest;
 
 public class SpotifyApiClient
 {
-    AuthorizationResponse apiTokenResponse;
+    private AuthorizationResponse apiTokenResponse;
     private String builtToken;
 
     private Long timeOfAuthorization;
-    IReflectiveSpotifyClientService reflectiveSpotifyClientService;
-    ISpotifyApiClientService spotifyApiClientService;
+    private IReflectiveSpotifyClientService reflectiveSpotifyClientService;
+    private ISpotifyApiClientService spotifyApiClientService;
 
     private static final String BASIC_AUTHORIZATION = "Basic ";
 
@@ -30,7 +30,16 @@ public class SpotifyApiClient
         return new SpotifyApiClient(clientId, clientSecret);
     }
 
-    SpotifyApiClient(){}
+    // Constructor for testing
+    SpotifyApiClient(IReflectiveSpotifyClientService reflectiveSpotifyClientService,
+                     ISpotifyApiClientService spotifyApiClientService, AuthorizationResponse apiTokenResponse)
+    {
+        this.reflectiveSpotifyClientService = reflectiveSpotifyClientService;
+        this.spotifyApiClientService = spotifyApiClientService;
+        this.apiTokenResponse = apiTokenResponse;
+    }
+
+    private SpotifyApiClient(){}
 
     private SpotifyApiClient(String clientId, String clientSecret) throws SpotifyRequestAuthorizationException
     {
