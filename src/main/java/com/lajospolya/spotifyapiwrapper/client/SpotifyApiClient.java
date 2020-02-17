@@ -79,7 +79,7 @@ public class SpotifyApiClient
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
         }
-        catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e)
+        catch (InvocationTargetException | IllegalAccessException e)
         {
             throw new SpotifyRequestBuilderException("Unable to build the request");
         }
