@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.client;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.io.IOException;

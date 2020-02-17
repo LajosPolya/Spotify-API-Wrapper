@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.spotifyexception;
+package com.lajospolya.spotifyapiwrapper.response;
 
 public class SpotifyError
 {

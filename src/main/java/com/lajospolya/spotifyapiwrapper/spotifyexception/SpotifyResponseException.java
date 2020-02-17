@@ -1,5 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.spotifyexception;
 
+import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+
 public class SpotifyResponseException extends RuntimeException
 {
     public SpotifyResponseException(String message)
