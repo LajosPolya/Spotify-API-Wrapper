@@ -37,7 +37,7 @@ class SpotifyApiClientTest
     }
 
     @Test
-    void verify_sendRequest_buildsAndSendsRequest() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, IOException, InterruptedException
+    void verify_sendRequest_buildsAndSendsRequest() throws IllegalAccessException, InvocationTargetException, IOException, InterruptedException
     {
         when(spotifyApiClientMock.hasTokenExpired(nullable(Long.class), nullable(Integer.class))).thenReturn(false);
 
