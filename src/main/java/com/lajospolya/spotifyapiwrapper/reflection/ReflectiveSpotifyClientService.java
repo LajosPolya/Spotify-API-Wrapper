@@ -3,7 +3,9 @@ package com.lajospolya.spotifyapiwrapper.reflection;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyBadClassDefinitionException;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
 
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.http.HttpRequest;
 
 public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientService
@@ -11,19 +13,26 @@ public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientS
     private static final String SET_ACCESS_TOKEN_METHOD_NAME = "reflectiveSetAccessToken";
     private static final String BUILD_REQUEST_METHOD_NAME = "reflectiveBuildRequest";
     private static final Class<?> ABSTRACT_SPOTIFY_REQUEST_CLASS = AbstractSpotifyRequest.class;
-    private static final Method setAccessTokenMethod;
-    private static final Method buildRequestMethod;
+    private final MethodWrapper setAccessTokenMethod;
+    private final MethodWrapper buildRequestMethod;
 
-    static
+    // Constructor for testing
+    ReflectiveSpotifyClientService(MethodWrapper setAccessTokenMethod, MethodWrapper buildRequestMethod)
+    {
+        this.setAccessTokenMethod = setAccessTokenMethod;
+        this.buildRequestMethod = buildRequestMethod;
+    }
+
+    public ReflectiveSpotifyClientService()
     {
         try
         {
-            setAccessTokenMethod = ABSTRACT_SPOTIFY_REQUEST_CLASS.getDeclaredMethod(SET_ACCESS_TOKEN_METHOD_NAME, String.class);
-            buildRequestMethod = ABSTRACT_SPOTIFY_REQUEST_CLASS.getDeclaredMethod(BUILD_REQUEST_METHOD_NAME, (Class<?>[]) null);
+            this.setAccessTokenMethod = new MethodWrapper(ABSTRACT_SPOTIFY_REQUEST_CLASS.getDeclaredMethod(SET_ACCESS_TOKEN_METHOD_NAME, String.class));
+            this.buildRequestMethod = new MethodWrapper(ABSTRACT_SPOTIFY_REQUEST_CLASS.getDeclaredMethod(BUILD_REQUEST_METHOD_NAME, (Class<?>[]) null));
         }
         catch (NoSuchMethodException e)
         {
-            throw new SpotifyBadClassDefinitionException(ABSTRACT_SPOTIFY_REQUEST_CLASS + " does not contain one of the methods needed to send a request");
+            throw new SpotifyBadClassDefinitionException("Some of the mandatory methods weren't found on " + ABSTRACT_SPOTIFY_REQUEST_CLASS);
         }
     }
 

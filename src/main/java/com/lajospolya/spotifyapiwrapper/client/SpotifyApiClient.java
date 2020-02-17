@@ -49,9 +49,8 @@ public class SpotifyApiClient
         ClientCredentialsFlow authorizedClient = new ClientCredentialsFlow.Builder().build();
         String base64EncodedAuthKey = spotifyApiClientService.getBase64EncodedAuthorizationKey(clientId, clientSecret);
         this.timeOfAuthorization = System.currentTimeMillis();
-        AuthorizationResponse authResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
 
-        this.apiTokenResponse = authResponse;
+        this.apiTokenResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
         this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
     }
 
