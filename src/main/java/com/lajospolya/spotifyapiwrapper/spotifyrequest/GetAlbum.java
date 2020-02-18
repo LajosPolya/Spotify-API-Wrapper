@@ -27,7 +27,6 @@ public final class GetAlbum extends AbstractSpotifyRequest<Album>
 
         public GetAlbum build()
         {
-            // Required param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
             addOptionalQueryParams(requestUriBuilder);

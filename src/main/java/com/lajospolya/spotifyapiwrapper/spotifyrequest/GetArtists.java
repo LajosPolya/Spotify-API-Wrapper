@@ -27,7 +27,6 @@ public final class GetArtists extends AbstractSpotifyRequest<Artists>
 
         public GetArtists build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             String commaSeparatedIds = String.join(",", this.artistIds);
             requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);

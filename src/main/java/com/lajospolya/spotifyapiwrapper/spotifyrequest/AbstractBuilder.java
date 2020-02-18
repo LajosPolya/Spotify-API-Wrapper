@@ -10,6 +10,9 @@ public abstract class AbstractBuilder
     static final String MARKET_QUERY_PARAM = "market";
     static final String LIMIT_QUERY_PARAM = "limit";
     static final String OFFSET_QUERY_PARAM = "offset";
+    static final String SEARCH_ALBUM_TYPE = "type";
+    static final String QUERY = "q";
+    static final String INCLUDE_EXTERNAL = "include_external";
 
     void validateParametersNotNull(Object ... params) throws IllegalArgumentException
     {

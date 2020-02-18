@@ -1,46 +1,56 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.enumeration.AlbumType;
-import com.lajospolya.spotifyapiwrapper.response.ArtistsAlbums;
+import com.lajospolya.spotifyapiwrapper.enumeration.ExternalContent;
+import com.lajospolya.spotifyapiwrapper.enumeration.SearchItemType;
+import com.lajospolya.spotifyapiwrapper.response.SearchResults;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
+public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 {
-    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/albums";
+    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "search";
 
-    private GetArtistsAlbums(HttpRequest.Builder requestBuilder)
+    private GetSearch(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
 
     public static class Builder extends AbstractBuilder
     {
-        private String artistId;
+        private String query;
+        private List<SearchItemType> searchItemTypes;
+        private String market;
         private Integer limit;
         private Integer offset;
-        private String market;
-        private List<AlbumType> includeGroups;
+        private ExternalContent content;
 
-        public Builder(String artistId) throws IllegalArgumentException
+        public Builder(String query, List<SearchItemType> searchItemTypes)
         {
-            validateParametersNotNull(artistId);
-            this.artistId = artistId;
+            validateParametersNotNull(query, searchItemTypes);
+            this.query = query;
+            this.searchItemTypes = searchItemTypes;
         }
 
-        public GetArtistsAlbums build()
+        public GetSearch build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+
+            requestUriBuilder.queryParam(QUERY, query);
+
+            String commaSearchItemTypes = this.searchItemTypes.stream()
+                    .map(SearchItemType::getType)
+                    .collect(Collectors.joining(","));
+            requestUriBuilder.queryParam(SEARCH_ALBUM_TYPE, commaSearchItemTypes);
 
             addOptionalQueryParams(requestUriBuilder);
 
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
+                    .uri(requestUriBuilder.build().toUri())
                     .GET();
-            return new GetArtistsAlbums(requestBuilder);
+            return new GetSearch(requestBuilder);
         }
 
         private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
@@ -57,17 +67,19 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
             {
                 requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
             }
-            if(this.includeGroups != null)
+            if(this.content != null)
             {
-                String commaSeparatedAlbumType = this.includeGroups
-                        .stream()
-                        .map(AlbumType::getType)
-                        .collect(Collectors.joining(","));
-                requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedAlbumType);
+                requestUriBuilder.queryParam(INCLUDE_EXTERNAL, this.content.getContent());
             }
         }
 
-        public Builder limit(Integer limit)
+        public GetSearch.Builder market(String market)
+        {
+            this.market = market;
+            return this;
+        }
+
+        public GetSearch.Builder limit(Integer limit)
         {
             if(limit < 1 || limit > 50)
             {
@@ -77,7 +89,7 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
             return this;
         }
 
-        public Builder offset(Integer offset)
+        public GetSearch.Builder offset(Integer offset)
         {
             if(offset < 0)
             {
@@ -87,15 +99,9 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
             return this;
         }
 
-        public Builder market(String market)
+        public GetSearch.Builder includeExternal(ExternalContent content)
         {
-            this.market = market;
-            return this;
-        }
-
-        public Builder albumType(List<AlbumType> includeGroups)
-        {
-            this.includeGroups = includeGroups;
+            this.content = content;
             return this;
         }
     }

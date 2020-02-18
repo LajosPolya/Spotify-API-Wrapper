@@ -26,7 +26,6 @@ public final class GetArtist extends AbstractSpotifyRequest<Artist>
 
         public GetArtist build()
         {
-            // Required param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())

@@ -30,7 +30,6 @@ public final class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<Simplif
 
         public GetAlbumsTracks build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
             addOptionalQueryParams(requestUriBuilder);

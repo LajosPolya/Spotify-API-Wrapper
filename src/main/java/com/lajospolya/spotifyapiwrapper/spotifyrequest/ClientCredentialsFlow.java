@@ -26,7 +26,6 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizationR
 
         public ClientCredentialsFlow build()
         {
-            // Required param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
             HttpRequest.Builder requestBuilder =  HttpRequest.newBuilder()

@@ -26,7 +26,6 @@ public final class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures
 
         public GetAudioFeatures build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.trackId).toUri())

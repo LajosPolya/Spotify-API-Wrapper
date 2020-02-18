@@ -27,7 +27,6 @@ public final class GetSeveralAudioFeatures extends AbstractSpotifyRequest<Tracks
 
         public GetSeveralAudioFeatures build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             String commaSeparatedIds = String.join(",", this.trackIds);
             requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);

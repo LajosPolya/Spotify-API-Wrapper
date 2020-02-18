@@ -27,7 +27,6 @@ public final class GetTrack extends AbstractSpotifyRequest<Track>
 
         public GetTrack build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
             addOptionalQueryParams(requestUriBuilder);

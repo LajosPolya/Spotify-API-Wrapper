@@ -28,7 +28,6 @@ public final class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTop
 
         public GetArtistsTopTracks build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()

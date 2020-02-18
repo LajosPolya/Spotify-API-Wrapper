@@ -25,7 +25,6 @@ public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
 
         public GetAudioAnalysis build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.trackId).toUri())

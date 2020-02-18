@@ -26,7 +26,6 @@ public final class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artis
 
         public GetArtistsRelatedArtists build()
         {
-            // Requires param validation
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
