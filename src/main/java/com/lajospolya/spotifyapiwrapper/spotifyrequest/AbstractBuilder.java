@@ -13,8 +13,6 @@ public abstract class AbstractBuilder
     static final String SEARCH_ALBUM_TYPE = "type";
     static final String QUERY = "q";
     static final String INCLUDE_EXTERNAL = "include_external";
-    static final String SPACE = " ";
-    static final String ENCODED_SPACE = "%20";
 
     void validateParametersNotNull(Object ... params) throws IllegalArgumentException
     {

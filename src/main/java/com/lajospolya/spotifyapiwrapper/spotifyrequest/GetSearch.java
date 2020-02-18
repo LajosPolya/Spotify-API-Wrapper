@@ -31,13 +31,13 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         {
             validateParametersNotNull(query, searchItemTypes);
             this.searchItemTypes = searchItemTypes;
+            this.query = query;
         }
 
         public GetSearch build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
-            this.query = query.replace(SPACE, ENCODED_SPACE);
             requestUriBuilder.queryParam(QUERY, query);
 
             String commaSearchItemTypes = this.searchItemTypes.stream()
