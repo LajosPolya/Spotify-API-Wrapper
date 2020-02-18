@@ -38,6 +38,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
+            query = query.replace(" ", "%20");
             requestUriBuilder.queryParam(QUERY, query);
 
             String commaSearchItemTypes = this.searchItemTypes.stream()
