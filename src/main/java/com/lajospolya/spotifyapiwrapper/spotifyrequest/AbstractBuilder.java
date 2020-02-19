@@ -8,6 +8,8 @@ public abstract class AbstractBuilder
 
     static final String IDS_QUERY_PARAM = "ids";
     static final String MARKET_QUERY_PARAM = "market";
+    static final String COUNTRY_QUERY_PARAM = "country";
+    static final String LOCALE_QUERY_PARAM = "locale";
     static final String LIMIT_QUERY_PARAM = "limit";
     static final String OFFSET_QUERY_PARAM = "offset";
     static final String SEARCH_ALBUM_TYPE = "type";
