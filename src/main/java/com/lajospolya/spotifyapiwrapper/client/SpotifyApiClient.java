@@ -1,5 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.client;
 
+import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
+import com.lajospolya.spotifyapiwrapper.client.service.SpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.ReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizationResponse;

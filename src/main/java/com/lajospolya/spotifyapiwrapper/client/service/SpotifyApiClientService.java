@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.client;
+package com.lajospolya.spotifyapiwrapper.client.service;
 
 import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
