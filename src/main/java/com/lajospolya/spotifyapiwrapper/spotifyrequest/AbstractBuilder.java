@@ -12,7 +12,13 @@ public abstract class AbstractBuilder
     static final String LOCALE_QUERY_PARAM = "locale";
     static final String LIMIT_QUERY_PARAM = "limit";
     static final String OFFSET_QUERY_PARAM = "offset";
+    static final String SEED_ARTISTS_QUERY_PARAM = "seed_artists";
+    static final String SEED_TRACKS_QUERY_PARAM = "seed_tracks";
+    static final String SEED_GENRES_QUERY_PARAM = "seed_genres";
     static final String SEARCH_ALBUM_TYPE = "type";
+    static final String MIN_PARAM_PREFIX = "min_";
+    static final String MAX_PARAM_PREFIX = "max_";
+    static final String TARGET_PARAM_PREFIX = "target_";
     static final String QUERY = "q";
     static final String INCLUDE_EXTERNAL = "include_external";
 

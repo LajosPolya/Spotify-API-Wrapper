@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.enumeration;
 
 public enum ExternalContent
 {
-
     Audio("audio");
 
     ExternalContent(String content)
