@@ -62,10 +62,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
             {
                 requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
             }
-            if(this.limit != null)
-            {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
-            }
+            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
 
             for(Map.Entry<String, Object> pair : tuneableAttributes.entrySet())
             {
@@ -75,10 +72,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 
         public Builder limit(Integer limit)
         {
-            if(limit < 1 || limit > 100)
-            {
-                throw new IllegalArgumentException(ILLEGAL_LIMIT_EXCEPTION_MSG);
-            }
+            spotifyRequestParamValidationService.validateLimit100(limit);
             this.limit = limit;
             return this;
         }

@@ -123,4 +123,28 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
             throw new IllegalArgumentException("list cannot be null");
         }
     }
+
+    public void validateLimit50(Integer limit) throws IllegalArgumentException
+    {
+        if(limit == null || limit < 1 || limit > 50)
+        {
+            throw new IllegalArgumentException("limit must be between 1 and 50 inclusive");
+        }
+    }
+
+    public void validateLimit100(Integer limit) throws IllegalArgumentException
+    {
+        if(limit == null || limit < 1 || limit > 100)
+        {
+            throw new IllegalArgumentException("limit must be between 1 and 100 inclusive");
+        }
+    }
+
+    public void validateOffset(Integer offset) throws IllegalArgumentException
+    {
+        if(offset == null || offset < 0)
+        {
+            throw new IllegalArgumentException("offset must be greater or equal to 0");
+        }
+    }
 }

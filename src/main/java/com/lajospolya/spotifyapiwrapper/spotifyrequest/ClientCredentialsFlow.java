@@ -20,9 +20,7 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizationR
 
     public static class Builder extends AbstractBuilder
     {
-        public Builder() throws IllegalArgumentException
-        {
-        }
+        public Builder() throws IllegalArgumentException { }
 
         public ClientCredentialsFlow build()
         {

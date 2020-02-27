@@ -49,40 +49,26 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
             {
                 requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
             }
-            if(this.limit != null)
-            {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
-            }
-            if(this.offset != null)
-            {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
-            }
-            if(this.includeGroups != null)
-            {
-                String commaSeparatedAlbumType = this.includeGroups
-                        .stream()
-                        .map(AlbumType::getType)
-                        .collect(Collectors.joining(","));
-                requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedAlbumType);
-            }
+            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+
+            String commaSeparatedAlbumType = this.includeGroups
+                    .stream()
+                    .map(AlbumType::getType)
+                    .collect(Collectors.joining(","));
+            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedAlbumType);
         }
 
         public Builder limit(Integer limit)
         {
-            if(limit < 1 || limit > 50)
-            {
-                throw new IllegalArgumentException(ILLEGAL_LIMIT_EXCEPTION_MSG);
-            }
+            spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            if(offset < 0)
-            {
-                throw new IllegalArgumentException(ILLEGAL_OFFSET_EXCEPTION_MSG);
-            }
+            spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }
@@ -95,6 +81,7 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
 
         public Builder albumType(List<AlbumType> includeGroups)
         {
+            spotifyRequestParamValidationService.validateList(includeGroups);
             this.includeGroups = includeGroups;
             return this;
         }

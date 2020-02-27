@@ -33,4 +33,10 @@ public interface ISpotifyRequestParamValidationService
     void validateValence(Double valence) throws IllegalArgumentException;
 
     void validateList(List<?> list) throws IllegalArgumentException;
+
+    void validateLimit50(Integer limit) throws IllegalArgumentException;
+
+    void validateLimit100(Integer limit) throws IllegalArgumentException;
+
+    void validateOffset(Integer offset) throws IllegalArgumentException;
 }

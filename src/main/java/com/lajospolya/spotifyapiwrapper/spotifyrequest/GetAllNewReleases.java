@@ -41,14 +41,8 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
             {
                 requestUriBuilder.queryParam(COUNTRY_QUERY_PARAM, this.country);
             }
-            if(this.limit != null)
-            {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
-            }
-            if(this.offset != null)
-            {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
-            }
+            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
         }
 
         public Builder country(String country)
@@ -59,20 +53,14 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
 
         public Builder limit(Integer limit)
         {
-            if(limit < 1 || limit > 50)
-            {
-                throw new IllegalArgumentException(ILLEGAL_LIMIT_EXCEPTION_MSG);
-            }
+            spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            if(offset < 0)
-            {
-                throw new IllegalArgumentException(ILLEGAL_OFFSET_EXCEPTION_MSG);
-            }
+            spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

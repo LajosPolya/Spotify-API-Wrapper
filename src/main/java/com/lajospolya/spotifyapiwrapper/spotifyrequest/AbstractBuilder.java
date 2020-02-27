@@ -1,5 +1,8 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
+import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.ISpotifyRequestParamValidationService;
+import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.SpotifyRequestParamValidationService;
+
 public abstract class AbstractBuilder
 {
     String NULL_CONSTRUCTOR_PARAM_EXCEPTION_MSG = "Builder Constructor parameters cannot be null";
@@ -21,6 +24,13 @@ public abstract class AbstractBuilder
     static final String TARGET_PARAM_PREFIX = "target_";
     static final String QUERY = "q";
     static final String INCLUDE_EXTERNAL = "include_external";
+
+    ISpotifyRequestParamValidationService spotifyRequestParamValidationService;
+
+    AbstractBuilder()
+    {
+        spotifyRequestParamValidationService = new SpotifyRequestParamValidationService();
+    }
 
     void validateParametersNotNull(Object ... params) throws IllegalArgumentException
     {
