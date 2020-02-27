@@ -36,11 +36,11 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
-    public void validateInstrumentalness(Double intrumentalness) throws IllegalArgumentException
+    public void validateInstrumentalness(Double instrumentalness) throws IllegalArgumentException
     {
-        if(intrumentalness == null || intrumentalness < 0.0 || intrumentalness > 1.0)
+        if(instrumentalness == null || instrumentalness < 0.0 || instrumentalness > 1.0)
         {
-            throw new IllegalArgumentException("intrumentalness must be between 0.0 and 1.0 inclusive");
+            throw new IllegalArgumentException("instrumentalness must be between 0.0 and 1.0 inclusive");
         }
     }
 
@@ -72,7 +72,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
     {
         if(modality == null || (modality != 0 && modality != 1))
         {
-            throw new IllegalArgumentException("modality modality must be 0 or 1");
+            throw new IllegalArgumentException("modality must be 0 or 1");
         }
     }
 
@@ -104,7 +104,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
     {
         if(timeSignature == null || timeSignature < 0)
         {
-            throw new IllegalArgumentException("time signature must be greater than 0");
+            throw new IllegalArgumentException("time signature must be positive");
         }
     }
 
@@ -118,9 +118,9 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
 
     public void validateList(List<?> list) throws IllegalArgumentException
     {
-        if(list == null)
+        if(list == null || list.isEmpty())
         {
-            throw new IllegalArgumentException("list cannot be null");
+            throw new IllegalArgumentException("list must not be null or empty");
         }
     }
 
@@ -144,7 +144,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
     {
         if(offset == null || offset < 0)
         {
-            throw new IllegalArgumentException("offset must be greater or equal to 0");
+            throw new IllegalArgumentException("offset must be positive");
         }
     }
 }
