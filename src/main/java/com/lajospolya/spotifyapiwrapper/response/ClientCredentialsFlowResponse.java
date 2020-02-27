@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
-public class AuthorizationResponse
+public class ClientCredentialsFlowResponse
 {
     private String access_token;
     private String token_type;
