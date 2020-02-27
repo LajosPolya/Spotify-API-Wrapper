@@ -41,8 +41,14 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
             {
                 requestUriBuilder.queryParam(COUNTRY_QUERY_PARAM, this.country);
             }
-            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
-            requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+            if(this.limit != null)
+            {
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            }
+            if(this.offset != null)
+            {
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+            }
         }
 
         public Builder country(String country)

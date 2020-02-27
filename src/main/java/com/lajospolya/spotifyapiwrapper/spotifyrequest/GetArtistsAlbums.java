@@ -49,14 +49,22 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
             {
                 requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
             }
-            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
-            requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
-
-            String commaSeparatedAlbumType = this.includeGroups
-                    .stream()
-                    .map(AlbumType::getType)
-                    .collect(Collectors.joining(","));
-            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedAlbumType);
+            if(this.limit != null)
+            {
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            }
+            if(this.offset != null)
+            {
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+            }
+            if(this.includeGroups != null)
+            {
+                String commaSeparatedAlbumType = this.includeGroups
+                        .stream()
+                        .map(AlbumType::getType)
+                        .collect(Collectors.joining(","));
+                requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedAlbumType);
+            }
         }
 
         public Builder limit(Integer limit)

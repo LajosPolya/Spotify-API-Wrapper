@@ -45,8 +45,14 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
             {
                 requestUriBuilder.queryParam(LOCALE_QUERY_PARAM, this.locale);
             }
-            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
-            requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+            if(this.limit != null)
+            {
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            }
+            if(this.offset != null)
+            {
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+            }
         }
 
         public Builder country(String country)

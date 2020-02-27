@@ -62,7 +62,10 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
             {
                 requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
             }
-            requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            if(this.limit != null)
+            {
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+            }
 
             for(Map.Entry<String, Object> pair : tuneableAttributes.entrySet())
             {
