@@ -25,7 +25,7 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<ClientCredenti
             HttpRequest.Builder requestBuilder =  HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                 .header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE)
-                .POST(HttpRequest.BodyPublishers.ofByteArray(GRANT_TYPE_BODY_PARAMS));
+                .POST(HttpRequest.BodyPublishers.ofByteArray(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));
             return new ClientCredentialsFlow(requestBuilder);
         }
     }

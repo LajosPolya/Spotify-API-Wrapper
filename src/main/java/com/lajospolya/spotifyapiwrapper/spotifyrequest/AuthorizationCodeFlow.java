@@ -4,6 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.AuthorizationCodeFlowResponse;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
+import java.nio.charset.StandardCharsets;
 
 public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationCodeFlowResponse>
 {
@@ -21,7 +22,7 @@ public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationC
 
         public Builder(String code, String redirectUri) throws IllegalArgumentException
         {
-            validateParametersNotNull(code);
+            validateParametersNotNull(code, redirectUri);
             this.code = code;
             this.redirectUri = redirectUri;
         }
@@ -36,7 +37,7 @@ public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationC
             HttpRequest.Builder requestBuilder =  HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE)
-                    .POST(HttpRequest.BodyPublishers.ofByteArray(GRANT_TYPE_BODY_PARAMS));
+                    .POST(HttpRequest.BodyPublishers.ofByteArray(("grant_type=authorization_code&code=" + code + "&redirect_uri=" + redirectUri).getBytes(StandardCharsets.UTF_8)));
             return new AuthorizationCodeFlow(requestBuilder);
         }
     }

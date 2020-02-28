@@ -28,7 +28,8 @@ public abstract class AbstractBuilder
 
     static final String CONTENT_TYPE_HEADER = "Content-Type";
     static final String URL_ENCODED_CONTENT_TYPE_HEADER_VALUE = "application/x-www-form-urlencoded";
-    static final byte[] GRANT_TYPE_BODY_PARAMS = "grant_type=client_credentials".getBytes(StandardCharsets.UTF_8);
+    static final byte[] CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS = "grant_type=client_credentials".getBytes(StandardCharsets.UTF_8);
+    static final byte[] AUTHORIZATION_CODE_GRANT_TYPE_BODY_PARAMS = "grant_type=authorization_code".getBytes(StandardCharsets.UTF_8);
 
     static final String QUERY = "q";
     static final String INCLUDE_EXTERNAL = "include_external";
