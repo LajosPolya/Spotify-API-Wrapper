@@ -11,7 +11,6 @@ import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseExceptio
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.AuthorizationCodeFlow;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.ClientCredentialsFlow;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -41,8 +40,7 @@ public class SpotifyApiClient
      */
     public static SpotifyApiClient createAuthorizationFlowClient(String clientId, String clientSecret, String code, String redirectUri) throws SpotifyRequestAuthorizationException
     {
-        UriComponentsBuilder redirectUriBuilder =  UriComponentsBuilder.fromUriString(redirectUri);
-        return new SpotifyApiClient(clientId, clientSecret, code, redirectUriBuilder);
+        return new SpotifyApiClient(clientId, clientSecret, code, redirectUri);
     }
 
     // Constructor for testing
@@ -63,29 +61,29 @@ public class SpotifyApiClient
         this.timeOfAuthorization = System.currentTimeMillis();
     }
 
-    private SpotifyApiClient(String clientId, String clientSecret, String code, UriComponentsBuilder uriBuilder) throws SpotifyRequestAuthorizationException
+    private SpotifyApiClient(String clientId, String clientSecret, String code, String redirectUri) throws SpotifyRequestAuthorizationException
     {
         this();
 
-        AuthorizationCodeFlow authorizedClient = new AuthorizationCodeFlow.Builder(code, uriBuilder.build().toUriString()).build();
-        String base64EncodedAuthKey = spotifyApiClientService.getBase64EncodedAuthorizationKey(clientId, clientSecret);
-
-        // This is the base class but we need better impl for this
-        // since we're losing the refresh token
-        this.apiTokenResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
-        this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
+        AuthorizationCodeFlow authorizationRequest = new AuthorizationCodeFlow.Builder(code, redirectUri).build();
+        authorizeClient(authorizationRequest, clientId, clientSecret);
     }
 
     private SpotifyApiClient(String clientId, String clientSecret) throws SpotifyRequestAuthorizationException
     {
         this();
 
-        ClientCredentialsFlow authorizedClient = new ClientCredentialsFlow.Builder().build();
+        ClientCredentialsFlow authorizationRequest = new ClientCredentialsFlow.Builder().build();
+        authorizeClient(authorizationRequest, clientId, clientSecret);
+    }
+
+    private void authorizeClient(AbstractSpotifyRequest<? extends ClientCredentialsFlowResponse> authorizationRequest, String clientId, String clientSecret)
+    {
         String base64EncodedAuthKey = spotifyApiClientService.getBase64EncodedAuthorizationKey(clientId, clientSecret);
 
         // This is the base class but we need better impl for this
         // since we're losing the refresh token
-        this.apiTokenResponse = sendRequest(authorizedClient, BASIC_AUTHORIZATION + base64EncodedAuthKey);
+        this.apiTokenResponse = sendRequest(authorizationRequest, BASIC_AUTHORIZATION + base64EncodedAuthKey);
         this.builtToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
     }
 
