@@ -90,16 +90,21 @@ public class SpotifyApiClient
     public <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
-        if(spotifyApiClientService.hasTokenExpired(this.timeOfAuthorization, this.apiTokenResponse.getExpiresIn()))
-        {
-            throw new SpotifyRequestAuthorizationException("Access Token Has Expired");
-        }
+        validateTokenHasNotExpired();
 
         return sendRequest(spotifyRequest, this.builtToken);
     }
 
+    private void validateTokenHasNotExpired() throws SpotifyRequestAuthorizationException
+    {
+        if(spotifyApiClientService.hasTokenExpired(this.timeOfAuthorization, this.apiTokenResponse.getExpiresIn()))
+        {
+            throw new SpotifyRequestAuthorizationException("Access Token Has Expired");
+        }
+    }
+
     private <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
-            throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
+            throws SpotifyRequestBuilderException, SpotifyResponseException
     {
         try
         {
