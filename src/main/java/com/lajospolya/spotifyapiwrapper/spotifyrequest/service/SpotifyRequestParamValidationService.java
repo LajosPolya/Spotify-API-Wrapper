@@ -159,4 +159,16 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
             throw new IllegalArgumentException("Cannot use more than 5 userIds");
         }
     }
+
+    public void validateFollowIds(List<String> ids) throws IllegalArgumentException
+    {
+        if(ids == null)
+        {
+            throw new IllegalArgumentException("ids cannot be null");
+        }
+        else if(ids.size() > 50)
+        {
+            throw new IllegalArgumentException("Cannot use more than 50 ids");
+        }
+    }
 }

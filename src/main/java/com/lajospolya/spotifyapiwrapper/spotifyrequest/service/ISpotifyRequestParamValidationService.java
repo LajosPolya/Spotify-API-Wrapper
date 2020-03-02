@@ -41,4 +41,6 @@ public interface ISpotifyRequestParamValidationService
     void validateOffset(Integer offset) throws IllegalArgumentException;
 
     void validateUserIds(List<String> ids) throws IllegalArgumentException;
+
+    void validateFollowIds(List<String> ids) throws IllegalArgumentException;
 }
