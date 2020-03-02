@@ -5,11 +5,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class GetUserFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean>>
+public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers/contains";
 
-    private GetUserFollowsPlaylist(HttpRequest.Builder requestBuilder)
+    private GetUsersFollowsPlaylist(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -27,7 +27,7 @@ public class GetUserFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean>
             this.userIds = userIds;
         }
 
-        public GetUserFollowsPlaylist build()
+        public GetUsersFollowsPlaylist build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
@@ -38,7 +38,7 @@ public class GetUserFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean>
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.buildAndExpand(this.playListId).toUri())
                     .GET();
-            return new GetUserFollowsPlaylist(requestBuilder);
+            return new GetUsersFollowsPlaylist(requestBuilder);
         }
     }
 }
