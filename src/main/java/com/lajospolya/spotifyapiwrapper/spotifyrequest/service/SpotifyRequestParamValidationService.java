@@ -147,4 +147,16 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
             throw new IllegalArgumentException("offset must be positive");
         }
     }
+
+    public void validateUserIds(List<String> userIds) throws IllegalArgumentException
+    {
+        if(userIds == null)
+        {
+            throw new IllegalArgumentException("userIds cannot be null");
+        }
+        else if(userIds.size() > 5)
+        {
+            throw new IllegalArgumentException("Cannot use more than 5 userIds");
+        }
+    }
 }

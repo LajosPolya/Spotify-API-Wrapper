@@ -30,6 +30,8 @@ class SpotifyRequestParamValidationServiceTest
     private static final String LIMIT_50_MESSAGE = "limit must be between 1 and 50 inclusive";
     private static final String LIMIT_100_MESSAGE = "limit must be between 1 and 100 inclusive";
     private static final String OFFSET_MESSAGE = "offset must be positive";
+    private static final String USER_IDS_NULL_MESSAGE = "userIds cannot be null";
+    private static final String USER_IDS_TOO_LONG_MESSAGE = "Cannot use more than 5 userIds";
 
     @Test
     void verify_validateAcousticness_throwsExceptionOnNullParameter()
@@ -550,5 +552,38 @@ class SpotifyRequestParamValidationServiceTest
     void verify_validateOffset_isSuccessfulOnValidParam()
     {
         spotifyRequestParamValidationService.validateOffset(2501);
+    }
+
+    @Test
+    void verify_validateUserIds_throwsExceptionOnNullParameter()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateUserIds(null));
+
+        assertEquals(e.getMessage(), USER_IDS_NULL_MESSAGE);
+    }
+
+    @Test
+    void verify_validateUserIds_throwsExceptionWhenListIsTooLong()
+    {
+        List<String> userIds = new ArrayList<>();
+        userIds.add("1");
+        userIds.add("2");
+        userIds.add("3");
+        userIds.add("4");
+        userIds.add("5");
+        userIds.add("6");
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateUserIds(userIds));
+
+        assertEquals(e.getMessage(), USER_IDS_TOO_LONG_MESSAGE);
+    }
+
+    @Test
+    void verify_validateUserIds_isSuccessfulOnValidParam()
+    {
+        List<String> userIds = new ArrayList<>();
+        userIds.add("1");
+        spotifyRequestParamValidationService.validateUserIds(userIds);
     }
 }

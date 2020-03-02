@@ -33,7 +33,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<List<Boolean>>
             String commaSeparatedIds = String.join(",", this.ids);
 
             requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
-            requestUriBuilder.queryParam("type", type);
+            requestUriBuilder.queryParam(TYPE_QUERY_PARAM, type);
 
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())

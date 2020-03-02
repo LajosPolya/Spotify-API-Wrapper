@@ -43,7 +43,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
             String commaSearchItemTypes = this.searchItemTypes.stream()
                     .map(SearchItemType::getType)
                     .collect(Collectors.joining(","));
-            requestUriBuilder.queryParam(SEARCH_ALBUM_TYPE, commaSearchItemTypes);
+            requestUriBuilder.queryParam(TYPE_QUERY_PARAM, commaSearchItemTypes);
 
             addOptionalQueryParams(requestUriBuilder);
 
