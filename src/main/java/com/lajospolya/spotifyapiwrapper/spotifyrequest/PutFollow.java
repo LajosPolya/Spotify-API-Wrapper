@@ -6,11 +6,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class PutFollowArtist extends AbstractSpotifyRequest<Void>
+public class PutFollow extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following";
 
-    private PutFollowArtist(HttpRequest.Builder requestBuilder)
+    private PutFollow(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -28,7 +28,7 @@ public class PutFollowArtist extends AbstractSpotifyRequest<Void>
             this.ids = ids;
         }
 
-        public PutFollowArtist build()
+        public PutFollow build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
@@ -39,7 +39,7 @@ public class PutFollowArtist extends AbstractSpotifyRequest<Void>
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .PUT(HttpRequest.BodyPublishers.noBody());
-            return new PutFollowArtist(requestBuilder);
+            return new PutFollow(requestBuilder);
         }
     }
 }

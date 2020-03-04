@@ -28,9 +28,12 @@ public abstract class AbstractBuilder
     static final String TARGET_PARAM_PREFIX = "target_";
 
     static final String CONTENT_TYPE_HEADER = "Content-Type";
+    static final String APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE = "application/json";
     static final String URL_ENCODED_CONTENT_TYPE_HEADER_VALUE = "application/x-www-form-urlencoded";
     static final byte[] CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS = "grant_type=client_credentials".getBytes(StandardCharsets.UTF_8);
     static final String AUTHORIZATION_CODE_GRANT_TYPE_BODY_PARAMS = "grant_type=authorization_code";
+
+    static final String DELETE = "DELETE";
 
     static final String QUERY = "q";
     static final String INCLUDE_EXTERNAL = "include_external";
