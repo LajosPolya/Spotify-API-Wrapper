@@ -50,24 +50,21 @@ class GetUsersTop<T> extends AbstractSpotifyRequest<T>
             }
         }
 
-        Builder limit(Integer limit)
+        void limit(Integer limit)
         {
             spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
-            return this;
         }
 
-        Builder offset(Integer offset)
+        void offset(Integer offset)
         {
             spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
-            return this;
         }
 
-        Builder timeRange(TimeRange timeRange)
+        void timeRange(TimeRange timeRange)
         {
             this.timeRange = timeRange;
-            return this;
         }
     }
 }
