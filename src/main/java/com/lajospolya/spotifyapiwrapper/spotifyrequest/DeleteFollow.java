@@ -33,8 +33,6 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
-            String commaSeparatedIds = String.join(",", this.ids);
-            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
             requestUriBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
 
             HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
