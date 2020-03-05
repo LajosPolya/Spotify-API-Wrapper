@@ -1,5 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
+import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.ISpotifyRequestParamValidationService;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.SpotifyRequestParamValidationService;
 
@@ -7,7 +8,9 @@ import java.nio.charset.StandardCharsets;
 
 public abstract class AbstractBuilder
 {
-    String NULL_CONSTRUCTOR_PARAM_EXCEPTION_MSG = "Builder Constructor parameters cannot be null";
+    private static final String NULL_CONSTRUCTOR_PARAM_EXCEPTION_MSG = "Builder Constructor parameters cannot be null";
+
+    static final Gson gson = new Gson();
 
     static final String IDS_QUERY_PARAM = "ids";
     static final String MARKET_QUERY_PARAM = "market";

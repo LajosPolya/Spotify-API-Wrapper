@@ -1,5 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
+import com.lajospolya.spotifyapiwrapper.body.PutPlaylistsFollowers;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
@@ -7,7 +8,6 @@ import java.net.http.HttpRequest;
 public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers";
-    private static final String JSON_BODY = "{\"public\":%s}";
 
     private PutFollowPlaylist(HttpRequest.Builder requestBuilder)
     {
@@ -43,7 +43,7 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
         {
             if(this.isPublic != null)
             {
-                return HttpRequest.BodyPublishers.ofString(JSON_BODY.replace("%s", isPublic.toString()));
+                return HttpRequest.BodyPublishers.ofString(gson.toJson(new PutPlaylistsFollowers(isPublic)));
             }
             return HttpRequest.BodyPublishers.noBody();
         }
