@@ -29,8 +29,6 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
-            requestUriBuilder.queryParam(IDS_QUERY_PARAM, this.id);
-
             HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
 
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
