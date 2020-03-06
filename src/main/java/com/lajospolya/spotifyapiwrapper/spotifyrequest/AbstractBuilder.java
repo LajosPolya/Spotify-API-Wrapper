@@ -34,6 +34,9 @@ public abstract class AbstractBuilder
     static final String CONTENT_TYPE_HEADER = "Content-Type";
     static final String APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE = "application/json";
     static final String URL_ENCODED_CONTENT_TYPE_HEADER_VALUE = "application/x-www-form-urlencoded";
+    static final String IMAGE_JPEG_HEADER_VALUE = "image/jpeg";
+
+    // Use string instead of byte for readability
     static final byte[] CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS = "grant_type=client_credentials".getBytes(StandardCharsets.UTF_8);
     static final String AUTHORIZATION_CODE_GRANT_TYPE_BODY_PARAMS = "grant_type=authorization_code";
 
