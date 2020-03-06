@@ -32,7 +32,7 @@ class SpotifyRequestParamValidationServiceTest
     private static final String OFFSET_MESSAGE = "offset must be positive";
     private static final String USER_IDS_NULL_MESSAGE = "userIds cannot be null";
     private static final String USER_IDS_TOO_LONG_MESSAGE = "Cannot use more than 5 userIds";
-    private static final String FOLLOW_IDS_NULL_MESSAGE = "ids cannot be null";
+    private static final String FOLLOW_IDS_NULL_MESSAGE = "ids cannot be empty";
     private static final String FOLLOW_IDS_TOO_LONG_MESSAGE = "Cannot use more than 50 ids";
 
     @Test
@@ -594,6 +594,15 @@ class SpotifyRequestParamValidationServiceTest
     {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
                 spotifyRequestParamValidationService.validateFollowIds(null));
+
+        assertEquals(e.getMessage(), FOLLOW_IDS_NULL_MESSAGE);
+    }
+
+    @Test
+    void verify_validateFollowIds_throwsExceptionOnEmptyList()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateFollowIds(new ArrayList<>()));
 
         assertEquals(e.getMessage(), FOLLOW_IDS_NULL_MESSAGE);
     }

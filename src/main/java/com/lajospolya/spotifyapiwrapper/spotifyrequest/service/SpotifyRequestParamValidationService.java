@@ -163,9 +163,9 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
     public void validateFollowIds(List<String> ids) throws IllegalArgumentException
     {
         // validate empty as well
-        if(ids == null)
+        if(ids == null || ids.isEmpty())
         {
-            throw new IllegalArgumentException("ids cannot be null");
+            throw new IllegalArgumentException("ids cannot be empty");
         }
         else if(ids.size() > 50)
         {
