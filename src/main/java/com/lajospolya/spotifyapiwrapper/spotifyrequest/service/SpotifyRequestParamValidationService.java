@@ -162,7 +162,6 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
 
     public void validateFollowIds(List<String> ids) throws IllegalArgumentException
     {
-        // validate empty as well
         if(ids == null || ids.isEmpty())
         {
             throw new IllegalArgumentException("ids cannot be empty");
@@ -170,6 +169,18 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         else if(ids.size() > 50)
         {
             throw new IllegalArgumentException("Cannot use more than 50 ids");
+        }
+    }
+
+    public void validatePlaylistUris(List<String> uris) throws IllegalArgumentException
+    {
+        if(uris == null || uris.isEmpty())
+        {
+            throw new IllegalArgumentException("uris cannot be empty");
+        }
+        else if(uris.size() > 100)
+        {
+            throw new IllegalArgumentException("Cannot use more than 100 uris");
         }
     }
 }

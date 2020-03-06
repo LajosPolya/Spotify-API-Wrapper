@@ -32,8 +32,10 @@ class SpotifyRequestParamValidationServiceTest
     private static final String OFFSET_MESSAGE = "offset must be positive";
     private static final String USER_IDS_NULL_MESSAGE = "userIds cannot be null";
     private static final String USER_IDS_TOO_LONG_MESSAGE = "Cannot use more than 5 userIds";
-    private static final String FOLLOW_IDS_NULL_MESSAGE = "ids cannot be empty";
+    private static final String FOLLOW_IDS_EMPTY_MESSAGE = "ids cannot be empty";
     private static final String FOLLOW_IDS_TOO_LONG_MESSAGE = "Cannot use more than 50 ids";
+    private static final String PLAYLIST_URIS_EMPTY_MESSAGE = "uris cannot be empty";
+    private static final String PLAYLIST_URIS_TOO_LONG_MESSAGE = "Cannot use more than 100 uris";
 
     @Test
     void verify_validateAcousticness_throwsExceptionOnNullParameter()
@@ -595,7 +597,7 @@ class SpotifyRequestParamValidationServiceTest
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
                 spotifyRequestParamValidationService.validateFollowIds(null));
 
-        assertEquals(e.getMessage(), FOLLOW_IDS_NULL_MESSAGE);
+        assertEquals(e.getMessage(), FOLLOW_IDS_EMPTY_MESSAGE);
     }
 
     @Test
@@ -604,7 +606,7 @@ class SpotifyRequestParamValidationServiceTest
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
                 spotifyRequestParamValidationService.validateFollowIds(new ArrayList<>()));
 
-        assertEquals(e.getMessage(), FOLLOW_IDS_NULL_MESSAGE);
+        assertEquals(e.getMessage(), FOLLOW_IDS_EMPTY_MESSAGE);
     }
 
     @Test
@@ -627,5 +629,45 @@ class SpotifyRequestParamValidationServiceTest
         List<String> ids = new ArrayList<>();
         ids.add("1");
         spotifyRequestParamValidationService.validateFollowIds(ids);
+    }
+
+    @Test
+    void verify_validatePlaylistUris_throwsExceptionOnNullParameter()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validatePlaylistUris(null));
+
+        assertEquals(e.getMessage(), PLAYLIST_URIS_EMPTY_MESSAGE);
+    }
+
+    @Test
+    void verify_validatePlaylistUris_throwsExceptionOnEmptyList()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validatePlaylistUris(new ArrayList<>()));
+
+        assertEquals(e.getMessage(), PLAYLIST_URIS_EMPTY_MESSAGE);
+    }
+
+    @Test
+    void verify_validatePlaylistUris_throwsExceptionWhenListIsTooLong()
+    {
+        List<String> ids = new ArrayList<>();
+        for(int i = 0; i < 101; i++)
+        {
+            ids.add(String.valueOf(i));
+        }
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validatePlaylistUris(ids));
+
+        assertEquals(e.getMessage(), PLAYLIST_URIS_TOO_LONG_MESSAGE);
+    }
+
+    @Test
+    void verify_validatePlaylistUris_isSuccessfulOnValidParam()
+    {
+        List<String> ids = new ArrayList<>();
+        ids.add("1");
+        spotifyRequestParamValidationService.validatePlaylistUris(ids);
     }
 }
