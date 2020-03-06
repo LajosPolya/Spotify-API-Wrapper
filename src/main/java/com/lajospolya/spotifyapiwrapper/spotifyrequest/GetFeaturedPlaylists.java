@@ -5,11 +5,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
-public class GetFeaturesPlaylists extends AbstractSpotifyRequest<FeaturedPlaylists>
+public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylists>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/featured-playlists";
 
-    private GetFeaturesPlaylists(HttpRequest.Builder requestBuilder)
+    private GetFeaturedPlaylists(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -24,7 +24,7 @@ public class GetFeaturesPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
 
         public Builder() { }
 
-        public GetFeaturesPlaylists build()
+        public GetFeaturedPlaylists build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
@@ -33,7 +33,7 @@ public class GetFeaturesPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .GET();
-            return new GetFeaturesPlaylists(requestBuilder);
+            return new GetFeaturedPlaylists(requestBuilder);
         }
 
         private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
