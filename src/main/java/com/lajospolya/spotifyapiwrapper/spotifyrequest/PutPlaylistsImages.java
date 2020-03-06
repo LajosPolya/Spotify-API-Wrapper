@@ -22,6 +22,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         {
             validateParametersNotNull(playlistId, base64image);
             this.playlistId = playlistId;
+            // TODO: Restring image size to 256KB if possible
             this.base64image = base64image;
         }
 
