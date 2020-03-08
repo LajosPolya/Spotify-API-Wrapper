@@ -21,6 +21,7 @@ public abstract class AbstractBuilder
     static final String TIMESTAMP_QUERY_PARAM = "timestamp";
     static final String TYPE_QUERY_PARAM = "type";
     static final String AFTER_QUERY_PARAM = "after";
+    static final String FIELDS_QUERY_PARAM = "fields";
     static final String TIME_RANGE_QUERY_PARAM = "time_range";
     static final String SEED_ARTISTS_QUERY_PARAM = "seed_artists";
     static final String SEED_TRACKS_QUERY_PARAM = "seed_tracks";
