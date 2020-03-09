@@ -183,4 +183,16 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
             throw new IllegalArgumentException("Cannot use more than 100 uris");
         }
     }
+
+    public void validateTrackUris(List<String> uris) throws IllegalArgumentException
+    {
+        if(uris == null || uris.isEmpty())
+        {
+            throw new IllegalArgumentException("track uris cannot be empty");
+        }
+        else if(uris.size() > 100)
+        {
+            throw new IllegalArgumentException("Cannot use more than 100 track uris");
+        }
+    }
 }

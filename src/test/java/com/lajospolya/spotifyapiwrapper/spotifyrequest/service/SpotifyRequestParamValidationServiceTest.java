@@ -36,6 +36,8 @@ class SpotifyRequestParamValidationServiceTest
     private static final String FOLLOW_IDS_TOO_LONG_MESSAGE = "Cannot use more than 50 ids";
     private static final String PLAYLIST_URIS_EMPTY_MESSAGE = "uris cannot be empty";
     private static final String PLAYLIST_URIS_TOO_LONG_MESSAGE = "Cannot use more than 100 uris";
+    private static final String TRACK_URIS_EMPTY_MESSAGE = "track uris cannot be empty";
+    private static final String TRACK_URIS_TOO_LONG_MESSAGE = "Cannot use more than 100 track uris";
 
     @Test
     void verify_validateAcousticness_throwsExceptionOnNullParameter()
@@ -669,5 +671,45 @@ class SpotifyRequestParamValidationServiceTest
         List<String> ids = new ArrayList<>();
         ids.add("1");
         spotifyRequestParamValidationService.validatePlaylistUris(ids);
+    }
+
+    @Test
+    void verify_validateTrackUris_throwsExceptionOnNullParameter()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateTrackUris(null));
+
+        assertEquals(e.getMessage(), TRACK_URIS_EMPTY_MESSAGE);
+    }
+
+    @Test
+    void verify_validateTrackUris_throwsExceptionOnEmptyList()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateTrackUris(new ArrayList<>()));
+
+        assertEquals(e.getMessage(), TRACK_URIS_EMPTY_MESSAGE);
+    }
+
+    @Test
+    void verify_validateTrackUris_throwsExceptionWhenListIsTooLong()
+    {
+        List<String> ids = new ArrayList<>();
+        for(int i = 0; i < 101; i++)
+        {
+            ids.add(String.valueOf(i));
+        }
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateTrackUris(ids));
+
+        assertEquals(e.getMessage(), TRACK_URIS_TOO_LONG_MESSAGE);
+    }
+
+    @Test
+    void verify_validateTrackUris_isSuccessfulOnValidParam()
+    {
+        List<String> ids = new ArrayList<>();
+        ids.add("1");
+        spotifyRequestParamValidationService.validateTrackUris(ids);
     }
 }
