@@ -18,7 +18,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         private String playlistId;
         private String base64image;
 
-        public Builder(String playlistId, String base64image)
+        public Builder(String playlistId, String base64image) throws IllegalArgumentException
         {
             validateParametersNotNull(playlistId, base64image);
             this.playlistId = playlistId;
