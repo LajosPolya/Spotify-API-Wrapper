@@ -5,11 +5,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
-public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
+public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
 {
-    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/repeat";
+    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/volume";
 
-    private PutMePlayerRepeat(HttpRequest.Builder requestBuilder)
+    private PutMePlayerVolume(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -17,19 +17,23 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
     public static class Builder extends AbstractBuilder
     {
         private RepeatState state;
+        private Integer volumePercent;
         private String deviceId;
 
-
-        public Builder(RepeatState state) throws IllegalArgumentException
+        public Builder(RepeatState state, Integer volumePercent) throws IllegalArgumentException
         {
-            validateParametersNotNull(state);
+            validateParametersNotNull(state, volumePercent);
+            spotifyRequestParamValidationService.validateVolume(volumePercent);
             this.state = state;
+            this.volumePercent = volumePercent;
         }
 
-        public PutMePlayerRepeat build()
+        public PutMePlayerVolume build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
             requestUriBuilder.queryParam(STATE_QUERY_PARAM, state.getState());
+            requestUriBuilder.queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
+
             addOptionalQueryParams(requestUriBuilder);
 
             HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
@@ -37,7 +41,7 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .PUT(bodyPublisher);
-            return new PutMePlayerRepeat(requestBuilder);
+            return new PutMePlayerVolume(requestBuilder);
         }
 
         private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)

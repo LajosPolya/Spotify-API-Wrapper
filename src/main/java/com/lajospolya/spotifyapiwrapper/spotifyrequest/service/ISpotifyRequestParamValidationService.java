@@ -47,4 +47,6 @@ public interface ISpotifyRequestParamValidationService
     void validatePlaylistUris(List<String> uris) throws IllegalArgumentException;
 
     void validateTrackUris(List<String> uris) throws IllegalArgumentException;
+
+    void validateVolume(Integer volume) throws IllegalArgumentException;
 }

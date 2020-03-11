@@ -195,4 +195,12 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
             throw new IllegalArgumentException("Cannot use more than 100 track uris");
         }
     }
+
+    public void validateVolume(Integer volume) throws IllegalArgumentException
+    {
+        if(volume == null || volume < 0 || volume > 100)
+        {
+            throw new IllegalArgumentException("volume must be between 0 and 100 inclusive");
+        }
+    }
 }

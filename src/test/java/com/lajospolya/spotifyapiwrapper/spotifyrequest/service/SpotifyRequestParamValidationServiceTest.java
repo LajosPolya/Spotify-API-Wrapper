@@ -38,6 +38,7 @@ class SpotifyRequestParamValidationServiceTest
     private static final String PLAYLIST_URIS_TOO_LONG_MESSAGE = "Cannot use more than 100 uris";
     private static final String TRACK_URIS_EMPTY_MESSAGE = "track uris cannot be empty";
     private static final String TRACK_URIS_TOO_LONG_MESSAGE = "Cannot use more than 100 track uris";
+    private static final String VOLUME_INVALID_MESSAGE = "volume must be between 0 and 100 inclusive";
 
     @Test
     void verify_validateAcousticness_throwsExceptionOnNullParameter()
@@ -711,5 +712,41 @@ class SpotifyRequestParamValidationServiceTest
         List<String> ids = new ArrayList<>();
         ids.add("1");
         spotifyRequestParamValidationService.validateTrackUris(ids);
+    }
+
+    @Test
+    void verify_validateVolume_throwsExceptionOnNullParameter()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateVolume(null));
+
+        assertEquals(e.getMessage(), VOLUME_INVALID_MESSAGE);
+    }
+
+    @Test
+    void verify_validateVolume_throwsExceptionOnEmptyList()
+    {
+        Integer volume = -2345;
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateVolume(volume));
+
+        assertEquals(e.getMessage(), VOLUME_INVALID_MESSAGE);
+    }
+
+    @Test
+    void verify_validateVolume_throwsExceptionWhenListIsTooLong()
+    {
+        Integer volume = 2345;
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateVolume(volume));
+
+        assertEquals(e.getMessage(), VOLUME_INVALID_MESSAGE);
+    }
+
+    @Test
+    void verify_validateVolume_isSuccessfulOnValidParam()
+    {
+        Integer volume = 2;
+        spotifyRequestParamValidationService.validateVolume(volume);
     }
 }
