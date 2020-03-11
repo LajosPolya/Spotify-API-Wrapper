@@ -4,30 +4,24 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
-public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
+public class PostMePlayerPrevious extends AbstractSpotifyRequest<Void>
 {
-    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/queue";
+    private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/previous";
 
-    private PostMePlayerQueue(HttpRequest.Builder requestBuilder)
+    private PostMePlayerPrevious(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
 
     public static class Builder extends AbstractBuilder
     {
-        private String uri;
         private String deviceId;
 
-        public Builder(String uri) throws IllegalArgumentException
-        {
-            validateParametersNotNull(uri);
-            this.uri = uri;
-        }
+        public Builder() { }
 
-        public PostMePlayerQueue build()
+        public PostMePlayerPrevious build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            requestUriBuilder.queryParam(URI_QUERY_PARAM, uri);
             addOptionalQueryParams(requestUriBuilder);
 
             HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
@@ -35,7 +29,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .POST(bodyPublisher);
-            return new PostMePlayerQueue(requestBuilder);
+            return new PostMePlayerPrevious(requestBuilder);
         }
 
         private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
