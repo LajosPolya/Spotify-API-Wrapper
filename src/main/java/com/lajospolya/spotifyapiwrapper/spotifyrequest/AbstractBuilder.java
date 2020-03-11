@@ -26,6 +26,7 @@ public abstract class AbstractBuilder
     static final String URI_QUERY_PARAM = "uri";
     static final String STATE_QUERY_PARAM = "state";
     static final String VOLUME_PERCENT_QUERY_PARAM = "volume_percent";
+    static final String POSITION_MS_QUERY_PARAM = "position_ms";
     static final String DEVICE_ID_QUERY_PARAM = "device_id";
     static final String TIME_RANGE_QUERY_PARAM = "time_range";
     static final String SEED_ARTISTS_QUERY_PARAM = "seed_artists";
