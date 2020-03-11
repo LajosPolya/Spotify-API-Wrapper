@@ -21,6 +21,7 @@ public abstract class AbstractBuilder
     static final String TIMESTAMP_QUERY_PARAM = "timestamp";
     static final String TYPE_QUERY_PARAM = "type";
     static final String AFTER_QUERY_PARAM = "after";
+    static final String BEFORE_QUERY_PARAM = "before";
     static final String FIELDS_QUERY_PARAM = "fields";
     static final String URI_QUERY_PARAM = "uri";
     static final String DEVICE_ID_QUERY_PARAM = "device_id";

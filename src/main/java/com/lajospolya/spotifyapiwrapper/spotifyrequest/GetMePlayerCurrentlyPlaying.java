@@ -17,7 +17,7 @@ public class GetMePlayerCurrentlyPlaying extends AbstractSpotifyRequest<String>
     {
         private String market;
 
-        public Builder(String market)
+        public Builder(String market) throws IllegalArgumentException
         {
             validateParametersNotNull(market);
             this.market = market;
