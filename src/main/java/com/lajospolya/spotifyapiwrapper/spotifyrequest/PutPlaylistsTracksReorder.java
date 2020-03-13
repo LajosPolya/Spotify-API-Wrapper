@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.body.PlatlistTrackReorder;
+import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackReorder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
@@ -46,7 +46,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<Void>
         private HttpRequest.BodyPublisher getBodyPublisher()
         {
             return HttpRequest.BodyPublishers.ofString(gson.toJson(
-                    new PlatlistTrackReorder(rangeStart, insertBefore, rangeLength, snapshotId)));
+                    new PlaylistTrackReorder(rangeStart, insertBefore, rangeLength, snapshotId)));
         }
 
         public Builder rangeLength(Integer rangeLength)

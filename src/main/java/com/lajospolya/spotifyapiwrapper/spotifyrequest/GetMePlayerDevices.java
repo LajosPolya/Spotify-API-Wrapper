@@ -5,11 +5,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
-public class GetMeDevices extends AbstractSpotifyRequest<Devices>
+public class GetMePlayerDevices extends AbstractSpotifyRequest<Devices>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/devices";
 
-    private GetMeDevices(HttpRequest.Builder requestBuilder)
+    private GetMePlayerDevices(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -19,14 +19,14 @@ public class GetMeDevices extends AbstractSpotifyRequest<Devices>
 
         public Builder() { }
 
-        public GetMeDevices build()
+        public GetMePlayerDevices build()
         {
             UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
 
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(requestUriBuilder.build().toUri())
                     .GET();
-            return new GetMeDevices(requestBuilder);
+            return new GetMePlayerDevices(requestBuilder);
         }
     }
 }
