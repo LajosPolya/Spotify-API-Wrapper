@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 
 public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
@@ -26,30 +24,20 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
 
         public PutMePlayerShuffle build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            requestUriBuilder.queryParam(STATE_QUERY_PARAM, state);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.addQueryParam(STATE_QUERY_PARAM, state);
 
-            addOptionalQueryParams(requestUriBuilder);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .PUT(bodyPublisher);
-            return new PutMePlayerShuffle(requestBuilder);
+            return new PutMePlayerShuffle(spotifyRequestBuilder.createPutRequest());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.deviceId != null)
             {
-                requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
+                requestUriBuilder.addQueryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
             }
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.noBody();
         }
 
         public Builder deviceId(String deviceId)

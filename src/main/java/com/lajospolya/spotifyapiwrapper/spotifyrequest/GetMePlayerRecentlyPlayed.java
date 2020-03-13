@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.PagingCursor;
 import com.lajospolya.spotifyapiwrapper.response.PlayHistory;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -25,29 +24,25 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
 
         public GetMePlayerRecentlyPlayed build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMePlayerRecentlyPlayed(requestBuilder);
+            return new GetMePlayerRecentlyPlayed(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.addQueryParam(LIMIT_QUERY_PARAM, this.limit);
             }
             if(this.after != null)
             {
-                requestUriBuilder.queryParam(AFTER_QUERY_PARAM, this.after);
+                requestUriBuilder.addQueryParam(AFTER_QUERY_PARAM, this.after);
             }
             if(this.before != null)
             {
-                requestUriBuilder.queryParam(BEFORE_QUERY_PARAM, this.before);
+                requestUriBuilder.addQueryParam(BEFORE_QUERY_PARAM, this.before);
             }
         }
 

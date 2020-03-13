@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 
 public class GetMePlayer extends AbstractSpotifyRequest<String>
@@ -25,14 +23,10 @@ public class GetMePlayer extends AbstractSpotifyRequest<String>
 
         public GetMePlayer build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.addQueryParam(MARKET_QUERY_PARAM, market);
 
-            requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMePlayer(requestBuilder);
+            return new GetMePlayer(spotifyRequestBuilder.createGetRequests());
         }
     }
 }
