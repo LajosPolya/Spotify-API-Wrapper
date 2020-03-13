@@ -1,12 +1,14 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+import com.lajospolya.spotifyapiwrapper.enumeration.ContextType;
+
 import java.util.Map;
 
 public class Context
 {
     private Map<String, String> external_urls;
     private String href;
-    private Context type;
+    private ContextType type;
     private String uri;
 
     public Map<String, String> getExternal_urls()
@@ -29,12 +31,12 @@ public class Context
         this.href = href;
     }
 
-    public Context getType()
+    public ContextType getContextType()
     {
         return type;
     }
 
-    public void setType(Context type)
+    public void setContextType(ContextType type)
     {
         this.type = type;
     }
