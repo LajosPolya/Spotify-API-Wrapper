@@ -59,11 +59,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
                 requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
             }
 
-            // TODO: SpotifyRequest Builder should also take a Map
-            for(Map.Entry<String, Object> pair : tuneableAttributes.entrySet())
-            {
-                requestUriBuilder.queryParam(pair.getKey(), pair.getValue());
-            }
+            requestUriBuilder.queryParam(tuneableAttributes);
         }
 
         public Builder limit(Integer limit)
