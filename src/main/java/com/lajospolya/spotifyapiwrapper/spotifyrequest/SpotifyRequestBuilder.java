@@ -35,6 +35,7 @@ public class SpotifyRequestBuilder
         uriComponentsBuilder.queryParam(name, value);
     }
 
+    // TODO: have an override to take a Map
     void queryParam(String name, List<String> values)
     {
         String commaSeparatedIds = String.join(",", values);

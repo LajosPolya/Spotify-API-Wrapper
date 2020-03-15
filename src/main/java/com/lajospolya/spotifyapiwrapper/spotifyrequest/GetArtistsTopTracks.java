@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.ArtistsTopTracks;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -28,12 +27,10 @@ public final class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTop
 
         public GetArtistsTopTracks build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
-                    .GET();
-            return new GetArtistsTopTracks(requestBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
+
+            return new GetArtistsTopTracks(spotifyRequestBuilder.createGetRequests());
         }
     }
 }

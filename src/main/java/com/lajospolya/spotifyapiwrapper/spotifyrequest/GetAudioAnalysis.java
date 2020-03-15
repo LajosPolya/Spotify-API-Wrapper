@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 
 public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
@@ -25,11 +23,9 @@ public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
 
         public GetAudioAnalysis build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.trackId).toUri())
-                    .GET();
-            return new GetAudioAnalysis(requestBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
+
+            return new GetAudioAnalysis(spotifyRequestBuilder.createGetRequests());
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.Artists;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -27,13 +26,10 @@ public final class GetArtists extends AbstractSpotifyRequest<Artists>
 
         public GetArtists build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            String commaSeparatedIds = String.join(",", this.artistIds);
-            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetArtists(requestBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, artistIds);
+
+            return new GetArtists(spotifyRequestBuilder.createGetRequests());
         }
     }
 }

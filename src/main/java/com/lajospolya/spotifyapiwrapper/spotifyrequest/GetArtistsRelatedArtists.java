@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.Artists;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -26,11 +25,9 @@ public final class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artis
 
         public GetArtistsRelatedArtists build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
-                    .GET();
-            return new GetArtistsRelatedArtists(requestBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+
+            return new GetArtistsRelatedArtists(spotifyRequestBuilder.createGetRequests());
         }
     }
 }
