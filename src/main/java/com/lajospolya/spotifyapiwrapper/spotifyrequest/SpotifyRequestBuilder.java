@@ -102,6 +102,12 @@ public class SpotifyRequestBuilder
                 .method(DELETE, HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
     }
 
+    HttpRequest.Builder createPostRequestWithStringBody(String body)
+    {
+        return createBuilderWithUri()
+                .POST(HttpRequest.BodyPublishers.ofString(body));
+    }
+
     HttpRequest.Builder createPutRequestWithStringBody(String body)
     {
         return createBuilderWithUri()

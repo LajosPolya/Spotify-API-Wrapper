@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
+import com.lajospolya.spotifyapiwrapper.body.AuthorizationCode;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizationCodeFlowResponse;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -28,16 +28,12 @@ public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationC
 
         public AuthorizationCodeFlow build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
-            requestUriBuilder.queryParam(CODE_QUERY_PARAM, code);
-            requestUriBuilder.queryParam(REDIRECT_URI_QUERY_PARAM, redirectUri);
-
-            HttpRequest.Builder requestBuilder =  HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE)
-                    .POST(HttpRequest.BodyPublishers.ofString(AUTHORIZATION_CODE_GRANT_TYPE_BODY_PARAMS +"&code=" + code + "&redirect_uri=" + redirectUri));
-            return new AuthorizationCodeFlow(requestBuilder);
+            return new AuthorizationCodeFlow(
+                    spotifyRequestBuilder.createPostRequestWithStringBody(
+                            new AuthorizationCode(code, redirectUri).toUrlEncodedString()));
         }
     }
 }
