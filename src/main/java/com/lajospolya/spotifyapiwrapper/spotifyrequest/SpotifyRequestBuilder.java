@@ -6,6 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,6 @@ public class SpotifyRequestBuilder
         uriComponentsBuilder.queryParam(name, value);
     }
 
-    // TODO: have an override to take a Map
     void queryParam(String name, List<String> values)
     {
         String commaSeparatedIds = String.join(",", values);
@@ -48,6 +48,11 @@ public class SpotifyRequestBuilder
                 .map(function)
                 .collect(Collectors.joining(","));
         uriComponentsBuilder.queryParam(name, commaSeparatedValues);
+    }
+
+    void queryParam(Map<String, Object> nameValuePair)
+    {
+        nameValuePair.forEach((name, value) -> uriComponentsBuilder.queryParam(name, value));
     }
 
     void header(String name, String value)
