@@ -3,11 +3,9 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 import com.lajospolya.spotifyapiwrapper.enumeration.ExternalContent;
 import com.lajospolya.spotifyapiwrapper.enumeration.SearchItemType;
 import com.lajospolya.spotifyapiwrapper.response.SearchResults;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 {
@@ -36,24 +34,15 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 
         public GetSearch build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(QUERY, query);
+            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, searchItemTypes, SearchItemType::getType);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            requestUriBuilder.queryParam(QUERY, query);
-
-            String commaSearchItemTypes = this.searchItemTypes.stream()
-                    .map(SearchItemType::getType)
-                    .collect(Collectors.joining(","));
-            requestUriBuilder.queryParam(TYPE_QUERY_PARAM, commaSearchItemTypes);
-
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetSearch(requestBuilder);
+            return new GetSearch(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.market != null)
             {

@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.PutPlaylistsFollowers;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -16,34 +15,29 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String playlistId;
         private Boolean isPublic = true;
 
-        public Builder(String id)
+        public Builder(String playlistId)
         {
-            validateParametersNotNull(id);
-            this.id = id;
+            validateParametersNotNull(playlistId);
+            this.playlistId = playlistId;
         }
 
         public PutFollowPlaylist build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.id).toUri())
-                    .PUT(bodyPublisher);
-            return new PutFollowPlaylist(requestBuilder);
+            return new PutFollowPlaylist(createRequest(spotifyRequestBuilder));
         }
 
-        private HttpRequest.BodyPublisher getBodyPublisher()
+        private HttpRequest.Builder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(this.isPublic != null)
             {
-                return HttpRequest.BodyPublishers.ofString(gson.toJson(new PutPlaylistsFollowers(isPublic)));
+                return spotifyRequestBuilder.createPutRequestWithObjectJsonBody(new PutPlaylistsFollowers(isPublic));
             }
-            return HttpRequest.BodyPublishers.noBody();
+            return spotifyRequestBuilder.createPutRequest();
         }
 
         public Builder isPublic(Boolean isPublic)

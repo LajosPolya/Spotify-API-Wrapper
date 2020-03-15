@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -30,17 +29,11 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
 
         public GetMeFollowingContains build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, ids);
+            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
 
-            String commaSeparatedIds = String.join(",", this.ids);
-
-            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
-            requestUriBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMeFollowingContains(requestBuilder);
+            return new GetMeFollowingContains(spotifyRequestBuilder.createGetRequests());
         }
     }
 }

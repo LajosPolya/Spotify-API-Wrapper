@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 
 public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
@@ -15,22 +13,19 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String playlistId;
 
-        public Builder(String id)
+        public Builder(String playlistId)
         {
-            validateParametersNotNull(id);
-            this.id = id;
+            validateParametersNotNull(playlistId);
+            this.playlistId = playlistId;
         }
 
         public DeleteFollowPlaylist build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
 
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(id).toUri())
-                    .method(DELETE, HttpRequest.BodyPublishers.noBody());
-            return new DeleteFollowPlaylist(requestBuilder);
+            return new DeleteFollowPlaylist(spotifyRequestBuilder.createDeleteRequest());
         }
     }
 }

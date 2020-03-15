@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.IdsContainer;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -17,31 +16,23 @@ public class PutMeAlbums extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private List<String> ids;
+        private List<String> albumIds;
 
-        public Builder(List<String> ids)
+        public Builder(List<String> albumIds)
         {
-            validateParametersNotNull(ids);
-            spotifyRequestParamValidationService.validateFollowIds(ids);
-            this.ids = ids;
+            validateParametersNotNull(albumIds);
+            spotifyRequestParamValidationService.validateFollowIds(albumIds);
+            this.albumIds = albumIds;
         }
 
         public PutMeAlbums build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .PUT(bodyPublisher);
-            return new PutMeAlbums(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(new IdsContainer(this.ids)));
+            return new PutMeAlbums(
+                    spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                            new IdsContainer(this.albumIds)));
         }
     }
 }

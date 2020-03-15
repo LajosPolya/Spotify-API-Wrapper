@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.TimeRange;
 import com.lajospolya.spotifyapiwrapper.enumeration.UsersTopType;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -25,16 +24,13 @@ class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 
         HttpRequest.Builder build(UsersTopType type)
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            return HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(type.getName()).toUri())
-                    .GET();
+            return spotifyRequestBuilder.createGetRequests();
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.limit != null)
             {

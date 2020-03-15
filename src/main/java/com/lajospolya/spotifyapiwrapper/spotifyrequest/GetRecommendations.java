@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.TuneableTrackAttributeFactory;
 import com.lajospolya.spotifyapiwrapper.response.Recommendation;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.HashMap;
@@ -40,23 +39,16 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 
         public GetRecommendations build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            String commaSeparatedArtists = String.join(",", this.seed_artists);
-            String commaSeparatedTracks = String.join(",", this.seed_tracks);
-            String commaSeparatedGenres = String.join(",", this.seed_genres);
-            requestUriBuilder.queryParam(SEED_ARTISTS_QUERY_PARAM, commaSeparatedArtists);
-            requestUriBuilder.queryParam(SEED_TRACKS_QUERY_PARAM, commaSeparatedTracks);
-            requestUriBuilder.queryParam(SEED_GENRES_QUERY_PARAM, commaSeparatedGenres);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(SEED_ARTISTS_QUERY_PARAM, seed_artists);
+            spotifyRequestBuilder.queryParam(SEED_TRACKS_QUERY_PARAM, seed_tracks);
+            spotifyRequestBuilder.queryParam(SEED_GENRES_QUERY_PARAM, seed_genres);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetRecommendations(requestBuilder);
+            return new GetRecommendations(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.market != null)
             {

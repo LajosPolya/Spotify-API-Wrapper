@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.IdsContainer;
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -31,22 +30,13 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
 
         public DeleteFollow build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            requestUriBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
-
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .method(DELETE, bodyPublisher);
-            return new DeleteFollow(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(new IdsContainer(this.ids)));
+            return new DeleteFollow(
+                    spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
+                            new IdsContainer(this.ids)));
         }
     }
 }

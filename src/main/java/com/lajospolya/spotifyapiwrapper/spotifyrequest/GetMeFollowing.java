@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 import com.lajospolya.spotifyapiwrapper.response.Following;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -29,19 +28,14 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
 
         public GetMeFollowing build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            requestUriBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
-
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMeFollowing(requestBuilder);
+            return new GetMeFollowing(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.limit != null)
             {
