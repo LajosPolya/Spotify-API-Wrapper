@@ -2,11 +2,9 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.AlbumType;
 import com.lajospolya.spotifyapiwrapper.response.ArtistsAlbums;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 {
@@ -33,17 +31,13 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
 
         public GetArtistsAlbums build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.artistId).toUri())
-                    .GET();
-            return new GetArtistsAlbums(requestBuilder);
+            return new GetArtistsAlbums(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.market != null)
             {
@@ -59,11 +53,7 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
             }
             if(this.includeGroups != null)
             {
-                String commaSeparatedAlbumType = this.includeGroups
-                        .stream()
-                        .map(AlbumType::getType)
-                        .collect(Collectors.joining(","));
-                requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedAlbumType);
+                requestUriBuilder.queryParam(INCLUDE_GROUPS_QUERY_PARAM, this.includeGroups, AlbumType::getType);
             }
         }
 
