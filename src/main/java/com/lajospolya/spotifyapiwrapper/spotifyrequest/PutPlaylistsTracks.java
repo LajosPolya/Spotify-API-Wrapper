@@ -21,7 +21,7 @@ public final class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
 
         public Builder(String playlistId, List<String> uris) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId, uris);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, uris);
             spotifyRequestParamValidationService.validatePlaylistUris(uris);
             this.playlistId = playlistId;
             this.uris = uris;

@@ -25,9 +25,9 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         private Integer offset;
         private ExternalContent content;
 
-        public Builder(String query, List<SearchItemType> searchItemTypes)
+        public Builder(String query, List<SearchItemType> searchItemTypes) throws IllegalArgumentException
         {
-            validateParametersNotNull(query, searchItemTypes);
+            spotifyRequestParamValidationService.validateParametersNotNull(query, searchItemTypes);
             this.searchItemTypes = searchItemTypes;
             this.query = query;
         }

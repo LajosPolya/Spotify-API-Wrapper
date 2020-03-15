@@ -25,7 +25,7 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
 
         public Builder(String artistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(artistId);
+            spotifyRequestParamValidationService.validateParametersNotNull(artistId);
             this.artistId = artistId;
         }
 

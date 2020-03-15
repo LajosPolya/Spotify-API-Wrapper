@@ -18,9 +18,9 @@ public class PutMeAlbums extends AbstractSpotifyRequest<Void>
     {
         private List<String> albumIds;
 
-        public Builder(List<String> albumIds)
+        public Builder(List<String> albumIds) throws IllegalArgumentException
         {
-            validateParametersNotNull(albumIds);
+            spotifyRequestParamValidationService.validateParametersNotNull(albumIds);
             spotifyRequestParamValidationService.validateFollowIds(albumIds);
             this.albumIds = albumIds;
         }

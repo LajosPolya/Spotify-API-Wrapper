@@ -20,7 +20,7 @@ public final class GetAlbum extends AbstractSpotifyRequest<Album>
 
         public Builder(String albumId) throws IllegalArgumentException
         {
-            validateParametersNotNull(albumId);
+            spotifyRequestParamValidationService.validateParametersNotNull(albumId);
             this.albumId = albumId;
         }
 

@@ -21,7 +21,7 @@ public class GetPlaylistsImages extends AbstractSpotifyRequest<List<Image>>
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

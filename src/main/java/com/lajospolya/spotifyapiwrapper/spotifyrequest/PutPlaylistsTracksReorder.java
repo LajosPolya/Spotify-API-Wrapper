@@ -24,7 +24,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
 
         public Builder(String playlistId, Integer rangeStart, Integer insertBefore) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId, rangeStart, insertBefore);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, rangeStart, insertBefore);
             this.playlistId = playlistId;
             this.rangeStart = rangeStart;
             this.insertBefore = insertBefore;

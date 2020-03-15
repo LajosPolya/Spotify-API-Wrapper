@@ -18,9 +18,9 @@ public final class GetTrack extends AbstractSpotifyRequest<Track>
         private String trackId;
         private String market;
 
-        public Builder(String trackId)
+        public Builder(String trackId) throws IllegalArgumentException
         {
-            validateParametersNotNull(trackId);
+            spotifyRequestParamValidationService.validateParametersNotNull(trackId);
             this.trackId = trackId;
         }
 

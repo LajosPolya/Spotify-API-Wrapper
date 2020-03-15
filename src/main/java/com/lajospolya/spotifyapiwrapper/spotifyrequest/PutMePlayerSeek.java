@@ -18,7 +18,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
 
         public Builder(Integer positionMs) throws IllegalArgumentException
         {
-            validateParametersNotNull(positionMs);
+            spotifyRequestParamValidationService.validateParametersNotNull(positionMs);
             this.positionMs = positionMs;
         }
 

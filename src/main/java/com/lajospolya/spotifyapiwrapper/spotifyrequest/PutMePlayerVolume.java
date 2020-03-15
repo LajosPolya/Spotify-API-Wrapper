@@ -18,7 +18,7 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
 
         public Builder(Integer volumePercent) throws IllegalArgumentException
         {
-            validateParametersNotNull(volumePercent);
+            spotifyRequestParamValidationService.validateParametersNotNull(volumePercent);
             spotifyRequestParamValidationService.validateVolume(volumePercent);
             this.volumePercent = volumePercent;
         }

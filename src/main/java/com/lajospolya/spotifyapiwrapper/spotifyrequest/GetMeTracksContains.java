@@ -16,9 +16,9 @@ public class GetMeTracksContains extends AbstractSpotifyRequest<List<Boolean>>
     {
         private List<String> trackIds;
 
-        public Builder(List<String> trackIds)
+        public Builder(List<String> trackIds) throws IllegalArgumentException
         {
-            validateParametersNotNull(trackIds);
+            spotifyRequestParamValidationService.validateParametersNotNull(trackIds);
             spotifyRequestParamValidationService.validateFollowIds(trackIds);
             this.trackIds = trackIds;
         }

@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface ISpotifyRequestParamValidationService
 {
+    void validateParametersNotNull(Object ... params) throws IllegalArgumentException;
+
     void validateAcousticness(Double acousticness) throws IllegalArgumentException;
 
     void validateDanceability(Double danceability) throws IllegalArgumentException;

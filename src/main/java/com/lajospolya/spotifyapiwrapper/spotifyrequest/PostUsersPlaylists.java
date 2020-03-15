@@ -24,7 +24,7 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 
         public Builder(String userId, String name) throws IllegalArgumentException
         {
-            validateParametersNotNull(userId, name);
+            spotifyRequestParamValidationService.validateParametersNotNull(userId, name);
             this.userId = userId;
             this.name = name;
         }

@@ -17,9 +17,9 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
         private String playListId;
         private List<String> userIds;
 
-        public Builder(String playListId, List<String> userIds)
+        public Builder(String playListId, List<String> userIds) throws IllegalArgumentException
         {
-            validateParametersNotNull(playListId, userIds);
+            spotifyRequestParamValidationService.validateParametersNotNull(playListId, userIds);
             spotifyRequestParamValidationService.validateUserIds(userIds);
             this.playListId = playListId;
             this.userIds = userIds;

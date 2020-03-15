@@ -18,7 +18,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
 
         public Builder(Boolean state) throws IllegalArgumentException
         {
-            validateParametersNotNull(state);
+            spotifyRequestParamValidationService.validateParametersNotNull(state);
             this.state = state;
         }
 

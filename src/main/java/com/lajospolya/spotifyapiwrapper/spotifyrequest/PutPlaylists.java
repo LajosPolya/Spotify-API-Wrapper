@@ -21,9 +21,9 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
         private Boolean collaborative;
         private String description;
 
-        public Builder(String playlistsId)
+        public Builder(String playlistsId) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistsId);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistsId);
             this.playlistsId = playlistsId;
         }
 

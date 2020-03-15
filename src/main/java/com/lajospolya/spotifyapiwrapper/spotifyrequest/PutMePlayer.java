@@ -21,7 +21,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
 
         public Builder(List<String> deviceIds) throws IllegalArgumentException
         {
-            validateParametersNotNull(deviceIds);
+            spotifyRequestParamValidationService.validateParametersNotNull(deviceIds);
             this.deviceIds = deviceIds;
         }
 

@@ -19,9 +19,9 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
         private FollowType type;
         private List<String> ids;
 
-        public Builder(FollowType type, List<String> ids)
+        public Builder(FollowType type, List<String> ids) throws IllegalArgumentException
         {
-            validateParametersNotNull(type, ids);
+            spotifyRequestParamValidationService.validateParametersNotNull(type, ids);
             spotifyRequestParamValidationService.validateFollowIds(ids);
             this.type = type;
             this.ids = ids;

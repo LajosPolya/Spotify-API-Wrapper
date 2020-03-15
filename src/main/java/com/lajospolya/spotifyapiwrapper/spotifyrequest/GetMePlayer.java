@@ -15,9 +15,9 @@ public class GetMePlayer extends AbstractSpotifyRequest<String>
     {
         private String market;
 
-        public Builder(String market)
+        public Builder(String market) throws IllegalArgumentException
         {
-            validateParametersNotNull(market);
+            spotifyRequestParamValidationService.validateParametersNotNull(market);
             this.market = market;
         }
 

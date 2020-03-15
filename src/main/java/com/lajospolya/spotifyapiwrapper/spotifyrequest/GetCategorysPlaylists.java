@@ -21,7 +21,7 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
 
         public Builder(String categoryId) throws IllegalArgumentException
         {
-            validateParametersNotNull(categoryId);
+            spotifyRequestParamValidationService.validateParametersNotNull(categoryId);
             this.categoryId = categoryId;
         }
 

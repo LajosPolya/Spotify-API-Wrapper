@@ -39,6 +39,33 @@ class SpotifyRequestParamValidationServiceTest
     private static final String TRACK_URIS_EMPTY_MESSAGE = "track uris cannot be empty";
     private static final String TRACK_URIS_TOO_LONG_MESSAGE = "Cannot use more than 100 track uris";
     private static final String VOLUME_INVALID_MESSAGE = "volume must be between 0 and 100 inclusive";
+    private static final String NULL_PARAM_MESSAGE = "Parameters cannot be null";
+
+    @Test
+    void verify_validateParametersNotNull_throwsExceptionOnNullParameter()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateParametersNotNull((Object) null));
+
+        assertEquals(e.getMessage(), NULL_PARAM_MESSAGE);
+    }
+
+    @Test
+    void verify_validateParametersNotNull_throwsExceptionWhenOneOfManyParamsNull()
+    {
+        Integer param = 456;
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
+                spotifyRequestParamValidationService.validateParametersNotNull(param, null));
+
+        assertEquals(e.getMessage(), NULL_PARAM_MESSAGE);
+    }
+
+    @Test
+    void verify_validateParametersNotNull_isSuccessfulOnNonNullParam()
+    {
+        String param = "string param";
+        spotifyRequestParamValidationService.validateParametersNotNull(param);
+    }
 
     @Test
     void verify_validateAcousticness_throwsExceptionOnNullParameter()

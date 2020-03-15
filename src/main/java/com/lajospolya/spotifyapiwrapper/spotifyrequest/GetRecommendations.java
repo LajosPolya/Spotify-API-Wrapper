@@ -31,7 +31,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 
         public Builder(List<String> seed_artists, List<String> seed_tracks, List<String> seed_genres) throws IllegalArgumentException
         {
-            validateParametersNotNull(seed_artists, seed_tracks, seed_genres);
+            spotifyRequestParamValidationService.validateParametersNotNull(seed_artists, seed_tracks, seed_genres);
             this.seed_artists = seed_artists;
             this.seed_tracks = seed_tracks;
             this.seed_genres = seed_genres;

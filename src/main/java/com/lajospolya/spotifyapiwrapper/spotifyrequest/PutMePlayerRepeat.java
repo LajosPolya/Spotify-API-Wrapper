@@ -21,7 +21,7 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
 
         public Builder(RepeatState state) throws IllegalArgumentException
         {
-            validateParametersNotNull(state);
+            spotifyRequestParamValidationService.validateParametersNotNull(state);
             this.state = state;
         }
 

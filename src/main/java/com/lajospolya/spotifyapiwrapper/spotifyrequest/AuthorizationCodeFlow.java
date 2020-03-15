@@ -21,7 +21,7 @@ public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationC
 
         public Builder(String code, String redirectUri) throws IllegalArgumentException
         {
-            validateParametersNotNull(code, redirectUri);
+            spotifyRequestParamValidationService.validateParametersNotNull(code, redirectUri);
             this.code = code;
             this.redirectUri = redirectUri;
         }

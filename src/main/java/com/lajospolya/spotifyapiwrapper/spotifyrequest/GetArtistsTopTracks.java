@@ -20,7 +20,7 @@ public final class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTop
 
         public Builder(String artistId, String market) throws IllegalArgumentException
         {
-            validateParametersNotNull(artistId, market);
+            spotifyRequestParamValidationService.validateParametersNotNull(artistId, market);
             this.artistId = artistId;
             this.market = market;
         }

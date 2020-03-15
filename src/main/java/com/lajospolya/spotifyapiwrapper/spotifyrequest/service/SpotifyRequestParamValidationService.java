@@ -4,6 +4,25 @@ import java.util.List;
 
 public class SpotifyRequestParamValidationService implements ISpotifyRequestParamValidationService
 {
+    @Override
+    public void validateParametersNotNull(Object ... params) throws IllegalArgumentException
+    {
+        final String ERROR_MESSAGE =  "Parameters cannot be null";
+        if(params == null)
+        {
+            throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
+
+        for(Object param : params)
+        {
+            if(param == null)
+            {
+                throw new IllegalArgumentException(ERROR_MESSAGE);
+            }
+        }
+    }
+
+    @Override
     public void validateAcousticness(Double acousticness) throws IllegalArgumentException
     {
         if(acousticness == null || acousticness < 0.0 || acousticness > 1.0)
@@ -12,6 +31,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateDanceability(Double danceability) throws IllegalArgumentException
     {
         if(danceability == null || danceability < 0.0 || danceability > 1.0)
@@ -20,6 +40,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateDurationMs(Integer durationMs) throws IllegalArgumentException
     {
         if(durationMs == null || durationMs < 0)
@@ -28,6 +49,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateEnergy(Double energy) throws IllegalArgumentException
     {
         if(energy == null || energy < 0.0 || energy > 1.0)
@@ -36,6 +58,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateInstrumentalness(Double instrumentalness) throws IllegalArgumentException
     {
         if(instrumentalness == null || instrumentalness < 0.0 || instrumentalness > 1.0)
@@ -44,6 +67,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateKey(Integer key) throws IllegalArgumentException
     {
         if(key == null)
@@ -52,6 +76,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateLiveness(Double liveness) throws IllegalArgumentException
     {
         if(liveness == null || liveness < 0.0 || liveness > 1.0)
@@ -60,6 +85,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateLoudness(Double loudness) throws IllegalArgumentException
     {
         if(loudness == null || loudness < 0.0)
@@ -68,6 +94,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateModality(Integer modality) throws IllegalArgumentException
     {
         if(modality == null || (modality != 0 && modality != 1))
@@ -76,6 +103,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validatePopularity(Integer popularity) throws IllegalArgumentException
     {
         if(popularity == null || popularity < 0 || popularity > 100)
@@ -84,6 +112,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateSpeechiness(Double speechiness) throws IllegalArgumentException
     {
         if(speechiness == null || speechiness < 0.0 || speechiness > 1.0)
@@ -92,6 +121,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateTempo(Double tempo) throws IllegalArgumentException
     {
         if(tempo == null || tempo < 0.0)
@@ -100,6 +130,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateTimeSignature(Integer timeSignature) throws IllegalArgumentException
     {
         if(timeSignature == null || timeSignature < 0)
@@ -108,6 +139,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateValence(Double valence) throws IllegalArgumentException
     {
         if(valence == null || valence < 0.0 || valence > 1.0)
@@ -116,6 +148,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateList(List<?> list) throws IllegalArgumentException
     {
         if(list == null || list.isEmpty())
@@ -124,6 +157,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateLimit50(Integer limit) throws IllegalArgumentException
     {
         if(limit == null || limit < 1 || limit > 50)
@@ -132,6 +166,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateLimit100(Integer limit) throws IllegalArgumentException
     {
         if(limit == null || limit < 1 || limit > 100)
@@ -140,6 +175,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateOffset(Integer offset) throws IllegalArgumentException
     {
         if(offset == null || offset < 0)
@@ -148,6 +184,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateUserIds(List<String> userIds) throws IllegalArgumentException
     {
         if(userIds == null)
@@ -160,6 +197,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateFollowIds(List<String> ids) throws IllegalArgumentException
     {
         if(ids == null || ids.isEmpty())
@@ -172,6 +210,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validatePlaylistUris(List<String> uris) throws IllegalArgumentException
     {
         if(uris == null || uris.isEmpty())
@@ -184,6 +223,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateTrackUris(List<String> uris) throws IllegalArgumentException
     {
         if(uris == null || uris.isEmpty())
@@ -196,6 +236,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
         }
     }
 
+    @Override
     public void validateVolume(Integer volume) throws IllegalArgumentException
     {
         if(volume == null || volume < 0 || volume > 100)

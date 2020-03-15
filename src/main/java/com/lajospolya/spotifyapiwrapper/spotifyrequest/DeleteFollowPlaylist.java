@@ -15,9 +15,9 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
     {
         private String playlistId;
 
-        public Builder(String playlistId)
+        public Builder(String playlistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

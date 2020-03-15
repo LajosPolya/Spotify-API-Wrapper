@@ -19,8 +19,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
         private Integer limit;
         private Integer offset;
 
-        public Builder() throws IllegalArgumentException
-        {}
+        public Builder() {}
 
         public GetAllNewReleases build()
         {

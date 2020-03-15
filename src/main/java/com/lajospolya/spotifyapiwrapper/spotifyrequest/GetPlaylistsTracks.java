@@ -24,7 +24,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

@@ -19,7 +19,7 @@ public class GetUser extends AbstractSpotifyRequest<UserPublic>
 
         public Builder(String userId) throws IllegalArgumentException
         {
-            validateParametersNotNull(userId);
+            spotifyRequestParamValidationService.validateParametersNotNull(userId);
             this.userId = userId;
         }
 

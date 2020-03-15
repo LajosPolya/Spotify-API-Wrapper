@@ -5,8 +5,6 @@ import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.SpotifyRequestPar
 
 public abstract class AbstractBuilder
 {
-    private static final String NULL_CONSTRUCTOR_PARAM_EXCEPTION_MSG = "Builder Constructor parameters cannot be null";
-
     static final String IDS_QUERY_PARAM = "ids";
     static final String MARKET_QUERY_PARAM = "market";
     static final String COUNTRY_QUERY_PARAM = "country";
@@ -47,16 +45,5 @@ public abstract class AbstractBuilder
     AbstractBuilder()
     {
         spotifyRequestParamValidationService = new SpotifyRequestParamValidationService();
-    }
-
-    void validateParametersNotNull(Object ... params) throws IllegalArgumentException
-    {
-        for(Object param : params)
-        {
-            if(param == null)
-            {
-                throw new IllegalArgumentException(NULL_CONSTRUCTOR_PARAM_EXCEPTION_MSG);
-            }
-        }
     }
 }

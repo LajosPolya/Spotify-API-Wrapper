@@ -15,7 +15,7 @@ public class GetRecomendationGenres extends AbstractSpotifyRequest<Recommendatio
 
     public static class Builder extends AbstractBuilder
     {
-        public Builder() throws IllegalArgumentException {}
+        public Builder() {}
 
         public GetRecomendationGenres build()
         {

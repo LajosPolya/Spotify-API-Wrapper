@@ -18,7 +18,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
 
         public Builder(String uri) throws IllegalArgumentException
         {
-            validateParametersNotNull(uri);
+            spotifyRequestParamValidationService.validateParametersNotNull(uri);
             this.uri = uri;
         }
 

@@ -22,7 +22,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
 
         public Builder(String userId) throws IllegalArgumentException
         {
-            validateParametersNotNull(userId);
+            spotifyRequestParamValidationService.validateParametersNotNull(userId);
             this.userId = userId;
         }
 

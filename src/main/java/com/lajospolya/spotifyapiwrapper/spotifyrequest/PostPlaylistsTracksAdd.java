@@ -23,7 +23,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

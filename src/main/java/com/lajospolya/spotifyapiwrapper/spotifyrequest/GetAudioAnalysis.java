@@ -17,7 +17,7 @@ public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
 
         public Builder(String trackId) throws IllegalArgumentException
         {
-            validateParametersNotNull(trackId);
+            spotifyRequestParamValidationService.validateParametersNotNull(trackId);
             this.trackId = trackId;
         }
 

@@ -23,7 +23,7 @@ public final class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<Simplif
 
         public Builder(String albumId) throws IllegalArgumentException
         {
-            validateParametersNotNull(albumId);
+            spotifyRequestParamValidationService.validateParametersNotNull(albumId);
             this.albumId = albumId;
         }
 

@@ -18,9 +18,9 @@ public final class GetSeveralAudioFeatures extends AbstractSpotifyRequest<Tracks
     {
         private List<String> trackIds;
 
-        public Builder(List<String> trackIds)
+        public Builder(List<String> trackIds) throws IllegalArgumentException
         {
-            validateParametersNotNull(trackIds);
+            spotifyRequestParamValidationService.validateParametersNotNull(trackIds);
             this.trackIds = trackIds;
         }
 

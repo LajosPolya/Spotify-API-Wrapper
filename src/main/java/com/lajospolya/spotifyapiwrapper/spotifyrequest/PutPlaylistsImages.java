@@ -18,7 +18,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
 
         public Builder(String playlistId, String base64image) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId, base64image);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, base64image);
             this.playlistId = playlistId;
             // TODO: Restring image size to 256KB if possible
             this.base64image = base64image;

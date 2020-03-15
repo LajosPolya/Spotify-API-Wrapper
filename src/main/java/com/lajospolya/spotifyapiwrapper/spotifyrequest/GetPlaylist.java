@@ -19,7 +19,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(playlistId);
+            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 
