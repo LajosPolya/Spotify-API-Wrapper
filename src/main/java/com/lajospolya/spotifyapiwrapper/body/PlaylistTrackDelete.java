@@ -3,11 +3,11 @@ package com.lajospolya.spotifyapiwrapper.body;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TrackIds
+public class DeletePlaylistsTracks
 {
     private List<URI> tracks;
 
-    public TrackIds(List<String> tracks)
+    public DeletePlaylistsTracks(List<String> tracks)
     {
         this.tracks = tracks.stream().map(URI::new).collect(Collectors.toList());
     }

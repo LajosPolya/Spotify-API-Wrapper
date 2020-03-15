@@ -1,11 +1,11 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackReorder;
-import org.springframework.web.util.UriComponentsBuilder;
+import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
 
 import java.net.http.HttpRequest;
 
-public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<Void>
+public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSnapshot>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
@@ -16,37 +16,28 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String playlistId;
         private Integer rangeStart;
         private Integer insertBefore;
         private Integer rangeLength;
         private String snapshotId;
 
-        public Builder(String id, Integer rangeStart, Integer insertBefore) throws IllegalArgumentException
+        public Builder(String playlistId, Integer rangeStart, Integer insertBefore) throws IllegalArgumentException
         {
-            validateParametersNotNull(id, rangeStart, insertBefore);
-            this.id = id;
+            validateParametersNotNull(playlistId, rangeStart, insertBefore);
+            this.playlistId = playlistId;
             this.rangeStart = rangeStart;
             this.insertBefore = insertBefore;
         }
 
         public PutPlaylistsTracksReorder build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            spotifyRequestBuilder.addHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(id).toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .PUT(bodyPublisher);
-            return new PutPlaylistsTracksReorder(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(
-                    new PlaylistTrackReorder(rangeStart, insertBefore, rangeLength, snapshotId)));
+            return new PutPlaylistsTracksReorder(
+                    spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                            new PlaylistTrackReorder(rangeStart, insertBefore, rangeLength, snapshotId)));
         }
 
         public Builder rangeLength(Integer rangeLength)
