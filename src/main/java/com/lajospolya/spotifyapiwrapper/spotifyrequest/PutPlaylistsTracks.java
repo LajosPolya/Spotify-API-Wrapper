@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.UrisContainer;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -17,33 +16,25 @@ public final class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String playlistId;
         private List<String> uris;
 
-        public Builder(String id, List<String> uris) throws IllegalArgumentException
+        public Builder(String playlistId, List<String> uris) throws IllegalArgumentException
         {
-            validateParametersNotNull(id, uris);
+            validateParametersNotNull(playlistId, uris);
             spotifyRequestParamValidationService.validatePlaylistUris(uris);
-            this.id = id;
+            this.playlistId = playlistId;
             this.uris = uris;
         }
 
         public PutPlaylistsTracks build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(id).toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .PUT(bodyPublisher);
-            return new PutPlaylistsTracks(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(new UrisContainer(this.uris)));
+            return new PutPlaylistsTracks(
+                    spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                            new UrisContainer(this.uris)));
         }
     }
 }

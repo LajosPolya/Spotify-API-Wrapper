@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 import com.lajospolya.spotifyapiwrapper.response.SavedAlbum;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -25,17 +24,13 @@ public class GetMeAlbums extends AbstractSpotifyRequest<Paging<SavedAlbum>>
 
         public GetMeAlbums build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMeAlbums(requestBuilder);
+            addOptionalQueryParams(spotifyRequestBuilder);
+            return new GetMeAlbums(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.market != null)
             {

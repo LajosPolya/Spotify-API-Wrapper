@@ -30,7 +30,7 @@ public class PostMePlayerNext extends AbstractSpotifyRequest<Void>
         {
             if(this.deviceId != null)
             {
-                requestUriBuilder.addQueryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
+                requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
             }
         }
 

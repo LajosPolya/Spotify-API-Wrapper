@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 import java.util.List;
 
@@ -16,27 +14,21 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
 
     public static class Builder extends AbstractBuilder
     {
-        private List<String> ids;
+        private List<String> albumIds;
 
-        public Builder(List<String> ids)
+        public Builder(List<String> albumIds)
         {
-            validateParametersNotNull(ids);
-            spotifyRequestParamValidationService.validateFollowIds(ids);
-            this.ids = ids;
+            validateParametersNotNull(albumIds);
+            spotifyRequestParamValidationService.validateFollowIds(albumIds);
+            this.albumIds = albumIds;
         }
 
         public GetMeAlbumsContains build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, albumIds);
 
-            String commaSeparatedIds = String.join(",", this.ids);
-
-            requestUriBuilder.queryParam(IDS_QUERY_PARAM, commaSeparatedIds);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMeAlbumsContains(requestBuilder);
+            return new GetMeAlbumsContains(spotifyRequestBuilder.createGetRequests());
         }
     }
 }

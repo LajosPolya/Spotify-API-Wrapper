@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 
 public class PostMePlayerPrevious extends AbstractSpotifyRequest<Void>
@@ -21,28 +19,18 @@ public class PostMePlayerPrevious extends AbstractSpotifyRequest<Void>
 
         public PostMePlayerPrevious build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            addOptionalQueryParams(requestUriBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .POST(bodyPublisher);
-            return new PostMePlayerPrevious(requestBuilder);
+            return new PostMePlayerPrevious(spotifyRequestBuilder.createPostRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.deviceId != null)
             {
                 requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
             }
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.noBody();
         }
 
         public Builder deviceId(String deviceId)

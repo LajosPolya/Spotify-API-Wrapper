@@ -34,15 +34,15 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
         {
             if(this.limit != null)
             {
-                requestUriBuilder.addQueryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
             }
             if(this.after != null)
             {
-                requestUriBuilder.addQueryParam(AFTER_QUERY_PARAM, this.after);
+                requestUriBuilder.queryParam(AFTER_QUERY_PARAM, this.after);
             }
             if(this.before != null)
             {
-                requestUriBuilder.addQueryParam(BEFORE_QUERY_PARAM, this.before);
+                requestUriBuilder.queryParam(BEFORE_QUERY_PARAM, this.before);
             }
         }
 

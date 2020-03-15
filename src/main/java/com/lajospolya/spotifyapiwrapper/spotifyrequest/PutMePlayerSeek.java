@@ -25,7 +25,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
         public PutMePlayerSeek build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.addQueryParam(POSITION_MS_QUERY_PARAM, positionMs);
+            spotifyRequestBuilder.queryParam(POSITION_MS_QUERY_PARAM, positionMs);
 
             addOptionalQueryParams(spotifyRequestBuilder);
 
@@ -36,7 +36,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
         {
             if(this.deviceId != null)
             {
-                requestUriBuilder.addQueryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
+                requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
             }
         }
 

@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.PlaylistDetails;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -16,37 +15,34 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String playlistsId;
         private String name;
         private Boolean isPublic;
         private Boolean collaborative;
         private String description;
 
-        public Builder(String id)
+        public Builder(String playlistsId)
         {
-            validateParametersNotNull(id);
-            this.id = id;
+            validateParametersNotNull(playlistsId);
+            this.playlistsId = playlistsId;
         }
 
         public PutPlaylists build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistsId);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.id).toUri())
-                    .PUT(bodyPublisher);
-            return new PutPlaylists(requestBuilder);
+            return createRequest(spotifyRequestBuilder);
         }
 
-        private HttpRequest.BodyPublisher getBodyPublisher()
+        private PutPlaylists createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(name != null || this.isPublic != null || collaborative != null || description != null)
             {
-                return HttpRequest.BodyPublishers.ofString(gson.toJson(new PlaylistDetails(name, isPublic, collaborative, description)));
+                return new PutPlaylists(
+                        spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                                new PlaylistDetails(name, isPublic, collaborative, description)));
             }
-            return HttpRequest.BodyPublishers.noBody();
+            return new PutPlaylists(spotifyRequestBuilder.createPutRequest());
         }
 
         public Builder isPublic(Boolean isPublic)

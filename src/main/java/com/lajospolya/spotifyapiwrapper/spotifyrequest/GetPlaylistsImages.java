@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.Image;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -28,12 +27,8 @@ public class GetPlaylistsImages extends AbstractSpotifyRequest<List<Image>>
 
         public GetPlaylistsImages build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(playlistId).toUri())
-                    .GET();
-            return new GetPlaylistsImages(requestBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            return new GetPlaylistsImages(spotifyRequestBuilder.createGetRequests());
         }
     }
 }

@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 import com.lajospolya.spotifyapiwrapper.response.SavedTrack;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -25,17 +24,13 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
 
         public GetMeTracks build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .GET();
-            return new GetMeTracks(requestBuilder);
+            return new GetMeTracks(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.market != null)
             {

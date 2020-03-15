@@ -1,8 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.body.TrackIds;
+import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackDelete;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -32,20 +31,12 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
 
         public DeletePlaylistsTracks build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(playlistId).toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .method(DELETE, bodyPublisher);
-            return new DeletePlaylistsTracks(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(new TrackIds(this.trackIds)));
+            return new DeletePlaylistsTracks(
+                    spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
+                            new PlaylistTrackDelete(this.trackIds, this.snapshotId)));
         }
 
         public Builder snapshotId(String snapshotId)

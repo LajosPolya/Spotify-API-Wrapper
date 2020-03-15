@@ -25,7 +25,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
         public PutMePlayerShuffle build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.addQueryParam(STATE_QUERY_PARAM, state);
+            spotifyRequestBuilder.queryParam(STATE_QUERY_PARAM, state);
 
             addOptionalQueryParams(spotifyRequestBuilder);
 
@@ -36,7 +36,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
         {
             if(this.deviceId != null)
             {
-                requestUriBuilder.addQueryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
+                requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
             }
         }
 

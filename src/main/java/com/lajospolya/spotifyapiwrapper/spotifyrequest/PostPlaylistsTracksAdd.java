@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackAdd;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -18,32 +17,24 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 
     public static class Builder extends AbstractBuilder
     {
-        private String id;
+        private String playlistId;
         private List<String> uris;
         private Integer position;
 
-        public Builder(String id) throws IllegalArgumentException
+        public Builder(String playlistId) throws IllegalArgumentException
         {
-            validateParametersNotNull(id);
-            this.id = id;
+            validateParametersNotNull(playlistId);
+            this.playlistId = playlistId;
         }
 
         public PostPlaylistsTracksAdd build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(id).toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .POST(bodyPublisher);
-            return new PostPlaylistsTracksAdd(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(new PlaylistTrackAdd(this.uris, position)));
+            return new PostPlaylistsTracksAdd(
+                    spotifyRequestBuilder.createPostRequestWithObjectJsonBody(
+                            new PlaylistTrackAdd(this.uris, position)));
         }
 
         public Builder uris(List<String> uris) throws IllegalArgumentException

@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistTrack;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -31,17 +30,13 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
 
         public GetPlaylistsTracks build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, this.playlistId);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(this.playlistId).toUri())
-                    .GET();
-            return new GetPlaylistsTracks(requestBuilder);
+            return new GetPlaylistsTracks(spotifyRequestBuilder.createGetRequests());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.market != null)
             {

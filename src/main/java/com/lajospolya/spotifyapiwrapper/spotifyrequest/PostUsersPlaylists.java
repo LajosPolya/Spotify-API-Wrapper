@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.PlaylistDetails;
 import com.lajospolya.spotifyapiwrapper.response.Playlist;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -32,20 +31,12 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 
         public PostUsersPlaylists build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.buildAndExpand(userId).toUri())
-                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE)
-                    .POST(bodyPublisher);
-            return new PostUsersPlaylists(requestBuilder);
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.ofString(gson.toJson(new PlaylistDetails(name, isPublic, collaborative, description)));
+            return new PostUsersPlaylists(
+                    spotifyRequestBuilder.createPostRequestWithObjectJsonBody(
+                            new PlaylistDetails(name, isPublic, collaborative, description)));
         }
 
         public Builder isPublic(Boolean isPublic)

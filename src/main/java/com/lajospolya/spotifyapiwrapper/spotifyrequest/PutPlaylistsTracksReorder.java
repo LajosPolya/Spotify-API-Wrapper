@@ -33,7 +33,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
         public PutPlaylistsTracksReorder build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
-            spotifyRequestBuilder.addHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutPlaylistsTracksReorder(
                     spotifyRequestBuilder.createPutRequestWithObjectJsonBody(

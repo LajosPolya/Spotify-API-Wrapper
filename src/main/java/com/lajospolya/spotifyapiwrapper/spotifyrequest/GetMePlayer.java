@@ -24,7 +24,7 @@ public class GetMePlayer extends AbstractSpotifyRequest<String>
         public GetMePlayer build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.addQueryParam(MARKET_QUERY_PARAM, market);
+            spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
             return new GetMePlayer(spotifyRequestBuilder.createGetRequests());
         }
