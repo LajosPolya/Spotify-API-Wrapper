@@ -1,5 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
+import com.lajospolya.spotifyapiwrapper.body.IdsContainer;
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 
 import java.net.http.HttpRequest;
@@ -30,10 +31,10 @@ public class PutFollow extends AbstractSpotifyRequest<Void>
         public PutFollow build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, ids);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
-            return new PutFollow(spotifyRequestBuilder.createPutRequest());
+            return new PutFollow(spotifyRequestBuilder.createPutRequestWithObjectJsonBody(new IdsContainer(ids)));
         }
     }
 }
