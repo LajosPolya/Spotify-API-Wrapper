@@ -46,7 +46,7 @@ class SpotifyApiClientTest
 
         verify(reflectiveSpotifyClientMock).setAccessTokenOfRequest(same(requestMock), nullable(String.class));
         verify(reflectiveSpotifyClientMock).buildRequest(same(requestMock));
-        verify(reflectiveSpotifyClientMock).getGenericTypeOfRequest(same(requestMock));
+        verify(reflectiveSpotifyClientMock).getParameterizedTypeOfRequest(same(requestMock));
         verify(spotifyApiClientMock).sendRequestAndFetchResponse(nullable(HttpRequest.class), nullable(Type.class));
     }
 }

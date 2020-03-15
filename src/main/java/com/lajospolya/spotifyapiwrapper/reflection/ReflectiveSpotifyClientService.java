@@ -51,7 +51,7 @@ public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientS
         return request;
     }
 
-    public <T> Type getGenericTypeOfRequest(AbstractSpotifyRequest<T> spotifyRequest)
+    public <T> Type getParameterizedTypeOfRequest(AbstractSpotifyRequest<T> spotifyRequest)
     {
         return ((ParameterizedType)spotifyRequest.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }

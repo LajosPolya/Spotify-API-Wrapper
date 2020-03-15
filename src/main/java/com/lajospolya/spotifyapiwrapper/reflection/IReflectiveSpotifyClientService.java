@@ -11,5 +11,5 @@ public interface IReflectiveSpotifyClientService
 
     <T> HttpRequest buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws InvocationTargetException, IllegalAccessException;
 
-    <T> Type getGenericTypeOfRequest(AbstractSpotifyRequest<T> spotifyRequest);
+    <T> Type getParameterizedTypeOfRequest(AbstractSpotifyRequest<T> spotifyRequest);
 }

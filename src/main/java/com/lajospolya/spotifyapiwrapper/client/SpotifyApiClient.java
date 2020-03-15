@@ -112,7 +112,7 @@ public class SpotifyApiClient
 
             HttpRequest request = this.reflectiveSpotifyClientService.buildRequest(spotifyRequest);
 
-            Type genericType = this.reflectiveSpotifyClientService.getGenericTypeOfRequest(spotifyRequest);
+            Type genericType = this.reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
         }
