@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.response.ClientCredentialsFlowResponse;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 
@@ -20,13 +19,11 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<ClientCredenti
 
         public ClientCredentialsFlow build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
-            HttpRequest.Builder requestBuilder =  HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                .header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE)
-                .POST(HttpRequest.BodyPublishers.ofByteArray(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));
-            return new ClientCredentialsFlow(requestBuilder);
+            return new ClientCredentialsFlow(
+                    spotifyRequestBuilder.createPostRequestWithStringBody(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));
         }
     }
 }
