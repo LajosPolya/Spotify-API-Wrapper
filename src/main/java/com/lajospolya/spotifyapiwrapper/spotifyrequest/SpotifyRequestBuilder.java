@@ -6,6 +6,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SpotifyRequestBuilder
 {
@@ -39,6 +41,14 @@ public class SpotifyRequestBuilder
         uriComponentsBuilder.queryParam(name, commaSeparatedIds);
     }
 
+    <T extends Enum<T>> void queryParam(String name, List<T> values, Function<T, String> function)
+    {
+        String commaSeparatedValues = values.stream()
+                .map(function)
+                .collect(Collectors.joining(","));
+        uriComponentsBuilder.queryParam(name, commaSeparatedValues);
+    }
+
     void header(String name, String value)
     {
         requestBuilder.header(name, value);
@@ -60,6 +70,12 @@ public class SpotifyRequestBuilder
     {
         return createBuilderWithUri()
                 .PUT(HttpRequest.BodyPublishers.noBody());
+    }
+
+    HttpRequest.Builder createDeleteRequest()
+    {
+        return createBuilderWithUri()
+                .method(DELETE, HttpRequest.BodyPublishers.noBody());
     }
 
     HttpRequest.Builder createPostRequestWithObjectJsonBody(Object body)
