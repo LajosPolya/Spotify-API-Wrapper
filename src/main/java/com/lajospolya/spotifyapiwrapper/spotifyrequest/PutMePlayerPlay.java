@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
 import com.lajospolya.spotifyapiwrapper.body.ResumePlayback;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
 import java.util.List;
@@ -28,18 +27,13 @@ public class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
 
         public PutMePlayerPlay build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            addOptionalQueryParams(requestUriBuilder);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .PUT(bodyPublisher);
-            return new PutMePlayerPlay(requestBuilder);
+            return new PutMePlayerPlay(createRequest(spotifyRequestBuilder));
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.deviceId != null)
             {
@@ -47,13 +41,14 @@ public class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
             }
         }
 
-        private HttpRequest.BodyPublisher getBodyPublisher()
+        private HttpRequest.Builder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(contextUri != null || uris != null || offset != null || positionMs != null)
             {
-                HttpRequest.BodyPublishers.ofString(gson.toJson(new ResumePlayback(contextUri, uris, offset, positionMs)));
+                return spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                        new ResumePlayback(contextUri, uris, offset, positionMs));
             }
-            return HttpRequest.BodyPublishers.noBody();
+            return spotifyRequestBuilder.createPutRequest();
         }
 
         public Builder contextUri(String contextUri)
