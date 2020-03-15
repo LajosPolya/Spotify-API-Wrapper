@@ -1,8 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.enumeration.RepeatState;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.http.HttpRequest;
 
 public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
@@ -16,45 +13,31 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder
     {
-        private RepeatState state;
         private Integer volumePercent;
         private String deviceId;
 
-        public Builder(RepeatState state, Integer volumePercent) throws IllegalArgumentException
+        public Builder(Integer volumePercent) throws IllegalArgumentException
         {
-            validateParametersNotNull(state, volumePercent);
+            validateParametersNotNull(volumePercent);
             spotifyRequestParamValidationService.validateVolume(volumePercent);
-            this.state = state;
             this.volumePercent = volumePercent;
         }
 
         public PutMePlayerVolume build()
         {
-            UriComponentsBuilder requestUriBuilder =  UriComponentsBuilder.fromUriString(REQUEST_URI_STRING);
-            requestUriBuilder.queryParam(STATE_QUERY_PARAM, state.getState());
-            requestUriBuilder.queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
+            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
+            addOptionalQueryParams(spotifyRequestBuilder);
 
-            addOptionalQueryParams(requestUriBuilder);
-
-            HttpRequest.BodyPublisher bodyPublisher = getBodyPublisher();
-
-            HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
-                    .uri(requestUriBuilder.build().toUri())
-                    .PUT(bodyPublisher);
-            return new PutMePlayerVolume(requestBuilder);
+            return new PutMePlayerVolume(spotifyRequestBuilder.createPutRequest());
         }
 
-        private void addOptionalQueryParams(UriComponentsBuilder requestUriBuilder)
+        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
             if(this.deviceId != null)
             {
                 requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
             }
-        }
-
-        private HttpRequest.BodyPublisher getBodyPublisher()
-        {
-            return HttpRequest.BodyPublishers.noBody();
         }
 
         public Builder deviceId(String deviceId)
