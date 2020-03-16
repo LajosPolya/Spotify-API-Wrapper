@@ -26,6 +26,7 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         this.gson =  new Gson();
     }
 
+    @Override
     public <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
     {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -64,12 +65,14 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 
+    @Override
     public String getBase64EncodedAuthorizationKey(String clientId, String clientSecret)
     {
         byte[] authorizationKey = (clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8);
         return Base64.getEncoder().encodeToString(authorizationKey);
     }
 
+    @Override
     public Boolean hasTokenExpired(Long timeOfAuthorization, Integer expiredIn)
     {
         return (System.currentTimeMillis() - timeOfAuthorization) / 1000L > expiredIn;
