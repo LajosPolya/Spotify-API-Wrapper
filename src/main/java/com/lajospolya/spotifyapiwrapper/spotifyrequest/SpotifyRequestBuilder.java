@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class SpotifyRequestBuilder
 {
     private static final String DELETE = "DELETE";
+
     private static final Gson gson = new Gson();
     private UriComponentsBuilder uriComponentsBuilder;
     private HttpRequest.Builder requestBuilder;

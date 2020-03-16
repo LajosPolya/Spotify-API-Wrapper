@@ -13,7 +13,7 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetFeaturedPlaylists>
     {
         private String country;
         private String locale;
@@ -23,6 +23,7 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
 
         public Builder() { }
 
+        @Override
         public GetFeaturedPlaylists build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

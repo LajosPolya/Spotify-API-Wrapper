@@ -11,7 +11,7 @@ public class GetMePlayer extends AbstractSpotifyRequest<String>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMePlayer>
     {
         private String market;
 
@@ -21,6 +21,7 @@ public class GetMePlayer extends AbstractSpotifyRequest<String>
             this.market = market;
         }
 
+        @Override
         public GetMePlayer build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

@@ -11,7 +11,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutPlaylistsImages>
     {
         private String playlistId;
         private String base64image;
@@ -24,6 +24,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
             this.base64image = base64image;
         }
 
+        @Override
         public PutPlaylistsImages build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);

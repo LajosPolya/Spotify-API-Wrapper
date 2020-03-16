@@ -14,7 +14,7 @@ public final class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutPlaylistsTracks>
     {
         private String playlistId;
         private List<String> uris;
@@ -27,6 +27,7 @@ public final class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
             this.uris = uris;
         }
 
+        @Override
         public PutPlaylistsTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);

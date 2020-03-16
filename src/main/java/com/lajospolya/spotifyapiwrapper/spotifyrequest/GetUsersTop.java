@@ -14,7 +14,7 @@ class GetUsersTop<T> extends AbstractSpotifyRequest<T>
         super(requestBuilder);
     }
 
-    static class Builder extends AbstractBuilder
+    abstract static class Builder<T> extends AbstractBuilder<T>
     {
         private Integer limit;
         private Integer offset;

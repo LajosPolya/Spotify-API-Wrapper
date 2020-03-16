@@ -14,7 +14,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutMePlayer>
     {
         private List<String> deviceIds;
         private Boolean play;
@@ -25,6 +25,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
             this.deviceIds = deviceIds;
         }
 
+        @Override
         public PutMePlayer build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

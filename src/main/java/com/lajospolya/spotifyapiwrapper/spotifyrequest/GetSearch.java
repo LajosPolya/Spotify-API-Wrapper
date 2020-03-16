@@ -16,7 +16,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetSearch>
     {
         private String query;
         private List<SearchItemType> searchItemTypes;
@@ -32,6 +32,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
             this.query = query;
         }
 
+        @Override
         public GetSearch build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

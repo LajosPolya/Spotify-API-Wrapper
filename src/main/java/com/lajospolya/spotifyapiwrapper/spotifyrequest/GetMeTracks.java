@@ -14,7 +14,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMeTracks>
     {
         private Integer limit;
         private Integer offset;
@@ -22,6 +22,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
 
         public Builder() { }
 
+        @Override
         public GetMeTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

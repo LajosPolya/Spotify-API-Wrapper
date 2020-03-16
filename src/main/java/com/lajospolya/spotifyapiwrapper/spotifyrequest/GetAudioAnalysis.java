@@ -11,7 +11,7 @@ public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetAudioAnalysis>
     {
         private String trackId;
 
@@ -21,6 +21,7 @@ public final class GetAudioAnalysis extends AbstractSpotifyRequest<String>
             this.trackId = trackId;
         }
 
+        @Override
         public GetAudioAnalysis build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);

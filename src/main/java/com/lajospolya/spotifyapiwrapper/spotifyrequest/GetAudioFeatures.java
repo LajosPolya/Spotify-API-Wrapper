@@ -13,7 +13,7 @@ public final class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetAudioFeatures>
     {
         private String trackId;
 
@@ -23,6 +23,7 @@ public final class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures
             this.trackId = trackId;
         }
 
+        @Override
         public GetAudioFeatures build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);

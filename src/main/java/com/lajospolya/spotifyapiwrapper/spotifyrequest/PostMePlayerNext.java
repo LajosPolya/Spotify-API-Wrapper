@@ -11,13 +11,14 @@ public class PostMePlayerNext extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PostMePlayerNext>
     {
         private String deviceId;
 
 
         public Builder() { }
 
+        @Override
         public PostMePlayerNext build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

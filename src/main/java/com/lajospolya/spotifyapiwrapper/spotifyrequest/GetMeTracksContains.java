@@ -12,7 +12,7 @@ public class GetMeTracksContains extends AbstractSpotifyRequest<List<Boolean>>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMeTracksContains>
     {
         private List<String> trackIds;
 
@@ -23,6 +23,7 @@ public class GetMeTracksContains extends AbstractSpotifyRequest<List<Boolean>>
             this.trackIds = trackIds;
         }
 
+        @Override
         public GetMeTracksContains build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

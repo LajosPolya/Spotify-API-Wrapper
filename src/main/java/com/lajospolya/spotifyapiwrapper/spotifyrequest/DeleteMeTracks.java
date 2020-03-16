@@ -14,7 +14,7 @@ public class DeleteMeTracks extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<DeleteMeTracks>
     {
         private List<String> ids;
 
@@ -25,6 +25,7 @@ public class DeleteMeTracks extends AbstractSpotifyRequest<Void>
             this.ids = ids;
         }
 
+        @Override
         public DeleteMeTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

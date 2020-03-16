@@ -14,7 +14,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutPlaylistsTracksReorder>
     {
         private String playlistId;
         private Integer rangeStart;
@@ -30,6 +30,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
             this.insertBefore = insertBefore;
         }
 
+        @Override
         public PutPlaylistsTracksReorder build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);

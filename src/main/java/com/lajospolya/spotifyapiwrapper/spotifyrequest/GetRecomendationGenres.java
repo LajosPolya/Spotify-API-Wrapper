@@ -13,10 +13,11 @@ public class GetRecomendationGenres extends AbstractSpotifyRequest<Recommendatio
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetRecomendationGenres>
     {
         public Builder() {}
 
+        @Override
         public GetRecomendationGenres build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

@@ -11,7 +11,7 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutMePlayerVolume>
     {
         private Integer volumePercent;
         private String deviceId;
@@ -23,6 +23,7 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
             this.volumePercent = volumePercent;
         }
 
+        @Override
         public PutMePlayerVolume build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

@@ -14,7 +14,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMePlayerRecentlyPlayed>
     {
         private Integer limit;
         private Long after;
@@ -22,6 +22,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
 
         public Builder() { }
 
+        @Override
         public GetMePlayerRecentlyPlayed build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

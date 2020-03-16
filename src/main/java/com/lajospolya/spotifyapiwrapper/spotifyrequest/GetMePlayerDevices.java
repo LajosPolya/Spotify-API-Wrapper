@@ -13,11 +13,12 @@ public class GetMePlayerDevices extends AbstractSpotifyRequest<Devices>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMePlayerDevices>
     {
 
         public Builder() { }
 
+        @Override
         public GetMePlayerDevices build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

@@ -14,7 +14,7 @@ public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationC
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<AuthorizationCodeFlow>
     {
         private String code;
         private String redirectUri;
@@ -26,6 +26,7 @@ public class AuthorizationCodeFlow extends AbstractSpotifyRequest<AuthorizationC
             this.redirectUri = redirectUri;
         }
 
+        @Override
         public AuthorizationCodeFlow build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

@@ -11,13 +11,13 @@ public class PutMePlayerPause extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutMePlayerPause>
     {
         private String deviceId;
 
-
         public Builder() { }
 
+        @Override
         public PutMePlayerPause build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

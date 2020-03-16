@@ -14,7 +14,7 @@ public final class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<Simplif
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetAlbumsTracks>
     {
         private String albumId;
         private Integer limit;
@@ -27,6 +27,7 @@ public final class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<Simplif
             this.albumId = albumId;
         }
 
+        @Override
         public GetAlbumsTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, albumId);

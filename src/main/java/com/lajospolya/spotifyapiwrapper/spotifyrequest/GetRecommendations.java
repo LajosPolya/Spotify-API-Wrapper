@@ -17,7 +17,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetRecommendations>
     {
         private List<String> seed_artists;
         private List<String> seed_tracks;
@@ -37,6 +37,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
             this.seed_genres = seed_genres;
         }
 
+        @Override
         public GetRecommendations build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

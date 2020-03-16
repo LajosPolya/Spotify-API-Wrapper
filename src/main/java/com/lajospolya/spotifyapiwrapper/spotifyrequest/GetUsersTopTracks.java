@@ -15,13 +15,14 @@ public class GetUsersTopTracks extends GetUsersTop<Paging<Track>>
         super(requestBuilder);
     }
 
-    public static class Builder extends GetUsersTop.Builder
+    public static class Builder extends GetUsersTop.Builder<GetUsersTopTracks>
     {
         public Builder()
         {
             super();
         }
 
+        @Override
         public GetUsersTopTracks build()
         {
             return new GetUsersTopTracks(super.build(UsersTopType.tracks));

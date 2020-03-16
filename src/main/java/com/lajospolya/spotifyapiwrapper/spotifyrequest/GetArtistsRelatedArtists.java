@@ -13,7 +13,7 @@ public final class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artis
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetArtistsRelatedArtists>
     {
         private String artistId;
 
@@ -23,6 +23,7 @@ public final class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artis
             this.artistId = artistId;
         }
 
+        @Override
         public GetArtistsRelatedArtists build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);

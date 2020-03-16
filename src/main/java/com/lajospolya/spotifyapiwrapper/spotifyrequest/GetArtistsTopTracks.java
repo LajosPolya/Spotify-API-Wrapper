@@ -13,7 +13,7 @@ public final class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTop
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetArtistsTopTracks>
     {
         private String artistId;
         private String market;
@@ -25,6 +25,7 @@ public final class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTop
             this.market = market;
         }
 
+        @Override
         public GetArtistsTopTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);

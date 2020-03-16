@@ -15,7 +15,7 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<DeletePlaylistsTracks>
     {
         private String playlistId;
         private List<String> trackIds;
@@ -29,6 +29,7 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
             this.trackIds = trackIds;
         }
 
+        @Override
         public DeletePlaylistsTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);

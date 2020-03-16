@@ -13,11 +13,10 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutMePlayerRepeat>
     {
         private RepeatState state;
         private String deviceId;
-
 
         public Builder(RepeatState state) throws IllegalArgumentException
         {
@@ -25,6 +24,7 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
             this.state = state;
         }
 
+        @Override
         public PutMePlayerRepeat build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

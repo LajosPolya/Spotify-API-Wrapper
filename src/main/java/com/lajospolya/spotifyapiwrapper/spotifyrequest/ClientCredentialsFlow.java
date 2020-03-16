@@ -13,10 +13,11 @@ public class ClientCredentialsFlow extends AbstractSpotifyRequest<ClientCredenti
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<ClientCredentialsFlow>
     {
         public Builder() { }
 
+        @Override
         public ClientCredentialsFlow build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

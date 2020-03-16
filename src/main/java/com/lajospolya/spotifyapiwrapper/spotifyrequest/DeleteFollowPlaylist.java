@@ -11,7 +11,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<DeleteFollowPlaylist>
     {
         private String playlistId;
 
@@ -21,6 +21,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
             this.playlistId = playlistId;
         }
 
+        @Override
         public DeleteFollowPlaylist build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);

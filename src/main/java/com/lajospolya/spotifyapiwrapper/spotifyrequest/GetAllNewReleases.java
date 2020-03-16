@@ -13,7 +13,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetAllNewReleases>
     {
         private String country;
         private Integer limit;
@@ -21,6 +21,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
 
         public Builder() {}
 
+        @Override
         public GetAllNewReleases build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

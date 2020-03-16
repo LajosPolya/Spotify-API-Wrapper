@@ -13,7 +13,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetPlaylist>
     {
         private String playlistId;
 
@@ -23,6 +23,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
             this.playlistId = playlistId;
         }
 
+        @Override
         public GetPlaylist build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);

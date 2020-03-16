@@ -3,7 +3,7 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.ISpotifyRequestParamValidationService;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.SpotifyRequestParamValidationService;
 
-public abstract class AbstractBuilder
+public abstract class AbstractBuilder<T>
 {
     static final String IDS_QUERY_PARAM = "ids";
     static final String MARKET_QUERY_PARAM = "market";
@@ -46,4 +46,6 @@ public abstract class AbstractBuilder
     {
         spotifyRequestParamValidationService = new SpotifyRequestParamValidationService();
     }
+
+    abstract public T build();
 }

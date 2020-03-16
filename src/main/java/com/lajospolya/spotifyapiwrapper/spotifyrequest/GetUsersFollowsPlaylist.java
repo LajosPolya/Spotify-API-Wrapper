@@ -12,7 +12,7 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetUsersFollowsPlaylist>
     {
         private String playListId;
         private List<String> userIds;
@@ -25,6 +25,7 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
             this.userIds = userIds;
         }
 
+        @Override
         public GetUsersFollowsPlaylist build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playListId);

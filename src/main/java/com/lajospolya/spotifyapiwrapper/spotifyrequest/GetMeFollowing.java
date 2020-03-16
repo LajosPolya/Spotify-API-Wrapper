@@ -14,7 +14,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMeFollowing>
     {
         private FollowType type;
         private Integer limit;
@@ -26,6 +26,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
             this.type = type;
         }
 
+        @Override
         public GetMeFollowing build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

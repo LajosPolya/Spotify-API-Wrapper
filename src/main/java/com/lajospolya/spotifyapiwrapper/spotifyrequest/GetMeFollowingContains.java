@@ -14,7 +14,7 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetMeFollowingContains>
     {
         private FollowType type;
         private List<String> ids;
@@ -27,6 +27,7 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
             this.ids = ids;
         }
 
+        @Override
         public GetMeFollowingContains build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

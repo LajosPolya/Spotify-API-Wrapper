@@ -13,7 +13,7 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<GetAllCategories>
     {
         private String country;
         private String locale;
@@ -22,6 +22,7 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
 
         public Builder() { }
 
+        @Override
         public GetAllCategories build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

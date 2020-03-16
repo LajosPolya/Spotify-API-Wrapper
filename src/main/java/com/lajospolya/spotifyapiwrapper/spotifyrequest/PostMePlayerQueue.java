@@ -11,7 +11,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PostMePlayerQueue>
     {
         private String uri;
         private String deviceId;
@@ -22,6 +22,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
             this.uri = uri;
         }
 
+        @Override
         public PostMePlayerQueue build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);

@@ -15,13 +15,14 @@ public class GetUsersTopArtists extends GetUsersTop<Paging<Artist>>
         super(requestBuilder);
     }
 
-    public static class Builder extends GetUsersTop.Builder
+    public static class Builder extends GetUsersTop.Builder<GetUsersTopArtists>
     {
         public Builder()
         {
             super();
         }
 
+        @Override
         public GetUsersTopArtists build()
         {
             return new GetUsersTopArtists(super.build(UsersTopType.artists));

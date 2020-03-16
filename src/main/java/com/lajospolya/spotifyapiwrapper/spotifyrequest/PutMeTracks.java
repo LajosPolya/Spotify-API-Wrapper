@@ -14,7 +14,7 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder
+    public static class Builder extends AbstractBuilder<PutMeTracks>
     {
         private List<String> trackIds;
 
@@ -25,6 +25,7 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
             this.trackIds = trackIds;
         }
 
+        @Override
         public PutMeTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
