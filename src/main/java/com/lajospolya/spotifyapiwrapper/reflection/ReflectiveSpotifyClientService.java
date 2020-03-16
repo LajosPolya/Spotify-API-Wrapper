@@ -36,14 +36,16 @@ public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientS
         }
     }
 
-    public <T> void setAccessTokenOfRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken) throws IllegalAccessException, InvocationTargetException
+    @Override
+    public void setAccessTokenOfRequest(AbstractSpotifyRequest<?> spotifyRequest, String accessToken) throws IllegalAccessException, InvocationTargetException
     {
         setAccessTokenMethod.setAccessible(true);
         setAccessTokenMethod.invoke(spotifyRequest, accessToken);
         setAccessTokenMethod.setAccessible(false);
     }
 
-    public <T> HttpRequest buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws InvocationTargetException, IllegalAccessException
+    @Override
+    public HttpRequest buildRequest(AbstractSpotifyRequest<?> spotifyRequest) throws InvocationTargetException, IllegalAccessException
     {
         buildRequestMethod.setAccessible(true);
         HttpRequest request =  (HttpRequest) buildRequestMethod.invoke(spotifyRequest, (Object[]) null);
@@ -51,7 +53,8 @@ public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientS
         return request;
     }
 
-    public <T> Type getParameterizedTypeOfRequest(AbstractSpotifyRequest<T> spotifyRequest)
+    @Override
+    public Type getParameterizedTypeOfRequest(AbstractSpotifyRequest<?> spotifyRequest)
     {
         return ((ParameterizedType)spotifyRequest.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
