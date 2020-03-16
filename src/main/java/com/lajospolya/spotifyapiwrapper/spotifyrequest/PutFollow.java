@@ -6,7 +6,7 @@ import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class PutFollow extends AbstractSpotifyRequest<Void>
+public final class PutFollow extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following";
 

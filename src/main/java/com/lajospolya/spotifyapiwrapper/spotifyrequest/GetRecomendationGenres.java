@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.RecommendationGenres;
 
 import java.net.http.HttpRequest;
 
-public class GetRecomendationGenres extends AbstractSpotifyRequest<RecommendationGenres>
+public final class GetRecomendationGenres extends AbstractSpotifyRequest<RecommendationGenres>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "recommendations/available-genre-seeds";
 

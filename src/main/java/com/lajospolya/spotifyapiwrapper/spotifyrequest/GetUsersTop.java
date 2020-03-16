@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.enumeration.UsersTopType;
 
 import java.net.http.HttpRequest;
 
-class GetUsersTop<T> extends AbstractSpotifyRequest<T>
+abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/top/{type}";
 

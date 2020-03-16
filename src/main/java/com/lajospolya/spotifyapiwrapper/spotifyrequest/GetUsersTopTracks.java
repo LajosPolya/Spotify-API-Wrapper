@@ -7,7 +7,7 @@ import com.lajospolya.spotifyapiwrapper.response.Track;
 
 import java.net.http.HttpRequest;
 
-public class GetUsersTopTracks extends GetUsersTop<Paging<Track>>
+public final class GetUsersTopTracks extends GetUsersTop<Paging<Track>>
 {
 
     private GetUsersTopTracks(HttpRequest.Builder requestBuilder)

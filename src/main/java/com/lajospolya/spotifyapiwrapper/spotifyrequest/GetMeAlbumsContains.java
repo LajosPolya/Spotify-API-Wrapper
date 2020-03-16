@@ -3,7 +3,7 @@ package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
+public final class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/albums/contains";
 

@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.body.Player;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public class PutMePlayer extends AbstractSpotifyRequest<Void>
+public final class PutMePlayer extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player";
 

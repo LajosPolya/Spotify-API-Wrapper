@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.FeaturedPlaylists;
 
 import java.net.http.HttpRequest;
 
-public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylists>
+public final class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylists>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/featured-playlists";
 

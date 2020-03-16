@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.response.SavedTrack;
 
 import java.net.http.HttpRequest;
 
-public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
+public final class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/tracks";
 

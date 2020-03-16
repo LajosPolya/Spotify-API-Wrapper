@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.UserPrivate;
 
 import java.net.http.HttpRequest;
 
-public class GetMe extends AbstractSpotifyRequest<UserPrivate>
+public final class GetMe extends AbstractSpotifyRequest<UserPrivate>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me";
 

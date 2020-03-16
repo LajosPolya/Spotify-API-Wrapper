@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
+public final class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "recommendations";
 

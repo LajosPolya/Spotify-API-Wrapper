@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.response.Playlist;
 
 import java.net.http.HttpRequest;
 
-public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
+public final class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "users/{user_id}/playlists";
 
