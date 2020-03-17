@@ -1,11 +1,13 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
-public class ClientCredentialsFlowResponse
+public class AuthorizingToken
 {
     private String access_token;
     private String token_type;
     private Integer expires_in;
     private String scope;
+    // Only returned by Authorization Code Flow
+    private String refresh_token = null;
 
     public String getAccessToken()
     {
@@ -45,5 +47,15 @@ public class ClientCredentialsFlowResponse
     public void setScope(String scope)
     {
         this.scope = scope;
+    }
+
+    public String getRefresh_token()
+    {
+        return refresh_token;
+    }
+
+    public void setRefresh_token(String refresh_token)
+    {
+        this.refresh_token = refresh_token;
     }
 }

@@ -2,7 +2,7 @@ package com.lajospolya.spotifyapiwrapper.client;
 
 import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
-import com.lajospolya.spotifyapiwrapper.response.ClientCredentialsFlowResponse;
+import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
 import org.junit.jupiter.api.Test;
@@ -21,10 +21,10 @@ class SpotifyApiClientTest
 {
     private IReflectiveSpotifyClientService reflectiveSpotifyClientMock = mock(IReflectiveSpotifyClientService.class);
     private ISpotifyApiClientService spotifyApiClientMock = mock(ISpotifyApiClientService.class);
-    private ClientCredentialsFlowResponse clientCredentialsFlowResponseMock = mock(ClientCredentialsFlowResponse.class);
+    private AuthorizingToken authorizingTokenMock = mock(AuthorizingToken.class);
     private AbstractSpotifyRequest<?> requestMock = mock(AbstractSpotifyRequest.class);
 
-    private SpotifyApiClient spotifyApiClient = new SpotifyApiClient(reflectiveSpotifyClientMock, spotifyApiClientMock, clientCredentialsFlowResponseMock);
+    private SpotifyApiClient spotifyApiClient = new SpotifyApiClient(reflectiveSpotifyClientMock, spotifyApiClientMock, authorizingTokenMock);
 
     @Test
     void verify_sendRequest_throwsExceptionWhenTokenHasExpired()

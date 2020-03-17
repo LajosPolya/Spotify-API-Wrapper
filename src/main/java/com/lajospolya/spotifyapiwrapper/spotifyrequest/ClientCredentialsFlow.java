@@ -1,10 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.spotifyrequest;
 
-import com.lajospolya.spotifyapiwrapper.response.ClientCredentialsFlowResponse;
+import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 
 import java.net.http.HttpRequest;
 
-public final class ClientCredentialsFlow extends AbstractSpotifyRequest<ClientCredentialsFlowResponse>
+public final class ClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizingToken>
 {
     private static final String REQUEST_URI_STRING = "https://accounts.spotify.com/api/token";
 
