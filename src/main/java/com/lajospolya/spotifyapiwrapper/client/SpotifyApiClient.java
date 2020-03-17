@@ -9,8 +9,8 @@ import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthoriza
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.AuthorizationCodeFlow;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.ClientCredentialsFlow;
+import com.lajospolya.spotifyapiwrapper.spotifyrequest.PostAuthorizationCodeFlow;
+import com.lajospolya.spotifyapiwrapper.spotifyrequest.PostClientCredentialsFlow;
 import com.lajospolya.spotifyapiwrapper.spotifyrequest.PostRefreshToken;
 
 import java.io.IOException;
@@ -60,7 +60,7 @@ public class SpotifyApiClient
     {
         this();
 
-        AuthorizationCodeFlow authorizationRequest = new AuthorizationCodeFlow.Builder(code, redirectUri).build();
+        PostAuthorizationCodeFlow authorizationRequest = new PostAuthorizationCodeFlow.Builder(code, redirectUri).build();
         authorizeClient(authorizationRequest, clientId, clientSecret);
     }
 
@@ -68,7 +68,7 @@ public class SpotifyApiClient
     {
         this();
 
-        ClientCredentialsFlow authorizationRequest = new ClientCredentialsFlow.Builder().build();
+        PostClientCredentialsFlow authorizationRequest = new PostClientCredentialsFlow.Builder().build();
         authorizeClient(authorizationRequest, clientId, clientSecret);
     }
 
@@ -129,8 +129,8 @@ public class SpotifyApiClient
         }
         else
         {
-            ClientCredentialsFlow clientCredentialsFlow = new ClientCredentialsFlow.Builder().build();
-            apiTokenResponse = sendRequest(clientCredentialsFlow, basicToken);
+            PostClientCredentialsFlow postClientCredentialsFlow = new PostClientCredentialsFlow.Builder().build();
+            apiTokenResponse = sendRequest(postClientCredentialsFlow, basicToken);
         }
         timeOfAuthorization = System.currentTimeMillis();
     }

@@ -4,26 +4,26 @@ import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 
 import java.net.http.HttpRequest;
 
-public final class ClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizingToken>
+public final class PostClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizingToken>
 {
     private static final String REQUEST_URI_STRING = "https://accounts.spotify.com/api/token";
 
-    private ClientCredentialsFlow(HttpRequest.Builder requestBuilder)
+    private PostClientCredentialsFlow(HttpRequest.Builder requestBuilder)
     {
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<ClientCredentialsFlow>
+    public static class Builder extends AbstractBuilder<PostClientCredentialsFlow>
     {
         public Builder() { }
 
         @Override
-        public ClientCredentialsFlow build()
+        public PostClientCredentialsFlow build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
-            return new ClientCredentialsFlow(
+            return new PostClientCredentialsFlow(
                     spotifyRequestBuilder.createPostRequestWithStringBody(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));
         }
     }
