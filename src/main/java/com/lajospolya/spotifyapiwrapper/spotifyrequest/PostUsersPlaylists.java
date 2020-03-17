@@ -33,7 +33,7 @@ public final class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
         public PostUsersPlaylists build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
-            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostUsersPlaylists(
                     spotifyRequestBuilder.createPostRequestWithObjectJsonBody(

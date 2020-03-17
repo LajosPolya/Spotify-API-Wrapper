@@ -30,7 +30,7 @@ public final class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Auth
         public PostAuthorizationCodeFlow build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
+            spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostAuthorizationCodeFlow(
                     spotifyRequestBuilder.createPostRequestWithStringBody(

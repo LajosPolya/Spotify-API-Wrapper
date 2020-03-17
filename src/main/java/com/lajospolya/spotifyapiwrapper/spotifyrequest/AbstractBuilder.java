@@ -30,7 +30,6 @@ public abstract class AbstractBuilder<T>
     static final String MAX_PARAM_PREFIX = "max_";
     static final String TARGET_PARAM_PREFIX = "target_";
 
-    static final String CONTENT_TYPE_HEADER = "Content-Type";
     static final String APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE = "application/json";
     static final String URL_ENCODED_CONTENT_TYPE_HEADER_VALUE = "application/x-www-form-urlencoded";
     static final String IMAGE_JPEG_HEADER_VALUE = "image/jpeg";

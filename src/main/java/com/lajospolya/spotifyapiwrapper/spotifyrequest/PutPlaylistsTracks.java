@@ -31,7 +31,7 @@ public final class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
         public PutPlaylistsTracks build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
-            spotifyRequestBuilder.header(CONTENT_TYPE_HEADER, APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutPlaylistsTracks(
                     spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
