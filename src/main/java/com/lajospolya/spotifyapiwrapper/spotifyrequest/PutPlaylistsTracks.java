@@ -35,7 +35,7 @@ public final class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
 
             return new PutPlaylistsTracks(
                     spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
-                            new UrisContainer(this.uris)));
+                            new UrisContainer(uris)));
         }
     }
 }

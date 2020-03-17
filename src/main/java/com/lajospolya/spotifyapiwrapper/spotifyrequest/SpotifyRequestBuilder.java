@@ -119,13 +119,13 @@ public class SpotifyRequestBuilder
     private HttpRequest.Builder createBuilderWithUri()
     {
         UriComponents uriComponents;
-        if(this.pathVariable == null)
+        if(pathVariable == null)
         {
             uriComponents = uriComponentsBuilder.build();
         }
         else
         {
-            uriComponents = uriComponentsBuilder.buildAndExpand(this.pathVariable);
+            uriComponents = uriComponentsBuilder.buildAndExpand(pathVariable);
         }
         return requestBuilder.uri(uriComponents.toUri());
     }

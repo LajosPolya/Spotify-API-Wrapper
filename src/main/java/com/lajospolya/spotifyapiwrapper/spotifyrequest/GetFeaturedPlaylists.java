@@ -34,25 +34,25 @@ public final class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedP
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.country != null)
+            if(country != null)
             {
-                requestUriBuilder.queryParam(COUNTRY_QUERY_PARAM, this.country);
+                requestUriBuilder.queryParam(COUNTRY_QUERY_PARAM, country);
             }
-            if(this.locale != null)
+            if(locale != null)
             {
-                requestUriBuilder.queryParam(LOCALE_QUERY_PARAM, this.locale);
+                requestUriBuilder.queryParam(LOCALE_QUERY_PARAM, locale);
             }
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.offset != null)
+            if(offset != null)
             {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, offset);
             }
-            if(this.timestamp != null)
+            if(timestamp != null)
             {
-                requestUriBuilder.queryParam(TIMESTAMP_QUERY_PARAM, this.timestamp);
+                requestUriBuilder.queryParam(TIMESTAMP_QUERY_PARAM, timestamp);
             }
         }
 

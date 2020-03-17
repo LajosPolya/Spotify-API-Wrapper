@@ -33,7 +33,7 @@ public final class DeleteMeAlbums extends AbstractSpotifyRequest<Void>
 
             return new DeleteMeAlbums(
                     spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
-                            new IdsContainer(this.albumIds)));
+                            new IdsContainer(albumIds)));
         }
     }
 }

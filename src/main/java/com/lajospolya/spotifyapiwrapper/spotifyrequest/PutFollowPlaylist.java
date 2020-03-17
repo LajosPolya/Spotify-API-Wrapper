@@ -34,7 +34,7 @@ public final class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
 
         private HttpRequest.Builder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
         {
-            if(this.isPublic != null)
+            if(isPublic != null)
             {
                 return spotifyRequestBuilder.createPutRequestWithObjectJsonBody(new PutPlaylistsFollowers(isPublic));
             }

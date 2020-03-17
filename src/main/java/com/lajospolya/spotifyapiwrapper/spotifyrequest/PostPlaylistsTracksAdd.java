@@ -35,7 +35,7 @@ public final class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<Playlis
 
             return new PostPlaylistsTracksAdd(
                     spotifyRequestBuilder.createPostRequestWithObjectJsonBody(
-                            new PlaylistTrackAdd(this.uris, position)));
+                            new PlaylistTrackAdd(uris, position)));
         }
 
         public Builder uris(List<String> uris) throws IllegalArgumentException

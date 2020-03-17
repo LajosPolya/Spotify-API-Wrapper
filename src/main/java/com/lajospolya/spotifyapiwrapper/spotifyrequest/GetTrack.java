@@ -35,9 +35,9 @@ public final class GetTrack extends AbstractSpotifyRequest<Track>
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.market != null)
+            if(market != null)
             {
-                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
             }
         }
 

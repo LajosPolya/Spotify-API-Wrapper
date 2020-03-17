@@ -86,12 +86,12 @@ public class SpotifyApiClient
     {
         validateTokenHasNotExpired();
 
-        return sendRequest(spotifyRequest, this.bearerToken);
+        return sendRequest(spotifyRequest, bearerToken);
     }
 
     private void validateTokenHasNotExpired() throws SpotifyRequestAuthorizationException
     {
-        if(spotifyApiClientService.hasTokenExpired(this.timeOfAuthorization, this.apiTokenResponse.getExpiresIn()))
+        if(spotifyApiClientService.hasTokenExpired(timeOfAuthorization, apiTokenResponse.getExpiresIn()))
         {
             throw new SpotifyRequestAuthorizationException("Access Token Has Expired");
         }
@@ -102,11 +102,11 @@ public class SpotifyApiClient
     {
         try
         {
-            this.reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
+            reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
 
-            HttpRequest request = this.reflectiveSpotifyClientService.buildRequest(spotifyRequest);
+            HttpRequest request = reflectiveSpotifyClientService.buildRequest(spotifyRequest);
 
-            Type genericType = this.reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
+            Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
         }

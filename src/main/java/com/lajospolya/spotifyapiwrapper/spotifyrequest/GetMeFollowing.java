@@ -38,13 +38,13 @@ public final class GetMeFollowing extends AbstractSpotifyRequest<Following>
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.after != null)
+            if(after != null)
             {
-                requestUriBuilder.queryParam(AFTER_QUERY_PARAM, this.after);
+                requestUriBuilder.queryParam(AFTER_QUERY_PARAM, after);
             }
         }
 

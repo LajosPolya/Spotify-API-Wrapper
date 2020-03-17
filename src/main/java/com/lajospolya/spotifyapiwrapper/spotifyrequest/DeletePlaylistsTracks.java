@@ -37,7 +37,7 @@ public final class DeletePlaylistsTracks extends AbstractSpotifyRequest<Playlist
 
             return new DeletePlaylistsTracks(
                     spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
-                            new PlaylistTrackDelete(this.trackIds, this.snapshotId)));
+                            new PlaylistTrackDelete(trackIds, snapshotId)));
         }
 
         public Builder snapshotId(String snapshotId)

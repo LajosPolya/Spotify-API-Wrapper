@@ -33,7 +33,7 @@ public final class PutMeAlbums extends AbstractSpotifyRequest<Void>
 
             return new PutMeAlbums(
                     spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
-                            new IdsContainer(this.albumIds)));
+                            new IdsContainer(albumIds)));
         }
     }
 }

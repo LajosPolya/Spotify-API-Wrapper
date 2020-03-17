@@ -36,13 +36,13 @@ public final class GetCategory extends AbstractSpotifyRequest<Category>
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.country != null)
+            if(country != null)
             {
-                requestUriBuilder.queryParam(COUNTRY_QUERY_PARAM, this.country);
+                requestUriBuilder.queryParam(COUNTRY_QUERY_PARAM, country);
             }
-            if(this.locale != null)
+            if(locale != null)
             {
-                requestUriBuilder.queryParam(LOCALE_QUERY_PARAM, this.locale);
+                requestUriBuilder.queryParam(LOCALE_QUERY_PARAM, locale);
             }
         }
 

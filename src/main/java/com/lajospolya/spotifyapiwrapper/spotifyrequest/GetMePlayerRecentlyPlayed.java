@@ -33,17 +33,17 @@ public final class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<Pagi
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.after != null)
+            if(after != null)
             {
-                requestUriBuilder.queryParam(AFTER_QUERY_PARAM, this.after);
+                requestUriBuilder.queryParam(AFTER_QUERY_PARAM, after);
             }
-            if(this.before != null)
+            if(before != null)
             {
-                requestUriBuilder.queryParam(BEFORE_QUERY_PARAM, this.before);
+                requestUriBuilder.queryParam(BEFORE_QUERY_PARAM, before);
             }
         }
 
@@ -56,7 +56,7 @@ public final class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<Pagi
 
         public Builder after(Long after)
         {
-            if(after != null && this.before != null)
+            if(after != null && before != null)
             {
                 throw new IllegalArgumentException("after and before cannot both be set.");
             }
@@ -66,7 +66,7 @@ public final class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<Pagi
 
         public Builder before(Long before)
         {
-            if(before != null && this.after != null)
+            if(before != null && after != null)
             {
                 throw new IllegalArgumentException("after and before cannot both be set.");
             }

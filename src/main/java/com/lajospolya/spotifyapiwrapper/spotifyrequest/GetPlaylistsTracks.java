@@ -39,21 +39,21 @@ public final class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<Play
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.market != null)
+            if(market != null)
             {
-                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
             }
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.offset != null)
+            if(offset != null)
             {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, offset);
             }
-            if(this.fields != null)
+            if(fields != null)
             {
-                requestUriBuilder.queryParam(FIELDS_QUERY_PARAM, this.fields);
+                requestUriBuilder.queryParam(FIELDS_QUERY_PARAM, fields);
             }
         }
 

@@ -36,9 +36,9 @@ public final class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.deviceId != null)
+            if(deviceId != null)
             {
-                requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, this.deviceId);
+                requestUriBuilder.queryParam(DEVICE_ID_QUERY_PARAM, deviceId);
             }
         }
 

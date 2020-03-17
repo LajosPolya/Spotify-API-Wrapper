@@ -40,21 +40,21 @@ public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.market != null)
+            if(market != null)
             {
-                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
             }
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.offset != null)
+            if(offset != null)
             {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, offset);
             }
-            if(this.includeGroups != null)
+            if(includeGroups != null)
             {
-                requestUriBuilder.queryParam(INCLUDE_GROUPS_QUERY_PARAM, this.includeGroups, AlbumType::getType);
+                requestUriBuilder.queryParam(INCLUDE_GROUPS_QUERY_PARAM, includeGroups, AlbumType::getType);
             }
         }
 

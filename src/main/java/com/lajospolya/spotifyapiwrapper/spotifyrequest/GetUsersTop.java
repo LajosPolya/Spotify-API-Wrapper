@@ -32,17 +32,17 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.offset != null)
+            if(offset != null)
             {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, offset);
             }
-            if(this.timeRange != null)
+            if(timeRange != null)
             {
-                requestUriBuilder.queryParam(TIME_RANGE_QUERY_PARAM, this.timeRange.getName());
+                requestUriBuilder.queryParam(TIME_RANGE_QUERY_PARAM, timeRange.getName());
             }
         }
 

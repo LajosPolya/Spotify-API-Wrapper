@@ -45,21 +45,21 @@ public final class GetSearch extends AbstractSpotifyRequest<SearchResults>
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
         {
-            if(this.market != null)
+            if(market != null)
             {
-                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, this.market);
+                requestUriBuilder.queryParam(MARKET_QUERY_PARAM, market);
             }
-            if(this.limit != null)
+            if(limit != null)
             {
-                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, this.limit);
+                requestUriBuilder.queryParam(LIMIT_QUERY_PARAM, limit);
             }
-            if(this.offset != null)
+            if(offset != null)
             {
-                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, this.offset);
+                requestUriBuilder.queryParam(OFFSET_QUERY_PARAM, offset);
             }
-            if(this.content != null)
+            if(content != null)
             {
-                requestUriBuilder.queryParam(INCLUDE_EXTERNAL, this.content.getContent());
+                requestUriBuilder.queryParam(INCLUDE_EXTERNAL, content.getContent());
             }
         }
 

@@ -37,7 +37,7 @@ public final class DeleteFollow extends AbstractSpotifyRequest<Void>
 
             return new DeleteFollow(
                     spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
-                            new IdsContainer(this.ids)));
+                            new IdsContainer(ids)));
         }
     }
 }
