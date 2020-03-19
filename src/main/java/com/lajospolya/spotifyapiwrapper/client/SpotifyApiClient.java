@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.net.http.HttpRequest;
+import java.util.concurrent.CompletableFuture;
 
 public class SpotifyApiClient
 {
@@ -89,6 +90,14 @@ public class SpotifyApiClient
         return sendRequest(spotifyRequest, bearerToken);
     }
 
+    public <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest)
+            throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
+    {
+        validateTokenHasNotExpired();
+
+        return sendRequestAsync(spotifyRequest, bearerToken);
+    }
+
     private void validateTokenHasNotExpired() throws SpotifyRequestAuthorizationException
     {
         if(spotifyApiClientService.hasTokenExpired(timeOfAuthorization, apiTokenResponse.getExpiresIn()))
@@ -117,6 +126,25 @@ public class SpotifyApiClient
         catch (InterruptedException | IOException e)
         {
             throw new SpotifyResponseException("An exception occurred while sending the request");
+        }
+    }
+
+    private <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+            throws SpotifyRequestBuilderException, SpotifyResponseException
+    {
+        try
+        {
+            reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
+
+            HttpRequest request = reflectiveSpotifyClientService.buildRequest(spotifyRequest);
+
+            Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
+
+            return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
+        }
+        catch (InvocationTargetException | IllegalAccessException e)
+        {
+            throw new SpotifyRequestBuilderException("Unable to build the request");
         }
     }
 
