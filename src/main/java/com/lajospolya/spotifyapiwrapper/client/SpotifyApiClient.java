@@ -111,17 +111,10 @@ public class SpotifyApiClient
     {
         try
         {
-            reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
-
-            HttpRequest request = reflectiveSpotifyClientService.buildRequest(spotifyRequest);
-
+            HttpRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
             Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
-        }
-        catch (InvocationTargetException | IllegalAccessException e)
-        {
-            throw new SpotifyRequestBuilderException("Unable to build the request");
         }
         catch (InterruptedException | IOException e)
         {
@@ -132,15 +125,19 @@ public class SpotifyApiClient
     private <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
+        HttpRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+        Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
+
+        return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
+    }
+
+    private <T> HttpRequest authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    {
         try
         {
             reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
 
-            HttpRequest request = reflectiveSpotifyClientService.buildRequest(spotifyRequest);
-
-            Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
-
-            return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
+            return reflectiveSpotifyClientService.buildRequest(spotifyRequest);
         }
         catch (InvocationTargetException | IllegalAccessException e)
         {
