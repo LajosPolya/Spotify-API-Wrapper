@@ -34,11 +34,7 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         validateResponse(response);
         String body = response.body();
 
-        if(isStringType(typeOfReturnValue))
-        {
-            return (T) body;
-        }
-        return gson.fromJson(body, typeOfReturnValue);
+        return serializeResponseBody(body, typeOfReturnValue);
     }
 
     @Override
@@ -49,11 +45,7 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
                     validateResponse(response);
                     String body = response.body();
 
-                    if(isStringType(typeOfReturnValue))
-                    {
-                        return (T) body;
-                    }
-                    return gson.fromJson(body, typeOfReturnValue);
+                    return serializeResponseBody(body, typeOfReturnValue);
                 });
 
     }
@@ -66,6 +58,15 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
             SpotifyErrorContainer error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
             throw new SpotifyResponseException(error);
         }
+    }
+
+    private <T> T serializeResponseBody(String body, Type typeOfReturnValue)
+    {
+        if(isStringType(typeOfReturnValue))
+        {
+            return (T) body;
+        }
+        return gson.fromJson(body, typeOfReturnValue);
     }
 
     private Boolean isClientErrorStatusCode(int statusCode)
