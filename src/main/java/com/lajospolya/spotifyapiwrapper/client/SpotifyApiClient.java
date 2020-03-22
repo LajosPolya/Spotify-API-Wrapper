@@ -145,7 +145,8 @@ public class SpotifyApiClient
         }
     }
 
-    public void reauthorize() {
+    public void reauthorize()
+    {
         if(canRefresh())
         {
             PostRefreshToken postRefreshToken = new PostRefreshToken.Builder(apiTokenResponse.getRefresh_token())
@@ -158,6 +159,29 @@ public class SpotifyApiClient
             apiTokenResponse = sendRequest(postClientCredentialsFlow, basicToken);
         }
         timeOfAuthorization = System.currentTimeMillis();
+    }
+
+    public CompletableFuture<Void> reauthorizeAsync()
+    {
+        if(canRefresh())
+        {
+            PostRefreshToken postRefreshToken = new PostRefreshToken.Builder(apiTokenResponse.getRefresh_token())
+                    .build();
+            return sendRequestAsync(postRefreshToken, basicToken).thenAccept(response ->
+            {
+                apiTokenResponse = response;
+                timeOfAuthorization = System.currentTimeMillis();
+            });
+        }
+        else
+        {
+            PostClientCredentialsFlow postClientCredentialsFlow = new PostClientCredentialsFlow.Builder().build();
+            return sendRequestAsync(postClientCredentialsFlow, basicToken).thenAccept(response ->
+            {
+                apiTokenResponse = response;
+                timeOfAuthorization = System.currentTimeMillis();
+            });
+        }
     }
 
     private boolean canRefresh()
