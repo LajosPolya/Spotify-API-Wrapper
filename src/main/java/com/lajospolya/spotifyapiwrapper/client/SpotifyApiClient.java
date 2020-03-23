@@ -8,10 +8,10 @@ import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.PostAuthorizationCodeFlow;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.PostClientCredentialsFlow;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.PostRefreshToken;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.PostAuthorizationCodeFlow;
+import com.lajospolya.spotifyapiwrapper.request.PostClientCredentialsFlow;
+import com.lajospolya.spotifyapiwrapper.request.PostRefreshToken;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

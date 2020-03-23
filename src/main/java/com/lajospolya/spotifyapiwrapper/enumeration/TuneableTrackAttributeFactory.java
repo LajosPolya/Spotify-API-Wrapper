@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.enumeration;
 
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.ISpotifyRequestParamValidationService;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.service.SpotifyRequestParamValidationService;
+import com.lajospolya.spotifyapiwrapper.request.service.ISpotifyRequestParamValidationService;
+import com.lajospolya.spotifyapiwrapper.request.service.SpotifyRequestParamValidationService;
 
 public class TuneableTrackAttributeFactory
 {

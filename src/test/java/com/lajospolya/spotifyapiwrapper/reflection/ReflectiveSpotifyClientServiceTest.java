@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.reflection;
 
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;

@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

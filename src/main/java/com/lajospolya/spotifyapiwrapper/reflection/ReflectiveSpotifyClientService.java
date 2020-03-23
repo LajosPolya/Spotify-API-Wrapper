@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.reflection;
 
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyBadClassDefinitionException;
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;

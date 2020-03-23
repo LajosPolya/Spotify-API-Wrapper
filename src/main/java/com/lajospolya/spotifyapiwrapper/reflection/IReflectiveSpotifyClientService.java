@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.reflection;
 
-import com.lajospolya.spotifyapiwrapper.spotifyrequest.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 
 import java.lang.reflect.*;
 import java.net.http.HttpRequest;
