@@ -44,7 +44,7 @@ public interface ISpotifyRequestParamValidationService
 
     void validateUserIds(List<String> ids) throws IllegalArgumentException;
 
-    void validateFollowIds(List<String> ids) throws IllegalArgumentException;
+    void validateIds50(List<String> ids) throws IllegalArgumentException;
 
     void validatePlaylistUris(List<String> uris) throws IllegalArgumentException;
 

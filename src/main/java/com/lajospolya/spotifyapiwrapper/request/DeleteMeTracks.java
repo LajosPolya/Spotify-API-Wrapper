@@ -21,7 +21,7 @@ public final class DeleteMeTracks extends AbstractSpotifyRequest<Void>
         public Builder(List<String> ids) throws IllegalArgumentException
         {
             spotifyRequestParamValidationService.validateParametersNotNull(ids);
-            spotifyRequestParamValidationService.validateFollowIds(ids);
+            spotifyRequestParamValidationService.validateIds50(ids);
             this.ids = ids;
         }
 

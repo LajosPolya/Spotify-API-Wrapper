@@ -625,7 +625,7 @@ class SpotifyRequestParamValidationServiceTest
     void verify_validateFollowIds_throwsExceptionOnNullParameter()
     {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
-                spotifyRequestParamValidationService.validateFollowIds(null));
+                spotifyRequestParamValidationService.validateIds50(null));
 
         assertEquals(e.getMessage(), FOLLOW_IDS_EMPTY_MESSAGE);
     }
@@ -634,7 +634,7 @@ class SpotifyRequestParamValidationServiceTest
     void verify_validateFollowIds_throwsExceptionOnEmptyList()
     {
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
-                spotifyRequestParamValidationService.validateFollowIds(new ArrayList<>()));
+                spotifyRequestParamValidationService.validateIds50(new ArrayList<>()));
 
         assertEquals(e.getMessage(), FOLLOW_IDS_EMPTY_MESSAGE);
     }
@@ -648,7 +648,7 @@ class SpotifyRequestParamValidationServiceTest
             ids.add(String.valueOf(i));
         }
         IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () ->
-                spotifyRequestParamValidationService.validateFollowIds(ids));
+                spotifyRequestParamValidationService.validateIds50(ids));
 
         assertEquals(e.getMessage(), FOLLOW_IDS_TOO_LONG_MESSAGE);
     }
@@ -658,7 +658,7 @@ class SpotifyRequestParamValidationServiceTest
     {
         List<String> ids = new ArrayList<>();
         ids.add("1");
-        spotifyRequestParamValidationService.validateFollowIds(ids);
+        spotifyRequestParamValidationService.validateIds50(ids);
     }
 
     @Test

@@ -21,7 +21,7 @@ public final class PutMeTracks extends AbstractSpotifyRequest<Void>
         public Builder(List<String> trackIds) throws IllegalArgumentException
         {
             spotifyRequestParamValidationService.validateParametersNotNull(trackIds);
-            spotifyRequestParamValidationService.validateFollowIds(trackIds);
+            spotifyRequestParamValidationService.validateIds50(trackIds);
             this.trackIds = trackIds;
         }
 

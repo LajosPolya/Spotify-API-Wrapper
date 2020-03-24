@@ -198,7 +198,7 @@ public class SpotifyRequestParamValidationService implements ISpotifyRequestPara
     }
 
     @Override
-    public void validateFollowIds(List<String> ids) throws IllegalArgumentException
+    public void validateIds50(List<String> ids) throws IllegalArgumentException
     {
         if(ids == null || ids.isEmpty())
         {
