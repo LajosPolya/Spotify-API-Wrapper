@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.response.SimplifiedTrack;
 
 import java.net.http.HttpRequest;
 
-public final class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTrack>>
+public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTrack>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums/{id}/tracks";
 

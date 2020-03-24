@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.response.PlayHistory;
 
 import java.net.http.HttpRequest;
 
-public final class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCursor<PlayHistory>>
+public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCursor<PlayHistory>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/recently-played";
 

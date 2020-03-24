@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.Categories;
 
 import java.net.http.HttpRequest;
 
-public final class GetAllCategories extends AbstractSpotifyRequest<Categories>
+public class GetAllCategories extends AbstractSpotifyRequest<Categories>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/categories";
 

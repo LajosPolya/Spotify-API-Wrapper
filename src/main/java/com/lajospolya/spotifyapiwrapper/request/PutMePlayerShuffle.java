@@ -2,7 +2,7 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import java.net.http.HttpRequest;
 
-public final class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
+public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/shuffle";
 

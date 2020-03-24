@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.CurrentlyPlaying;
 
 import java.net.http.HttpRequest;
 
-public final class GetMePlayerCurrentlyPlaying extends AbstractSpotifyRequest<CurrentlyPlaying>
+public class GetMePlayerCurrentlyPlaying extends AbstractSpotifyRequest<CurrentlyPlaying>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/currently-playing";
 

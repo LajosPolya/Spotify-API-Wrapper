@@ -2,7 +2,7 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import java.net.http.HttpRequest;
 
-public final class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
+public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers";
 

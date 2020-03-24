@@ -5,7 +5,7 @@ import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public final class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>>
+public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following/contains";
 

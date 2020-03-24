@@ -7,7 +7,7 @@ import com.lajospolya.spotifyapiwrapper.response.SearchResults;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public final class GetSearch extends AbstractSpotifyRequest<SearchResults>
+public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "search";
 

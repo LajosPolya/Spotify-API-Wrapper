@@ -6,7 +6,7 @@ import com.lajospolya.spotifyapiwrapper.response.ArtistsAlbums;
 import java.net.http.HttpRequest;
 import java.util.List;
 
-public final class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
+public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/albums";
 

@@ -7,7 +7,7 @@ import com.lajospolya.spotifyapiwrapper.response.Paging;
 
 import java.net.http.HttpRequest;
 
-public final class GetUsersTopArtists extends GetUsersTop<Paging<Artist>>
+public class GetUsersTopArtists extends GetUsersTop<Paging<Artist>>
 {
 
     private GetUsersTopArtists(HttpRequest.Builder requestBuilder)

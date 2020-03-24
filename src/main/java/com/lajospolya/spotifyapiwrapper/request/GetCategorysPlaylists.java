@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.CategorysPlaylists;
 
 import java.net.http.HttpRequest;
 
-public final class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlaylists>
+public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlaylists>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/categories/{category_id}/playlists";
 

@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.ArtistsTopTracks;
 
 import java.net.http.HttpRequest;
 
-public final class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks>
+public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/top-tracks";
 

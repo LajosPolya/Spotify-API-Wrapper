@@ -4,7 +4,7 @@ import com.lajospolya.spotifyapiwrapper.response.Artists;
 
 import java.net.http.HttpRequest;
 
-public final class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artists>
+public class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artists>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/related-artists";
 
