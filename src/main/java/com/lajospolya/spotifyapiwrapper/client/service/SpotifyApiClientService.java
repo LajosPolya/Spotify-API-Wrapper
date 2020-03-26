@@ -34,41 +34,29 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     public <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
     {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        validateResponse(response);
-        String body = response.body();
-
-        /*
-        * when a 304 is returned with an empty body the serialized body becomes null
-        * so we don't need to handled caching separately
-        */
-        T serializedResponse = serializeResponseBody(body, typeOfReturnValue);
-
-        if(serializedResponse instanceof CachableResponse)
-        {
-            setCachableValuesFromHeaders((CachableResponse)serializedResponse, response.headers());
-        }
-
-        return serializedResponse;
+        return validateResponseAndSerialize(response, typeOfReturnValue);
     }
 
     @Override
     public <T> CompletableFuture<T> sendRequestAndFetchResponseAsync(HttpRequest request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply((response) -> {
-                    validateResponse(response);
-                    String body = response.body();
+                .thenApply((response) -> validateResponseAndSerialize(response, typeOfReturnValue));
+    }
 
-                    T serializedResponse = serializeResponseBody(body, typeOfReturnValue);
+    private <T> T validateResponseAndSerialize(HttpResponse<String> response, Type typeOfReturnValue)
+    {
+        validateResponse(response);
+        String body = response.body();
 
-                    if(serializedResponse instanceof CachableResponse)
-                    {
-                        setCachableValuesFromHeaders((CachableResponse)serializedResponse, response.headers());
-                    }
+        /*
+         * when a 304 is returned with an empty body the serialized body becomes null
+         * so we don't need to handled caching separately
+         */
+        T serializedResponse = serializeResponseBody(body, typeOfReturnValue);
+        setCachableValuesFromHeadersIfCachable(serializedResponse, response.headers());
 
-                    return serializedResponse;
-                });
-
+        return serializedResponse;
     }
 
     private void validateResponse(HttpResponse<String> response) throws SpotifyResponseException
@@ -81,11 +69,6 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         }
     }
 
-    private boolean isResourceCached(HttpResponse<String> response)
-    {
-        return response.statusCode() == 304;
-    }
-
     private <T> T serializeResponseBody(String body, Type typeOfReturnValue)
     {
         if(isStringType(typeOfReturnValue))
@@ -95,9 +78,12 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         return gson.fromJson(body, typeOfReturnValue);
     }
 
-    private <T extends CachableResponse> void setCachableValuesFromHeaders(T response, HttpHeaders headers)
+    private <T> void setCachableValuesFromHeadersIfCachable(T response, HttpHeaders headers)
     {
-        headers.firstValue(ETAG_HEADER).ifPresent(response::setEtag);
+        if(response instanceof CachableResponse)
+        {
+            headers.firstValue(ETAG_HEADER).ifPresent(((CachableResponse)response)::setEtag);
+        }
     }
 
     private Boolean isClientErrorStatusCode(int statusCode)
