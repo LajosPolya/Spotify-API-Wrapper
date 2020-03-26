@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class SpotifyRequestBuilder
 {
     private static final String CONTENT_TYPE_HEADER = "Content-Type";
+    private static final String IF_NOT_MATCH = "If-None-Match";
     private static final String DELETE = "DELETE";
 
     private static final Gson gson = new Gson();
@@ -60,6 +61,11 @@ public class SpotifyRequestBuilder
     void contentType(String value)
     {
         requestBuilder.header(CONTENT_TYPE_HEADER, value);
+    }
+
+    void etag(String value)
+    {
+        requestBuilder.header(IF_NOT_MATCH, value);
     }
 
     HttpRequest.Builder createGetRequests()

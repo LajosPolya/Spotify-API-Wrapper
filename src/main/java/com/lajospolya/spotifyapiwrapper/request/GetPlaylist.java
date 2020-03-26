@@ -13,7 +13,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetPlaylist>
+    public static class Builder extends CacheableRequestBuilder<GetPlaylist>
     {
         private String playlistId;
 
@@ -27,7 +27,15 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
         public GetPlaylist build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            addEtagHeader(spotifyRequestBuilder);
             return new GetPlaylist(spotifyRequestBuilder.createGetRequests());
+        }
+
+        @Override
+        public Builder etag(String etag)
+        {
+            this.etag = etag;
+            return this;
         }
     }
 }

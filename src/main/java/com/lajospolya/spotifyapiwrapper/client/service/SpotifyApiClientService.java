@@ -1,12 +1,14 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
 import com.google.gson.Gson;
+import com.lajospolya.spotifyapiwrapper.cachable.CachableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpClient;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
@@ -15,6 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class SpotifyApiClientService implements ISpotifyApiClientService
 {
+    private static final String ETAG_HEADER = "etag";
     private HttpClient httpClient;
     private Gson gson;
 
@@ -34,7 +37,18 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         validateResponse(response);
         String body = response.body();
 
-        return serializeResponseBody(body, typeOfReturnValue);
+        /*
+        * when a 304 is returned with an empty body the serialized body becomes null
+        * so we don't need to handled caching separately
+        */
+        T serializedResponse = serializeResponseBody(body, typeOfReturnValue);
+
+        if(serializedResponse instanceof CachableResponse)
+        {
+            setCachableValuesFromHeaders((CachableResponse)serializedResponse, response.headers());
+        }
+
+        return serializedResponse;
     }
 
     @Override
@@ -45,7 +59,14 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
                     validateResponse(response);
                     String body = response.body();
 
-                    return serializeResponseBody(body, typeOfReturnValue);
+                    T serializedResponse = serializeResponseBody(body, typeOfReturnValue);
+
+                    if(serializedResponse instanceof CachableResponse)
+                    {
+                        setCachableValuesFromHeaders((CachableResponse)serializedResponse, response.headers());
+                    }
+
+                    return serializedResponse;
                 });
 
     }
@@ -60,6 +81,11 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         }
     }
 
+    private boolean isResourceCached(HttpResponse<String> response)
+    {
+        return response.statusCode() == 304;
+    }
+
     private <T> T serializeResponseBody(String body, Type typeOfReturnValue)
     {
         if(isStringType(typeOfReturnValue))
@@ -67,6 +93,11 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
             return (T) body;
         }
         return gson.fromJson(body, typeOfReturnValue);
+    }
+
+    private <T extends CachableResponse> void setCachableValuesFromHeaders(T response, HttpHeaders headers)
+    {
+        headers.firstValue(ETAG_HEADER).ifPresent(response::setEtag);
     }
 
     private Boolean isClientErrorStatusCode(int statusCode)
