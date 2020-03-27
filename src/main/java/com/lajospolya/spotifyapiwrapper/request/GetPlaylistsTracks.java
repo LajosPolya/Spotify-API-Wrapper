@@ -14,7 +14,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetPlaylistsTracks>
+    public static class Builder extends CacheableRequestBuilder<GetPlaylistsTracks>
     {
         private String playlistId;
         private Integer limit;
@@ -33,6 +33,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, this.playlistId);
             addOptionalQueryParams(spotifyRequestBuilder);
+            addEtagHeader(spotifyRequestBuilder);
 
             return new GetPlaylistsTracks(spotifyRequestBuilder.createGetRequests());
         }
@@ -80,6 +81,13 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
         public Builder fields(String fields)
         {
             this.fields = fields;
+            return this;
+        }
+
+        @Override
+        public CacheableRequestBuilder<GetPlaylistsTracks> etag(String etag)
+        {
+            this.etag = etag;
             return this;
         }
     }
