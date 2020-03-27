@@ -1,10 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
-import com.lajospolya.spotifyapiwrapper.cachable.CachableResponse;
+import com.lajospolya.spotifyapiwrapper.cachable.CacheableResponse;
 
 import java.util.List;
 
-public class Paging<T> extends CachableResponse
+public class Paging<T> extends CacheableResponse
 {
     private String href;
     private List<T> items;

@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.cachable;
 
-public class CachableResponse
+public class CacheableResponse
 {
     private String etag;
 

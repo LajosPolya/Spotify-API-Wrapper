@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.cachable.CachableResponse;
+import com.lajospolya.spotifyapiwrapper.cachable.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
@@ -80,9 +80,9 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
 
     private <T> void setCachableValuesFromHeadersIfCachable(T response, HttpHeaders headers)
     {
-        if(response instanceof CachableResponse)
+        if(response instanceof CacheableResponse)
         {
-            headers.firstValue(ETAG_HEADER).ifPresent(((CachableResponse)response)::setEtag);
+            headers.firstValue(ETAG_HEADER).ifPresent(((CacheableResponse)response)::setEtag);
         }
     }
 
