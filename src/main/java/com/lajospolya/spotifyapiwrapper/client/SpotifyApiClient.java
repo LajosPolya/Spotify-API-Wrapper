@@ -19,6 +19,13 @@ import java.lang.reflect.Type;
 import java.net.http.HttpRequest;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * @author Lajos Polya
+ *
+ * This class represents a Spotify client.
+ * The client is isntantiated by using one of the two static factory methods which returns an authorized client.
+ * Once the user has an authorized client it can send Spotify requests with the client.
+ */
 public class SpotifyApiClient
 {
     private AuthorizingToken apiTokenResponse;
@@ -31,11 +38,27 @@ public class SpotifyApiClient
 
     private static final String BASIC_AUTHORIZATION = "Basic ";
 
+    /**
+     *
+     * @param clientId the client id of a Spotify app retrieved from the Spotify Developer Dashboard
+     * @param clientSecret the secret of a Spotify app retrieved from the Spotify Developer Dashboard
+     * @return an authorized client using the client credentials flow
+     * @throws SpotifyRequestAuthorizationException when the client cannot be authorized
+     */
     public static SpotifyApiClient createClientCredentialsFlowClient(String clientId, String clientSecret) throws SpotifyRequestAuthorizationException
     {
         return new SpotifyApiClient(clientId, clientSecret);
     }
 
+    /**
+     *
+     * @param clientId the client id of a Spotify app retrieved from the Spotify Developer Dashboard
+     * @param clientSecret the secret of a Spotify app retrieved from the Spotify Developer Dashboard
+     * @param code the code returned by the client when a user authorized this app
+     * @param redirectUri the redirect url the app was authorized against
+     * @return an authorized client using the authorization flow
+     * @throws SpotifyRequestAuthorizationException when the client cannot be authorized
+     */
     public static SpotifyApiClient createAuthorizationFlowClient(String clientId, String clientSecret, String code, String redirectUri) throws SpotifyRequestAuthorizationException
     {
         return new SpotifyApiClient(clientId, clientSecret, code, redirectUri);
@@ -82,6 +105,16 @@ public class SpotifyApiClient
         bearerToken = apiTokenResponse.getTokenType() + " " + apiTokenResponse.getAccessToken();
     }
 
+    /**
+     * Sends a request synchronously
+     * @param spotifyRequest the request to be sent
+     * @param <T> type of the response body of the request
+     * @return serialize response body of the response
+     * @throws SpotifyRequestAuthorizationException when the client isn't authorized to send request
+     * @throws SpotifyRequestBuilderException when the request wasn't built successfully, this occurs if it is missing
+     * the mandatory private fields and methods needed to build the request
+     * @throws SpotifyResponseException when the response header contains an erroneous status code
+     */
     public <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
@@ -90,6 +123,16 @@ public class SpotifyApiClient
         return sendRequest(spotifyRequest, bearerToken);
     }
 
+    /**
+     * Sends a request asynchronously
+     * @param spotifyRequest the request to be sent
+     * @param <T> type of the response body of the request
+     * @return serialize response body of the response
+     * @throws SpotifyRequestAuthorizationException when the client isn't authorized to send request
+     * @throws SpotifyRequestBuilderException when the request wasn't built successfully, this occurs if it is missing
+     * the mandatory private fields and methods needed to build the request
+     * @throws SpotifyResponseException when the response header contains an erroneous status code
+     */
     public <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
@@ -145,6 +188,10 @@ public class SpotifyApiClient
         }
     }
 
+    /**
+     * Reauthorizes the client synchronously, if the client has a refresh token it will refresh it, otherwise it'll
+     * reauthorize using the client credentials flow
+     */
     public void reauthorize()
     {
         if(canRefresh())
@@ -161,6 +208,11 @@ public class SpotifyApiClient
         timeOfAuthorization = System.currentTimeMillis();
     }
 
+    /**
+     * Reauthorizes the client asynchronously, if the client has a refresh token it will refresh it, otherwise it'll
+     * reauthorize using the client credentials flow
+     * @return a void completable future
+     */
     public CompletableFuture<Void> reauthorizeAsync()
     {
         if(canRefresh())
