@@ -14,7 +14,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMeTracks>
+    public static class Builder extends CacheableRequestBuilder<GetMeTracks>
     {
         private Integer limit;
         private Integer offset;
@@ -27,7 +27,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
-
+            addEtagHeader(spotifyRequestBuilder);
             return new GetMeTracks(spotifyRequestBuilder.createGetRequests());
         }
 
@@ -64,6 +64,13 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
         public Builder market(String market)
         {
             this.market = market;
+            return this;
+        }
+
+        @Override
+        public Builder etag(String etag)
+        {
+            this.etag = etag;
             return this;
         }
     }
