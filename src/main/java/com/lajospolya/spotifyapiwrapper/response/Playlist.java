@@ -1,7 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.lajospolya.spotifyapiwrapper.cachable.CacheableResponse;
 
 import java.util.List;
 import java.util.Map;

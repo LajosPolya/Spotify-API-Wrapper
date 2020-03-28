@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
-import com.lajospolya.spotifyapiwrapper.cachable.CacheableResponse;
-
 public class Following extends CacheableResponse
 {
     private PagingCursor<Artist> artists;

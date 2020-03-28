@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.cachable;
+package com.lajospolya.spotifyapiwrapper.response;
 
 /**
  * @author Lajos Polya
