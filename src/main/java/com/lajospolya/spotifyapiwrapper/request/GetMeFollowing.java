@@ -14,7 +14,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMeFollowing>
+    public static class Builder extends CacheableRequestBuilder<GetMeFollowing>
     {
         private FollowType type;
         private Integer limit;
@@ -32,7 +32,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
-
+            addEtagHeader(spotifyRequestBuilder);
             return new GetMeFollowing(spotifyRequestBuilder.createGetRequests());
         }
 
@@ -58,6 +58,13 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
         public Builder after(String after)
         {
             this.after = after;
+            return this;
+        }
+
+        @Override
+        public Builder etag(String etag)
+        {
+            this.etag = etag;
             return this;
         }
     }
