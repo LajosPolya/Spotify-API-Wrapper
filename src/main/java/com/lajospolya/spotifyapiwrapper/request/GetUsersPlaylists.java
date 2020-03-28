@@ -14,7 +14,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetUsersPlaylists>
+    public static class Builder extends CacheableRequestBuilder<GetUsersPlaylists>
     {
         private String userId;
         private Integer limit;
@@ -31,6 +31,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
             addOptionalQueryParams(spotifyRequestBuilder);
+            addEtagHeader(spotifyRequestBuilder);
 
             return new GetUsersPlaylists(spotifyRequestBuilder.createGetRequests());
         }
@@ -58,6 +59,13 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
         {
             spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
+            return this;
+        }
+
+        @Override
+        public Builder etag(String etag)
+        {
+            this.etag = etag;
             return this;
         }
     }
