@@ -10,6 +10,13 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * @author Lajos Polya
+ *
+ * This class allows for easy building of Spotify requests.
+ * It contains all methods to add appropriate headers, and query params, as well as a single path param.
+ * It also has method to easily build DELETE, PUT, POST, and GET requests
+ */
 public class SpotifyRequestBuilder
 {
     private static final String CONTENT_TYPE_HEADER = "Content-Type";

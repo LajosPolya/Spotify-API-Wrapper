@@ -3,6 +3,11 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.request.service.ISpotifyRequestParamValidationService;
 import com.lajospolya.spotifyapiwrapper.request.service.SpotifyRequestParamValidationService;
 
+/**
+ * This is the base class for all Request Builders
+ * @author Lajos Polya
+ * @param <T> The type of the request it buils
+ */
 public abstract class AbstractBuilder<T>
 {
     static final String IDS_QUERY_PARAM = "ids";
@@ -46,5 +51,9 @@ public abstract class AbstractBuilder<T>
         spotifyRequestParamValidationService = new SpotifyRequestParamValidationService();
     }
 
+    /**
+     * Build the Spotify Request with all appropriate headers, params, body, etc
+     * @return the built Spotify Request
+     */
     abstract public T build();
 }

@@ -4,7 +4,12 @@ import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderEx
 
 import java.net.http.HttpRequest;
 
-// This must be an abstract class in order to get the Generic type later
+/**
+ * This is the base class for all Spotify Requests.
+ * The SpotifyApiClient uses private methods on this field to authorize and built the request
+ * @author Lajos Polya
+ * @param <T> the type of the Response Body
+ */
 public abstract class AbstractSpotifyRequest<T>
 {
     static final String SPOTIFY_V1_API_URI = "https://api.spotify.com/v1/";

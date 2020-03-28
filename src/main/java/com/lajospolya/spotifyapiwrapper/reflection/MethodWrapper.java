@@ -3,6 +3,12 @@ package com.lajospolya.spotifyapiwrapper.reflection;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * @author Lajos Polya
+ *
+ * This wraps java.lang.reflect.Method to allow for easier unit testing since
+ * java.lang.reflect.Method is a final class it cannot be mocked
+ */
 public class MethodWrapper
 {
     private Method method;
