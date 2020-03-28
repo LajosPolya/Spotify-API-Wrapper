@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import java.util.List;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetRecommendationGenres as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class RecommendationGenres
 {
     List<String> genres;

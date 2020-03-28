@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.CopyrightType;
 
+/**
+ * @author Lajos Polya
+ * Represent a Copyright object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Copyright
 {
     private String text;

@@ -1,5 +1,9 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the container for an errpr response
+ */
 public class SpotifyErrorContainer
 {
     private SpotifyError error;

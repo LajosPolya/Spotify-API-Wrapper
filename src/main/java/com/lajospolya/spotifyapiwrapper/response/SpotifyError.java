@@ -1,5 +1,9 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent an error response
+ */
 public class SpotifyError
 {
     Integer status;

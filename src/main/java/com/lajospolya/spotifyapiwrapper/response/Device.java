@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.DeviceType;
 
+/**
+ * @author Lajos Polya
+ * Represent a Device object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Device
 {
     private String id;

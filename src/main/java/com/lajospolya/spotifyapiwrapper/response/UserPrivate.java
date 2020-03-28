@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetMe request as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class UserPrivate extends UserPublic
 {
     private String country;

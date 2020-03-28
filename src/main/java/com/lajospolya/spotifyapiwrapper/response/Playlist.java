@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetPlaylist as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Playlist extends CacheableResponse
 {
     private Boolean collaborative;

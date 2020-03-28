@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ * Represent the Artist (Simplified) object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class SimplifiedArtist
 {
     private Map<String, String> external_urls;

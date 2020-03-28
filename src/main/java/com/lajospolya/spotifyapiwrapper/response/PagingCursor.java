@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import java.util.List;
 
+/**
+ * Spotify's implementation of a Paging Cursor
+ * @author Lajos Polya
+ * @param <T>
+ */
 public class PagingCursor<T>
 {
     private String href;

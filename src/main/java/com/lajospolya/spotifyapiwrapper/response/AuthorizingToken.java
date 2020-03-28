@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of PostAuthorizationCodeFlow, PostClientCredentialsFlow, and PostRefresh token as described
+ * at https://developer.spotify.com/documentation/general/guides/authorization-guide/
+ */
 public class AuthorizingToken
 {
     private String access_token;

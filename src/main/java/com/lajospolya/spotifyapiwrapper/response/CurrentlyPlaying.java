@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.CurrentlyPlayingType;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetMePlayerCurrentlyPlaying as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class CurrentlyPlaying
 {
     private Context context;

@@ -5,6 +5,11 @@ import com.lajospolya.spotifyapiwrapper.enumeration.Explicit;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetShow as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Show
 {
     private List<String> available_markets;

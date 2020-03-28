@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the Playlists Tracks object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PlaylistsTracks
 {
     private String href;

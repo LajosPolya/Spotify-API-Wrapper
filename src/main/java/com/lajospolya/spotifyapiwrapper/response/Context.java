@@ -4,6 +4,11 @@ import com.lajospolya.spotifyapiwrapper.enumeration.ContextType;
 
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ * Represent a Context object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Context
 {
     private Map<String, String> external_urls;

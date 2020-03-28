@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetMePlayerRecentlyPlayed as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PlayHistory
 {
     private Context context;

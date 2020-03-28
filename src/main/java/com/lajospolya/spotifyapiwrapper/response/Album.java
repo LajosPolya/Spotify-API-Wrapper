@@ -3,6 +3,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetAlbum request as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Album extends AlbumBase
 {
     private List<Map<String, String>> copyrights;

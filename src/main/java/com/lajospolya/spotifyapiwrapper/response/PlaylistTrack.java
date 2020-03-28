@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetPlaylistsTracks as desribed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PlaylistTrack
 {
     private String added_at;

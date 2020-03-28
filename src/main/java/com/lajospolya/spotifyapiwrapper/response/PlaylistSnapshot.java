@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of DeletePlaylistsTracks, PostPlaylistsTracksAdd, and PutPlaylistsTracksReorder as described
+ * at https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PlaylistSnapshot
 {
     private String snapshot_id;

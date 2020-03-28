@@ -3,6 +3,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 import com.lajospolya.spotifyapiwrapper.enumeration.CurrentlyPlayingType;
 import com.lajospolya.spotifyapiwrapper.enumeration.RepeatState;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetMePlayer as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class CurrentlyPlayingContext
 {
     private Device device;

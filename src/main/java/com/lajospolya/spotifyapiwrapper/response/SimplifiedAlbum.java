@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent the Album (Simplified) object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class SimplifiedAlbum extends AlbumBase
 {
     private String album_group;

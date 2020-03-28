@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.RecommendationSeedType;
 
+/**
+ * @author Lajos Polya
+ * Represent the Recommendation object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class RecommendationSeed
 {
     private Integer afterFilteringSize;

@@ -1,5 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.response;
 
+/**
+ * @author Lajos Polya
+ * Represent an Audio Analysis object as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class AudioAnalysisTrack
 {
     private Integer num_samples;

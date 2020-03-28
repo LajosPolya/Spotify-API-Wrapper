@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ * Represent the response of GetTrack and GetUsersTopTracks as described at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class Track extends SimplifiedTrack
 {
     private SimplifiedAlbum album;

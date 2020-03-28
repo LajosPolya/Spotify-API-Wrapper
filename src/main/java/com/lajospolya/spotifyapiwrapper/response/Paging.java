@@ -2,6 +2,11 @@ package com.lajospolya.spotifyapiwrapper.response;
 
 import java.util.List;
 
+/**
+ * Spotify's implementation of Paging responses
+ * @author Lajos Polya
+ * @param <T> type of the items stored
+ */
 public class Paging<T> extends CacheableResponse
 {
     private String href;

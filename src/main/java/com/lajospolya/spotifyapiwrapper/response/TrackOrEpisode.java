@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A logical OR of a Track object and an Episode object
+ * @author Lajos Polya
+ * The response of GetMePlayerCurrentlyPlaying can return a Track or Episode
+ * Represents a logical OR of a Track object and an Episode object.
+ * Note that if a Track object is returned then the fields representing the Episode object will be null and vice
+ * versa
  */
 public class TrackOrEpisode
 {
