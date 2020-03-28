@@ -5,6 +5,12 @@ import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 import java.net.http.HttpRequest;
 import java.util.List;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at GET https://api.spotify.com/v1/me/following/contains as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following/contains";

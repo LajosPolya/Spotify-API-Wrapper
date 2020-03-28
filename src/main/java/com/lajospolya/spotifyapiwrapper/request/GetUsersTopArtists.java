@@ -7,6 +7,12 @@ import com.lajospolya.spotifyapiwrapper.response.Paging;
 
 import java.net.http.HttpRequest;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at GET https://api.spotify.com/v1/me/top/{type} as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class GetUsersTopArtists extends GetUsersTop<Paging<Artist>>
 {
 

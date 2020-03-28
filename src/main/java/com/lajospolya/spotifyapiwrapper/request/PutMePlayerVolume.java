@@ -2,6 +2,12 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import java.net.http.HttpRequest;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at PUT https://api.spotify.com/v1/me/player/volume as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/volume";

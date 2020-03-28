@@ -5,6 +5,12 @@ import com.lajospolya.spotifyapiwrapper.response.Playlist;
 
 import java.net.http.HttpRequest;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at POST https://api.spotify.com/v1/users/{user_id}/playlists as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "users/{user_id}/playlists";

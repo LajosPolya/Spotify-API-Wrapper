@@ -5,6 +5,12 @@ import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
 
 import java.net.http.HttpRequest;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at PUT https://api.spotify.com/v1/playlists/{playlist_id}/tracks as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSnapshot>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";

@@ -5,6 +5,12 @@ import com.lajospolya.spotifyapiwrapper.response.Episodes;
 import java.net.http.HttpRequest;
 import java.util.List;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at GET https://api.spotify.com/v1/episodes as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class GetEpisodes extends AbstractSpotifyRequest<Episodes>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "episodes";

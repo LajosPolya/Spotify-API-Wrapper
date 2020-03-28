@@ -8,6 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at GET https://api.spotify.com/v1/recommendations as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "recommendations";

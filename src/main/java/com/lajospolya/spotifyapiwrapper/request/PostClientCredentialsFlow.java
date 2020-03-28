@@ -4,6 +4,12 @@ import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 
 import java.net.http.HttpRequest;
 
+/**
+ * @author Lajos Polya
+ *
+ * Represents the endpoint at POST https://accounts.spotify.com/api/token as descrbibed at
+ * https://developer.spotify.com/documentation/web-api/reference-beta/
+ */
 public class PostClientCredentialsFlow extends AbstractSpotifyRequest<AuthorizingToken>
 {
     private static final String REQUEST_URI_STRING = "https://accounts.spotify.com/api/token";
