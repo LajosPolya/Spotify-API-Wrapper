@@ -7,6 +7,34 @@
     <groupId>com.github.lajospolya</groupId>
     <artifactId>spotify-api-wrapper</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <name>com.github.lajospolya:spotify-api-wrapper</name>
+    <description>This project wraps the Spotify public API in order to allow users to intuitively use it</description>
+    <url>https://github.com/LajosPolya/Spotify-API-Wrapper</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Lajos Polya</name>
+            <email>lajospolya94@gmail.com</email>
+            <organization>N/A</organization>
+            <organizationUrl>https://github.com/LajosPolya/Spotify-API-Wrapper</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com:LajosPolya/Spotify-API-Wrapper.git</connection>
+        <developerConnection>scm:git:ssh://github.com:LajosPolya/Spotify-API-Wrapper.git</developerConnection>
+        <url>https://github.com/LajosPolya/Spotify-API-Wrapper</url>
+    </scm>
+
+
     <build>
         <plugins>
             <plugin>
