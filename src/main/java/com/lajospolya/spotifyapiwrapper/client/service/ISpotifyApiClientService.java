@@ -21,6 +21,8 @@ public interface ISpotifyApiClientService
      * @param <T> should be equivalent to typeOfReturnValue
      * @return returns the serialized response body of the request
      * @throws SpotifyResponseException when the response header has an erroneous status code
+     * @throws IOException delegated exception
+     * @throws InterruptedException delegated exception
      */
     <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException;
 

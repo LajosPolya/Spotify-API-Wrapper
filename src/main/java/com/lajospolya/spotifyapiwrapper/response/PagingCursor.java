@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Spotify's implementation of a Paging Cursor
  * @author Lajos Polya
- * @param <T>
+ * @param <T> type of the item
  */
 public class PagingCursor<T>
 {
