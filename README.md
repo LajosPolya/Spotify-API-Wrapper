@@ -50,7 +50,7 @@ SpotifyApiClient client = SpotifyApiClient
 
 All requests extend `AbstractSpotifyRequest<?>`
 
-Requests are built using the `Builder Pattern`. All parameters for the [Builder](https://en.wikipedia.org/wiki/Builder_pattern) 
+Requests are built using the [Builder Pattern](https://en.wikipedia.org/wiki/Builder_pattern). All parameters for the `Builder` 
 constructor are mandatory to the request. All appended parameters (ex, market) are optional parameters.
  
  for example
