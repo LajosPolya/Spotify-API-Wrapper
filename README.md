@@ -76,3 +76,8 @@ GetTrack getTrackRequest = new GetTrack.Builder(TRACK_ID)
 
 Track track = client.sendRequest(getTrackRequest);
 ```
+
+
+```
+TODO: Reauthorization and Caching
+```
