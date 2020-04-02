@@ -67,7 +67,7 @@ The responses for all requests are typed.
 
 ```java
 SpotifyApiClient client = SpotifyApiClient
-    .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL;
+    .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL);
 
 String TRACK_ID = "1EaKU4dMbesXXd3BrLCtYG";
 String MARKET = "CA";
