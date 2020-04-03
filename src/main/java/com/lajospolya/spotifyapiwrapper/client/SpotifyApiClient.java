@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
  * @author Lajos Polya
  *
  * This class represents a Spotify client.
- * The client is isntantiated by using one of the two static factory methods which returns an authorized client.
+ * The client is instantiated by using one of the two static factory methods which returns an authorized client.
  * Once the user has an authorized client it can send Spotify requests with the client.
  */
 public class SpotifyApiClient
