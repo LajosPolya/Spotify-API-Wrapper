@@ -43,7 +43,7 @@ SpotifyApiClient client = SpotifyApiClient
 
 ```java
 SpotifyApiClient client = SpotifyApiClient
-    .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL;
+    .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL);
 ```
 
 #### Requests
