@@ -35,7 +35,7 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, albumIds);
 
-            return new GetMeAlbumsContains(spotifyRequestBuilder.createGetRequests());
+            return new GetMeAlbumsContains(spotifyRequestBuilder.GET());
         }
     }
 }

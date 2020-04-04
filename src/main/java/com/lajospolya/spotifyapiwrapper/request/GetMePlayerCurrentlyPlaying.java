@@ -35,7 +35,7 @@ public class GetMePlayerCurrentlyPlaying extends AbstractSpotifyRequest<Currentl
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
-            return new GetMePlayerCurrentlyPlaying(spotifyRequestBuilder.createGetRequests());
+            return new GetMePlayerCurrentlyPlaying(spotifyRequestBuilder.GET());
         }
     }
 }

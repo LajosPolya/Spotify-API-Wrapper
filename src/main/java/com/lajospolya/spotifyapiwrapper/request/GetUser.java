@@ -34,7 +34,7 @@ public class GetUser extends AbstractSpotifyRequest<UserPublic>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
 
-            return new GetUser(spotifyRequestBuilder.createGetRequests());
+            return new GetUser(spotifyRequestBuilder.GET());
         }
     }
 }

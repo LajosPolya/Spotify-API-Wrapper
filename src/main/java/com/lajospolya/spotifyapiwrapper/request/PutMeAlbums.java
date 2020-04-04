@@ -38,7 +38,7 @@ public class PutMeAlbums extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutMeAlbums(
-                    spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.PUTWithJsonBody(
                             new IdsContainer(albumIds)));
         }
     }

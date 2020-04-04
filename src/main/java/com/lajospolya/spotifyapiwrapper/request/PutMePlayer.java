@@ -37,7 +37,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
             HttpRequest.Builder requestBuilder = spotifyRequestBuilder.
-                    createPutRequestWithObjectJsonBody(new Player(deviceIds, play));
+                    PUTWithJsonBody(new Player(deviceIds, play));
             return new PutMePlayer(requestBuilder);
         }
 

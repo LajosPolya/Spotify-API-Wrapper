@@ -40,7 +40,7 @@ public class GetEpisodes extends AbstractSpotifyRequest<Episodes>
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, episodeIds);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetEpisodes(spotifyRequestBuilder.createGetRequests());
+            return new GetEpisodes(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

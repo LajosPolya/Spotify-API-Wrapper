@@ -37,7 +37,7 @@ public class PostRefreshToken extends AbstractSpotifyRequest<AuthorizingToken>
             spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostRefreshToken(
-                    spotifyRequestBuilder.createPostRequestWithStringBody(
+                    spotifyRequestBuilder.POSTWithStringBody(
                             new RefreshToken(refreshToken).toUrlEncodedString()));
         }
     }

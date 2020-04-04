@@ -37,7 +37,7 @@ public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
             spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
-            return new GetArtistsTopTracks(spotifyRequestBuilder.createGetRequests());
+            return new GetArtistsTopTracks(spotifyRequestBuilder.GET());
         }
     }
 }

@@ -52,7 +52,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
             spotifyRequestBuilder.queryParam(SEED_GENRES_QUERY_PARAM, seed_genres);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetRecommendations(spotifyRequestBuilder.createGetRequests());
+            return new GetRecommendations(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

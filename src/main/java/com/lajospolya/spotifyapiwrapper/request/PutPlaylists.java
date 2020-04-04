@@ -46,10 +46,10 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
             if(name != null || this.isPublic != null || collaborative != null || description != null)
             {
                 return new PutPlaylists(
-                        spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                        spotifyRequestBuilder.PUTWithJsonBody(
                                 new PlaylistDetails(name, isPublic, collaborative, description)));
             }
-            return new PutPlaylists(spotifyRequestBuilder.createPutRequest());
+            return new PutPlaylists(spotifyRequestBuilder.PUT());
         }
 
         public Builder isPublic(Boolean isPublic)

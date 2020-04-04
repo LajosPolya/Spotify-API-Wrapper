@@ -35,7 +35,7 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetFeaturedPlaylists(spotifyRequestBuilder.createGetRequests());
+            return new GetFeaturedPlaylists(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

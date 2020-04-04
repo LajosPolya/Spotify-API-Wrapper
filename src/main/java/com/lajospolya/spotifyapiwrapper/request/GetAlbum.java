@@ -36,7 +36,7 @@ public class GetAlbum extends AbstractSpotifyRequest<Album>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, albumId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetAlbum(spotifyRequestBuilder.createGetRequests());
+            return new GetAlbum(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

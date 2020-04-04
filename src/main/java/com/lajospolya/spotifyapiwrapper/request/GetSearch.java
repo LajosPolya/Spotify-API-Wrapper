@@ -46,7 +46,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, searchItemTypes, SearchItemType::getType);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetSearch(spotifyRequestBuilder.createGetRequests());
+            return new GetSearch(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

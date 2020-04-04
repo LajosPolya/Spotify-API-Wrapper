@@ -75,55 +75,55 @@ public class SpotifyRequestBuilder
         requestBuilder.header(IF_NOT_MATCH, value);
     }
 
-    HttpRequest.Builder createGetRequests()
+    HttpRequest.Builder GET()
     {
         return createBuilderWithUri()
                 .GET();
     }
 
-    HttpRequest.Builder createPostRequests()
+    HttpRequest.Builder POST()
     {
         return createBuilderWithUri()
                 .POST(HttpRequest.BodyPublishers.noBody());
     }
 
-    HttpRequest.Builder createPutRequest()
+    HttpRequest.Builder PUT()
     {
         return createBuilderWithUri()
                 .PUT(HttpRequest.BodyPublishers.noBody());
     }
 
-    HttpRequest.Builder createDeleteRequest()
+    HttpRequest.Builder DELETE()
     {
         return createBuilderWithUri()
                 .method(DELETE, HttpRequest.BodyPublishers.noBody());
     }
 
-    HttpRequest.Builder createPostRequestWithObjectJsonBody(Object body)
+    HttpRequest.Builder POSTWithJsonBody(Object body)
     {
         return createBuilderWithUri()
                 .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
     }
 
-    HttpRequest.Builder createPutRequestWithObjectJsonBody(Object body)
+    HttpRequest.Builder PUTWithJsonBody(Object body)
     {
         return createBuilderWithUri()
                 .PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
     }
 
-    HttpRequest.Builder createDeleteRequestWithObjectJsonBody(Object body)
+    HttpRequest.Builder DELETEWithJsonBody(Object body)
     {
         return createBuilderWithUri()
                 .method(DELETE, HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
     }
 
-    HttpRequest.Builder createPostRequestWithStringBody(String body)
+    HttpRequest.Builder POSTWithStringBody(String body)
     {
         return createBuilderWithUri()
                 .POST(HttpRequest.BodyPublishers.ofString(body));
     }
 
-    HttpRequest.Builder createPutRequestWithStringBody(String body)
+    HttpRequest.Builder PUTWithStringBody(String body)
     {
         return createBuilderWithUri()
                 .PUT(HttpRequest.BodyPublishers.ofString(body));

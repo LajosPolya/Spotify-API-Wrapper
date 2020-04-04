@@ -34,7 +34,7 @@ public class GetMeAlbums extends AbstractSpotifyRequest<Paging<SavedAlbum>>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
-            return new GetMeAlbums(spotifyRequestBuilder.createGetRequests());
+            return new GetMeAlbums(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

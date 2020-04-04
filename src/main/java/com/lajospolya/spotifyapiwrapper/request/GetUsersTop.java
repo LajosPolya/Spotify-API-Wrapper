@@ -27,7 +27,7 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return spotifyRequestBuilder.createGetRequests();
+            return spotifyRequestBuilder.GET();
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

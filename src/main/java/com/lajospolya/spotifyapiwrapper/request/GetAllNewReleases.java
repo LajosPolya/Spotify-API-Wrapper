@@ -33,7 +33,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetAllNewReleases(spotifyRequestBuilder.createGetRequests());
+            return new GetAllNewReleases(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

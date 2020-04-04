@@ -38,7 +38,7 @@ public class DeleteMeTracks extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new DeleteMeTracks(
-                    spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.DELETEWithJsonBody(
                             new IdsContainer(ids)));
         }
     }

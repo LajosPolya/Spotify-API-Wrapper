@@ -36,7 +36,7 @@ public class GetShow extends AbstractSpotifyRequest<Show>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, showId);
             addOptionalQueryParams(spotifyRequestBuilder);
-            return new GetShow(spotifyRequestBuilder.createGetRequests());
+            return new GetShow(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

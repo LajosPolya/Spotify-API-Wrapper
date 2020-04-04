@@ -36,7 +36,7 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PutMePlayerVolume(spotifyRequestBuilder.createPutRequest());
+            return new PutMePlayerVolume(spotifyRequestBuilder.PUT());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

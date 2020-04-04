@@ -30,7 +30,7 @@ public class PostMePlayerNext extends AbstractSpotifyRequest<Void>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PostMePlayerNext(spotifyRequestBuilder.createPostRequests());
+            return new PostMePlayerNext(spotifyRequestBuilder.POST());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

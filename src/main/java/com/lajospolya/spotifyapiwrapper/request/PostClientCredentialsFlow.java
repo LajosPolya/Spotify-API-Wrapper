@@ -30,7 +30,7 @@ public class PostClientCredentialsFlow extends AbstractSpotifyRequest<Authorizin
             spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostClientCredentialsFlow(
-                    spotifyRequestBuilder.createPostRequestWithStringBody(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));
+                    spotifyRequestBuilder.POSTWithStringBody(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));
         }
     }
 }

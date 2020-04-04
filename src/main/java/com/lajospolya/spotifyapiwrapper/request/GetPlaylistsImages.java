@@ -35,7 +35,7 @@ public class GetPlaylistsImages extends AbstractSpotifyRequest<List<Image>>
         public GetPlaylistsImages build()
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
-            return new GetPlaylistsImages(spotifyRequestBuilder.createGetRequests());
+            return new GetPlaylistsImages(spotifyRequestBuilder.GET());
         }
     }
 }

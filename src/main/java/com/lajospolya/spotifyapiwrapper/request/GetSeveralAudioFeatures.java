@@ -36,7 +36,7 @@ public class GetSeveralAudioFeatures extends AbstractSpotifyRequest<TracksAudioF
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, trackIds);
 
-            return new GetSeveralAudioFeatures(spotifyRequestBuilder.createGetRequests());
+            return new GetSeveralAudioFeatures(spotifyRequestBuilder.GET());
         }
     }
 }

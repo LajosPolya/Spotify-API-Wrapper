@@ -40,7 +40,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostPlaylistsTracksAdd(
-                    spotifyRequestBuilder.createPostRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.POSTWithJsonBody(
                             new PlaylistTrackAdd(uris, position)));
         }
 

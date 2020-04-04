@@ -38,7 +38,7 @@ public class DeleteMeAlbums extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new DeleteMeAlbums(
-                    spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.DELETEWithJsonBody(
                             new IdsContainer(albumIds)));
         }
     }

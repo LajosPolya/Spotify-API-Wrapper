@@ -32,7 +32,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
 
-            return new DeleteFollowPlaylist(spotifyRequestBuilder.createDeleteRequest());
+            return new DeleteFollowPlaylist(spotifyRequestBuilder.DELETE());
         }
     }
 }

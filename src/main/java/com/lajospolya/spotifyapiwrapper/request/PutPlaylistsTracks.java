@@ -40,7 +40,7 @@ public class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutPlaylistsTracks(
-                    spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.PUTWithJsonBody(
                             new UrisContainer(uris)));
         }
     }

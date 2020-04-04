@@ -39,7 +39,7 @@ public class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Authorizin
             spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostAuthorizationCodeFlow(
-                    spotifyRequestBuilder.createPostRequestWithStringBody(
+                    spotifyRequestBuilder.POSTWithStringBody(
                             new AuthorizationCode(code, redirectUri).toUrlEncodedString()));
         }
     }

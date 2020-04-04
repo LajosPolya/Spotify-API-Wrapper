@@ -34,7 +34,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
-            return new GetMeTracks(spotifyRequestBuilder.createGetRequests());
+            return new GetMeTracks(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

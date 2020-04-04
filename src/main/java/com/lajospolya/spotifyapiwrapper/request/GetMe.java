@@ -29,7 +29,7 @@ public class GetMe extends AbstractSpotifyRequest<UserPrivate>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
-            return new GetMe(spotifyRequestBuilder.createGetRequests());
+            return new GetMe(spotifyRequestBuilder.GET());
         }
     }
 }

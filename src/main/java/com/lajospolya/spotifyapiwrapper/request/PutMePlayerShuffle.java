@@ -36,7 +36,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
 
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PutMePlayerShuffle(spotifyRequestBuilder.createPutRequest());
+            return new PutMePlayerShuffle(spotifyRequestBuilder.PUT());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

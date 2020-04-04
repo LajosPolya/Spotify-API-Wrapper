@@ -35,7 +35,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.queryParam(URI_QUERY_PARAM, uri);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PostMePlayerQueue(spotifyRequestBuilder.createPostRequests());
+            return new PostMePlayerQueue(spotifyRequestBuilder.POST());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

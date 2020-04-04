@@ -34,7 +34,7 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetAllCategories(spotifyRequestBuilder.createGetRequests());
+            return new GetAllCategories(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

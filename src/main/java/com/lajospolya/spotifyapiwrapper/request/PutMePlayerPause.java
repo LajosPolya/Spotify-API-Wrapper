@@ -29,7 +29,7 @@ public class PutMePlayerPause extends AbstractSpotifyRequest<Void>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PutMePlayerPause(spotifyRequestBuilder.createPutRequest());
+            return new PutMePlayerPause(spotifyRequestBuilder.PUT());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

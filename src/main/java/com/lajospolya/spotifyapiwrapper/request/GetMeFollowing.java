@@ -39,7 +39,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
-            return new GetMeFollowing(spotifyRequestBuilder.createGetRequests());
+            return new GetMeFollowing(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

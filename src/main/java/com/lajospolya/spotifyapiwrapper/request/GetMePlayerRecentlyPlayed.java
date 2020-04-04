@@ -34,7 +34,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetMePlayerRecentlyPlayed(spotifyRequestBuilder.createGetRequests());
+            return new GetMePlayerRecentlyPlayed(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

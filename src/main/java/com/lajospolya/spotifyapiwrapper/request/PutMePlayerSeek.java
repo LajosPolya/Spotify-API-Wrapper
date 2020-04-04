@@ -36,7 +36,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
 
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PutMePlayerSeek(spotifyRequestBuilder.createPutRequest());
+            return new PutMePlayerSeek(spotifyRequestBuilder.PUT());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

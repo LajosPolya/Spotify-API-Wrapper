@@ -39,7 +39,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
 
-            return new GetUsersPlaylists(spotifyRequestBuilder.createGetRequests());
+            return new GetUsersPlaylists(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

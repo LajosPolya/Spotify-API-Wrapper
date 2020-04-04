@@ -34,7 +34,7 @@ public class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
 
-            return new GetAudioFeatures(spotifyRequestBuilder.createGetRequests());
+            return new GetAudioFeatures(spotifyRequestBuilder.GET());
         }
     }
 }

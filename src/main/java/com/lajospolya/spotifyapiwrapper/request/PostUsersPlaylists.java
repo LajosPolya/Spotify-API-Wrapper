@@ -42,7 +42,7 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostUsersPlaylists(
-                    spotifyRequestBuilder.createPostRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.POSTWithJsonBody(
                             new PlaylistDetails(name, isPublic, collaborative, description)));
         }
 

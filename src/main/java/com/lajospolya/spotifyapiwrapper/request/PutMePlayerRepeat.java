@@ -37,7 +37,7 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.queryParam(STATE_QUERY_PARAM, state.getState());
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new PutMePlayerRepeat(spotifyRequestBuilder.createPutRequest());
+            return new PutMePlayerRepeat(spotifyRequestBuilder.PUT());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

@@ -42,7 +42,7 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new DeleteFollow(
-                    spotifyRequestBuilder.createDeleteRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.DELETEWithJsonBody(
                             new IdsContainer(ids)));
         }
     }

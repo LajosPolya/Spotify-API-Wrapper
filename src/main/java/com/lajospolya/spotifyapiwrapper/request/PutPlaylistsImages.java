@@ -36,7 +36,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             spotifyRequestBuilder.contentType(IMAGE_JPEG_HEADER_VALUE);
 
-            return new PutPlaylistsImages(spotifyRequestBuilder.createPutRequestWithStringBody(base64image));
+            return new PutPlaylistsImages(spotifyRequestBuilder.PUTWithStringBody(base64image));
         }
     }
 }

@@ -38,7 +38,7 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutMeTracks(
-                    spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                    spotifyRequestBuilder.PUTWithJsonBody(
                             new IdsContainer(trackIds)));
         }
     }

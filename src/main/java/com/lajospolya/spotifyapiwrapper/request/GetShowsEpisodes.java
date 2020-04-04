@@ -39,7 +39,7 @@ public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEp
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, showId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetShowsEpisodes(spotifyRequestBuilder.createGetRequests());
+            return new GetShowsEpisodes(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

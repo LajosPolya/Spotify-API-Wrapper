@@ -34,7 +34,7 @@ public class GetAudioAnalysis extends AbstractSpotifyRequest<AudioAnalysis>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
 
-            return new GetAudioAnalysis(spotifyRequestBuilder.createGetRequests());
+            return new GetAudioAnalysis(spotifyRequestBuilder.GET());
         }
     }
 }

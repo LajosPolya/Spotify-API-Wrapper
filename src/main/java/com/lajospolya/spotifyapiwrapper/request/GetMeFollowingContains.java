@@ -40,7 +40,7 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, ids);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
 
-            return new GetMeFollowingContains(spotifyRequestBuilder.createGetRequests());
+            return new GetMeFollowingContains(spotifyRequestBuilder.GET());
         }
     }
 }

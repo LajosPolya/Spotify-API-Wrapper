@@ -41,7 +41,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
 
-            return new GetPlaylistsTracks(spotifyRequestBuilder.createGetRequests());
+            return new GetPlaylistsTracks(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)

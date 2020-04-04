@@ -52,10 +52,10 @@ public class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
         {
             if(contextUri != null || uris != null || offset != null || positionMs != null)
             {
-                return spotifyRequestBuilder.createPutRequestWithObjectJsonBody(
+                return spotifyRequestBuilder.PUTWithJsonBody(
                         new ResumePlayback(contextUri, uris, offset, positionMs));
             }
-            return spotifyRequestBuilder.createPutRequest();
+            return spotifyRequestBuilder.PUT();
         }
 
         public Builder contextUri(String contextUri)

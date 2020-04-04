@@ -28,7 +28,7 @@ public class GetRecomendationGenres extends AbstractSpotifyRequest<Recommendatio
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
-            return new GetRecomendationGenres(spotifyRequestBuilder.createGetRequests());
+            return new GetRecomendationGenres(spotifyRequestBuilder.GET());
         }
     }
 }

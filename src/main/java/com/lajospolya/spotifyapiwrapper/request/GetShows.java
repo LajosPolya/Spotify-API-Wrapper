@@ -40,7 +40,7 @@ public class GetShows extends AbstractSpotifyRequest<Shows>
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, showIds);
             addOptionalQueryParams(spotifyRequestBuilder);
 
-            return new GetShows(spotifyRequestBuilder.createGetRequests());
+            return new GetShows(spotifyRequestBuilder.GET());
         }
 
         private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
