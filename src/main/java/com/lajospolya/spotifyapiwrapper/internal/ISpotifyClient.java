@@ -2,7 +2,7 @@ package com.lajospolya.spotifyapiwrapper.internal;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface ISpotifyClient<T>
+public interface ISpotifyClient
 {
     ISpotifyResponse<?> send(ISpotifyRequest<?> request);
 
