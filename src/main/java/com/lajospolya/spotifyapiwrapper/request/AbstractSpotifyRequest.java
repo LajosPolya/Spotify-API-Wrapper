@@ -22,6 +22,13 @@ public abstract class AbstractSpotifyRequest<T>
         this.requestBuilder = requestBuilder;
     }
 
+    /**
+     * The SpotifyApiClient uses IReflectiveSpotifyClientService to call this method via reflection to build the
+     * request. In the near future this will be abstracted to an Http Request which doesn't couple Java 11's
+     * HttpRequest.
+     * This method is private to simplify the interface for end users.
+     * @return HttpRequest the built request
+     */
     private HttpRequest reflectiveBuildRequest()
     {
         if(accessToken == null)
@@ -32,6 +39,11 @@ public abstract class AbstractSpotifyRequest<T>
                 .build();
     }
 
+    /**
+     * The SpotifyApiClient uses IReflectiveSpotifyClientService to call this method via reflection to set the
+     * authorization header of the request.
+     * This method is private to simplify the interface for end users.
+     */
     private void reflectiveSetAccessToken(String accessToken)
     {
         this.accessToken = accessToken;
