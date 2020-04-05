@@ -2,15 +2,15 @@ package com.lajospolya.spotifyapiwrapper.client;
 
 import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
-import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
-import java.net.http.HttpRequest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -47,6 +47,6 @@ class SpotifyApiClientTest
         verify(reflectiveSpotifyClientMock).setAccessTokenOfRequest(same(requestMock), nullable(String.class));
         verify(reflectiveSpotifyClientMock).buildRequest(same(requestMock));
         verify(reflectiveSpotifyClientMock).getParameterizedTypeOfRequest(same(requestMock));
-        verify(spotifyApiClientMock).sendRequestAndFetchResponse(nullable(HttpRequest.class), nullable(Type.class));
+        verify(spotifyApiClientMock).sendRequestAndFetchResponse(nullable(ISpotifyRequest.class), nullable(Type.class));
     }
 }

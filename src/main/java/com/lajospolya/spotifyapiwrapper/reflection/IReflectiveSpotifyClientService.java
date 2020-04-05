@@ -1,9 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.reflection;
 
 import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 
-import java.lang.reflect.*;
-import java.net.http.HttpRequest;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 
 public interface IReflectiveSpotifyClientService
 {
@@ -23,7 +24,7 @@ public interface IReflectiveSpotifyClientService
      * @throws InvocationTargetException thrown by the java.lang.reflect method calls
      * @throws IllegalAccessException thrown by the java.lang.reflect method calls
      */
-    HttpRequest buildRequest(AbstractSpotifyRequest<?> spotifyRequest) throws InvocationTargetException, IllegalAccessException;
+    ISpotifyRequest buildRequest(AbstractSpotifyRequest<?> spotifyRequest) throws InvocationTargetException, IllegalAccessException;
 
     Type getParameterizedTypeOfRequest(AbstractSpotifyRequest<?> spotifyRequest);
 }

@@ -4,6 +4,7 @@ import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.client.service.SpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.ReflectiveSpotifyClientService;
+import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
@@ -154,7 +155,7 @@ public class SpotifyApiClient
     {
         try
         {
-            HttpRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+            ISpotifyRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
             Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
@@ -168,13 +169,13 @@ public class SpotifyApiClient
     private <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
-        HttpRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+        ISpotifyRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
         Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
         return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
     }
 
-    private <T> HttpRequest authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyRequest authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
     {
         try
         {
