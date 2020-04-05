@@ -19,11 +19,11 @@ public class Java11HttpClient implements ISpotifyClient<HttpRequest>
     }
 
     @Override
-    public HttpResponse<String> send(ISpotifyRequest<HttpRequest> request)
+    public ISpotifyResponse<?> send(ISpotifyRequest<?> request)
     {
         try
         {
-            return httpClient.send(request.get(), HttpResponse.BodyHandlers.ofString());
+            return new Java11HttpResponse(httpClient.send((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()));
         }
         catch (InterruptedException | IOException e)
         {
@@ -33,8 +33,8 @@ public class Java11HttpClient implements ISpotifyClient<HttpRequest>
     }
 
     @Override
-    public CompletableFuture<?> sendAsync(ISpotifyRequest<HttpRequest> request)
+    public CompletableFuture<?> sendAsync(ISpotifyRequest<?> request)
     {
-        return httpClient.sendAsync(request.get(), HttpResponse.BodyHandlers.ofString());
+        return httpClient.sendAsync((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString());
     }
 }
