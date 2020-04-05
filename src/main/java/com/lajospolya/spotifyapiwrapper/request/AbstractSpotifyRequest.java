@@ -13,12 +13,11 @@ import java.net.http.HttpRequest;
 public abstract class AbstractSpotifyRequest<T>
 {
     static final String SPOTIFY_V1_API_URI = "https://api.spotify.com/v1/";
-    static final String AUTHORIZATION_HEADER = "Authorization";
 
-    private HttpRequest.Builder requestBuilder;
+    private SpotifyRequestBuilder requestBuilder;
     private String accessToken;
 
-    AbstractSpotifyRequest(HttpRequest.Builder requestBuilder)
+    AbstractSpotifyRequest(SpotifyRequestBuilder requestBuilder)
     {
         this.requestBuilder = requestBuilder;
     }
@@ -36,6 +35,6 @@ public abstract class AbstractSpotifyRequest<T>
     private void reflectiveSetAccessToken(String accessToken)
     {
         this.accessToken = accessToken;
-        requestBuilder.setHeader(AUTHORIZATION_HEADER, this.accessToken);
+        requestBuilder.authorization(this.accessToken);
     }
 }

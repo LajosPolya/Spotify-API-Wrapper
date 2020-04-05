@@ -3,8 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackReorder;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -15,7 +13,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private PutPlaylistsTracksReorder(HttpRequest.Builder requestBuilder)
+    private PutPlaylistsTracksReorder(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

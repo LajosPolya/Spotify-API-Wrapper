@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.Show;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetShow extends AbstractSpotifyRequest<Show>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "shows/{id}";
 
-    private GetShow(HttpRequest.Builder requestBuilder)
+    private GetShow(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

@@ -3,7 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.body.IdsContainer;
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following";
 
-    private DeleteFollow(HttpRequest.Builder requestBuilder)
+    private DeleteFollow(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

@@ -3,7 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackAdd;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private PostPlaylistsTracksAdd(HttpRequest.Builder requestBuilder)
+    private PostPlaylistsTracksAdd(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

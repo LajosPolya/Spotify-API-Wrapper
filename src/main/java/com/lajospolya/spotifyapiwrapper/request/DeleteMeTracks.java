@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.IdsContainer;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class DeleteMeTracks extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/tracks";
 
-    private DeleteMeTracks(HttpRequest.Builder requestBuilder)
+    private DeleteMeTracks(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

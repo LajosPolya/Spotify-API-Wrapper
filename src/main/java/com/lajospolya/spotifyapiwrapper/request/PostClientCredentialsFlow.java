@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class PostClientCredentialsFlow extends AbstractSpotifyRequest<Authorizin
 {
     private static final String REQUEST_URI_STRING = "https://accounts.spotify.com/api/token";
 
-    private PostClientCredentialsFlow(HttpRequest.Builder requestBuilder)
+    private PostClientCredentialsFlow(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

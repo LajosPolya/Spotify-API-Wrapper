@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  */
 public class SpotifyRequestBuilder
 {
+    private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String CONTENT_TYPE_HEADER = "Content-Type";
     private static final String IF_NOT_MATCH = "If-None-Match";
     private static final String DELETE = "DELETE";
@@ -70,63 +71,68 @@ public class SpotifyRequestBuilder
         requestBuilder.header(CONTENT_TYPE_HEADER, value);
     }
 
+    void authorization(String token)
+    {
+        requestBuilder.header(AUTHORIZATION_HEADER, token);
+    }
+
     void etag(String value)
     {
         requestBuilder.header(IF_NOT_MATCH, value);
     }
 
-    HttpRequest.Builder GET()
+    SpotifyRequestBuilder GET()
     {
-        return createBuilderWithUri()
-                .GET();
+        createBuilderWithUri().GET();
+        return this;
     }
 
-    HttpRequest.Builder POST()
+    SpotifyRequestBuilder POST()
     {
-        return createBuilderWithUri()
-                .POST(HttpRequest.BodyPublishers.noBody());
+        createBuilderWithUri().POST(HttpRequest.BodyPublishers.noBody());
+        return this;
     }
 
-    HttpRequest.Builder PUT()
+    SpotifyRequestBuilder PUT()
     {
-        return createBuilderWithUri()
-                .PUT(HttpRequest.BodyPublishers.noBody());
+        createBuilderWithUri().PUT(HttpRequest.BodyPublishers.noBody());
+        return this;
     }
 
-    HttpRequest.Builder DELETE()
+    SpotifyRequestBuilder DELETE()
     {
-        return createBuilderWithUri()
-                .method(DELETE, HttpRequest.BodyPublishers.noBody());
+        createBuilderWithUri().method(DELETE, HttpRequest.BodyPublishers.noBody());
+        return this;
     }
 
-    HttpRequest.Builder POSTWithJsonBody(Object body)
+    SpotifyRequestBuilder POSTWithJsonBody(Object body)
     {
-        return createBuilderWithUri()
-                .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
+        createBuilderWithUri().POST(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
+        return this;
     }
 
-    HttpRequest.Builder PUTWithJsonBody(Object body)
+    SpotifyRequestBuilder PUTWithJsonBody(Object body)
     {
-        return createBuilderWithUri()
-                .PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
+        createBuilderWithUri().PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
+        return this;
     }
 
-    HttpRequest.Builder DELETEWithJsonBody(Object body)
+    SpotifyRequestBuilder DELETEWithJsonBody(Object body)
     {
-        return createBuilderWithUri()
-                .method(DELETE, HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
+        createBuilderWithUri().method(DELETE, HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
+        return this;
     }
 
-    HttpRequest.Builder POSTWithStringBody(String body)
+    SpotifyRequestBuilder POSTWithStringBody(String body)
     {
-        return createBuilderWithUri()
-                .POST(HttpRequest.BodyPublishers.ofString(body));
+        createBuilderWithUri().POST(HttpRequest.BodyPublishers.ofString(body));
+        return this;
     }
 
-    HttpRequest.Builder PUTWithStringBody(String body)
+    SpotifyRequestBuilder PUTWithStringBody(String body)
     {
-        return createBuilderWithUri()
-                .PUT(HttpRequest.BodyPublishers.ofString(body));
+        createBuilderWithUri().PUT(HttpRequest.BodyPublishers.ofString(body));
+        return this;
     }
 
     private HttpRequest.Builder createBuilderWithUri()
@@ -141,5 +147,10 @@ public class SpotifyRequestBuilder
             uriComponents = uriComponentsBuilder.buildAndExpand(pathVariable);
         }
         return requestBuilder.uri(uriComponents.toUri());
+    }
+
+    public HttpRequest build()
+    {
+        return requestBuilder.build();
     }
 }

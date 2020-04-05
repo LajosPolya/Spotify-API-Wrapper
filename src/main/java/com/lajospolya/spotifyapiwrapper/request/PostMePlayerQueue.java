@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -12,7 +10,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/queue";
 
-    private PostMePlayerQueue(HttpRequest.Builder requestBuilder)
+    private PostMePlayerQueue(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

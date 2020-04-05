@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.Player;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player";
 
-    private PutMePlayer(HttpRequest.Builder requestBuilder)
+    private PutMePlayer(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -36,7 +35,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
         {
             SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
-            HttpRequest.Builder requestBuilder = spotifyRequestBuilder.
+            SpotifyRequestBuilder requestBuilder = spotifyRequestBuilder.
                     PUTWithJsonBody(new Player(deviceIds, play));
             return new PutMePlayer(requestBuilder);
         }

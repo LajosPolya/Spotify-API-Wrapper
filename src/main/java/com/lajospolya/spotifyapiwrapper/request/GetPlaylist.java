@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.Playlist;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}";
 
-    private GetPlaylist(HttpRequest.Builder requestBuilder)
+    private GetPlaylist(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

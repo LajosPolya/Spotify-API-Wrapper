@@ -3,8 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.response.PagingCursor;
 import com.lajospolya.spotifyapiwrapper.response.PlayHistory;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -15,7 +13,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/recently-played";
 
-    private GetMePlayerRecentlyPlayed(HttpRequest.Builder requestBuilder)
+    private GetMePlayerRecentlyPlayed(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

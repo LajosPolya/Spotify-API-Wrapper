@@ -4,7 +4,6 @@ import com.lajospolya.spotifyapiwrapper.enumeration.ExternalContent;
 import com.lajospolya.spotifyapiwrapper.enumeration.SearchItemType;
 import com.lajospolya.spotifyapiwrapper.response.SearchResults;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "search";
 
-    private GetSearch(HttpRequest.Builder requestBuilder)
+    private GetSearch(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

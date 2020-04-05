@@ -3,8 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 import com.lajospolya.spotifyapiwrapper.response.SavedTrack;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -15,7 +13,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/tracks";
 
-    private GetMeTracks(HttpRequest.Builder requestBuilder)
+    private GetMeTracks(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

@@ -3,8 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 import com.lajospolya.spotifyapiwrapper.response.SavedAlbum;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -15,7 +13,7 @@ public class GetMeAlbums extends AbstractSpotifyRequest<Paging<SavedAlbum>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/albums";
 
-    private GetMeAlbums(HttpRequest.Builder requestBuilder)
+    private GetMeAlbums(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

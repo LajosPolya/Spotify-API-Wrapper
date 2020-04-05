@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.PutPlaylistsFollowers;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers";
 
-    private PutFollowPlaylist(HttpRequest.Builder requestBuilder)
+    private PutFollowPlaylist(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -38,7 +36,7 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
             return new PutFollowPlaylist(createRequest(spotifyRequestBuilder));
         }
 
-        private HttpRequest.Builder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
+        private SpotifyRequestBuilder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(isPublic != null)
             {

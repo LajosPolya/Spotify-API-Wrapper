@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.FeaturedPlaylists;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/featured-playlists";
 
-    private GetFeaturedPlaylists(HttpRequest.Builder requestBuilder)
+    private GetFeaturedPlaylists(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.ResumePlayback;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/play";
 
-    private PutMePlayerPlay(HttpRequest.Builder requestBuilder)
+    private PutMePlayerPlay(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -48,7 +47,7 @@ public class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
             }
         }
 
-        private HttpRequest.Builder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
+        private SpotifyRequestBuilder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(contextUri != null || uris != null || offset != null || positionMs != null)
             {

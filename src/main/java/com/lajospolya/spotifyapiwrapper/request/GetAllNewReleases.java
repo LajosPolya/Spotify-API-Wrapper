@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.NewReleases;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/new-releases";
 
-    private GetAllNewReleases(HttpRequest.Builder requestBuilder)
+    private GetAllNewReleases(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.CurrentlyPlayingContext;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetMePlayer extends AbstractSpotifyRequest<CurrentlyPlayingContext>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player";
 
-    private GetMePlayer(HttpRequest.Builder requestBuilder)
+    private GetMePlayer(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

@@ -5,8 +5,6 @@ import com.lajospolya.spotifyapiwrapper.enumeration.UsersTopType;
 import com.lajospolya.spotifyapiwrapper.response.Artist;
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -16,7 +14,7 @@ import java.net.http.HttpRequest;
 public class GetUsersTopArtists extends GetUsersTop<Paging<Artist>>
 {
 
-    private GetUsersTopArtists(HttpRequest.Builder requestBuilder)
+    private GetUsersTopArtists(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

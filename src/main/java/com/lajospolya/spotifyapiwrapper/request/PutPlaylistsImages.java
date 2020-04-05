@@ -1,7 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -12,7 +10,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/images";
 
-    private PutPlaylistsImages(HttpRequest.Builder requestBuilder)
+    private PutPlaylistsImages(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

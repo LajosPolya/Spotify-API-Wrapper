@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.CategorysPlaylists;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/categories/{category_id}/playlists";
 
-    public GetCategorysPlaylists(HttpRequest.Builder requestBuilder)
+    public GetCategorysPlaylists(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

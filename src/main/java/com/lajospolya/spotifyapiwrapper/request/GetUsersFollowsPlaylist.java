@@ -1,6 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers/contains";
 
-    private GetUsersFollowsPlaylist(HttpRequest.Builder requestBuilder)
+    private GetUsersFollowsPlaylist(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

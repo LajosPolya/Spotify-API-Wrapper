@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.ArtistsTopTracks;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/top-tracks";
 
-    private GetArtistsTopTracks(HttpRequest.Builder requestBuilder)
+    private GetArtistsTopTracks(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

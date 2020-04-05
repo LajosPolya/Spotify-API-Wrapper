@@ -3,7 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackDelete;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private DeletePlaylistsTracks(HttpRequest.Builder requestBuilder)
+    private DeletePlaylistsTracks(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

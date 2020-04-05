@@ -3,8 +3,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
 import com.lajospolya.spotifyapiwrapper.response.Following;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -15,7 +13,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following";
 
-    private GetMeFollowing(HttpRequest.Builder requestBuilder)
+    private GetMeFollowing(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

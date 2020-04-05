@@ -2,8 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.Categories;
 
-import java.net.http.HttpRequest;
-
 /**
  * @author Lajos Polya
  *
@@ -14,7 +12,7 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/categories";
 
-    private GetAllCategories(HttpRequest.Builder requestBuilder)
+    private GetAllCategories(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

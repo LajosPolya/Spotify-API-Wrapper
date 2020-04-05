@@ -2,7 +2,6 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.response.TracksAudioFeatures;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class GetSeveralAudioFeatures extends AbstractSpotifyRequest<TracksAudioF
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-features";
 
-    private GetSeveralAudioFeatures(HttpRequest.Builder requestBuilder)
+    private GetSeveralAudioFeatures(SpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
