@@ -1,8 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.request.internal.Java11HttpRequest;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -151,8 +149,8 @@ public class SpotifyRequestBuilder
         return requestBuilder.uri(uriComponents.toUri());
     }
 
-    public ISpotifyRequest build()
+    public HttpRequest build()
     {
-        return new Java11HttpRequest(requestBuilder.build());
+        return requestBuilder.build();
     }
 }

@@ -1,7 +1,8 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
+
+import java.net.http.HttpRequest;
 
 /**
  * This is the base class for all Spotify Requests.
@@ -26,9 +27,9 @@ public abstract class AbstractSpotifyRequest<T>
      * request. In the near future this will be abstracted to an Http Request which doesn't couple Java 11's
      * HttpRequest.
      * This method is private to simplify the interface for end users.
-     * @return ISpotifyRequest the built request
+     * @return HttpRequest the built request
      */
-    private ISpotifyRequest reflectiveBuildRequest()
+    private HttpRequest reflectiveBuildRequest()
     {
         if(accessToken == null)
         {

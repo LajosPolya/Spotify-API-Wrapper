@@ -1,16 +1,15 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.client.service.internal.ISpotifyClient;
-import com.lajospolya.spotifyapiwrapper.client.service.internal.Java11HttpClient;
-import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.http.HttpClient;
 import java.net.http.HttpHeaders;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -19,27 +18,30 @@ import java.util.concurrent.CompletableFuture;
 public class SpotifyApiClientService implements ISpotifyApiClientService
 {
     private static final String ETAG_HEADER = "etag";
-    private ISpotifyClient httpClient;
+    private HttpClient httpClient;
     private Gson gson;
 
     public SpotifyApiClientService()
     {
-        this.httpClient = new Java11HttpClient();
+        this.httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
         this.gson =  new Gson();
     }
 
     @Override
-    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
+    public <T> T sendRequestAndFetchResponse(HttpRequest request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
     {
-        HttpResponse<String> response = httpClient.send(request);
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         return validateResponseAndSerialize(response, typeOfReturnValue);
     }
 
     @Override
-    public <T> CompletableFuture<T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
+    public <T> CompletableFuture<T> sendRequestAndFetchResponseAsync(HttpRequest request, Type typeOfReturnValue) throws SpotifyResponseException
     {
-        return httpClient.sendAsync(request)
-                .thenApply((response) -> validateResponseAndSerialize((HttpResponse<String>) response, typeOfReturnValue));
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply((response) -> validateResponseAndSerialize(response, typeOfReturnValue));
     }
 
     private <T> T validateResponseAndSerialize(HttpResponse<String> response, Type typeOfReturnValue)

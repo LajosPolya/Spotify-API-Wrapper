@@ -1,12 +1,12 @@
 package com.lajospolya.spotifyapiwrapper.reflection;
 
-import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyBadClassDefinitionException;
+import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.http.HttpRequest;
 
 public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientService
 {
@@ -45,10 +45,10 @@ public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientS
     }
 
     @Override
-    public ISpotifyRequest buildRequest(AbstractSpotifyRequest<?> spotifyRequest) throws InvocationTargetException, IllegalAccessException
+    public HttpRequest buildRequest(AbstractSpotifyRequest<?> spotifyRequest) throws InvocationTargetException, IllegalAccessException
     {
         buildRequestMethod.setAccessible(true);
-        ISpotifyRequest request =  (ISpotifyRequest) buildRequestMethod.invoke(spotifyRequest, (Object[]) null);
+        HttpRequest request =  (HttpRequest) buildRequestMethod.invoke(spotifyRequest, (Object[]) null);
         buildRequestMethod.setAccessible(false);
         return request;
     }
