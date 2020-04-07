@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 public class SpotifyApiClientService implements ISpotifyApiClientService
 {
     private static final String ETAG_HEADER = "etag";
-    private ISpotifyClient httpClient;
+    private ISpotifyClient<?> httpClient;
     private Gson gson;
 
     public SpotifyApiClientService()
