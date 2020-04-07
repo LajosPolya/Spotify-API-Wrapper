@@ -1,9 +1,9 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyClient;
-import com.lajospolya.spotifyapiwrapper.internal.Java11HttpClient;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.client.service.internal.ISpotifyClient;
+import com.lajospolya.spotifyapiwrapper.client.service.internal.Java11HttpClient;
+import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;

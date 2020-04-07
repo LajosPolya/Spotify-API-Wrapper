@@ -1,4 +1,6 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.client.service.internal;
+
+import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;

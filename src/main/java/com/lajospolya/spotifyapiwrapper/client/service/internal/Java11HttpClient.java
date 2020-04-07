@@ -1,4 +1,6 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.client.service.internal;
+
+import com.lajospolya.spotifyapiwrapper.request.internal.ISpotifyRequest;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
