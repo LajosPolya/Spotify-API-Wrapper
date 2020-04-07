@@ -1,11 +1,11 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyAsyncResponse;
 import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Lajos Polya
@@ -34,7 +34,7 @@ public interface ISpotifyApiClientService
      * @return returns the serialized response body of the request
      * @throws SpotifyResponseException when the response header has an erroneous status code
      */
-    <T> ISpotifyAsyncResponse<?, T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException;
+    <T> CompletableFuture<T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException;
 
     /**
      * Base64 encodes the clientId and clientSecret in the format clientId:clientSecret
