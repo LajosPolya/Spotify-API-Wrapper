@@ -2,6 +2,7 @@ package com.lajospolya.spotifyapiwrapper.client;
 
 import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.client.service.SpotifyApiClientService;
+import com.lajospolya.spotifyapiwrapper.internal.ISpotifyAsyncResponse;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.ReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
@@ -133,7 +134,7 @@ public class SpotifyApiClient
      * the mandatory private fields and methods needed to build the request
      * @throws SpotifyResponseException when the response header contains an erroneous status code
      */
-    public <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest)
+    public <T> ISpotifyAsyncResponse<?, T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
         validateTokenHasNotExpired();
@@ -165,7 +166,7 @@ public class SpotifyApiClient
         }
     }
 
-    private <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyAsyncResponse<?, T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
         ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
@@ -219,7 +220,7 @@ public class SpotifyApiClient
         {
             PostRefreshToken postRefreshToken = new PostRefreshToken.Builder(apiTokenResponse.getRefresh_token())
                     .build();
-            return sendRequestAsync(postRefreshToken, basicToken).thenAccept(response ->
+            return (CompletableFuture<Void>)sendRequestAsync(postRefreshToken, basicToken).thenAccept(response ->
             {
                 apiTokenResponse = response;
                 timeOfAuthorization = System.currentTimeMillis();
@@ -228,7 +229,7 @@ public class SpotifyApiClient
         else
         {
             PostClientCredentialsFlow postClientCredentialsFlow = new PostClientCredentialsFlow.Builder().build();
-            return sendRequestAsync(postClientCredentialsFlow, basicToken).thenAccept(response ->
+            return (CompletableFuture<Void>)sendRequestAsync(postClientCredentialsFlow, basicToken).thenAccept(response ->
             {
                 apiTokenResponse = response;
                 timeOfAuthorization = System.currentTimeMillis();
