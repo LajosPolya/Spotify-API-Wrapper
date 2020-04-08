@@ -13,7 +13,7 @@ Maven
 ```
 
 Gradle
-```
+```gradle
 compile group: 'com.github.lajospolya', name: 'spotify-api-wrapper', version: '1.0.RELEASE'
 ```
 
