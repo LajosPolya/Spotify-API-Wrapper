@@ -96,6 +96,28 @@ client.reauthorize();
 // or asynchronously
 client.reauthorizeAsync().get();
 ```
-```
-TODO: Reauthorization and Caching
+
+#### Caching with Etags
+Spotify has implemented [Contitional Requests](https://developer.spotify.com/documentation/web-api/#conditional-requests) 
+through the use of [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag).
+
+Requests which support the use of ETags have an `etag` setter method. 
+Responses which support the use of ETags have a `getEtag` getter method. 
+If the ETag is set and the resource being requested hasn't changed then a null object will be returned.
+```java
+SpotifyApiClient client = SpotifyApiClient
+    .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL);
+
+GetMeTracks getUsersTracksRequest = new GetMeTracks.Builder()
+        .offset(0).limit(50).build();
+// Fetch my saved Tracks
+Paging<SavedTrack> tracks = client.sendRequest(getUsersTracksRequest);
+
+String etag = tracks.getEtag();
+
+GetMeTracks getUsersTracksCachedRequest = new GetMeTracks.Builder()
+    .etag(etag) // set the etag
+    .offset(0).limit(50).build();
+// If I haven't saved any tracks then tracksCached will be null
+Paging<SavedTrack> tracksCached = client.sendRequest(getUsersTracksCachedRequest);
 ```
