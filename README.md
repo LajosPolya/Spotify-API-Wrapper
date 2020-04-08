@@ -62,7 +62,7 @@ GetTrack getTrackRequest = new GetTrack.Builder(TRACK_ID)
     .market(MARKET).build();
 ```
 
-#### Sending a Request (full example)
+#### Sending a Synchronous Request (full example)
 The responses for all requests are typed.
 
 ```java
@@ -77,7 +77,25 @@ GetTrack getTrackRequest = new GetTrack.Builder(TRACK_ID)
 Track track = client.sendRequest(getTrackRequest);
 ```
 
+#### Sending an Asynchronous Request (full example)
+```
+String SHOW_ID = "4xdoysfv0ztl97lrj8Sg4W";
+String MARKET = "CA";
+GetShowsEpisodes getShowsRequest = new GetShowsEpisodes.Builder(SHOW_ID)
+    .market(MARKET).limit(50).offset(3).build();
+Paging<SimplifiedEpisode> episodes = client.sendRequestAsync(getShowsRequest).get();
 
+```
+#### Reauthorizing an Expired Client
+```
+SpotifyApiClient client = SpotifyApiClient
+    .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL);
+ 
+// one method call to reauthorize the client
+client.reauthorize();
+// or asynchronously
+client.reauthorizeAsync().get();
+```
 ```
 TODO: Reauthorization and Caching
 ```
