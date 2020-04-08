@@ -78,7 +78,7 @@ Track track = client.sendRequest(getTrackRequest);
 ```
 
 #### Sending an Asynchronous Request (full example)
-```
+```java
 String SHOW_ID = "4xdoysfv0ztl97lrj8Sg4W";
 String MARKET = "CA";
 GetShowsEpisodes getShowsRequest = new GetShowsEpisodes.Builder(SHOW_ID)
@@ -87,7 +87,7 @@ Paging<SimplifiedEpisode> episodes = client.sendRequestAsync(getShowsRequest).ge
 
 ```
 #### Reauthorizing an Expired Client
-```
+```java
 SpotifyApiClient client = SpotifyApiClient
     .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL);
  
