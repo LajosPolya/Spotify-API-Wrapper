@@ -4,7 +4,7 @@ An intuitive wrapper over the [Spotify Developer API](https://developer.spotify.
 ## Integrating with your App
 
 Maven
-```
+```xml
 <dependency>
     <groupId>com.github.lajospolya</groupId>
     <artifactId>spotify-api-wrapper</artifactId>
