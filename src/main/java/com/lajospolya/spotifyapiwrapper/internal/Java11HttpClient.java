@@ -18,11 +18,11 @@ public class Java11HttpClient implements ISpotifyClient
     }
 
     @Override
-    public ISpotifyResponse<?> send(ISpotifyRequest<?> request)
+    public <T> ISpotifyResponse<T> send(ISpotifyRequest<?> request)
     {
         try
         {
-            return new Java11HttpResponse(httpClient.send((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()));
+            return new Java11HttpResponse<>(httpClient.send((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()));
         }
         catch (InterruptedException | IOException e)
         {

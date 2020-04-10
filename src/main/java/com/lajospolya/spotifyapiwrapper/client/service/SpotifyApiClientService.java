@@ -6,7 +6,6 @@ import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
@@ -27,9 +26,9 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     }
 
     @Override
-    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException
+    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
-        ISpotifyResponse<?> response = httpClient.send(request);
+        ISpotifyResponse<T> response = httpClient.send(request);
         return validateResponseAndSerialize(response, typeOfReturnValue);
     }
 
@@ -44,19 +43,17 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
                 });
     }
 
-    private <T> T validateResponseAndSerialize(ISpotifyResponse<?> response, Type typeOfReturnValue)
+    private <T> T validateResponseAndSerialize(ISpotifyResponse<T> response, Type typeOfReturnValue)
     {
         validateResponse(response);
-        String body = response.body();
+        T body = response.body(typeOfReturnValue);
 
         /*
          * when a 304 is returned with an empty body the serialized body becomes null
          * so we don't need to handled caching separately
          */
-        T serializedResponse = serializeResponseBody(body, typeOfReturnValue);
-        setCachableValuesFromHeadersIfCachable(serializedResponse, response.headers());
-
-        return serializedResponse;
+        setCachableValuesFromHeadersIfCachable(body, response.headers());
+        return body;
     }
 
     private void validateResponse(ISpotifyResponse<?> response) throws SpotifyResponseException
@@ -64,7 +61,8 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         int statusCode = response.statusCode();
         if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
         {
-            SpotifyErrorContainer error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
+            // TODO: Should this logic be in the ISpotifyResponse<?> impl
+            SpotifyErrorContainer error = response.error();
             throw new SpotifyResponseException(error);
         }
     }
