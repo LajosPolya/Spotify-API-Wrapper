@@ -7,7 +7,6 @@ import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.lang.reflect.Type;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
@@ -35,12 +34,9 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     @Override
     public <T> ISpotifyAsyncResponse<?, T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
-        return (ISpotifyAsyncResponse<?, T>)httpClient.sendAsync(request)
-                .thenApply((response) ->
-                {
-                    return validateResponseAndSerialize((ISpotifyResponse<?>) new Java11HttpResponse((HttpResponse
-                            <String>)response), typeOfReturnValue);
-                });
+        ISpotifyAsyncResponse<?, T> asyncResponse = httpClient.sendAsync(request);
+        asyncResponse.validateResponseAsync(this::validateResponseFromStatusCode, typeOfReturnValue);
+        return  asyncResponse;
     }
 
     private <T> T validateResponseAndSerialize(ISpotifyResponse<T> response, Type typeOfReturnValue)
@@ -65,6 +61,11 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
             SpotifyErrorContainer error = response.error();
             throw new SpotifyResponseException(error);
         }
+    }
+
+    private boolean validateResponseFromStatusCode(int statusCode)
+    {
+        return isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode);
     }
 
     private <T> T serializeResponseBody(String body, Type typeOfReturnValue)

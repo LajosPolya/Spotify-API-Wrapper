@@ -151,7 +151,7 @@ public class SpotifyRequestBuilder
         return requestBuilder.uri(uriComponents.toUri());
     }
 
-    public ISpotifyRequest build()
+    public ISpotifyRequest<?> build()
     {
         return new Java11HttpRequest(requestBuilder.build());
     }

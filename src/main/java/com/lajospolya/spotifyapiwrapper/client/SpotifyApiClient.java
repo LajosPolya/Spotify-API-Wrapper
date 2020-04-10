@@ -3,22 +3,21 @@ package com.lajospolya.spotifyapiwrapper.client;
 import com.lajospolya.spotifyapiwrapper.client.service.ISpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.client.service.SpotifyApiClientService;
 import com.lajospolya.spotifyapiwrapper.internal.ISpotifyAsyncResponse;
+import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.reflection.IReflectiveSpotifyClientService;
 import com.lajospolya.spotifyapiwrapper.reflection.ReflectiveSpotifyClientService;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
-import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
-import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
-import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 import com.lajospolya.spotifyapiwrapper.request.AbstractSpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.request.PostAuthorizationCodeFlow;
 import com.lajospolya.spotifyapiwrapper.request.PostClientCredentialsFlow;
 import com.lajospolya.spotifyapiwrapper.request.PostRefreshToken;
+import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author Lajos Polya
@@ -214,13 +213,13 @@ public class SpotifyApiClient
      * reauthorize using the client credentials flow
      * @return a void completable future
      */
-    public CompletableFuture<Void> reauthorizeAsync()
+    public ISpotifyAsyncResponse<?, ?> reauthorizeAsync()
     {
         if(canRefresh())
         {
             PostRefreshToken postRefreshToken = new PostRefreshToken.Builder(apiTokenResponse.getRefresh_token())
                     .build();
-            return (CompletableFuture<Void>)sendRequestAsync(postRefreshToken, basicToken).thenAccept(response ->
+            return sendRequestAsync(postRefreshToken, basicToken).thenAccept(response ->
             {
                 apiTokenResponse = response;
                 timeOfAuthorization = System.currentTimeMillis();
@@ -229,7 +228,7 @@ public class SpotifyApiClient
         else
         {
             PostClientCredentialsFlow postClientCredentialsFlow = new PostClientCredentialsFlow.Builder().build();
-            return (CompletableFuture<Void>)sendRequestAsync(postClientCredentialsFlow, basicToken).thenAccept(response ->
+            return sendRequestAsync(postClientCredentialsFlow, basicToken).thenAccept(response ->
             {
                 apiTokenResponse = response;
                 timeOfAuthorization = System.currentTimeMillis();
