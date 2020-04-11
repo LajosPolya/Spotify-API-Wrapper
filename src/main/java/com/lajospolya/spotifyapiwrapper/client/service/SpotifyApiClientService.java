@@ -68,15 +68,6 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         return isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode);
     }
 
-    private <T> T serializeResponseBody(String body, Type typeOfReturnValue)
-    {
-        if(isStringType(typeOfReturnValue))
-        {
-            return (T) body;
-        }
-        return gson.fromJson(body, typeOfReturnValue);
-    }
-
     private <T> void setCachableValuesFromHeadersIfCachable(T response, Map<String, List<String>> headers)
     {
         if(response instanceof CacheableResponse)
@@ -97,11 +88,6 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     private Boolean isServerErrorStatusCode(int statusCode)
     {
         return statusCode / 100 == 5;
-    }
-
-    private Boolean isStringType(Type typeOfReturnValue)
-    {
-        return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 
     @Override
