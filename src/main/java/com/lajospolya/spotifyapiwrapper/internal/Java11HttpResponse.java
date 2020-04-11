@@ -12,22 +12,31 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
 {
     private Gson gson;
     private HttpResponse<String> response;
+    private Type type;
+    private T body;
 
-    public Java11HttpResponse(HttpResponse<String> response)
+    public Java11HttpResponse(HttpResponse<String> response, Type typeOfResponse)
     {
         this.gson = new Gson();
         this.response = response;
+        this.type = typeOfResponse;
+        serializeBody();
+    }
+
+    private void serializeBody()
+    {
+        String body = response.body();
+        if(isStringType(type))
+        {
+            this.body =  (T) body;
+        }
+        this.body =  gson.fromJson(body, type);
     }
 
     @Override
     public T body(Type typeOfBody)
     {
-        String body = response.body();
-        if(isStringType(typeOfBody))
-        {
-            return (T) body;
-        }
-        return gson.fromJson(body, typeOfBody);
+        return this.body;
     }
 
     @Override
