@@ -1,34 +1,26 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
-import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.internal.*;
-import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
-import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
-import java.util.Map;
 
 public class SpotifyApiClientService implements ISpotifyApiClientService
 {
-    private static final String ETAG_HEADER = "etag";
     private ISpotifyClient httpClient;
-    private Gson gson;
 
     public SpotifyApiClientService()
     {
         this.httpClient = new Java11HttpClient();
-        this.gson =  new Gson();
     }
 
     @Override
     public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyResponse<T> response = httpClient.send(request, typeOfReturnValue);
-        return validateResponseAndSerialize(response, typeOfReturnValue);
+        return response.body();
     }
 
     @Override
@@ -39,45 +31,9 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
         return  asyncResponse;
     }
 
-    private <T> T validateResponseAndSerialize(ISpotifyResponse<T> response, Type typeOfReturnValue)
-    {
-        validateResponse(response);
-        T body = response.body(typeOfReturnValue);
-
-        /*
-         * when a 304 is returned with an empty body the serialized body becomes null
-         * so we don't need to handled caching separately
-         */
-        setCachableValuesFromHeadersIfCachable(body, response.headers());
-        return body;
-    }
-
-    private void validateResponse(ISpotifyResponse<?> response) throws SpotifyResponseException
-    {
-        int statusCode = response.statusCode();
-        if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
-        {
-            // TODO: Should this logic be in the ISpotifyResponse<?> impl
-            SpotifyErrorContainer error = response.error();
-            throw new SpotifyResponseException(error);
-        }
-    }
-
     private boolean validateResponseFromStatusCode(int statusCode)
     {
         return isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode);
-    }
-
-    private <T> void setCachableValuesFromHeadersIfCachable(T response, Map<String, List<String>> headers)
-    {
-        if(response instanceof CacheableResponse)
-        {
-            List<String> etag = headers.get(ETAG_HEADER);
-            if(etag != null && !etag.isEmpty())
-            {
-                ((CacheableResponse) response).setEtag(etag.get(0));
-            }
-        }
     }
 
     private Boolean isClientErrorStatusCode(int statusCode)

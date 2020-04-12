@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
 import com.google.gson.Gson;
+import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 
 import java.lang.reflect.Type;
@@ -10,17 +11,54 @@ import java.util.Map;
 
 public class Java11HttpResponse<T> implements ISpotifyResponse<T>
 {
+    private static final String ETAG_HEADER = "etag";
     private Gson gson;
     private HttpResponse<String> response;
     private Type type;
     private T body;
+    private SpotifyErrorContainer error;
+    private boolean erroneous = false;
 
     public Java11HttpResponse(HttpResponse<String> response, Type typeOfResponse)
     {
         this.gson = new Gson();
         this.response = response;
         this.type = typeOfResponse;
-        serializeBody();
+        validateResponse();
+    }
+
+    private void validateResponse()
+    {
+        int statusCode = response.statusCode();
+        if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
+        {
+            serializeError();
+            erroneous = true;
+        }
+        else
+        {
+            serializeBody();
+            /*
+             * when a 304 is returned with an empty body the serialized body becomes null
+             * so we don't need to handled caching separately
+             */
+            setCachableValuesFromHeadersIfCachable(body);
+        }
+    }
+
+    private Boolean isClientErrorStatusCode(int statusCode)
+    {
+        return statusCode / 100 == 4;
+    }
+
+    private Boolean isServerErrorStatusCode(int statusCode)
+    {
+        return statusCode / 100 == 5;
+    }
+
+    private void serializeError()
+    {
+        error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
     }
 
     private void serializeBody()
@@ -33,8 +71,21 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         this.body =  gson.fromJson(body, type);
     }
 
+    private void setCachableValuesFromHeadersIfCachable(T body)
+    {
+        if(body instanceof CacheableResponse)
+        {
+            // Use the Optional interface here
+            List<String> etag = response.headers().map().get(ETAG_HEADER);
+            if(etag != null && !etag.isEmpty())
+            {
+                ((CacheableResponse) body).setEtag(etag.get(0));
+            }
+        }
+    }
+
     @Override
-    public T body(Type typeOfBody)
+    public T body()
     {
         return this.body;
     }
@@ -42,7 +93,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     @Override
     public SpotifyErrorContainer error()
     {
-        return gson.fromJson(response.body(), SpotifyErrorContainer.class);
+        return error;
     }
 
     private Boolean isStringType(Type typeOfReturnValue)
