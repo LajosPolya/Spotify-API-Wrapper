@@ -11,7 +11,8 @@ import java.util.function.Function;
 
 public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<CompletableFuture<?>, T>
 {
-    private Gson gson;
+    private final Gson gson;
+    private final HttpResponseHelper helper;
     private CompletableFuture<HttpResponse<String>> asyncContainer;
     private CompletableFuture<T> serializedValue;
     private Boolean isValid = null;
@@ -19,6 +20,7 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     public CompletableFutureAsyncResponse(CompletableFuture<HttpResponse<String>> asyncContainer)
     {
         this.gson = new Gson();
+        this.helper = new HttpResponseHelper();
         this.asyncContainer = asyncContainer;
     }
 
@@ -39,12 +41,12 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     }
 
     @Override
-    public void validateResponseAsync(Function<Integer, Boolean> validateByStatusCode, Type typeOfBody)
+    public void validateResponseAsync(Type typeOfBody)
     {
         serializedValue = asyncContainer.thenApply((response) -> {
-            isValid = !validateByStatusCode.apply(response.statusCode());
+            int statusCode = response.statusCode();
 
-            if(isValid)
+            if(!(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode)))
             {
                 String body = response.body();
                 if(isStringType(typeOfBody))
@@ -53,7 +55,10 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
                 }
                 return gson.fromJson(body, typeOfBody);
             }
-            return null;
+            else
+            {
+                return null;
+            }
         });
     }
 

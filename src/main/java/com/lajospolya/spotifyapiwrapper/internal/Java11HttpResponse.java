@@ -12,7 +12,10 @@ import java.util.Map;
 public class Java11HttpResponse<T> implements ISpotifyResponse<T>
 {
     private static final String ETAG_HEADER = "etag";
-    private Gson gson;
+
+    private final HttpResponseHelper helper;
+    private final Gson gson;
+
     private HttpResponse<String> response;
     private Type type;
     private T body;
@@ -21,6 +24,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
 
     public Java11HttpResponse(HttpResponse<String> response, Type typeOfResponse)
     {
+        this.helper = new HttpResponseHelper();
         this.gson = new Gson();
         this.response = response;
         this.type = typeOfResponse;
@@ -30,7 +34,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     private void validateResponse()
     {
         int statusCode = response.statusCode();
-        if(isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode))
+        if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
         {
             serializeError();
             erroneous = true;
@@ -44,16 +48,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
              */
             setCachableValuesFromHeadersIfCachable(body);
         }
-    }
-
-    private Boolean isClientErrorStatusCode(int statusCode)
-    {
-        return statusCode / 100 == 4;
-    }
-
-    private Boolean isServerErrorStatusCode(int statusCode)
-    {
-        return statusCode / 100 == 5;
     }
 
     private void serializeError()

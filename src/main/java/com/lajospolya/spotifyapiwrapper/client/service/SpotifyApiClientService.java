@@ -27,23 +27,8 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     public <T> ISpotifyAsyncResponse<?, T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyAsyncResponse<?, T> asyncResponse = httpClient.sendAsync(request);
-        asyncResponse.validateResponseAsync(this::validateResponseFromStatusCode, typeOfReturnValue);
+        asyncResponse.validateResponseAsync(typeOfReturnValue);
         return  asyncResponse;
-    }
-
-    private boolean validateResponseFromStatusCode(int statusCode)
-    {
-        return isClientErrorStatusCode(statusCode) || isServerErrorStatusCode(statusCode);
-    }
-
-    private Boolean isClientErrorStatusCode(int statusCode)
-    {
-        return statusCode / 100 == 4;
-    }
-
-    private Boolean isServerErrorStatusCode(int statusCode)
-    {
-        return statusCode / 100 == 5;
     }
 
     @Override
