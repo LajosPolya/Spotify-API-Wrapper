@@ -16,8 +16,8 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     private final HttpResponseHelper helper;
     private final Gson gson;
 
-    private HttpResponse<String> response;
-    private Type type;
+    private final HttpResponse<String> response;
+    private final Type type;
     private T body;
     private SpotifyErrorContainer error;
     private boolean erroneous = false;

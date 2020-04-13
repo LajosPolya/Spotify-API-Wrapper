@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<CompletableFuture<?>, T>
 {
     private final HttpResponseHelper helper;
-    private CompletableFuture<HttpResponse<String>> asyncContainer;
-    private Type type;
+    private final CompletableFuture<HttpResponse<String>> asyncContainer;
+    private final Type type;
     private CompletableFuture<T> serializedValue;
     private Boolean isValid = null;
 
