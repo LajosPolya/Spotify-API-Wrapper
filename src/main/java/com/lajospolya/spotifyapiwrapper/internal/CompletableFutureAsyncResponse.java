@@ -1,34 +1,30 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
-import com.google.gson.Gson;
-
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<CompletableFuture<?>, T>
 {
-    private final Gson gson;
     private final HttpResponseHelper helper;
     private CompletableFuture<HttpResponse<String>> asyncContainer;
+    private Type type;
     private CompletableFuture<T> serializedValue;
     private Boolean isValid = null;
 
-    public CompletableFutureAsyncResponse(CompletableFuture<HttpResponse<String>> asyncContainer)
+    public CompletableFutureAsyncResponse(CompletableFuture<HttpResponse<String>> asyncContainer, Type type)
     {
-        this.gson = new Gson();
         this.helper = new HttpResponseHelper();
         this.asyncContainer = asyncContainer;
+        this.type = type;
     }
 
     @Override
     public CompletableFutureAsyncResponse<T> thenAccept(Consumer<? super T> action)
     {
         asyncContainer.thenAccept((response) -> serializedValue.thenAccept(action));
-
         return this;
     }
 
@@ -41,19 +37,14 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     }
 
     @Override
-    public void validateResponseAsync(Type typeOfBody)
+    public void validateResponseAsync()
     {
         serializedValue = asyncContainer.thenApply((response) -> {
             int statusCode = response.statusCode();
 
             if(!(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode)))
             {
-                String body = response.body();
-                if(isStringType(typeOfBody))
-                {
-                    return (T) body;
-                }
-                return gson.fromJson(body, typeOfBody);
+                return helper.serializeBody(response, type);
             }
             else
             {

@@ -33,8 +33,9 @@ public class Java11HttpClient implements ISpotifyClient
     }
 
     @Override
-    public <T> ISpotifyAsyncResponse<?, T> sendAsync(ISpotifyRequest<?> request)
+    public <T> ISpotifyAsyncResponse<?, T> sendAsync(ISpotifyRequest<?> request, Type typeOfResponse)
     {
-        return new CompletableFutureAsyncResponse<>(httpClient.sendAsync((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()));
+        return new CompletableFutureAsyncResponse<>(
+                httpClient.sendAsync((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()), typeOfResponse);
     }
 }

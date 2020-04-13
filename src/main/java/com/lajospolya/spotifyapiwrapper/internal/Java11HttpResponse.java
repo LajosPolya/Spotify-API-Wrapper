@@ -41,7 +41,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         }
         else
         {
-            serializeBody();
+            body = helper.serializeBody(response, type);
             /*
              * when a 304 is returned with an empty body the serialized body becomes null
              * so we don't need to handled caching separately
@@ -53,16 +53,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     private void serializeError()
     {
         error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
-    }
-
-    private void serializeBody()
-    {
-        String body = response.body();
-        if(isStringType(type))
-        {
-            this.body =  (T) body;
-        }
-        this.body =  gson.fromJson(body, type);
     }
 
     private void setCachableValuesFromHeadersIfCachable(T body)
@@ -88,11 +78,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     public SpotifyErrorContainer error()
     {
         return error;
-    }
-
-    private Boolean isStringType(Type typeOfReturnValue)
-    {
-        return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 
     @Override
