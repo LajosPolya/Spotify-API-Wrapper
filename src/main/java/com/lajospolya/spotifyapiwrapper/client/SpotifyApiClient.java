@@ -210,7 +210,7 @@ public class SpotifyApiClient
 
     /**
      * Reauthorizes the client asynchronously, if the client has a refresh token it will refresh it, otherwise it'll
-     * reauthorize using the client credentials flow
+     * reauthorize using the Client Credentials Flow
      * @return a void completable future
      */
     public ISpotifyAsyncResponse<?, ?> reauthorizeAsync()
@@ -219,7 +219,7 @@ public class SpotifyApiClient
         {
             PostRefreshToken postRefreshToken = new PostRefreshToken.Builder(apiTokenResponse.getRefresh_token())
                     .build();
-            return sendRequestAsync(postRefreshToken, basicToken).thenAccept(response ->
+            return sendRequestAsync(postRefreshToken, basicToken).success(response ->
             {
                 apiTokenResponse = response;
                 timeOfAuthorization = System.currentTimeMillis();
@@ -228,7 +228,7 @@ public class SpotifyApiClient
         else
         {
             PostClientCredentialsFlow postClientCredentialsFlow = new PostClientCredentialsFlow.Builder().build();
-            return sendRequestAsync(postClientCredentialsFlow, basicToken).thenAccept(response ->
+            return sendRequestAsync(postClientCredentialsFlow, basicToken).success(response ->
             {
                 apiTokenResponse = response;
                 timeOfAuthorization = System.currentTimeMillis();

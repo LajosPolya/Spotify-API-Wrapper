@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
@@ -13,12 +14,11 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     private final HttpResponseHelper helper;
     private final CompletableFuture<HttpResponse<String>> asyncContainer;
     private final Type type;
-    private CompletableFuture<T> serializedTypedValue;
+    // Can be either of type T (on success) or type SpotifyErrorContainer (on error)
     private CompletableFuture<?> serializedValue;
-    private Boolean erroneous = false;
 
-    private Consumer<T> successFunction = null;
-    private Consumer<SpotifyErrorContainer> errorFunction = null;
+    private Consumer<T> successConsumer = null;
+    private Consumer<SpotifyErrorContainer> errorConsumer = null;
 
     public CompletableFutureAsyncResponse(CompletableFuture<HttpResponse<String>> asyncContainer, Type type)
     {
@@ -28,23 +28,9 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
         validateResponseAsync();
     }
 
-    // TODO: this should not be a method
-    @Override
-    public CompletableFutureAsyncResponse<T> thenAccept(Consumer<? super T> action)
-    {
-        // Fix this:
-        if(!erroneous)
-        {
-            serializedTypedValue = (CompletableFuture<T>) serializedValue;
-            asyncContainer.thenAccept((response) -> serializedTypedValue.thenAccept(action));
-        }
-        return this;
-    }
-
     @Override
     public void block() throws ExecutionException, InterruptedException
     {
-
         asyncContainer.get();
         serializedValue.get();
     }
@@ -55,11 +41,10 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
             int statusCode = response.statusCode();
             if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
             {
-                erroneous = true;
                 SpotifyErrorContainer body = helper.serializeBody(response, SpotifyErrorContainer.class);
-                if(errorFunction != null)
+                if(errorConsumer != null)
                 {
-                    errorFunction.accept(body);
+                    errorConsumer.accept(body);
                 }
                 return body;
             }
@@ -72,9 +57,9 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
                  */
                 helper.setCachableValuesFromHeadersIfCachable(body,response);
 
-                if(successFunction != null)
+                if(successConsumer != null)
                 {
-                    successFunction.accept(body);
+                    successConsumer.accept(body);
                 }
                 return body;
             }
@@ -82,16 +67,30 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     }
 
     @Override
-    public CompletableFutureAsyncResponse<T> success(Consumer<T> func)
+    public CompletableFutureAsyncResponse<T> success(Consumer<T> func) throws SpotifyResponseException
     {
-        successFunction = func;
+        if(successConsumer != null)
+        {
+            throw new SpotifyResponseException("Can only have one Success consumer");
+        }
+        successConsumer = func;
         return this;
     }
 
     @Override
-    public CompletableFutureAsyncResponse<T> error(Consumer<SpotifyErrorContainer> func)
+    public CompletableFutureAsyncResponse<T> error(Consumer<SpotifyErrorContainer> func) throws SpotifyResponseException
     {
-        errorFunction = func;
+        if(errorConsumer != null)
+        {
+            throw new SpotifyResponseException("Can only have one Error consumer");
+        }
+        errorConsumer = func;
         return this;
+    }
+
+    @Override
+    public boolean isDone()
+    {
+        return serializedValue.isDone();
     }
 }
