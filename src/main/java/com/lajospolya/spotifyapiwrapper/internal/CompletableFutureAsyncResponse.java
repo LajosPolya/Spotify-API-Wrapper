@@ -17,6 +17,9 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     private CompletableFuture<?> serializedValue;
     private Boolean erroneous = false;
 
+    private Consumer<T> successFunction = null;
+    private Consumer<SpotifyErrorContainer> errorFunction = null;
+
     public CompletableFutureAsyncResponse(CompletableFuture<HttpResponse<String>> asyncContainer, Type type)
     {
         this.helper = new HttpResponseHelper();
@@ -39,11 +42,11 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     }
 
     @Override
-    public T get() throws ExecutionException, InterruptedException
+    public void block() throws ExecutionException, InterruptedException
     {
 
         asyncContainer.get();
-        return (T)serializedValue.get();
+        serializedValue.get();
     }
 
     private void validateResponseAsync()
@@ -53,7 +56,12 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
             if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
             {
                 erroneous = true;
-                return helper.serializeBody(response, SpotifyErrorContainer.class);
+                SpotifyErrorContainer body = helper.serializeBody(response, SpotifyErrorContainer.class);
+                if(errorFunction != null)
+                {
+                    errorFunction.accept(body);
+                }
+                return body;
             }
             else
             {
@@ -63,13 +71,27 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
                  * so we don't need to handled caching separately
                  */
                 helper.setCachableValuesFromHeadersIfCachable(body,response);
+
+                if(successFunction != null)
+                {
+                    successFunction.accept(body);
+                }
                 return body;
             }
         });
     }
 
-    private Boolean isStringType(Type typeOfReturnValue)
+    @Override
+    public CompletableFutureAsyncResponse<T> success(Consumer<T> func)
     {
-        return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
+        successFunction = func;
+        return this;
+    }
+
+    @Override
+    public CompletableFutureAsyncResponse<T> error(Consumer<SpotifyErrorContainer> func)
+    {
+        errorFunction = func;
+        return this;
     }
 }
