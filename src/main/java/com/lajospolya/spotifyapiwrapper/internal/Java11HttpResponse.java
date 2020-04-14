@@ -1,6 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
-import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 
 import java.lang.reflect.Type;
@@ -10,8 +9,6 @@ import java.util.Map;
 
 public class Java11HttpResponse<T> implements ISpotifyResponse<T>
 {
-    private static final String ETAG_HEADER = "etag";
-
     private final HttpResponseHelper helper;
 
     private final HttpResponse<String> response;
@@ -47,23 +44,10 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         }
     }
 
-    private void setCachableValuesFromHeadersIfCachable(T body)
-    {
-        if(body instanceof CacheableResponse)
-        {
-            // Use the Optional interface here
-            List<String> etag = response.headers().map().get(ETAG_HEADER);
-            if(etag != null && !etag.isEmpty())
-            {
-                ((CacheableResponse) body).setEtag(etag.get(0));
-            }
-        }
-    }
-
     @Override
     public T body()
     {
-        return this.body;
+        return body;
     }
 
     @Override
