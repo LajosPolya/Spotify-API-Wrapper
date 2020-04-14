@@ -1,12 +1,16 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
 import com.google.gson.Gson;
+import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 public class HttpResponseHelper
 {
+    private static final String ETAG_HEADER = "etag";
+
     private final Gson gson = new Gson();
     public Boolean isClientErrorStatusCode(int statusCode)
     {
@@ -31,5 +35,18 @@ public class HttpResponseHelper
     private Boolean isStringType(Type typeOfReturnValue)
     {
         return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
+    }
+
+    public <T> void setCachableValuesFromHeadersIfCachable(T body, HttpResponse<String> response)
+    {
+        if(body instanceof CacheableResponse)
+        {
+            // Use the Optional interface here
+            List<String> etag = response.headers().map().get(ETAG_HEADER);
+            if(etag != null && !etag.isEmpty())
+            {
+                ((CacheableResponse) body).setEtag(etag.get(0));
+            }
+        }
     }
 }

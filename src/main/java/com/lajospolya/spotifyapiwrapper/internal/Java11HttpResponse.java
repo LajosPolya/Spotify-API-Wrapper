@@ -1,6 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
-import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 
@@ -14,7 +13,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     private static final String ETAG_HEADER = "etag";
 
     private final HttpResponseHelper helper;
-    private final Gson gson;
 
     private final HttpResponse<String> response;
     private final Type type;
@@ -25,7 +23,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     public Java11HttpResponse(HttpResponse<String> response, Type typeOfResponse)
     {
         this.helper = new HttpResponseHelper();
-        this.gson = new Gson();
         this.response = response;
         this.type = typeOfResponse;
         validateResponse();
@@ -36,7 +33,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         int statusCode = response.statusCode();
         if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
         {
-            serializeError();
+            error = helper.serializeBody(response, SpotifyErrorContainer.class);
             erroneous = true;
         }
         else
@@ -46,13 +43,8 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
              * when a 304 is returned with an empty body the serialized body becomes null
              * so we don't need to handled caching separately
              */
-            setCachableValuesFromHeadersIfCachable(body);
+            helper.setCachableValuesFromHeadersIfCachable(body, response);
         }
-    }
-
-    private void serializeError()
-    {
-        error = gson.fromJson(response.body(), SpotifyErrorContainer.class);
     }
 
     private void setCachableValuesFromHeadersIfCachable(T body)

@@ -1,5 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
+import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
@@ -11,20 +13,28 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     private final HttpResponseHelper helper;
     private final CompletableFuture<HttpResponse<String>> asyncContainer;
     private final Type type;
-    private CompletableFuture<T> serializedValue;
-    private Boolean isValid = null;
+    private CompletableFuture<T> serializedTypedValue;
+    private CompletableFuture<?> serializedValue;
+    private Boolean erroneous = false;
 
     public CompletableFutureAsyncResponse(CompletableFuture<HttpResponse<String>> asyncContainer, Type type)
     {
         this.helper = new HttpResponseHelper();
         this.asyncContainer = asyncContainer;
         this.type = type;
+        validateResponseAsync();
     }
 
+    // TODO: this should not be a method
     @Override
     public CompletableFutureAsyncResponse<T> thenAccept(Consumer<? super T> action)
     {
-        asyncContainer.thenAccept((response) -> serializedValue.thenAccept(action));
+        // Fix this:
+        if(!erroneous)
+        {
+            serializedTypedValue = (CompletableFuture<T>) serializedValue;
+            asyncContainer.thenAccept((response) -> serializedTypedValue.thenAccept(action));
+        }
         return this;
     }
 
@@ -33,22 +43,27 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     {
 
         asyncContainer.get();
-        return serializedValue.get();
+        return (T)serializedValue.get();
     }
 
-    @Override
-    public void validateResponseAsync()
+    private void validateResponseAsync()
     {
         serializedValue = asyncContainer.thenApply((response) -> {
             int statusCode = response.statusCode();
-
-            if(!(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode)))
+            if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
             {
-                return helper.serializeBody(response, type);
+                erroneous = true;
+                return helper.serializeBody(response, SpotifyErrorContainer.class);
             }
             else
             {
-                return null;
+                T body = helper.serializeBody(response, type);
+                /*
+                 * when a 304 is returned with an empty body the serialized body becomes null
+                 * so we don't need to handled caching separately
+                 */
+                helper.setCachableValuesFromHeadersIfCachable(body,response);
+                return body;
             }
         });
     }

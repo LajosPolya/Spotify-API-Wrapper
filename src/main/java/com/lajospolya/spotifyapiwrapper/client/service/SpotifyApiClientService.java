@@ -27,7 +27,6 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     public <T> ISpotifyAsyncResponse<?, T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyAsyncResponse<?, T> asyncResponse = httpClient.sendAsync(request, typeOfReturnValue);
-        asyncResponse.validateResponseAsync();
         return  asyncResponse;
     }
 
