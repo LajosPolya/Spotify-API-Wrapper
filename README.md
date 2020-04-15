@@ -77,8 +77,11 @@ Track track = client.sendRequest(getTrackRequest);
 String SHOW_ID = "4xdoysfv0ztl97lrj8Sg4W";
 String MARKET = "CA";
 GetShowsEpisodes getShowsRequest = new GetShowsEpisodes.Builder(SHOW_ID)
-    .market(MARKET).limit(50).offset(3).build();
-Paging<SimplifiedEpisode> episodes = client.sendRequestAsync(getShowsRequest).get();
+    .market(MARKET).build();
+client.sendRequestAsync(getShowsRequest)
+    .success((episodes) -> {
+        System.out.println(episodes);
+    });
 
 ```
 #### Reauthorizing an Expired Client
@@ -89,7 +92,7 @@ SpotifyApiClient client = SpotifyApiClient
 // one method call to reauthorize the client
 client.reauthorize();
 // or asynchronously
-client.reauthorizeAsync().get();
+client.reauthorizeAsync();
 ```
 
 #### Caching with Etags
