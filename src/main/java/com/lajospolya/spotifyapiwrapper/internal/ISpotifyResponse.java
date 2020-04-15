@@ -1,13 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
-import java.util.List;
-import java.util.Map;
+import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 
-public interface ISpotifyResponse<T>
+public interface ISpotifyResponse<ResponseType>
 {
-    String body();
+    ResponseType body();
 
-    Integer statusCode();
-
-    Map<String, List<String>> headers();
+    SpotifyErrorContainer error();
 }

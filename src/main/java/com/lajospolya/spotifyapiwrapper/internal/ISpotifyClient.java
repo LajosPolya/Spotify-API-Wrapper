@@ -1,8 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
+import java.lang.reflect.Type;
+
 public interface ISpotifyClient
 {
-    ISpotifyResponse<?> send(ISpotifyRequest<?> request);
+    <T> ISpotifyResponse<T> send(ISpotifyRequest<?> request, Type typeOfResponse);
 
-    ISpotifyAsyncResponse<?, ?> sendAsync(ISpotifyRequest<?> request);
+    <T> ISpotifyAsyncResponse<?, T> sendAsync(ISpotifyRequest<?> request, Type typeOfResponse);
 }

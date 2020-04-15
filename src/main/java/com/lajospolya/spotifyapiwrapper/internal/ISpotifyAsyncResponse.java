@@ -1,14 +1,17 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
+import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public interface ISpotifyAsyncResponse<AsyncContainer, T>
 {
-    <V> ISpotifyAsyncResponse<AsyncContainer, T> thenApply(Function<? super T, ? extends V> fn);
+    void block() throws ExecutionException, InterruptedException;
 
-    AsyncContainer thenAccept(Consumer<? super T> action);
+    ISpotifyAsyncResponse<AsyncContainer, T> success(Consumer<T> func);
 
-    T get() throws ExecutionException, InterruptedException;
+    ISpotifyAsyncResponse<AsyncContainer, T> error(Consumer<SpotifyErrorContainer> func);
+
+    boolean isDone();
 }
