@@ -154,7 +154,7 @@ public class SpotifyApiClient
     {
         try
         {
-            ISpotifyRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+            ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
             Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
@@ -168,13 +168,13 @@ public class SpotifyApiClient
     private <T> CompletableFuture<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
-        ISpotifyRequest request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+        ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
         Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
         return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
     }
 
-    private <T> ISpotifyRequest authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyRequest<?> authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
     {
         try
         {
