@@ -31,7 +31,6 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
     @Override
     public void block() throws ExecutionException, InterruptedException
     {
-        asyncContainer.get();
         serializedValue.get();
     }
 
