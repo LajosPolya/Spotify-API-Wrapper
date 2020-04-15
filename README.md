@@ -12,11 +12,6 @@ Maven
 </dependency>
 ```
 
-Gradle
-```gradle
-compile group: 'com.github.lajospolya', name: 'spotify-api-wrapper', version: '1.0.RELEASE'
-```
-
 For other Dependency Management systems please check [Maven](https://mvnrepository.com/artifact/com.github.lajospolya/spotify-api-wrapper/1.0.RELEASE)
 or [Sonatype](https://search.maven.org/artifact/com.github.lajospolya/spotify-api-wrapper/1.0.RELEASE/jar) repositories.
  
