@@ -8,12 +8,12 @@ Maven
 <dependency>
     <groupId>com.github.lajospolya</groupId>
     <artifactId>spotify-api-wrapper</artifactId>
-    <version>1.0.RELEASE</version>
+    <version>2.0.RELEASE</version>
 </dependency>
 ```
 
-For other Dependency Management systems please check [Maven](https://mvnrepository.com/artifact/com.github.lajospolya/spotify-api-wrapper/1.0.RELEASE)
-or [Sonatype](https://search.maven.org/artifact/com.github.lajospolya/spotify-api-wrapper/1.0.RELEASE/jar) repositories.
+For other Dependency Management systems please check [Maven](https://mvnrepository.com/artifact/com.github.lajospolya/spotify-api-wrapper)
+or [Sonatype](https://search.maven.org/artifact/com.github.lajospolya/spotify-api-wrapper) repositories.
  
  ## General Usage
  The API-Wrapper consists of two basic parts; the Client and the Requests.
