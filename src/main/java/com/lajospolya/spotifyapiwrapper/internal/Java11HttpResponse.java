@@ -37,7 +37,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     }
 
     @Override
-    public T body()
+    public T body() throws SpotifyResponseException
     {
         if(body == null)
         {
