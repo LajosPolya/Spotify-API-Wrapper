@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.request.internal;
+package com.lajospolya.spotifyapiwrapper.internal;
 
 import java.net.http.HttpRequest;
 
