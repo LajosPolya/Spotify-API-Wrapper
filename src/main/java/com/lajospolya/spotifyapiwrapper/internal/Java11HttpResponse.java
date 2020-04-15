@@ -1,11 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.Map;
 
 public class Java11HttpResponse<T> implements ISpotifyResponse<T>
 {
@@ -15,7 +14,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     private final Type type;
     private T body;
     private SpotifyErrorContainer error;
-    private boolean erroneous = false;
 
     public Java11HttpResponse(HttpResponse<String> response, Type typeOfResponse)
     {
@@ -31,7 +29,6 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
         {
             error = helper.serializeBody(response, SpotifyErrorContainer.class);
-            erroneous = true;
         }
         else
         {
@@ -42,6 +39,10 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     @Override
     public T body()
     {
+        if(body == null)
+        {
+            throw new SpotifyResponseException("Response was not successful");
+        }
         return body;
     }
 
@@ -50,18 +51,4 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     {
         return error;
     }
-
-    @Override
-    public Integer statusCode()
-    {
-        return response.statusCode();
-    }
-
-    @Override
-    public Map<String, List<String>> headers()
-    {
-        return response.headers().map();
-    }
-
-
 }
