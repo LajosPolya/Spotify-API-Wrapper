@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;
 
 import java.lang.reflect.Type;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
-import java.util.List;
 
 public class HttpResponseHelper
 {
@@ -30,7 +30,7 @@ public class HttpResponseHelper
          * when a 304 is returned with an empty body the serialized body becomes null
          * so we don't need to handled caching separately
          */
-        setCachableValuesFromHeadersIfCachable(body,response);
+        setCachableValuesFromHeadersIfCachable(body,response.headers());
 
         return body;
     }
@@ -49,16 +49,11 @@ public class HttpResponseHelper
         return String.class.getTypeName().equals(typeOfReturnValue.getTypeName());
     }
 
-    public <T> void setCachableValuesFromHeadersIfCachable(T body, HttpResponse<String> response)
+    private <T> void setCachableValuesFromHeadersIfCachable(T body, HttpHeaders headers)
     {
         if(body instanceof CacheableResponse)
         {
-            // Use the Optional interface here
-            List<String> etag = response.headers().map().get(ETAG_HEADER);
-            if(etag != null && !etag.isEmpty())
-            {
-                ((CacheableResponse) body).setEtag(etag.get(0));
-            }
+            headers.firstValue(ETAG_HEADER).ifPresent(((CacheableResponse) body)::setEtag);
         }
     }
 }
