@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.concurrent.CompletableFuture;
 
 public class Java11HttpClient implements ISpotifyClient
 {
@@ -33,8 +32,8 @@ public class Java11HttpClient implements ISpotifyClient
     }
 
     @Override
-    public CompletableFuture<?> sendAsync(ISpotifyRequest<?> request)
+    public ISpotifyAsyncResponse<?, ?> sendAsync(ISpotifyRequest<?> request)
     {
-        return httpClient.sendAsync((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString());
+        return new CompletableFutureAsyncResponse<>(httpClient.sendAsync((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()));
     }
 }
