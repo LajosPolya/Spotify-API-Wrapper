@@ -51,11 +51,6 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
             else
             {
                 T body = helper.serializeBody(response, type);
-                /*
-                 * when a 304 is returned with an empty body the serialized body becomes null
-                 * so we don't need to handled caching separately
-                 */
-                helper.setCachableValuesFromHeadersIfCachable(body,response);
 
                 if(successConsumer != null)
                 {

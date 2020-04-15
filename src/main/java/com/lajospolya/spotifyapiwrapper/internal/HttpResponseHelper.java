@@ -24,7 +24,19 @@ public class HttpResponseHelper
 
     public <T> T serializeBody(HttpResponse<String> response, Type type)
     {
-        String body = response.body();
+        T body = serializeResponseBody(response.body(), type);
+
+        /*
+         * when a 304 is returned with an empty body the serialized body becomes null
+         * so we don't need to handled caching separately
+         */
+        setCachableValuesFromHeadersIfCachable(body,response);
+
+        return body;
+    }
+
+    private <T> T serializeResponseBody(String body, Type type)
+    {
         if(isStringType(type))
         {
             return (T) body;
