@@ -14,6 +14,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     private final Type type;
     private T body;
     private SpotifyErrorContainer error;
+    private boolean erroneous = false;
 
     public Java11HttpResponse(HttpResponse<String> response, Type typeOfResponse)
     {
@@ -28,6 +29,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         int statusCode = response.statusCode();
         if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
         {
+            erroneous = true;
             error = helper.serializeBody(response, SpotifyErrorContainer.class);
         }
         else
@@ -39,7 +41,7 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
     @Override
     public T body() throws SpotifyResponseException
     {
-        if(body == null)
+        if(erroneous)
         {
             throw new SpotifyResponseException("Response was not successful");
         }
