@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * It contains all methods to add appropriate headers, and query params, as well as a single path param.
  * It also has method to easily build DELETE, PUT, POST, and GET requests
  */
-public class SpotifyRequestBuilder
+public class SpotifyRequestBuilder implements ISpotifyRequestBuilder
 {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String CONTENT_TYPE_HEADER = "Content-Type";
@@ -44,18 +44,21 @@ public class SpotifyRequestBuilder
         this.pathVariable = pathVariable;
     }
 
-    void queryParam(String name, Object value)
+    @Override
+    public void queryParam(String name, Object value)
     {
         uriComponentsBuilder.queryParam(name, value);
     }
 
-    void queryParam(String name, List<String> values)
+    @Override
+    public void queryParam(String name, List<String> values)
     {
         String commaSeparatedIds = String.join(",", values);
         uriComponentsBuilder.queryParam(name, commaSeparatedIds);
     }
 
-    <T extends Enum<T>> void queryParam(String name, List<T> values, Function<T, String> function)
+    @Override
+    public <T extends Enum<T>> void queryParam(String name, List<T> values, Function<T, String> function)
     {
         String commaSeparatedValues = values.stream()
                 .map(function)
@@ -63,75 +66,88 @@ public class SpotifyRequestBuilder
         uriComponentsBuilder.queryParam(name, commaSeparatedValues);
     }
 
-    void queryParam(Map<String, Object> nameValuePair)
+    @Override
+    public void queryParam(Map<String, Object> nameValuePair)
     {
         nameValuePair.forEach((name, value) -> uriComponentsBuilder.queryParam(name, value));
     }
 
-    void contentType(String value)
+    @Override
+    public void contentType(String value)
     {
         requestBuilder.header(CONTENT_TYPE_HEADER, value);
     }
 
-    void authorization(String token)
+    @Override
+    public void authorization(String token)
     {
         requestBuilder.header(AUTHORIZATION_HEADER, token);
     }
 
-    void etag(String value)
+    @Override
+    public void etag(String value)
     {
         requestBuilder.header(IF_NOT_MATCH, value);
     }
 
-    SpotifyRequestBuilder GET()
+    @Override
+    public SpotifyRequestBuilder GET()
     {
         createBuilderWithUri().GET();
         return this;
     }
 
-    SpotifyRequestBuilder POST()
+    @Override
+    public SpotifyRequestBuilder POST()
     {
         createBuilderWithUri().POST(HttpRequest.BodyPublishers.noBody());
         return this;
     }
 
-    SpotifyRequestBuilder PUT()
+    @Override
+    public SpotifyRequestBuilder PUT()
     {
         createBuilderWithUri().PUT(HttpRequest.BodyPublishers.noBody());
         return this;
     }
 
-    SpotifyRequestBuilder DELETE()
+    @Override
+    public SpotifyRequestBuilder DELETE()
     {
         createBuilderWithUri().method(DELETE, HttpRequest.BodyPublishers.noBody());
         return this;
     }
 
-    SpotifyRequestBuilder POSTWithJsonBody(Object body)
+    @Override
+    public SpotifyRequestBuilder POSTWithJsonBody(Object body)
     {
         createBuilderWithUri().POST(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
         return this;
     }
 
-    SpotifyRequestBuilder PUTWithJsonBody(Object body)
+    @Override
+    public SpotifyRequestBuilder PUTWithJsonBody(Object body)
     {
         createBuilderWithUri().PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
         return this;
     }
 
-    SpotifyRequestBuilder DELETEWithJsonBody(Object body)
+    @Override
+    public SpotifyRequestBuilder DELETEWithJsonBody(Object body)
     {
         createBuilderWithUri().method(DELETE, HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
         return this;
     }
 
-    SpotifyRequestBuilder POSTWithStringBody(String body)
+    @Override
+    public SpotifyRequestBuilder POSTWithStringBody(String body)
     {
         createBuilderWithUri().POST(HttpRequest.BodyPublishers.ofString(body));
         return this;
     }
 
-    SpotifyRequestBuilder PUTWithStringBody(String body)
+    @Override
+    public SpotifyRequestBuilder PUTWithStringBody(String body)
     {
         createBuilderWithUri().PUT(HttpRequest.BodyPublishers.ofString(body));
         return this;
@@ -151,6 +167,7 @@ public class SpotifyRequestBuilder
         return requestBuilder.uri(uriComponents.toUri());
     }
 
+    @Override
     public ISpotifyRequest<?> build()
     {
         return new Java11HttpRequest(requestBuilder.build());
