@@ -8,7 +8,7 @@ Maven
 <dependency>
     <groupId>com.github.lajospolya</groupId>
     <artifactId>spotify-api-wrapper</artifactId>
-    <version>2.0.RELEASE</version>
+    <version>2.1.RELEASE</version>
 </dependency>
 ```
 
