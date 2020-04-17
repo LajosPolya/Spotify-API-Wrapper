@@ -1,6 +1,8 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
+import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.internal.OkHttpRequest;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
 {
+    private Gson gson = new Gson();
     private HttpUrl url;
     private HttpUrl.Builder urlBuilder;
     private Request.Builder requestBuilder;
@@ -108,31 +111,39 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     @Override
     public OkHttpRequestBuilder POSTWithJsonBody(Object body)
     {
-        return null;
+        String strBody = gson.toJson(body);
+        createBuilderWithUri().post(RequestBody.create(strBody.getBytes()));
+        return this;
     }
 
     @Override
     public OkHttpRequestBuilder PUTWithJsonBody(Object body)
     {
-        return null;
+        String strBody = gson.toJson(body);
+        createBuilderWithUri().put(RequestBody.create(strBody.getBytes()));
+        return this;
     }
 
     @Override
     public OkHttpRequestBuilder DELETEWithJsonBody(Object body)
     {
-        return null;
+        String strBody = gson.toJson(body);
+        createBuilderWithUri().delete(RequestBody.create(strBody.getBytes()));
+        return this;
     }
 
     @Override
     public OkHttpRequestBuilder POSTWithStringBody(String body)
     {
-        return null;
+        createBuilderWithUri().post(RequestBody.create(body.getBytes()));
+        return this;
     }
 
     @Override
     public OkHttpRequestBuilder PUTWithStringBody(String body)
     {
-        return null;
+        createBuilderWithUri().put(RequestBody.create(body.getBytes()));
+        return this;
     }
 
     private Request.Builder createBuilderWithUri()
@@ -144,6 +155,6 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     @Override
     public ISpotifyRequest<?> build()
     {
-        return null;
+        return new OkHttpRequest(requestBuilder.build());
     }
 }
