@@ -30,7 +30,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
         @Override
         public GetPlaylist build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             addEtagHeader(spotifyRequestBuilder);
             return new GetPlaylist(spotifyRequestBuilder.GET());
         }

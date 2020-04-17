@@ -30,7 +30,7 @@ public class GetMePlayer extends AbstractSpotifyRequest<CurrentlyPlayingContext>
         @Override
         public GetMePlayer build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
             return new GetMePlayer(spotifyRequestBuilder.GET());

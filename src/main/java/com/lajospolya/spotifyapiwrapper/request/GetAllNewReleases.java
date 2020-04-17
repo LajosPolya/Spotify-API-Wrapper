@@ -28,7 +28,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
         @Override
         public GetAllNewReleases build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAllNewReleases(spotifyRequestBuilder.GET());

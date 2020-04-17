@@ -20,13 +20,13 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     private Request.Builder requestBuilder;
     private String pathVariable = null;
 
-    OkHttpRequestBuilder(String uri)
+    public OkHttpRequestBuilder(String uri)
     {
         urlBuilder = HttpUrl.parse(uri).newBuilder();
         requestBuilder = new Request.Builder();
     }
 
-    OkHttpRequestBuilder(String uri, String pathVariable)
+    public OkHttpRequestBuilder(String uri, String pathVariable)
     {
         uri = uri.replace("{id}", pathVariable);
         urlBuilder = HttpUrl.parse(uri).newBuilder();

@@ -28,7 +28,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
         @Override
         public DeleteFollowPlaylist build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
 
             return new DeleteFollowPlaylist(spotifyRequestBuilder.DELETE());
         }

@@ -34,7 +34,7 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistsId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistsId);
 
             return createRequest(spotifyRequestBuilder);
         }

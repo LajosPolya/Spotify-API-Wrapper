@@ -45,7 +45,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
         @Override
         public GetRecommendations build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(SEED_ARTISTS_QUERY_PARAM, seed_artists);
             spotifyRequestBuilder.queryParam(SEED_TRACKS_QUERY_PARAM, seed_tracks);
             spotifyRequestBuilder.queryParam(SEED_GENRES_QUERY_PARAM, seed_genres);

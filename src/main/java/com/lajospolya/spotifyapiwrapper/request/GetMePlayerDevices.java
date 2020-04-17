@@ -25,7 +25,7 @@ public class GetMePlayerDevices extends AbstractSpotifyRequest<Devices>
         @Override
         public GetMePlayerDevices build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             return new GetMePlayerDevices(spotifyRequestBuilder.GET());
         }
     }

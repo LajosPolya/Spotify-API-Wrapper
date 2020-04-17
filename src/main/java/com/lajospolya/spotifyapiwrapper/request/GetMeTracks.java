@@ -29,7 +29,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
         @Override
         public GetMeTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
             return new GetMeTracks(spotifyRequestBuilder.GET());

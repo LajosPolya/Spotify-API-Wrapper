@@ -36,7 +36,7 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
         @Override
         public DeleteFollow build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 

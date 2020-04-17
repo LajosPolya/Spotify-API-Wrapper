@@ -32,7 +32,7 @@ public class GetArtists extends AbstractSpotifyRequest<Artists>
         @Override
         public GetArtists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, artistIds);
 
             return new GetArtists(spotifyRequestBuilder.GET());

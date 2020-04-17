@@ -25,7 +25,7 @@ public class GetMe extends AbstractSpotifyRequest<UserPrivate>
         @Override
         public GetMe build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
 
             return new GetMe(spotifyRequestBuilder.GET());
         }

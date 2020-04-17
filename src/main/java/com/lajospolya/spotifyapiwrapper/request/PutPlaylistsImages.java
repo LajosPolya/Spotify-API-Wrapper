@@ -31,7 +31,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylistsImages build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             spotifyRequestBuilder.contentType(IMAGE_JPEG_HEADER_VALUE);
 
             return new PutPlaylistsImages(spotifyRequestBuilder.PUTWithStringBody(base64image));

@@ -34,7 +34,7 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
         @Override
         public GetAlbumsTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, albumId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, albumId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAlbumsTracks(spotifyRequestBuilder.GET());

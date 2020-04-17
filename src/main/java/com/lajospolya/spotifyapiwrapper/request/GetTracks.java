@@ -33,7 +33,7 @@ public class GetTracks extends AbstractSpotifyRequest<Tracks>
         @Override
         public GetTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, trackIds);
             addOptionalQueryParams(spotifyRequestBuilder);
 

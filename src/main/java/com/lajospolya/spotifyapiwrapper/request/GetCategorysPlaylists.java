@@ -32,7 +32,7 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
         @Override
         public GetCategorysPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, categoryId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, categoryId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetCategorysPlaylists(spotifyRequestBuilder.GET());

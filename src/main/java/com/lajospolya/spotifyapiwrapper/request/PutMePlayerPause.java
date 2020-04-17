@@ -24,7 +24,7 @@ public class PutMePlayerPause extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerPause build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PutMePlayerPause(spotifyRequestBuilder.PUT());

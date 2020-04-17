@@ -29,7 +29,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerShuffle build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(STATE_QUERY_PARAM, state);
 
             addOptionalQueryParams(spotifyRequestBuilder);

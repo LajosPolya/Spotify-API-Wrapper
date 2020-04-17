@@ -22,7 +22,7 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 
         ISpotifyRequestBuilder build(UsersTopType type)
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return spotifyRequestBuilder.GET();

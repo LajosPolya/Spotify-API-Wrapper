@@ -29,7 +29,7 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
         @Override
         public GetAllCategories build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAllCategories(spotifyRequestBuilder.GET());

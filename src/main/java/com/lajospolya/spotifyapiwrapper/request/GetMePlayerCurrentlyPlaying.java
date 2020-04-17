@@ -30,7 +30,7 @@ public class GetMePlayerCurrentlyPlaying extends AbstractSpotifyRequest<Currentl
         @Override
         public GetMePlayerCurrentlyPlaying build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
             return new GetMePlayerCurrentlyPlaying(spotifyRequestBuilder.GET());
