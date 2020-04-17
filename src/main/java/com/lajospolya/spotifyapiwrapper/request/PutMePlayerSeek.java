@@ -1,5 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
+import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
+
 /**
  * @author Lajos Polya
  *

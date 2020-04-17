@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.FollowType;
+import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
 import com.lajospolya.spotifyapiwrapper.response.Following;
 
 /**

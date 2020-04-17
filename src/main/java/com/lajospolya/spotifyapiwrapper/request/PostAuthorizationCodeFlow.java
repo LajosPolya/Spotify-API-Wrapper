@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.AuthorizationCode;
+import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 
 /**

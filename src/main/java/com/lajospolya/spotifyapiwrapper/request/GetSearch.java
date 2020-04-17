@@ -2,6 +2,7 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.ExternalContent;
 import com.lajospolya.spotifyapiwrapper.enumeration.SearchItemType;
+import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
 import com.lajospolya.spotifyapiwrapper.response.SearchResults;
 
 import java.util.List;

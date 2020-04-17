@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.PlaylistTrackAdd;
+import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
 import com.lajospolya.spotifyapiwrapper.response.PlaylistSnapshot;
 
 import java.util.List;
