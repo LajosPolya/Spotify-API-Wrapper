@@ -8,6 +8,10 @@ import java.util.function.Function;
 
 public interface ISpotifyRequestBuilder
 {
+    String AUTHORIZATION_HEADER = "Authorization";
+    String CONTENT_TYPE_HEADER = "Content-Type";
+    String IF_NOT_MATCH = "If-None-Match";
+    String DELETE = "DELETE";
 
     void queryParam(String name, Object value);
 
@@ -23,23 +27,23 @@ public interface ISpotifyRequestBuilder
 
     void etag(String value);
 
-    SpotifyRequestBuilder GET();
+    ISpotifyRequestBuilder GET();
 
-    SpotifyRequestBuilder POST();
+    ISpotifyRequestBuilder POST();
 
-    SpotifyRequestBuilder PUT();
+    ISpotifyRequestBuilder PUT();
 
-    SpotifyRequestBuilder DELETE();
+    ISpotifyRequestBuilder DELETE();
 
-    SpotifyRequestBuilder POSTWithJsonBody(Object body);
+    ISpotifyRequestBuilder POSTWithJsonBody(Object body);
 
-    SpotifyRequestBuilder PUTWithJsonBody(Object body);
+    ISpotifyRequestBuilder PUTWithJsonBody(Object body);
 
-    SpotifyRequestBuilder DELETEWithJsonBody(Object body);
+    ISpotifyRequestBuilder DELETEWithJsonBody(Object body);
 
-    SpotifyRequestBuilder POSTWithStringBody(String body);
+    ISpotifyRequestBuilder POSTWithStringBody(String body);
 
-    SpotifyRequestBuilder PUTWithStringBody(String body);
+    ISpotifyRequestBuilder PUTWithStringBody(String body);
 
     ISpotifyRequest<?> build();
 }
