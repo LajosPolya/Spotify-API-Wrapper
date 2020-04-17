@@ -21,11 +21,6 @@ import java.util.stream.Collectors;
  */
 public class SpotifyRequestBuilder implements ISpotifyRequestBuilder
 {
-    private static final String AUTHORIZATION_HEADER = "Authorization";
-    private static final String CONTENT_TYPE_HEADER = "Content-Type";
-    private static final String IF_NOT_MATCH = "If-None-Match";
-    private static final String DELETE = "DELETE";
-
     private static final Gson gson = new Gson();
     private UriComponentsBuilder uriComponentsBuilder;
     private HttpRequest.Builder requestBuilder;
