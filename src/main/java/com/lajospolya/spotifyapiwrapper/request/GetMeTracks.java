@@ -13,7 +13,7 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/tracks";
 
-    private GetMeTracks(SpotifyRequestBuilder requestBuilder)
+    private GetMeTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -29,13 +29,13 @@ public class GetMeTracks extends AbstractSpotifyRequest<Paging<SavedTrack>>
         @Override
         public GetMeTracks build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
             return new GetMeTracks(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

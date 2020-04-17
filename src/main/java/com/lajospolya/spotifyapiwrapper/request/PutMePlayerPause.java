@@ -10,7 +10,7 @@ public class PutMePlayerPause extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/pause";
 
-    private PutMePlayerPause(SpotifyRequestBuilder requestBuilder)
+    private PutMePlayerPause(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -24,13 +24,13 @@ public class PutMePlayerPause extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerPause build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PutMePlayerPause(spotifyRequestBuilder.PUT());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

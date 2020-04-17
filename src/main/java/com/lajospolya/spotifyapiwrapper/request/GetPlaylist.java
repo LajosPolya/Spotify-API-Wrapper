@@ -12,7 +12,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}";
 
-    private GetPlaylist(SpotifyRequestBuilder requestBuilder)
+    private GetPlaylist(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -30,7 +30,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
         @Override
         public GetPlaylist build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             addEtagHeader(spotifyRequestBuilder);
             return new GetPlaylist(spotifyRequestBuilder.GET());
         }

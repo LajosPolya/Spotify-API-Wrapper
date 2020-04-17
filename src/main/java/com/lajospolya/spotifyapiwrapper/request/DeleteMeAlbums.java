@@ -14,7 +14,7 @@ public class DeleteMeAlbums extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/albums";
 
-    private DeleteMeAlbums(SpotifyRequestBuilder requestBuilder)
+    private DeleteMeAlbums(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -33,7 +33,7 @@ public class DeleteMeAlbums extends AbstractSpotifyRequest<Void>
         @Override
         public DeleteMeAlbums build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new DeleteMeAlbums(

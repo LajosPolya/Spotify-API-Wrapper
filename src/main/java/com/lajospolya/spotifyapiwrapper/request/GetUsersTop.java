@@ -7,7 +7,7 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/top/{type}";
 
-    GetUsersTop(SpotifyRequestBuilder requestBuilder)
+    GetUsersTop(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -20,15 +20,15 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 
         Builder() { }
 
-        SpotifyRequestBuilder build(UsersTopType type)
+        ISpotifyRequestBuilder build(UsersTopType type)
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return spotifyRequestBuilder.GET();
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(limit != null)
             {

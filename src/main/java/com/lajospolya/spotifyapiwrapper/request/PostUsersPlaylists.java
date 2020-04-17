@@ -13,7 +13,7 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "users/{user_id}/playlists";
 
-    private PostUsersPlaylists(SpotifyRequestBuilder requestBuilder)
+    private PostUsersPlaylists(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -36,7 +36,7 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
         @Override
         public PostUsersPlaylists build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostUsersPlaylists(

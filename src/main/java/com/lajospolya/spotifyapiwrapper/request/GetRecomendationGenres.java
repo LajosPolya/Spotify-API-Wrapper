@@ -12,7 +12,7 @@ public class GetRecomendationGenres extends AbstractSpotifyRequest<Recommendatio
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "recommendations/available-genre-seeds";
 
-    private GetRecomendationGenres(SpotifyRequestBuilder requestBuilder)
+    private GetRecomendationGenres(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -24,7 +24,7 @@ public class GetRecomendationGenres extends AbstractSpotifyRequest<Recommendatio
         @Override
         public GetRecomendationGenres build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
             return new GetRecomendationGenres(spotifyRequestBuilder.GET());
         }

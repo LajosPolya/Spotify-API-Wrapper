@@ -12,7 +12,7 @@ public class GetCategory extends AbstractSpotifyRequest<Category>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/categories/{category_id}";
 
-    public GetCategory(SpotifyRequestBuilder requestBuilder)
+    public GetCategory(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -32,13 +32,13 @@ public class GetCategory extends AbstractSpotifyRequest<Category>
         @Override
         public GetCategory build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, categoryId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, categoryId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetCategory(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(country != null)
             {

@@ -10,7 +10,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/seek";
 
-    private PutMePlayerSeek(SpotifyRequestBuilder requestBuilder)
+    private PutMePlayerSeek(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -29,7 +29,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerSeek build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(POSITION_MS_QUERY_PARAM, positionMs);
 
             addOptionalQueryParams(spotifyRequestBuilder);
@@ -37,7 +37,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
             return new PutMePlayerSeek(spotifyRequestBuilder.PUT());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

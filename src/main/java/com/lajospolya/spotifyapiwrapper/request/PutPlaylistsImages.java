@@ -10,7 +10,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/images";
 
-    private PutPlaylistsImages(SpotifyRequestBuilder requestBuilder)
+    private PutPlaylistsImages(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,7 +31,7 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylistsImages build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             spotifyRequestBuilder.contentType(IMAGE_JPEG_HEADER_VALUE);
 
             return new PutPlaylistsImages(spotifyRequestBuilder.PUTWithStringBody(base64image));

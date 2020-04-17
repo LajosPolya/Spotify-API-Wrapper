@@ -12,7 +12,7 @@ public class GetAudioAnalysis extends AbstractSpotifyRequest<AudioAnalysis>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-analysis/{id}";
 
-    private GetAudioAnalysis(SpotifyRequestBuilder requestBuilder)
+    private GetAudioAnalysis(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -30,7 +30,7 @@ public class GetAudioAnalysis extends AbstractSpotifyRequest<AudioAnalysis>
         @Override
         public GetAudioAnalysis build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
 
             return new GetAudioAnalysis(spotifyRequestBuilder.GET());
         }

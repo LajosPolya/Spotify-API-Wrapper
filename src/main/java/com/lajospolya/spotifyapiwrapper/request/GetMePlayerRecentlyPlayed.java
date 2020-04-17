@@ -13,7 +13,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/recently-played";
 
-    private GetMePlayerRecentlyPlayed(SpotifyRequestBuilder requestBuilder)
+    private GetMePlayerRecentlyPlayed(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -29,13 +29,13 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
         @Override
         public GetMePlayerRecentlyPlayed build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetMePlayerRecentlyPlayed(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(limit != null)
             {

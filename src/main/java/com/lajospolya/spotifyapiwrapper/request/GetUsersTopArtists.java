@@ -14,7 +14,7 @@ import com.lajospolya.spotifyapiwrapper.response.Paging;
 public class GetUsersTopArtists extends GetUsersTop<Paging<Artist>>
 {
 
-    private GetUsersTopArtists(SpotifyRequestBuilder requestBuilder)
+    private GetUsersTopArtists(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

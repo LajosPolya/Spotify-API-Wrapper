@@ -13,7 +13,7 @@ public class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Authorizin
 {
     private static final String REQUEST_URI_STRING = "https://accounts.spotify.com/api/token";
 
-    private PostAuthorizationCodeFlow(SpotifyRequestBuilder requestBuilder)
+    private PostAuthorizationCodeFlow(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -33,7 +33,7 @@ public class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Authorizin
         @Override
         public PostAuthorizationCodeFlow build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostAuthorizationCodeFlow(

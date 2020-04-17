@@ -13,7 +13,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following";
 
-    private GetMeFollowing(SpotifyRequestBuilder requestBuilder)
+    private GetMeFollowing(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -33,14 +33,14 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
         @Override
         public GetMeFollowing build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
             return new GetMeFollowing(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(limit != null)
             {

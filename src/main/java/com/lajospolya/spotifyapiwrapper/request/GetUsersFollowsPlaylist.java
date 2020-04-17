@@ -12,7 +12,7 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers/contains";
 
-    private GetUsersFollowsPlaylist(SpotifyRequestBuilder requestBuilder)
+    private GetUsersFollowsPlaylist(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -33,7 +33,7 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
         @Override
         public GetUsersFollowsPlaylist build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playListId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playListId);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, userIds);
 
             return new GetUsersFollowsPlaylist(spotifyRequestBuilder.GET());

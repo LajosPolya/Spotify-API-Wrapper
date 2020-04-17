@@ -13,7 +13,7 @@ public class GetMeAlbums extends AbstractSpotifyRequest<Paging<SavedAlbum>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/albums";
 
-    private GetMeAlbums(SpotifyRequestBuilder requestBuilder)
+    private GetMeAlbums(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -29,13 +29,13 @@ public class GetMeAlbums extends AbstractSpotifyRequest<Paging<SavedAlbum>>
         @Override
         public GetMeAlbums build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
             return new GetMeAlbums(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

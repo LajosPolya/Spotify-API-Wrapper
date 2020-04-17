@@ -16,7 +16,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "search";
 
-    private GetSearch(SpotifyRequestBuilder requestBuilder)
+    private GetSearch(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -40,7 +40,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         @Override
         public GetSearch build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(QUERY, query);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, searchItemTypes, SearchItemType::getType);
             addOptionalQueryParams(spotifyRequestBuilder);
@@ -48,7 +48,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
             return new GetSearch(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

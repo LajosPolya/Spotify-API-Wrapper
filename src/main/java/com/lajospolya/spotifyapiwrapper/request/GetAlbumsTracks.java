@@ -13,7 +13,7 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums/{id}/tracks";
 
-    private GetAlbumsTracks(SpotifyRequestBuilder requestBuilder)
+    private GetAlbumsTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -34,13 +34,13 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
         @Override
         public GetAlbumsTracks build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, albumId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, albumId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAlbumsTracks(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

@@ -10,7 +10,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/shuffle";
 
-    private PutMePlayerShuffle(SpotifyRequestBuilder requestBuilder)
+    private PutMePlayerShuffle(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -29,7 +29,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerShuffle build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(STATE_QUERY_PARAM, state);
 
             addOptionalQueryParams(spotifyRequestBuilder);
@@ -37,7 +37,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
             return new PutMePlayerShuffle(spotifyRequestBuilder.PUT());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

@@ -12,7 +12,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/new-releases";
 
-    private GetAllNewReleases(SpotifyRequestBuilder requestBuilder)
+    private GetAllNewReleases(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -28,13 +28,13 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
         @Override
         public GetAllNewReleases build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAllNewReleases(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(country != null)
             {

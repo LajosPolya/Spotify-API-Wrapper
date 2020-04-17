@@ -17,7 +17,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "recommendations";
 
-    private GetRecommendations(SpotifyRequestBuilder requestBuilder)
+    private GetRecommendations(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -45,7 +45,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
         @Override
         public GetRecommendations build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(SEED_ARTISTS_QUERY_PARAM, seed_artists);
             spotifyRequestBuilder.queryParam(SEED_TRACKS_QUERY_PARAM, seed_tracks);
             spotifyRequestBuilder.queryParam(SEED_GENRES_QUERY_PARAM, seed_genres);
@@ -54,7 +54,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
             return new GetRecommendations(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

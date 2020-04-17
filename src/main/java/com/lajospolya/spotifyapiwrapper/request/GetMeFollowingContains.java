@@ -14,7 +14,7 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following/contains";
 
-    private GetMeFollowingContains(SpotifyRequestBuilder requestBuilder)
+    private GetMeFollowingContains(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -35,7 +35,7 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
         @Override
         public GetMeFollowingContains build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, ids);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
 

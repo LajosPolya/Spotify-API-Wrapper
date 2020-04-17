@@ -10,7 +10,7 @@ public class PostMePlayerPrevious extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/previous";
 
-    private PostMePlayerPrevious(SpotifyRequestBuilder requestBuilder)
+    private PostMePlayerPrevious(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -24,13 +24,13 @@ public class PostMePlayerPrevious extends AbstractSpotifyRequest<Void>
         @Override
         public PostMePlayerPrevious build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PostMePlayerPrevious(spotifyRequestBuilder.POST());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

@@ -12,7 +12,7 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/featured-playlists";
 
-    private GetFeaturedPlaylists(SpotifyRequestBuilder requestBuilder)
+    private GetFeaturedPlaylists(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -30,13 +30,13 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
         @Override
         public GetFeaturedPlaylists build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetFeaturedPlaylists(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(country != null)
             {

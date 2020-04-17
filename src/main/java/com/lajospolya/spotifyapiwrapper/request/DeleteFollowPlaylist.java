@@ -10,7 +10,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers";
 
-    private DeleteFollowPlaylist(SpotifyRequestBuilder requestBuilder)
+    private DeleteFollowPlaylist(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -28,7 +28,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
         @Override
         public DeleteFollowPlaylist build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
 
             return new DeleteFollowPlaylist(spotifyRequestBuilder.DELETE());
         }

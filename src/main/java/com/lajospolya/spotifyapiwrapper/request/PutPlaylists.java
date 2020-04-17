@@ -12,7 +12,7 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}";
 
-    private PutPlaylists(SpotifyRequestBuilder requestBuilder)
+    private PutPlaylists(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -34,12 +34,12 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylists build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistsId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistsId);
 
             return createRequest(spotifyRequestBuilder);
         }
 
-        private PutPlaylists createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
+        private PutPlaylists createRequest(ISpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(name != null || this.isPublic != null || collaborative != null || description != null)
             {

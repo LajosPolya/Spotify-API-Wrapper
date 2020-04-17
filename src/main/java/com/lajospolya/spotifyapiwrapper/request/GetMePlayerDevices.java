@@ -12,7 +12,7 @@ public class GetMePlayerDevices extends AbstractSpotifyRequest<Devices>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/devices";
 
-    private GetMePlayerDevices(SpotifyRequestBuilder requestBuilder)
+    private GetMePlayerDevices(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -25,7 +25,7 @@ public class GetMePlayerDevices extends AbstractSpotifyRequest<Devices>
         @Override
         public GetMePlayerDevices build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             return new GetMePlayerDevices(spotifyRequestBuilder.GET());
         }
     }

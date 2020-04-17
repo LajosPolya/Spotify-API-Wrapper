@@ -14,7 +14,7 @@ public class GetSeveralAudioFeatures extends AbstractSpotifyRequest<TracksAudioF
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-features";
 
-    private GetSeveralAudioFeatures(SpotifyRequestBuilder requestBuilder)
+    private GetSeveralAudioFeatures(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -32,7 +32,7 @@ public class GetSeveralAudioFeatures extends AbstractSpotifyRequest<TracksAudioF
         @Override
         public GetSeveralAudioFeatures build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, trackIds);
 
             return new GetSeveralAudioFeatures(spotifyRequestBuilder.GET());

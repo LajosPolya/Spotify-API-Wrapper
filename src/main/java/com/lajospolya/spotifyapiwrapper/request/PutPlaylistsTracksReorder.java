@@ -13,7 +13,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private PutPlaylistsTracksReorder(SpotifyRequestBuilder requestBuilder)
+    private PutPlaylistsTracksReorder(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -37,7 +37,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
         @Override
         public PutPlaylistsTracksReorder build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutPlaylistsTracksReorder(

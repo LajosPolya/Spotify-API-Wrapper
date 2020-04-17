@@ -10,7 +10,7 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/volume";
 
-    private PutMePlayerVolume(SpotifyRequestBuilder requestBuilder)
+    private PutMePlayerVolume(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -30,14 +30,14 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerVolume build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PutMePlayerVolume(spotifyRequestBuilder.PUT());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

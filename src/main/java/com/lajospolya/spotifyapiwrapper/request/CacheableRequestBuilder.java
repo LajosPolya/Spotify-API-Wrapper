@@ -6,7 +6,7 @@ public abstract class CacheableRequestBuilder<T> extends AbstractBuilder<T>
 
     public abstract CacheableRequestBuilder<T> etag(String etag);
 
-    void addEtagHeader(SpotifyRequestBuilder requestBuilder)
+    void addEtagHeader(ISpotifyRequestBuilder requestBuilder)
     {
         if(etag != null)
         {

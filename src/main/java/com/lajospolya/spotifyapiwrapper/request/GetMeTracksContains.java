@@ -12,7 +12,7 @@ public class GetMeTracksContains extends AbstractSpotifyRequest<List<Boolean>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/tracks/contains";
 
-    private GetMeTracksContains(SpotifyRequestBuilder requestBuilder)
+    private GetMeTracksContains(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,7 +31,7 @@ public class GetMeTracksContains extends AbstractSpotifyRequest<List<Boolean>>
         @Override
         public GetMeTracksContains build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM,  trackIds);
 
             return new GetMeTracksContains(spotifyRequestBuilder.GET());

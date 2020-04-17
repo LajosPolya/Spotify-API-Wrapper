@@ -13,7 +13,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "users/{user_id}/playlists";
 
-    private GetUsersPlaylists(SpotifyRequestBuilder requestBuilder)
+    private GetUsersPlaylists(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -33,14 +33,14 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
         @Override
         public GetUsersPlaylists build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, userId);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
 
             return new GetUsersPlaylists(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(limit != null)
             {

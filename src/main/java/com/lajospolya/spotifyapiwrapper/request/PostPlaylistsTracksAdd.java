@@ -15,7 +15,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private PostPlaylistsTracksAdd(SpotifyRequestBuilder requestBuilder)
+    private PostPlaylistsTracksAdd(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -35,7 +35,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
         @Override
         public PostPlaylistsTracksAdd build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostPlaylistsTracksAdd(

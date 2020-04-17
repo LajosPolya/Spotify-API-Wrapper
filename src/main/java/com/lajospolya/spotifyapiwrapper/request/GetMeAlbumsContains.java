@@ -12,7 +12,7 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/albums/contains";
 
-    private GetMeAlbumsContains(SpotifyRequestBuilder requestBuilder)
+    private GetMeAlbumsContains(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,7 +31,7 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
         @Override
         public GetMeAlbumsContains build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, albumIds);
 
             return new GetMeAlbumsContains(spotifyRequestBuilder.GET());

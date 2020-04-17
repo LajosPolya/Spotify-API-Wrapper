@@ -12,7 +12,7 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/repeat";
 
-    private PutMePlayerRepeat(SpotifyRequestBuilder requestBuilder)
+    private PutMePlayerRepeat(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,14 +31,14 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerRepeat build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(STATE_QUERY_PARAM, state.getState());
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PutMePlayerRepeat(spotifyRequestBuilder.PUT());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

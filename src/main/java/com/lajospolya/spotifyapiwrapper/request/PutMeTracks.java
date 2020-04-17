@@ -14,7 +14,7 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/tracks";
 
-    private PutMeTracks(SpotifyRequestBuilder requestBuilder)
+    private PutMeTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -33,7 +33,7 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
         @Override
         public PutMeTracks build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutMeTracks(

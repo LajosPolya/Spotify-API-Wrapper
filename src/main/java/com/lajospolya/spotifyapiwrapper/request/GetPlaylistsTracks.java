@@ -13,7 +13,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private GetPlaylistsTracks(SpotifyRequestBuilder requestBuilder)
+    private GetPlaylistsTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -35,14 +35,14 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
         @Override
         public GetPlaylistsTracks build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, this.playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, this.playlistId);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
 
             return new GetPlaylistsTracks(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

@@ -14,7 +14,7 @@ public class GetShows extends AbstractSpotifyRequest<Shows>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "shows";
 
-    private GetShows(SpotifyRequestBuilder requestBuilder)
+    private GetShows(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -35,14 +35,14 @@ public class GetShows extends AbstractSpotifyRequest<Shows>
         @Override
         public GetShows build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, showIds);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetShows(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

@@ -14,7 +14,7 @@ import com.lajospolya.spotifyapiwrapper.response.Track;
 public class GetUsersTopTracks extends GetUsersTop<Paging<Track>>
 {
 
-    private GetUsersTopTracks(SpotifyRequestBuilder requestBuilder)
+    private GetUsersTopTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }

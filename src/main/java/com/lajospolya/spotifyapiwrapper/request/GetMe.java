@@ -12,7 +12,7 @@ public class GetMe extends AbstractSpotifyRequest<UserPrivate>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me";
 
-    private GetMe(SpotifyRequestBuilder requestBuilder)
+    private GetMe(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -25,7 +25,7 @@ public class GetMe extends AbstractSpotifyRequest<UserPrivate>
         @Override
         public GetMe build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
 
             return new GetMe(spotifyRequestBuilder.GET());
         }

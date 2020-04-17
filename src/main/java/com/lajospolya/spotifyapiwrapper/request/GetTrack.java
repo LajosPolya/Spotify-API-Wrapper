@@ -12,7 +12,7 @@ public class GetTrack extends AbstractSpotifyRequest<Track>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "tracks/{id}";
 
-    private GetTrack(SpotifyRequestBuilder requestBuilder)
+    private GetTrack(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,13 +31,13 @@ public class GetTrack extends AbstractSpotifyRequest<Track>
         @Override
         public GetTrack build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, trackId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetTrack(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

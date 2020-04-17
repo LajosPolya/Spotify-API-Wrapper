@@ -15,7 +15,7 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
-    private DeletePlaylistsTracks(SpotifyRequestBuilder requestBuilder)
+    private DeletePlaylistsTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -37,7 +37,7 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
         @Override
         public DeletePlaylistsTracks build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new DeletePlaylistsTracks(

@@ -10,7 +10,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/player/queue";
 
-    private PostMePlayerQueue(SpotifyRequestBuilder requestBuilder)
+    private PostMePlayerQueue(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -29,14 +29,14 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
         @Override
         public PostMePlayerQueue build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(URI_QUERY_PARAM, uri);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PostMePlayerQueue(spotifyRequestBuilder.POST());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(deviceId != null)
             {

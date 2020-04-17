@@ -13,7 +13,7 @@ public class PostRefreshToken extends AbstractSpotifyRequest<AuthorizingToken>
 {
     private static final String REQUEST_URI_STRING = "https://accounts.spotify.com/api/token";
 
-    private PostRefreshToken(SpotifyRequestBuilder requestBuilder)
+    private PostRefreshToken(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,7 +31,7 @@ public class PostRefreshToken extends AbstractSpotifyRequest<AuthorizingToken>
         @Override
         public PostRefreshToken build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostRefreshToken(

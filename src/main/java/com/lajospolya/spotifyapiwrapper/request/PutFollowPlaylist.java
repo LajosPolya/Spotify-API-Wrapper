@@ -12,7 +12,7 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/followers";
 
-    private PutFollowPlaylist(SpotifyRequestBuilder requestBuilder)
+    private PutFollowPlaylist(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -31,12 +31,12 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
         @Override
         public PutFollowPlaylist build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
 
             return new PutFollowPlaylist(createRequest(spotifyRequestBuilder));
         }
 
-        private SpotifyRequestBuilder createRequest(SpotifyRequestBuilder spotifyRequestBuilder)
+        private ISpotifyRequestBuilder createRequest(ISpotifyRequestBuilder spotifyRequestBuilder)
         {
             if(isPublic != null)
             {

@@ -15,7 +15,7 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/following";
 
-    private DeleteFollow(SpotifyRequestBuilder requestBuilder)
+    private DeleteFollow(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -36,7 +36,7 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
         @Override
         public DeleteFollow build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING);
             spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 

@@ -15,7 +15,7 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/albums";
 
-    private GetArtistsAlbums(SpotifyRequestBuilder requestBuilder)
+    private GetArtistsAlbums(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -37,13 +37,13 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
         @Override
         public GetArtistsAlbums build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetArtistsAlbums(spotifyRequestBuilder.GET());
         }
 
-        private void addOptionalQueryParams(SpotifyRequestBuilder requestUriBuilder)
+        private void addOptionalQueryParams(ISpotifyRequestBuilder requestUriBuilder)
         {
             if(market != null)
             {

@@ -12,7 +12,7 @@ public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/top-tracks";
 
-    private GetArtistsTopTracks(SpotifyRequestBuilder requestBuilder)
+    private GetArtistsTopTracks(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -32,7 +32,7 @@ public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks
         @Override
         public GetArtistsTopTracks build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
             spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
             return new GetArtistsTopTracks(spotifyRequestBuilder.GET());

@@ -13,10 +13,10 @@ public abstract class AbstractSpotifyRequest<T>
 {
     static final String SPOTIFY_V1_API_URI = "https://api.spotify.com/v1/";
 
-    private SpotifyRequestBuilder requestBuilder;
+    private ISpotifyRequestBuilder requestBuilder;
     private String accessToken;
 
-    AbstractSpotifyRequest(SpotifyRequestBuilder requestBuilder)
+    AbstractSpotifyRequest(ISpotifyRequestBuilder requestBuilder)
     {
         this.requestBuilder = requestBuilder;
     }

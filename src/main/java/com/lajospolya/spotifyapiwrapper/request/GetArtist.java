@@ -12,7 +12,7 @@ public class GetArtist extends AbstractSpotifyRequest<Artist>
 {
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}";
 
-    private GetArtist(SpotifyRequestBuilder requestBuilder)
+    private GetArtist(ISpotifyRequestBuilder requestBuilder)
     {
         super(requestBuilder);
     }
@@ -30,7 +30,7 @@ public class GetArtist extends AbstractSpotifyRequest<Artist>
         @Override
         public GetArtist build()
         {
-            SpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = new SpotifyRequestBuilder(REQUEST_URI_STRING, artistId);
 
             return new GetArtist(spotifyRequestBuilder.GET());
         }
