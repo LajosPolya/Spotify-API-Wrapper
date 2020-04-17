@@ -154,7 +154,7 @@ public class SpotifyApiClient
     {
         try
         {
-            ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+            ISpotifyRequest<T> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
             Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
@@ -168,19 +168,19 @@ public class SpotifyApiClient
     private <T> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
-        ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+        ISpotifyRequest<T> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
         Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
         return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
     }
 
-    private <T> ISpotifyRequest<?> authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyRequest<T> authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
     {
         try
         {
             reflectiveSpotifyClientService.setAccessTokenOfRequest(spotifyRequest, accessToken);
 
-            return reflectiveSpotifyClientService.buildRequest(spotifyRequest);
+            return (ISpotifyRequest<T>) reflectiveSpotifyClientService.buildRequest(spotifyRequest);
         }
         catch (InvocationTargetException | IllegalAccessException e)
         {

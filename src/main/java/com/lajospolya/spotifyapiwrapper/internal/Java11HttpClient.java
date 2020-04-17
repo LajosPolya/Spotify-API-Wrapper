@@ -19,7 +19,7 @@ public class Java11HttpClient implements ISpotifyClient
     }
 
     @Override
-    public <T> ISpotifyResponse<T> send(ISpotifyRequest<?> request, Type typeOfResponse)
+    public <T> ISpotifyResponse<T> send(ISpotifyRequest<T> request, Type typeOfResponse)
     {
         try
         {
@@ -33,7 +33,7 @@ public class Java11HttpClient implements ISpotifyClient
     }
 
     @Override
-    public <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<?> request, Type typeOfResponse)
+    public <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<T> request, Type typeOfResponse)
     {
         return new CompletableFutureAsyncResponse<>(
                 httpClient.sendAsync((HttpRequest) request.get(), HttpResponse.BodyHandlers.ofString()), typeOfResponse);
