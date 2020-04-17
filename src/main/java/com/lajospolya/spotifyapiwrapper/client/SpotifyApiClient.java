@@ -133,7 +133,7 @@ public class SpotifyApiClient
      * the mandatory private fields and methods needed to build the request
      * @throws SpotifyResponseException when the response header contains an erroneous status code
      */
-    public <T> ISpotifyAsyncResponse<?, T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest)
+    public <T> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest)
             throws SpotifyRequestAuthorizationException, SpotifyRequestBuilderException, SpotifyResponseException
     {
         validateTokenHasNotExpired();
@@ -165,7 +165,7 @@ public class SpotifyApiClient
         }
     }
 
-    private <T> ISpotifyAsyncResponse<?, T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
         ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
@@ -213,7 +213,7 @@ public class SpotifyApiClient
      * reauthorize using the Client Credentials Flow
      * @return a void completable future
      */
-    public ISpotifyAsyncResponse<?, ?> reauthorizeAsync()
+    public ISpotifyAsyncResponse<?> reauthorizeAsync()
     {
         if(canRefresh())
         {

@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
-public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<CompletableFuture<?>, T>
+public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<T>
 {
     private final HttpResponseHelper helper;
     private final CompletableFuture<HttpResponse<String>> asyncContainer;

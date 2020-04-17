@@ -17,16 +17,16 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     }
 
     @Override
-    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
+    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<T> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyResponse<T> response = client.send(request, typeOfReturnValue);
         return response.body();
     }
 
     @Override
-    public <T> ISpotifyAsyncResponse<?, T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
+    public <T> ISpotifyAsyncResponse<T> sendRequestAndFetchResponseAsync(ISpotifyRequest<T> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
-        ISpotifyAsyncResponse<?, T> asyncResponse = client.sendAsync(request, typeOfReturnValue);
+        ISpotifyAsyncResponse<T> asyncResponse = client.sendAsync(request, typeOfReturnValue);
         return  asyncResponse;
     }
 

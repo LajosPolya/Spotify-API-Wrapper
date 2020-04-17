@@ -24,7 +24,7 @@ public interface ISpotifyApiClientService
      * @throws IOException delegated exception
      * @throws InterruptedException delegated exception
      */
-    <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException;
+    <T> T sendRequestAndFetchResponse(ISpotifyRequest<T> request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException;
 
     /**
      * Sends the request and returns a serialized version of the response
@@ -34,7 +34,7 @@ public interface ISpotifyApiClientService
      * @return returns the serialized response body of the request
      * @throws SpotifyResponseException when the response header has an erroneous status code
      */
-    <T> ISpotifyAsyncResponse<?, T> sendRequestAndFetchResponseAsync(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException;
+    <T> ISpotifyAsyncResponse<T> sendRequestAndFetchResponseAsync(ISpotifyRequest<T> request, Type typeOfReturnValue) throws SpotifyResponseException;
 
     /**
      * Base64 encodes the clientId and clientSecret in the format clientId:clientSecret
