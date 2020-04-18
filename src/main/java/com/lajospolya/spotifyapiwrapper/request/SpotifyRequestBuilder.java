@@ -27,13 +27,13 @@ public class SpotifyRequestBuilder implements ISpotifyRequestBuilder
     // Only one path variable is supported
     private String pathVariable = null;
 
-    SpotifyRequestBuilder(String uri)
+    public SpotifyRequestBuilder(String uri)
     {
         this.uriComponentsBuilder = UriComponentsBuilder.fromUriString(uri);
         this.requestBuilder = HttpRequest.newBuilder();
     }
 
-    SpotifyRequestBuilder(String uri, String pathVariable)
+    public SpotifyRequestBuilder(String uri, String pathVariable)
     {
         this(uri);
         this.pathVariable = pathVariable;
