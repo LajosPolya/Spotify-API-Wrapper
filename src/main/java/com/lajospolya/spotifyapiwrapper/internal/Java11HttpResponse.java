@@ -30,11 +30,11 @@ public class Java11HttpResponse<T> implements ISpotifyResponse<T>
         if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
         {
             erroneous = true;
-            error = helper.serializeBody(response, SpotifyErrorContainer.class);
+            error = helper.serializeBody(response.body(), response.headers().map(), SpotifyErrorContainer.class);
         }
         else
         {
-            body = helper.serializeBody(response, type);
+            body = helper.serializeBody(response.body(), response.headers().map(), type);
         }
     }
 

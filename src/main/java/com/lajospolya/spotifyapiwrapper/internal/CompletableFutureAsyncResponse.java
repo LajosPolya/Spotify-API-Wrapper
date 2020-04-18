@@ -40,7 +40,7 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
             int statusCode = response.statusCode();
             if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
             {
-                SpotifyErrorContainer body = helper.serializeBody(response, SpotifyErrorContainer.class);
+                SpotifyErrorContainer body = helper.serializeBody(response.body(), response.headers().map(), SpotifyErrorContainer.class);
                 if(errorConsumer != null)
                 {
                     errorConsumer.accept(body);
@@ -49,7 +49,7 @@ public class CompletableFutureAsyncResponse<T> implements ISpotifyAsyncResponse<
             }
             else
             {
-                T body = helper.serializeBody(response, type);
+                T body = helper.serializeBody(response.body(), response.headers().map(), type);
 
                 if(successConsumer != null)
                 {
