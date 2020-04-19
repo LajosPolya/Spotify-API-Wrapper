@@ -2,7 +2,7 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.TimeRange;
 import com.lajospolya.spotifyapiwrapper.enumeration.UsersTopType;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequestBuilder;
 import com.lajospolya.spotifyapiwrapper.response.Artist;
 import com.lajospolya.spotifyapiwrapper.response.Paging;
 

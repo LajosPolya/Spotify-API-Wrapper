@@ -2,8 +2,8 @@ package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.enumeration.TimeRange;
 import com.lajospolya.spotifyapiwrapper.enumeration.UsersTopType;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
-import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequestBuilder;
+import com.lajospolya.spotifyapiwrapper.component.SpotifyClientComponentsFactory;
 
 abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 {

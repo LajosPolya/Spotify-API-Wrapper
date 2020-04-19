@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.component;
 
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
 import okhttp3.Response;

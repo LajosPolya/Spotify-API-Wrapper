@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.component;
 
 import com.google.gson.Gson;
 import org.springframework.web.util.UriComponents;

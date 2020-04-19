@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.client.service;
 
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyAsyncResponse;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyAsyncResponse;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequest;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 
 import java.io.IOException;

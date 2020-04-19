@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.component;
 
 import java.util.List;
 import java.util.Map;

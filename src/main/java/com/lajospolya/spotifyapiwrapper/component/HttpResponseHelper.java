@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.component;
 
 import com.google.gson.Gson;
 import com.lajospolya.spotifyapiwrapper.response.CacheableResponse;

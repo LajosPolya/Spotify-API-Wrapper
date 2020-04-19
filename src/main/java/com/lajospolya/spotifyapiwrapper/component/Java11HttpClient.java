@@ -1,4 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.internal;
+package com.lajospolya.spotifyapiwrapper.component;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

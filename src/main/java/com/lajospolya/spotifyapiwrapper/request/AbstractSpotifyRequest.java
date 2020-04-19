@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequest;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequestBuilder;
 import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestBuilderException;
 
 /**

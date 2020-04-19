@@ -1,8 +1,8 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.PlaylistDetails;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
-import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequestBuilder;
+import com.lajospolya.spotifyapiwrapper.component.SpotifyClientComponentsFactory;
 
 /**
  * @author Lajos Polya

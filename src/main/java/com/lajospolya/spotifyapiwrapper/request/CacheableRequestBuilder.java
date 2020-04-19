@@ -1,6 +1,6 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequestBuilder;
 
 public abstract class CacheableRequestBuilder<T> extends AbstractBuilder<T>
 {

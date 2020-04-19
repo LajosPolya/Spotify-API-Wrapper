@@ -1,7 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
-import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
+import com.lajospolya.spotifyapiwrapper.component.ISpotifyRequestBuilder;
+import com.lajospolya.spotifyapiwrapper.component.SpotifyClientComponentsFactory;
 import com.lajospolya.spotifyapiwrapper.response.Artists;
 
 import java.util.List;
