@@ -1,5 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
+import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
+
 public abstract class CacheableRequestBuilder<T> extends AbstractBuilder<T>
 {
     String etag = null;

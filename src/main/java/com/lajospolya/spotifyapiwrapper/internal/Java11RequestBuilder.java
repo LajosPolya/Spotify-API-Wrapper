@@ -1,8 +1,6 @@
-package com.lajospolya.spotifyapiwrapper.request;
+package com.lajospolya.spotifyapiwrapper.internal;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.internal.Java11HttpRequest;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,7 +17,7 @@ import java.util.stream.Collectors;
  * It contains all methods to add appropriate headers, and query params, as well as a single path param.
  * It also has method to easily build DELETE, PUT, POST, and GET requests
  */
-public class SpotifyRequestBuilder implements ISpotifyRequestBuilder
+public class Java11RequestBuilder implements ISpotifyRequestBuilder
 {
     private static final Gson gson = new Gson();
     private UriComponentsBuilder uriComponentsBuilder;
@@ -27,13 +25,13 @@ public class SpotifyRequestBuilder implements ISpotifyRequestBuilder
     // Only one path variable is supported
     private String pathVariable = null;
 
-    public SpotifyRequestBuilder(String uri)
+    public Java11RequestBuilder(String uri)
     {
         this.uriComponentsBuilder = UriComponentsBuilder.fromUriString(uri);
         this.requestBuilder = HttpRequest.newBuilder();
     }
 
-    public SpotifyRequestBuilder(String uri, String pathVariable)
+    public Java11RequestBuilder(String uri, String pathVariable)
     {
         this(uri);
         this.pathVariable = pathVariable;
@@ -86,63 +84,63 @@ public class SpotifyRequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public SpotifyRequestBuilder GET()
+    public Java11RequestBuilder GET()
     {
         createBuilderWithUri().GET();
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder POST()
+    public Java11RequestBuilder POST()
     {
         createBuilderWithUri().POST(HttpRequest.BodyPublishers.noBody());
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder PUT()
+    public Java11RequestBuilder PUT()
     {
         createBuilderWithUri().PUT(HttpRequest.BodyPublishers.noBody());
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder DELETE()
+    public Java11RequestBuilder DELETE()
     {
         createBuilderWithUri().method(DELETE, HttpRequest.BodyPublishers.noBody());
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder POSTWithJsonBody(Object body)
+    public Java11RequestBuilder POSTWithJsonBody(Object body)
     {
         createBuilderWithUri().POST(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder PUTWithJsonBody(Object body)
+    public Java11RequestBuilder PUTWithJsonBody(Object body)
     {
         createBuilderWithUri().PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder DELETEWithJsonBody(Object body)
+    public Java11RequestBuilder DELETEWithJsonBody(Object body)
     {
         createBuilderWithUri().method(DELETE, HttpRequest.BodyPublishers.ofString(gson.toJson(body)));
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder POSTWithStringBody(String body)
+    public Java11RequestBuilder POSTWithStringBody(String body)
     {
         createBuilderWithUri().POST(HttpRequest.BodyPublishers.ofString(body));
         return this;
     }
 
     @Override
-    public SpotifyRequestBuilder PUTWithStringBody(String body)
+    public Java11RequestBuilder PUTWithStringBody(String body)
     {
         createBuilderWithUri().PUT(HttpRequest.BodyPublishers.ofString(body));
         return this;

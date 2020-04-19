@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
 import com.lajospolya.spotifyapiwrapper.body.RefreshToken;
+import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequestBuilder;
 import com.lajospolya.spotifyapiwrapper.internal.SpotifyClientComponentsFactory;
 import com.lajospolya.spotifyapiwrapper.response.AuthorizingToken;
 

@@ -1,6 +1,4 @@
-package com.lajospolya.spotifyapiwrapper.request;
-
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
+package com.lajospolya.spotifyapiwrapper.internal;
 
 import java.util.List;
 import java.util.Map;

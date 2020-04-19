@@ -1,9 +1,5 @@
 package com.lajospolya.spotifyapiwrapper.internal;
 
-import com.lajospolya.spotifyapiwrapper.request.ISpotifyRequestBuilder;
-import com.lajospolya.spotifyapiwrapper.request.OkHttpRequestBuilder;
-import com.lajospolya.spotifyapiwrapper.request.SpotifyRequestBuilder;
-
 public class SpotifyClientComponentsFactory
 {
     private static final String JAVA_11_HTTP_CLIENT_QUALIFIER = "java.net.http.HttpClient";
@@ -21,18 +17,18 @@ public class SpotifyClientComponentsFactory
     {
         if (doesJava11HttpClientExists())
         {
-            return new SpotifyRequestBuilder(uri);
+            return new Java11RequestBuilder(uri);
         }
-        return new OkHttpRequestBuilder(uri);
+        return new OkHttp4RequestBuilder(uri);
     }
 
     public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri, String pathVariable)
     {
         if (doesJava11HttpClientExists())
         {
-            return new SpotifyRequestBuilder(uri, pathVariable);
+            return new Java11RequestBuilder(uri, pathVariable);
         }
-        return new OkHttpRequestBuilder(uri, pathVariable);
+        return new OkHttp4RequestBuilder(uri, pathVariable);
     }
 
     private static boolean doesJava11HttpClientExists()

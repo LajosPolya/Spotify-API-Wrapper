@@ -22,12 +22,12 @@ public class OkHttp4Client implements ISpotifyClient
         {
             e.printStackTrace();
         }
-        return new OkHttpResponse<>(response, typeOfResponse);
+        return new OkHttp4Response<>(response, typeOfResponse);
     }
 
     @Override
     public <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<T> request, Type typeOfResponse)
     {
-        return new OkHttpAsyncResponse<>(client.newCall((Request) request.get()), typeOfResponse);
+        return new OkHttp4AsyncResponse<>(client.newCall((Request) request.get()), typeOfResponse);
     }
 }

@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
-public class OkHttpAsyncResponse<T> implements ISpotifyAsyncResponse<T>
+public class OkHttp4AsyncResponse<T> implements ISpotifyAsyncResponse<T>
 {
     private final HttpResponseHelper helper;
     private final Call call;
@@ -23,7 +23,7 @@ public class OkHttpAsyncResponse<T> implements ISpotifyAsyncResponse<T>
     private Consumer<T> successConsumer = null;
     private Consumer<SpotifyErrorContainer> errorConsumer = null;
 
-    public OkHttpAsyncResponse(Call call, Type type)
+    public OkHttp4AsyncResponse(Call call, Type type)
     {
         this.call = call;
         this.helper = new HttpResponseHelper();

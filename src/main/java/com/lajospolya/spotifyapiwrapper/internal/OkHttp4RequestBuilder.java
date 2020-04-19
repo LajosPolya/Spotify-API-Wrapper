@@ -1,8 +1,6 @@
-package com.lajospolya.spotifyapiwrapper.request;
+package com.lajospolya.spotifyapiwrapper.internal;
 
 import com.google.gson.Gson;
-import com.lajospolya.spotifyapiwrapper.internal.ISpotifyRequest;
-import com.lajospolya.spotifyapiwrapper.internal.OkHttpRequest;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,7 +10,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
+public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
 {
     private Gson gson = new Gson();
     private HttpUrl url;
@@ -20,13 +18,13 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     private Request.Builder requestBuilder;
     private String pathVariable = null;
 
-    public OkHttpRequestBuilder(String uri)
+    public OkHttp4RequestBuilder(String uri)
     {
         urlBuilder = HttpUrl.parse(uri).newBuilder();
         requestBuilder = new Request.Builder();
     }
 
-    public OkHttpRequestBuilder(String uri, String pathVariable)
+    public OkHttp4RequestBuilder(String uri, String pathVariable)
     {
         uri = uri.replace("{id}", pathVariable);
         urlBuilder = HttpUrl.parse(uri).newBuilder();
@@ -81,35 +79,35 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public OkHttpRequestBuilder GET()
+    public OkHttp4RequestBuilder GET()
     {
         createBuilderWithUri().get();
         return this;
     }
 
     @Override
-    public OkHttpRequestBuilder POST()
+    public OkHttp4RequestBuilder POST()
     {
         createBuilderWithUri().post(RequestBody.create("", null));
         return this;
     }
 
     @Override
-    public OkHttpRequestBuilder PUT()
+    public OkHttp4RequestBuilder PUT()
     {
         createBuilderWithUri().put(RequestBody.create("", null));
         return this;
     }
 
     @Override
-    public OkHttpRequestBuilder DELETE()
+    public OkHttp4RequestBuilder DELETE()
     {
         createBuilderWithUri().delete();
         return this;
     }
 
     @Override
-    public OkHttpRequestBuilder POSTWithJsonBody(Object body)
+    public OkHttp4RequestBuilder POSTWithJsonBody(Object body)
     {
         String strBody = gson.toJson(body);
         createBuilderWithUri().post(RequestBody.create(strBody.getBytes()));
@@ -117,7 +115,7 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public OkHttpRequestBuilder PUTWithJsonBody(Object body)
+    public OkHttp4RequestBuilder PUTWithJsonBody(Object body)
     {
         String strBody = gson.toJson(body);
         createBuilderWithUri().put(RequestBody.create(strBody.getBytes()));
@@ -125,7 +123,7 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public OkHttpRequestBuilder DELETEWithJsonBody(Object body)
+    public OkHttp4RequestBuilder DELETEWithJsonBody(Object body)
     {
         String strBody = gson.toJson(body);
         createBuilderWithUri().delete(RequestBody.create(strBody.getBytes()));
@@ -133,14 +131,14 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public OkHttpRequestBuilder POSTWithStringBody(String body)
+    public OkHttp4RequestBuilder POSTWithStringBody(String body)
     {
         createBuilderWithUri().post(RequestBody.create(body.getBytes()));
         return this;
     }
 
     @Override
-    public OkHttpRequestBuilder PUTWithStringBody(String body)
+    public OkHttp4RequestBuilder PUTWithStringBody(String body)
     {
         createBuilderWithUri().put(RequestBody.create(body.getBytes()));
         return this;
@@ -155,6 +153,6 @@ public class OkHttpRequestBuilder implements ISpotifyRequestBuilder
     @Override
     public ISpotifyRequest<?> build()
     {
-        return new OkHttpRequest(requestBuilder.build());
+        return new OkHttp4Request(requestBuilder.build());
     }
 }

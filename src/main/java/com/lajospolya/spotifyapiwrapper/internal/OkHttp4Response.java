@@ -6,7 +6,7 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
-public class OkHttpResponse<T> implements ISpotifyResponse<T>
+public class OkHttp4Response<T> implements ISpotifyResponse<T>
 {
     private final HttpResponseHelper helper;
 
@@ -16,7 +16,7 @@ public class OkHttpResponse<T> implements ISpotifyResponse<T>
     private SpotifyErrorContainer error;
     private boolean erroneous = false;
 
-    public OkHttpResponse(Response response, Type typeOfResponse)
+    public OkHttp4Response(Response response, Type typeOfResponse)
     {
         this.helper = new HttpResponseHelper();
         this.response = response;
