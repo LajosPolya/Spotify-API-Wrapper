@@ -7,6 +7,16 @@ import com.lajospolya.spotifyapiwrapper.request.SpotifyRequestBuilder;
 public class SpotifyClientComponentsFactory
 {
     private static final String JAVA_11_HTTP_CLIENT_QUALIFIER = "java.net.http.HttpClient";
+
+    public static  ISpotifyClient spotifyClient()
+    {
+        if (doesJava11HttpClientExists())
+        {
+            return new Java11HttpClient();
+        }
+        return new OkHttp4Client();
+    }
+
     public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri)
     {
         if (doesJava11HttpClientExists())

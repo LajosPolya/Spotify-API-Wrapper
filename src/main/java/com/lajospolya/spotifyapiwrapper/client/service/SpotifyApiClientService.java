@@ -13,7 +13,7 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
 
     public SpotifyApiClientService()
     {
-        this.client = new Java11HttpClient();
+        client = SpotifyClientComponentsFactory.spotifyClient();
     }
 
     @Override
