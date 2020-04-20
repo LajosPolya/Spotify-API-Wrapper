@@ -22,6 +22,15 @@ public class HttpResponseHelper
         return statusCode / 100 == 5;
     }
 
+    /**
+     * Serializes the response by and sets the body as 'cacheable' if an ETag header is found
+     * 
+     * @param responseBody String representation of response body
+     * @param headers Map of the response headers
+     * @param type Type of the response body
+     * @param <T> Type of the response body. Should be equivalent to the 'type' parameter
+     * @return serialized response body of type 'Type'
+     */
     public <T> T serializeBody(String responseBody, Map<String, List<String>> headers, Type type)
     {
         T body = serializeResponseBody(responseBody, type);
