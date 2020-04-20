@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
 public class OkHttp4AsyncResponse<T> implements ISpotifyAsyncResponse<T>
@@ -69,9 +68,13 @@ public class OkHttp4AsyncResponse<T> implements ISpotifyAsyncResponse<T>
         call.enqueue(callback);
     }
 
+    /**
+     * This implementation (OkHttp4) does not support the blocking operation
+     */
     @Override
-    public void block() throws ExecutionException, InterruptedException
+    public void block()
     {
+        throw new UnsupportedOperationException("Cannot block async request with OkHttp");
     }
 
     @Override
