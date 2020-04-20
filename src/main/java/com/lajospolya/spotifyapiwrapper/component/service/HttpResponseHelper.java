@@ -24,7 +24,7 @@ public class HttpResponseHelper
 
     /**
      * Serializes the response by and sets the body as 'cacheable' if an ETag header is found
-     * 
+     *
      * @param responseBody String representation of response body
      * @param headers Map of the response headers
      * @param type Type of the response body
