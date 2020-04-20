@@ -1,6 +1,7 @@
 package com.lajospolya.spotifyapiwrapper.component;
 
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyResponseException;
 import okhttp3.Response;
 
 import java.io.IOException;
@@ -48,6 +49,10 @@ public class OkHttp4Response<T> implements ISpotifyResponse<T>
     @Override
     public T body()
     {
+        if(erroneous)
+        {
+            throw new SpotifyResponseException("Response was not successful");
+        }
         return body;
     }
 

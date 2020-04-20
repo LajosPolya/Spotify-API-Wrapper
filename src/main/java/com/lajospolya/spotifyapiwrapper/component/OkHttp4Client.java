@@ -9,7 +9,8 @@ import java.lang.reflect.Type;
 
 public class OkHttp4Client implements ISpotifyClient
 {
-    private OkHttpClient client = new OkHttpClient.Builder().build();
+    private final OkHttpClient client = new OkHttpClient.Builder().build();
+
     @Override
     public <T> ISpotifyResponse<T> send(ISpotifyRequest<T> request, Type typeOfResponse)
     {

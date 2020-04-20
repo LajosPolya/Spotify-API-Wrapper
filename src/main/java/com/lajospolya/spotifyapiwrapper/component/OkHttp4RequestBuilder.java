@@ -12,11 +12,9 @@ import java.util.stream.Collectors;
 
 public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
 {
-    private Gson gson = new Gson();
-    private HttpUrl url;
-    private HttpUrl.Builder urlBuilder;
-    private Request.Builder requestBuilder;
-    private String pathVariable = null;
+    private final Gson gson = new Gson();
+    private final HttpUrl.Builder urlBuilder;
+    private final Request.Builder requestBuilder;
 
     public OkHttp4RequestBuilder(String uri)
     {
@@ -29,7 +27,6 @@ public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
         uri = uri.replace("{id}", pathVariable);
         urlBuilder = HttpUrl.parse(uri).newBuilder();
         requestBuilder = new Request.Builder();
-        this.pathVariable = pathVariable;
     }
 
     @Override
@@ -146,7 +143,7 @@ public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
 
     private Request.Builder createBuilderWithUri()
     {
-        url = urlBuilder.build();
+        HttpUrl url = urlBuilder.build();
         return requestBuilder.url(url);
     }
 

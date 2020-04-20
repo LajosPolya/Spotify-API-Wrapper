@@ -4,7 +4,7 @@ import okhttp3.Request;
 
 public class OkHttp4Request implements ISpotifyRequest<Request>
 {
-    private Request request;
+    private final Request request;
 
     public OkHttp4Request(Request request)
     {
