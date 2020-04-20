@@ -8,7 +8,7 @@ import java.net.http.HttpResponse;
 
 public class Java11HttpClient implements ISpotifyClient
 {
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
 
     public Java11HttpClient()
     {

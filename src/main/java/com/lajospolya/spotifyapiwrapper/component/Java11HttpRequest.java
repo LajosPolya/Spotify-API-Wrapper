@@ -4,7 +4,7 @@ import java.net.http.HttpRequest;
 
 public class Java11HttpRequest implements ISpotifyRequest<HttpRequest>
 {
-    private HttpRequest request;
+    private final HttpRequest request;
 
     public Java11HttpRequest(HttpRequest request)
     {

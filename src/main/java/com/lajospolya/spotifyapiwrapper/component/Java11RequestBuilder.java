@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public class Java11RequestBuilder implements ISpotifyRequestBuilder
 {
     private static final Gson gson = new Gson();
-    private UriComponentsBuilder uriComponentsBuilder;
-    private HttpRequest.Builder requestBuilder;
+    private final UriComponentsBuilder uriComponentsBuilder;
+    private final HttpRequest.Builder requestBuilder;
     // Only one path variable is supported
     private String pathVariable = null;
 

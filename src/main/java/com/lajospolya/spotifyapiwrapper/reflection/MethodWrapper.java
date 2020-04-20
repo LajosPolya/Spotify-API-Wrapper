@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  */
 public class MethodWrapper
 {
-    private Method method;
+    private final Method method;
 
     public MethodWrapper(Method method)
     {
