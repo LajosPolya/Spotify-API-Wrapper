@@ -20,7 +20,7 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutMePlayerVolume>
     {
-        private Integer volumePercent;
+        private final Integer volumePercent;
         private String deviceId;
 
         public Builder(Integer volumePercent) throws IllegalArgumentException

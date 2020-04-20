@@ -24,7 +24,7 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 
     public static class Builder extends AbstractBuilder<GetArtistsAlbums>
     {
-        private String artistId;
+        private final String artistId;
         private Integer limit;
         private Integer offset;
         private String market;

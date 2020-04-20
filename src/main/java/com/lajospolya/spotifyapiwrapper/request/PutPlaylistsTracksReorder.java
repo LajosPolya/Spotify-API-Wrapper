@@ -22,9 +22,9 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
 
     public static class Builder extends AbstractBuilder<PutPlaylistsTracksReorder>
     {
-        private String playlistId;
-        private Integer rangeStart;
-        private Integer insertBefore;
+        private final String playlistId;
+        private final Integer rangeStart;
+        private final Integer insertBefore;
         private Integer rangeLength;
         private String snapshotId;
 

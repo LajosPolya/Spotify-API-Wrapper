@@ -22,7 +22,7 @@ public class PostRefreshToken extends AbstractSpotifyRequest<AuthorizingToken>
 
     public static class Builder extends AbstractBuilder<PostRefreshToken>
     {
-        private String refreshToken;
+        private final String refreshToken;
 
         public Builder(String refreshToken)
         {

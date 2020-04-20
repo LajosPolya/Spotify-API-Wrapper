@@ -22,7 +22,7 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
 
     public static class Builder extends AbstractBuilder<GetAlbumsTracks>
     {
-        private String albumId;
+        private final String albumId;
         private Integer limit;
         private Integer offset;
         private String market;

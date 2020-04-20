@@ -25,8 +25,8 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 
     public static class Builder extends AbstractBuilder<GetSearch>
     {
-        private String query;
-        private List<SearchItemType> searchItemTypes;
+        private final String query;
+        private final List<SearchItemType> searchItemTypes;
         private String market;
         private Integer limit;
         private Integer offset;

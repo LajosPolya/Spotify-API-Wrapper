@@ -21,8 +21,7 @@ public class GetShow extends AbstractSpotifyRequest<Show>
 
     public static class Builder extends AbstractBuilder<GetShow>
     {
-        private String showId;
-
+        private final String showId;
         private String market;
 
         public Builder(String showId)

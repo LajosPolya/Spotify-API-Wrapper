@@ -26,9 +26,9 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 
     public static class Builder extends AbstractBuilder<GetRecommendations>
     {
-        private List<String> seed_artists;
-        private List<String> seed_tracks;
-        private List<String> seed_genres;
+        private final List<String> seed_artists;
+        private final List<String> seed_tracks;
+        private final List<String> seed_genres;
 
         private Integer limit;
         private String market;

@@ -24,7 +24,6 @@ public class PutMePlayerPlay extends AbstractSpotifyRequest<Void>
     public static class Builder extends AbstractBuilder<PutMePlayerPlay>
     {
         private String deviceId;
-
         private String contextUri;
         private List<String> uris;
         private Integer offset;

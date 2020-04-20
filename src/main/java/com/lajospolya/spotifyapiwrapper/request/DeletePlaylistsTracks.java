@@ -24,8 +24,8 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
 
     public static class Builder extends AbstractBuilder<DeletePlaylistsTracks>
     {
-        private String playlistId;
-        private List<String> trackIds;
+        private final String playlistId;
+        private final List<String> trackIds;
         private String snapshotId;
 
         public Builder(String playlistId, List<String> trackIds) throws IllegalArgumentException

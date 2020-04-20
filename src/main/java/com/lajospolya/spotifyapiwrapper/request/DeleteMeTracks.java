@@ -23,7 +23,7 @@ public class DeleteMeTracks extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<DeleteMeTracks>
     {
-        private List<String> ids;
+        private final List<String> ids;
 
         public Builder(List<String> ids) throws IllegalArgumentException
         {

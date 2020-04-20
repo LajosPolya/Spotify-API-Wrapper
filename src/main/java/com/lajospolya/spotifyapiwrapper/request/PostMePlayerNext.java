@@ -22,7 +22,6 @@ public class PostMePlayerNext extends AbstractSpotifyRequest<Void>
     {
         private String deviceId;
 
-
         public Builder() { }
 
         @Override

@@ -22,7 +22,7 @@ public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEp
 
     public static class Builder extends AbstractBuilder<GetShowsEpisodes>
     {
-        private String showId;
+        private final String showId;
         private Integer limit;
         private Integer offset;
         private String market;

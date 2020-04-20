@@ -24,8 +24,8 @@ public class PutFollow extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutFollow>
     {
-        private FollowType type;
-        private List<String> ids;
+        private final FollowType type;
+        private final List<String> ids;
 
         public Builder(FollowType type, List<String> ids) throws IllegalArgumentException
         {

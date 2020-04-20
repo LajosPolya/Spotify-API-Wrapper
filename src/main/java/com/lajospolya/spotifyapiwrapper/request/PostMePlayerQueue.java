@@ -20,7 +20,7 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PostMePlayerQueue>
     {
-        private String uri;
+        private final String uri;
         private String deviceId;
 
         public Builder(String uri) throws IllegalArgumentException

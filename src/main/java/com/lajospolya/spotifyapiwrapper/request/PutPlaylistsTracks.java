@@ -23,8 +23,8 @@ public class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutPlaylistsTracks>
     {
-        private String playlistId;
-        private List<String> uris;
+        private final String playlistId;
+        private final List<String> uris;
 
         public Builder(String playlistId, List<String> uris) throws IllegalArgumentException
         {

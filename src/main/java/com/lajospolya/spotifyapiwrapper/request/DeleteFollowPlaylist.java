@@ -20,7 +20,7 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<DeleteFollowPlaylist>
     {
-        private String playlistId;
+        private final String playlistId;
 
         public Builder(String playlistId) throws IllegalArgumentException
         {

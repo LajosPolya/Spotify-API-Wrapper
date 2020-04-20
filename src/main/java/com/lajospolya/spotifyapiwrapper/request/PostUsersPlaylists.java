@@ -22,8 +22,8 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 
     public static class Builder extends AbstractBuilder<PostUsersPlaylists>
     {
-        private String userId;
-        private String name;
+        private final String userId;
+        private final String name;
         private Boolean isPublic;
         private Boolean collaborative;
         private String description;

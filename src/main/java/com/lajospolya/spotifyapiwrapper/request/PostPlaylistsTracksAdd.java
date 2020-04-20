@@ -24,7 +24,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 
     public static class Builder extends AbstractBuilder<PostPlaylistsTracksAdd>
     {
-        private String playlistId;
+        private final String playlistId;
         private List<String> uris;
         private Integer position;
 

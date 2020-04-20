@@ -23,7 +23,7 @@ public class GetEpisodes extends AbstractSpotifyRequest<Episodes>
 
     public static class Builder extends AbstractBuilder<GetEpisodes>
     {
-        private List<String> episodeIds;
+        private final List<String> episodeIds;
 
         private String market;
 

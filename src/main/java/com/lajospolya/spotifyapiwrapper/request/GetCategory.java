@@ -21,7 +21,7 @@ public class GetCategory extends AbstractSpotifyRequest<Category>
 
     public static class Builder extends AbstractBuilder<GetCategory>
     {
-        private String categoryId;
+        private final String categoryId;
         private String country;
         private String locale;
 

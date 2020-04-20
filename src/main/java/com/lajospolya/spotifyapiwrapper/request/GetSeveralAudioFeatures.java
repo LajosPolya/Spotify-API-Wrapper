@@ -23,7 +23,7 @@ public class GetSeveralAudioFeatures extends AbstractSpotifyRequest<TracksAudioF
 
     public static class Builder extends AbstractBuilder<GetSeveralAudioFeatures>
     {
-        private List<String> trackIds;
+        private final List<String> trackIds;
 
         public Builder(List<String> trackIds) throws IllegalArgumentException
         {

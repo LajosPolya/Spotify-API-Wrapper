@@ -21,7 +21,7 @@ public class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures>
 
     public static class Builder extends AbstractBuilder<GetAudioFeatures>
     {
-        private String trackId;
+        private final String trackId;
 
         public Builder(String trackId) throws IllegalArgumentException
         {

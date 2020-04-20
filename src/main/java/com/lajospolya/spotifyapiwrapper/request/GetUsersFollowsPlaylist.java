@@ -22,8 +22,8 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
 
     public static class Builder extends AbstractBuilder<GetUsersFollowsPlaylist>
     {
-        private String playListId;
-        private List<String> userIds;
+        private final String playListId;
+        private final List<String> userIds;
 
         public Builder(String playListId, List<String> userIds) throws IllegalArgumentException
         {

@@ -21,7 +21,7 @@ public class GetUser extends AbstractSpotifyRequest<UserPublic>
 
     public static class Builder extends AbstractBuilder<GetUser>
     {
-        private String userId;
+        private final String userId;
 
         public Builder(String userId) throws IllegalArgumentException
         {

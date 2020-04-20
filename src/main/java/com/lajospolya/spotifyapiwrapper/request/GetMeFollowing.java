@@ -22,7 +22,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
 
     public static class Builder extends CacheableRequestBuilder<GetMeFollowing>
     {
-        private FollowType type;
+        private final FollowType type;
         private Integer limit;
         private String after;
 

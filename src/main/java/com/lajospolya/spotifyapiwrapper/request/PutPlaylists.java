@@ -21,7 +21,7 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutPlaylists>
     {
-        private String playlistsId;
+        private final String playlistsId;
         private String name;
         private Boolean isPublic;
         private Boolean collaborative;

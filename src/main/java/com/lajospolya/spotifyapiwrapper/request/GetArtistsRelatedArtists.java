@@ -21,7 +21,7 @@ public class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artists>
 
     public static class Builder extends AbstractBuilder<GetArtistsRelatedArtists>
     {
-        private String artistId;
+        private final String artistId;
 
         public Builder(String artistId) throws IllegalArgumentException
         {

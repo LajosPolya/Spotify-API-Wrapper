@@ -23,7 +23,7 @@ public class PutMePlayer extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutMePlayer>
     {
-        private List<String> deviceIds;
+        private final List<String> deviceIds;
         private Boolean play;
 
         public Builder(List<String> deviceIds) throws IllegalArgumentException

@@ -22,7 +22,7 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
 
     public static class Builder extends AbstractBuilder<GetMeAlbumsContains>
     {
-        private List<String> albumIds;
+        private final List<String> albumIds;
 
         public Builder(List<String> albumIds) throws IllegalArgumentException
         {

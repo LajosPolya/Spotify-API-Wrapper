@@ -21,8 +21,8 @@ public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks
 
     public static class Builder extends AbstractBuilder<GetArtistsTopTracks>
     {
-        private String artistId;
-        private String market;
+        private final String artistId;
+        private final String market;
 
         public Builder(String artistId, String market) throws IllegalArgumentException
         {

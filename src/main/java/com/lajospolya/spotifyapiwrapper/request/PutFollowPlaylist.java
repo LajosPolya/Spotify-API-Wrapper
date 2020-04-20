@@ -21,7 +21,7 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutFollowPlaylist>
     {
-        private String playlistId;
+        private final String playlistId;
         private Boolean isPublic = true;
 
         public Builder(String playlistId) throws IllegalArgumentException

@@ -24,7 +24,7 @@ public class GetPlaylistsImages extends AbstractSpotifyRequest<List<Image>>
 
     public static class Builder extends AbstractBuilder<GetPlaylistsImages>
     {
-        private String playlistId;
+        private final String playlistId;
 
         public Builder(String playlistId) throws IllegalArgumentException
         {

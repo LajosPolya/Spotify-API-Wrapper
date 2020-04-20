@@ -21,7 +21,7 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
 
     public static class Builder extends CacheableRequestBuilder<GetPlaylist>
     {
-        private String playlistId;
+        private final String playlistId;
 
         public Builder(String playlistId) throws IllegalArgumentException
         {

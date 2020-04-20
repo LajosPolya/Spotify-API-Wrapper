@@ -20,7 +20,7 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutMePlayerSeek>
     {
-        private Integer positionMs;
+        private final Integer positionMs;
         private String deviceId;
 
         public Builder(Integer positionMs) throws IllegalArgumentException

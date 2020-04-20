@@ -22,8 +22,8 @@ public class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Authorizin
 
     public static class Builder extends AbstractBuilder<PostAuthorizationCodeFlow>
     {
-        private String code;
-        private String redirectUri;
+        private final String code;
+        private final String redirectUri;
 
         public Builder(String code, String redirectUri) throws IllegalArgumentException
         {

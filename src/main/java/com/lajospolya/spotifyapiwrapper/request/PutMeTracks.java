@@ -23,7 +23,7 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutMeTracks>
     {
-        private List<String> trackIds;
+        private final List<String> trackIds;
 
         public Builder(List<String> trackIds) throws IllegalArgumentException
         {

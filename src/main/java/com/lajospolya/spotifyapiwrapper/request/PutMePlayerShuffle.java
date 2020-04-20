@@ -20,7 +20,7 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutMePlayerShuffle>
     {
-        private Boolean state;
+        private final Boolean state;
         private String deviceId;
 
         public Builder(Boolean state) throws IllegalArgumentException

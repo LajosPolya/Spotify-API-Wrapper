@@ -22,7 +22,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
 
     public static class Builder extends CacheableRequestBuilder<GetPlaylistsTracks>
     {
-        private String playlistId;
+        private final String playlistId;
         private Integer limit;
         private Integer offset;
         private String market;

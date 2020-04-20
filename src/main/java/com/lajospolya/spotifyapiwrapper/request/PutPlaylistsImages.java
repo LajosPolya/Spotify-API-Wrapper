@@ -20,8 +20,8 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
 
     public static class Builder extends AbstractBuilder<PutPlaylistsImages>
     {
-        private String playlistId;
-        private String base64image;
+        private final String playlistId;
+        private final String base64image;
 
         public Builder(String playlistId, String base64image) throws IllegalArgumentException
         {

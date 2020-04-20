@@ -21,7 +21,7 @@ public class GetMePlayer extends AbstractSpotifyRequest<CurrentlyPlayingContext>
 
     public static class Builder extends AbstractBuilder<GetMePlayer>
     {
-        private String market;
+        private final String market;
 
         public Builder(String market) throws IllegalArgumentException
         {

@@ -22,7 +22,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
 
     public static class Builder extends CacheableRequestBuilder<GetUsersPlaylists>
     {
-        private String userId;
+        private final String userId;
         private Integer limit;
         private Integer offset;
 

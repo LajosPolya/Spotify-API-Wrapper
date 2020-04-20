@@ -23,8 +23,7 @@ public class GetShows extends AbstractSpotifyRequest<Shows>
 
     public static class Builder extends AbstractBuilder<GetShows>
     {
-        private List<String> showIds;
-
+        private final List<String> showIds;
         private String market;
 
         public Builder(List<String> showIds) throws IllegalArgumentException

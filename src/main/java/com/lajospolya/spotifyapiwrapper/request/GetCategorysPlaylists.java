@@ -21,7 +21,7 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
 
     public static class Builder extends AbstractBuilder<GetCategorysPlaylists>
     {
-        private String categoryId;
+        private final String categoryId;
         private String country;
         private String locale;
 
