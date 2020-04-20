@@ -3,32 +3,11 @@ package com.lajospolya.spotifyapiwrapper.component;
 public class SpotifyClientComponentsFactory
 {
     private static final String JAVA_11_HTTP_CLIENT_QUALIFIER = "java.net.http.HttpClient";
+    private static final boolean useJava11;
 
-    public static  ISpotifyClient spotifyClient()
+    static
     {
-        if (doesJava11HttpClientExists())
-        {
-            return new Java11HttpClient();
-        }
-        return new OkHttp4Client();
-    }
-
-    public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri)
-    {
-        if (doesJava11HttpClientExists())
-        {
-            return new Java11RequestBuilder(uri);
-        }
-        return new OkHttp4RequestBuilder(uri);
-    }
-
-    public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri, String pathVariable)
-    {
-        if (doesJava11HttpClientExists())
-        {
-            return new Java11RequestBuilder(uri, pathVariable);
-        }
-        return new OkHttp4RequestBuilder(uri, pathVariable);
+        useJava11 = doesJava11HttpClientExists();
     }
 
     private static boolean doesJava11HttpClientExists()
@@ -44,4 +23,30 @@ public class SpotifyClientComponentsFactory
         }
     }
 
+    public static  ISpotifyClient spotifyClient()
+    {
+        if (useJava11)
+        {
+            return new Java11HttpClient();
+        }
+        return new OkHttp4Client();
+    }
+
+    public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri)
+    {
+        if (useJava11)
+        {
+            return new Java11RequestBuilder(uri);
+        }
+        return new OkHttp4RequestBuilder(uri);
+    }
+
+    public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri, String pathVariable)
+    {
+        if (useJava11)
+        {
+            return new Java11RequestBuilder(uri, pathVariable);
+        }
+        return new OkHttp4RequestBuilder(uri, pathVariable);
+    }
 }
