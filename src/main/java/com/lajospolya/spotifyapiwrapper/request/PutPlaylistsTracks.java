@@ -38,9 +38,9 @@ public class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylistsTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistId);
-            spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, playlistId)
+            .contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutPlaylistsTracks(
                     spotifyRequestBuilder.PUTWithJsonBody(

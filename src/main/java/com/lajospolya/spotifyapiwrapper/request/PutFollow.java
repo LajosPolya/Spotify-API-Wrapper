@@ -38,9 +38,9 @@ public class PutFollow extends AbstractSpotifyRequest<Void>
         @Override
         public PutFollow build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
-            spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(TYPE_QUERY_PARAM, type.getName())
+            .contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutFollow(spotifyRequestBuilder.PUTWithJsonBody(new IdsContainer(ids)));
         }

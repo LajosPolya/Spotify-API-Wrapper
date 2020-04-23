@@ -35,8 +35,8 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
         @Override
         public GetMeFollowing build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, type.getName());
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(TYPE_QUERY_PARAM, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
             return new GetMeFollowing(spotifyRequestBuilder.GET());

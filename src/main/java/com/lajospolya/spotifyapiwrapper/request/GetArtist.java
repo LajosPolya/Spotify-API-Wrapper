@@ -33,8 +33,8 @@ public class GetArtist extends AbstractSpotifyRequest<Artist>
         @Override
         public GetArtist build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, artistId);
 
             return new GetArtist(spotifyRequestBuilder.GET());
         }

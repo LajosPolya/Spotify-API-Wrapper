@@ -35,8 +35,8 @@ public class PutMeAlbums extends AbstractSpotifyRequest<Void>
         @Override
         public PutMeAlbums build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutMeAlbums(
                     spotifyRequestBuilder.PUTWithJsonBody(

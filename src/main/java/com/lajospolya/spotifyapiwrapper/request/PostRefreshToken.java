@@ -33,8 +33,8 @@ public class PostRefreshToken extends AbstractSpotifyRequest<AuthorizingToken>
         @Override
         public PostRefreshToken build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostRefreshToken(
                     spotifyRequestBuilder.POSTWithStringBody(

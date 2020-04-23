@@ -35,8 +35,8 @@ public class GetEpisode extends AbstractSpotifyRequest<Episode>
         @Override
         public GetEpisode build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, episodeId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, episodeId);
             addOptionalQueryParams(spotifyRequestBuilder);
             return new GetEpisode(spotifyRequestBuilder.GET());
         }

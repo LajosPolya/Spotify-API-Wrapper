@@ -35,8 +35,8 @@ public class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Authorizin
         @Override
         public PostAuthorizationCodeFlow build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostAuthorizationCodeFlow(
                     spotifyRequestBuilder.POSTWithStringBody(

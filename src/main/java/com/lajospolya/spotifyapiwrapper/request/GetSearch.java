@@ -42,9 +42,9 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         @Override
         public GetSearch build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(QUERY, query);
-            spotifyRequestBuilder.queryParam(TYPE_QUERY_PARAM, searchItemTypes, SearchItemType::getType);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(QUERY, query)
+            .queryParam(TYPE_QUERY_PARAM, searchItemTypes, SearchItemType::getType);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetSearch(spotifyRequestBuilder.GET());

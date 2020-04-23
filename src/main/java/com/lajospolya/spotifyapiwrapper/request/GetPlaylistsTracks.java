@@ -38,8 +38,8 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
         @Override
         public GetPlaylistsTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, playlistId);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
 

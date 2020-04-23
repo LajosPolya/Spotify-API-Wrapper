@@ -26,8 +26,8 @@ public class PostClientCredentialsFlow extends AbstractSpotifyRequest<Authorizin
         @Override
         public PostClientCredentialsFlow build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .contentType(URL_ENCODED_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostClientCredentialsFlow(
                     spotifyRequestBuilder.POSTWithStringBody(CLIENT_CREDENTIALS_GRANT_TYPE_BODY_PARAMS));

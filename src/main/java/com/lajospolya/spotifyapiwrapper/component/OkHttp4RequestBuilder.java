@@ -28,56 +28,64 @@ public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public void pathParam(String name, String value)
+    public OkHttp4RequestBuilder pathParam(String name, String value)
     {
         pathName = name;
         pathValue = value;
+        return this;
     }
 
     @Override
-    public void queryParam(String name, Object value)
+    public OkHttp4RequestBuilder queryParam(String name, Object value)
     {
         urlBuilder.addQueryParameter(name, value.toString());
+        return this;
     }
 
     @Override
-    public void queryParam(String name, List<String> values)
+    public OkHttp4RequestBuilder queryParam(String name, List<String> values)
     {
         String commaSeparatedIds = String.join(",", values);
         urlBuilder.addQueryParameter(name, commaSeparatedIds);
+        return this;
     }
 
     @Override
-    public <T extends Enum<T>> void queryParam(String name, List<T> values, Function<T, String> function)
+    public <T extends Enum<T>> OkHttp4RequestBuilder queryParam(String name, List<T> values, Function<T, String> function)
     {
         String commaSeparatedValues = values.stream()
                 .map(function)
                 .collect(Collectors.joining(","));
         urlBuilder.addQueryParameter(name, commaSeparatedValues);
+        return this;
     }
 
     @Override
-    public void queryParam(Map<String, Object> nameValuePair)
+    public OkHttp4RequestBuilder queryParam(Map<String, Object> nameValuePair)
     {
         nameValuePair.forEach((name, value) -> urlBuilder.addQueryParameter(name, value.toString()));
+        return this;
     }
 
     @Override
-    public void contentType(String value)
+    public OkHttp4RequestBuilder contentType(String value)
     {
         requestBuilder.header(CONTENT_TYPE_HEADER, value);
+        return this;
     }
 
     @Override
-    public void authorization(String token)
+    public OkHttp4RequestBuilder authorization(String token)
     {
         requestBuilder.header(AUTHORIZATION_HEADER, token);
+        return this;
     }
 
     @Override
-    public void etag(String value)
+    public OkHttp4RequestBuilder etag(String value)
     {
         requestBuilder.header(IF_NOT_MATCH, value);
+        return this;
     }
 
     @Override

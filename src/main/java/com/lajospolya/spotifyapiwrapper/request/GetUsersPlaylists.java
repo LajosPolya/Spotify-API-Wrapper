@@ -36,8 +36,8 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
         @Override
         public GetUsersPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, userId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, userId);
             addOptionalQueryParams(spotifyRequestBuilder);
             addEtagHeader(spotifyRequestBuilder);
 

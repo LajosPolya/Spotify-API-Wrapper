@@ -33,8 +33,8 @@ public class GetUser extends AbstractSpotifyRequest<UserPublic>
         @Override
         public GetUser build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, userId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, userId);
 
             return new GetUser(spotifyRequestBuilder.GET());
         }

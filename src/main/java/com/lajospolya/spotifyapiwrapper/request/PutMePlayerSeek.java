@@ -32,8 +32,8 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerSeek build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(POSITION_MS_QUERY_PARAM, positionMs);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(POSITION_MS_QUERY_PARAM, positionMs);
 
             addOptionalQueryParams(spotifyRequestBuilder);
 

@@ -6,7 +6,7 @@
 
     <groupId>com.github.lajospolya</groupId>
     <artifactId>spotify-api-wrapper</artifactId>
-    <version>2.1.8-SNAPSHOT</version>
+    <version>2.1.9-SNAPSHOT</version>
 
     <name>com.github.lajospolya:spotify-api-wrapper</name>
     <description>This project wraps the Spotify public API in order to allow users to intuitively use it</description>

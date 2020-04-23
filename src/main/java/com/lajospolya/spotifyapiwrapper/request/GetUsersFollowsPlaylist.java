@@ -37,9 +37,9 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
         @Override
         public GetUsersFollowsPlaylist build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, playListId);
-            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, userIds);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, playListId)
+            .queryParam(IDS_QUERY_PARAM, userIds);
 
             return new GetUsersFollowsPlaylist(spotifyRequestBuilder.GET());
         }

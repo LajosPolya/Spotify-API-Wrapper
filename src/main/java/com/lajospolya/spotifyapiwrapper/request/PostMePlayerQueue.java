@@ -32,8 +32,8 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
         @Override
         public PostMePlayerQueue build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(URI_QUERY_PARAM, uri);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(URI_QUERY_PARAM, uri);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PostMePlayerQueue(spotifyRequestBuilder.POST());

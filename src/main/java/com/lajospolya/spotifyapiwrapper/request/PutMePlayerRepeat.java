@@ -33,8 +33,8 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerRepeat build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(STATE_QUERY_PARAM, state.getState());
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(STATE_QUERY_PARAM, state.getState());
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PutMePlayerRepeat(spotifyRequestBuilder.PUT());

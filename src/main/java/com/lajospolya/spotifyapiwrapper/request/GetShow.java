@@ -34,8 +34,8 @@ public class GetShow extends AbstractSpotifyRequest<Show>
         @Override
         public GetShow build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, showId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, showId);
             addOptionalQueryParams(spotifyRequestBuilder);
             return new GetShow(spotifyRequestBuilder.GET());
         }

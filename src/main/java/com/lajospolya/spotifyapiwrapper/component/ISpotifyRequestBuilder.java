@@ -11,21 +11,21 @@ public interface ISpotifyRequestBuilder
     String IF_NOT_MATCH = "If-None-Match";
     String DELETE = "DELETE";
 
-    void pathParam(String name, String value);
+    ISpotifyRequestBuilder pathParam(String name, String value);
 
-    void queryParam(String name, Object value);
+    ISpotifyRequestBuilder queryParam(String name, Object value);
 
-    void queryParam(String name, List<String> values);
+    ISpotifyRequestBuilder queryParam(String name, List<String> values);
 
-    <T extends Enum<T>> void queryParam(String name, List<T> values, Function<T, String> function);
+    <T extends Enum<T>> ISpotifyRequestBuilder queryParam(String name, List<T> values, Function<T, String> function);
 
-    void queryParam(Map<String, Object> nameValuePair);
+    ISpotifyRequestBuilder queryParam(Map<String, Object> nameValuePair);
 
-    void contentType(String value);
+    ISpotifyRequestBuilder contentType(String value);
 
-    void authorization(String token);
+    ISpotifyRequestBuilder authorization(String token);
 
-    void etag(String value);
+    ISpotifyRequestBuilder etag(String value);
 
     ISpotifyRequestBuilder GET();
 

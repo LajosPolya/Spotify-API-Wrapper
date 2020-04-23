@@ -33,8 +33,8 @@ public class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures>
         @Override
         public GetAudioFeatures build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, trackId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, trackId);
 
             return new GetAudioFeatures(spotifyRequestBuilder.GET());
         }

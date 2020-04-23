@@ -34,8 +34,8 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
         @Override
         public GetMeAlbumsContains build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM, albumIds);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(IDS_QUERY_PARAM, albumIds);
 
             return new GetMeAlbumsContains(spotifyRequestBuilder.GET());
         }

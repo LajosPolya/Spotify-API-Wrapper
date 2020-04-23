@@ -34,8 +34,8 @@ public class GetMeTracksContains extends AbstractSpotifyRequest<List<Boolean>>
         @Override
         public GetMeTracksContains build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(IDS_QUERY_PARAM,  trackIds);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(IDS_QUERY_PARAM,  trackIds);
 
             return new GetMeTracksContains(spotifyRequestBuilder.GET());
         }

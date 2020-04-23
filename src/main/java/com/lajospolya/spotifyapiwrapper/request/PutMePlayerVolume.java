@@ -33,8 +33,8 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
         @Override
         public PutMePlayerVolume build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .queryParam(VOLUME_PERCENT_QUERY_PARAM, volumePercent);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new PutMePlayerVolume(spotifyRequestBuilder.PUT());

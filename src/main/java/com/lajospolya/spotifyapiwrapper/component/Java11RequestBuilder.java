@@ -33,56 +33,64 @@ public class Java11RequestBuilder implements ISpotifyRequestBuilder
     }
 
     @Override
-    public void pathParam(String name, String value)
+    public Java11RequestBuilder pathParam(String name, String value)
     {
         pathVars = new HashMap<>();
         pathVars.put(name, value);
+        return this;
     }
 
     @Override
-    public void queryParam(String name, Object value)
+    public Java11RequestBuilder queryParam(String name, Object value)
     {
         uriComponentsBuilder.queryParam(name, value);
+        return this;
     }
 
     @Override
-    public void queryParam(String name, List<String> values)
+    public Java11RequestBuilder queryParam(String name, List<String> values)
     {
         String commaSeparatedIds = String.join(",", values);
         uriComponentsBuilder.queryParam(name, commaSeparatedIds);
+        return this;
     }
 
     @Override
-    public <T extends Enum<T>> void queryParam(String name, List<T> values, Function<T, String> function)
+    public <T extends Enum<T>> Java11RequestBuilder queryParam(String name, List<T> values, Function<T, String> function)
     {
         String commaSeparatedValues = values.stream()
                 .map(function)
                 .collect(Collectors.joining(","));
         uriComponentsBuilder.queryParam(name, commaSeparatedValues);
+        return this;
     }
 
     @Override
-    public void queryParam(Map<String, Object> nameValuePair)
+    public Java11RequestBuilder queryParam(Map<String, Object> nameValuePair)
     {
         nameValuePair.forEach((name, value) -> uriComponentsBuilder.queryParam(name, value));
+        return this;
     }
 
     @Override
-    public void contentType(String value)
+    public Java11RequestBuilder contentType(String value)
     {
         requestBuilder.header(CONTENT_TYPE_HEADER, value);
+        return this;
     }
 
     @Override
-    public void authorization(String token)
+    public Java11RequestBuilder authorization(String token)
     {
         requestBuilder.header(AUTHORIZATION_HEADER, token);
+        return this;
     }
 
     @Override
-    public void etag(String value)
+    public Java11RequestBuilder etag(String value)
     {
         requestBuilder.header(IF_NOT_MATCH, value);
+        return this;
     }
 
     @Override

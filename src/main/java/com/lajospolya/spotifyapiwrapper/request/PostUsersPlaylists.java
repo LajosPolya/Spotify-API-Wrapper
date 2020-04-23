@@ -39,9 +39,9 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
         @Override
         public PostUsersPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
-            spotifyRequestBuilder.pathParam(PATH_PARAM, userId);
-            spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING)
+            .pathParam(PATH_PARAM, userId)
+            .contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostUsersPlaylists(
                     spotifyRequestBuilder.POSTWithJsonBody(
