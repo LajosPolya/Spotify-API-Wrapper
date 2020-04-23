@@ -5,6 +5,8 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -147,7 +149,9 @@ public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
     {
         if(pathName != null && pathValue != null)
         {
-            String uriWithPathVariable = urlBuilder.toString().replace(pathName, pathValue);
+
+            String uriWithPathVariable = urlBuilder.toString().replace(
+                    URLEncoder.encode(pathName, StandardCharsets.UTF_8), pathValue);
             urlBuilder = HttpUrl.parse(uriWithPathVariable).newBuilder();
         }
         HttpUrl url = urlBuilder.build();
