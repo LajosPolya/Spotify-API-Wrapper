@@ -151,7 +151,7 @@ public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
         {
 
             String uriWithPathVariable = urlBuilder.toString().replace(
-                    URLEncoder.encode(pathName, StandardCharsets.UTF_8), pathValue);
+                    URLEncoder.encode(pathName, StandardCharsets.UTF_8.toString()), pathValue);
             urlBuilder = HttpUrl.parse(uriWithPathVariable).newBuilder();
         }
         HttpUrl url = urlBuilder.build();
