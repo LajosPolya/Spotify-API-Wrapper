@@ -5,6 +5,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -149,10 +150,16 @@ public class OkHttp4RequestBuilder implements ISpotifyRequestBuilder
     {
         if(pathName != null && pathValue != null)
         {
-
-            String uriWithPathVariable = urlBuilder.toString().replace(
-                    URLEncoder.encode(pathName, StandardCharsets.UTF_8.toString()), pathValue);
-            urlBuilder = HttpUrl.parse(uriWithPathVariable).newBuilder();
+            try
+            {
+                String uriWithPathVariable = urlBuilder.toString().replace(
+                        URLEncoder.encode(pathName, StandardCharsets.UTF_8.toString()), pathValue);
+                urlBuilder = HttpUrl.parse(uriWithPathVariable).newBuilder();
+            }
+            catch (UnsupportedEncodingException e)
+            {
+                throw new RuntimeException(e);
+            }
         }
         HttpUrl url = urlBuilder.build();
         return requestBuilder.url(url);
