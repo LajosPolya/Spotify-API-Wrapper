@@ -13,6 +13,7 @@ import com.lajospolya.spotifyapiwrapper.response.SimplifiedEpisode;
  */
 public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEpisode>>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "shows/{id}/episodes";
 
     private GetShowsEpisodes(ISpotifyRequestBuilder requestBuilder)
@@ -36,7 +37,8 @@ public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEp
         @Override
         public GetShowsEpisodes build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, showId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, showId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetShowsEpisodes(spotifyRequestBuilder.GET());

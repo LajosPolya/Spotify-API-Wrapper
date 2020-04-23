@@ -40,13 +40,4 @@ public class SpotifyClientComponentsFactory
         }
         return new OkHttp4RequestBuilder(uri);
     }
-
-    public static ISpotifyRequestBuilder spotifyRequestBuilder(String uri, String pathVariable)
-    {
-        if (useJava11)
-        {
-            return new Java11RequestBuilder(uri, pathVariable);
-        }
-        return new OkHttp4RequestBuilder(uri, pathVariable);
-    }
 }

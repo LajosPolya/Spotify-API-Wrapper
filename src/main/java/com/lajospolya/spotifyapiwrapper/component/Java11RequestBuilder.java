@@ -5,6 +5,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.http.HttpRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -23,7 +24,7 @@ public class Java11RequestBuilder implements ISpotifyRequestBuilder
     private final UriComponentsBuilder uriComponentsBuilder;
     private final HttpRequest.Builder requestBuilder;
     // Only one path variable is supported
-    private String pathVariable = null;
+    private Map<String, String> pathVars;
 
     public Java11RequestBuilder(String uri)
     {
@@ -31,10 +32,11 @@ public class Java11RequestBuilder implements ISpotifyRequestBuilder
         this.requestBuilder = HttpRequest.newBuilder();
     }
 
-    public Java11RequestBuilder(String uri, String pathVariable)
+    @Override
+    public void pathParam(String name, String value)
     {
-        this(uri);
-        this.pathVariable = pathVariable;
+        pathVars = new HashMap<>();
+        pathVars.put(name, value);
     }
 
     @Override
@@ -149,13 +151,13 @@ public class Java11RequestBuilder implements ISpotifyRequestBuilder
     private HttpRequest.Builder createBuilderWithUri()
     {
         UriComponents uriComponents;
-        if(pathVariable == null)
+        if(pathVars == null)
         {
             uriComponents = uriComponentsBuilder.build();
         }
         else
         {
-            uriComponents = uriComponentsBuilder.buildAndExpand(pathVariable);
+            uriComponents = uriComponentsBuilder.buildAndExpand(pathVars);
         }
         return requestBuilder.uri(uriComponents.toUri());
     }

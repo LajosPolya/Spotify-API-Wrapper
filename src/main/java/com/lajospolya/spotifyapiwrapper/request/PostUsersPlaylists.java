@@ -13,6 +13,7 @@ import com.lajospolya.spotifyapiwrapper.response.Playlist;
  */
 public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 {
+    private static final String PATH_PARAM = "{user_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "users/{user_id}/playlists";
 
     private PostUsersPlaylists(ISpotifyRequestBuilder requestBuilder)
@@ -38,7 +39,8 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
         @Override
         public PostUsersPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, userId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, userId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PostUsersPlaylists(

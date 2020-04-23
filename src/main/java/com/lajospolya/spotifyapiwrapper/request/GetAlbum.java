@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.Album;
  */
 public class GetAlbum extends AbstractSpotifyRequest<Album>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums/{id}";
 
     private GetAlbum(ISpotifyRequestBuilder requestBuilder)
@@ -33,7 +34,8 @@ public class GetAlbum extends AbstractSpotifyRequest<Album>
         @Override
         public GetAlbum build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, albumId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, albumId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAlbum(spotifyRequestBuilder.GET());

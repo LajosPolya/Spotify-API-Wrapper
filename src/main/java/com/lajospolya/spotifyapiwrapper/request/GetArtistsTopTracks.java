@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.ArtistsTopTracks;
  */
 public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/top-tracks";
 
     private GetArtistsTopTracks(ISpotifyRequestBuilder requestBuilder)
@@ -34,7 +35,8 @@ public class GetArtistsTopTracks extends AbstractSpotifyRequest<ArtistsTopTracks
         @Override
         public GetArtistsTopTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, artistId);
             spotifyRequestBuilder.queryParam(MARKET_QUERY_PARAM, market);
 
             return new GetArtistsTopTracks(spotifyRequestBuilder.GET());

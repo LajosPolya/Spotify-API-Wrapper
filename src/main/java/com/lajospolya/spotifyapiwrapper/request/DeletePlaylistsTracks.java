@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapshot>
 {
+    private static final String PATH_PARAM = "{playlist_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
     private DeletePlaylistsTracks(ISpotifyRequestBuilder requestBuilder)
@@ -39,7 +40,8 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
         @Override
         public DeletePlaylistsTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new DeletePlaylistsTracks(

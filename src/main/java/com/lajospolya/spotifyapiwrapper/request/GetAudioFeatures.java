@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.AudioFeatures;
  */
 public class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-features/{id}";
 
     private GetAudioFeatures(ISpotifyRequestBuilder requestBuilder)
@@ -32,7 +33,8 @@ public class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures>
         @Override
         public GetAudioFeatures build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, trackId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, trackId);
 
             return new GetAudioFeatures(spotifyRequestBuilder.GET());
         }

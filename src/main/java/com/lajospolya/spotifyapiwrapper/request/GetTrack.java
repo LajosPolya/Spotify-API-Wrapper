@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.Track;
  */
 public class GetTrack extends AbstractSpotifyRequest<Track>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "tracks/{id}";
 
     private GetTrack(ISpotifyRequestBuilder requestBuilder)
@@ -33,7 +34,8 @@ public class GetTrack extends AbstractSpotifyRequest<Track>
         @Override
         public GetTrack build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, trackId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, trackId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetTrack(spotifyRequestBuilder.GET());

@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.Artists;
  */
 public class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artists>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/related-artists";
 
     private GetArtistsRelatedArtists(ISpotifyRequestBuilder requestBuilder)
@@ -32,7 +33,8 @@ public class GetArtistsRelatedArtists extends AbstractSpotifyRequest<Artists>
         @Override
         public GetArtistsRelatedArtists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, artistId);
 
             return new GetArtistsRelatedArtists(spotifyRequestBuilder.GET());
         }

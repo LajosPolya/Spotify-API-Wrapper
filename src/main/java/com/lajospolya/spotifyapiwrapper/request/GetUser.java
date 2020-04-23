@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.UserPublic;
  */
 public class GetUser extends AbstractSpotifyRequest<UserPublic>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "users/{id}";
 
     private GetUser(ISpotifyRequestBuilder requestBuilder)
@@ -32,7 +33,8 @@ public class GetUser extends AbstractSpotifyRequest<UserPublic>
         @Override
         public GetUser build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, userId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, userId);
 
             return new GetUser(spotifyRequestBuilder.GET());
         }

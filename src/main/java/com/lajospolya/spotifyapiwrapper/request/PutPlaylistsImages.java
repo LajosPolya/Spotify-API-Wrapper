@@ -11,6 +11,7 @@ import com.lajospolya.spotifyapiwrapper.component.SpotifyClientComponentsFactory
  */
 public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
 {
+    private static final String PATH_PARAM = "{playlist_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/images";
 
     private PutPlaylistsImages(ISpotifyRequestBuilder requestBuilder)
@@ -34,7 +35,8 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylistsImages build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistId);
             spotifyRequestBuilder.contentType(IMAGE_JPEG_HEADER_VALUE);
 
             return new PutPlaylistsImages(spotifyRequestBuilder.PUTWithStringBody(base64image));

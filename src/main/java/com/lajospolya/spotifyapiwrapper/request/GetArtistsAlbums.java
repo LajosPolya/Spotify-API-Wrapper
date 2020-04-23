@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "artists/{id}/albums";
 
     private GetArtistsAlbums(ISpotifyRequestBuilder requestBuilder)
@@ -39,7 +40,8 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
         @Override
         public GetArtistsAlbums build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, artistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, artistId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetArtistsAlbums(spotifyRequestBuilder.GET());

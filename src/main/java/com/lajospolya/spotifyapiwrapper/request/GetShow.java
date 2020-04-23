@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.Show;
  */
 public class GetShow extends AbstractSpotifyRequest<Show>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "shows/{id}";
 
     private GetShow(ISpotifyRequestBuilder requestBuilder)
@@ -33,7 +34,8 @@ public class GetShow extends AbstractSpotifyRequest<Show>
         @Override
         public GetShow build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, showId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, showId);
             addOptionalQueryParams(spotifyRequestBuilder);
             return new GetShow(spotifyRequestBuilder.GET());
         }

@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.CategorysPlaylists;
  */
 public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlaylists>
 {
+    private static final String PATH_PARAM = "{category_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "browse/categories/{category_id}/playlists";
 
     public GetCategorysPlaylists(ISpotifyRequestBuilder requestBuilder)
@@ -34,7 +35,8 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
         @Override
         public GetCategorysPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, categoryId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, categoryId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetCategorysPlaylists(spotifyRequestBuilder.GET());

@@ -11,6 +11,8 @@ public interface ISpotifyRequestBuilder
     String IF_NOT_MATCH = "If-None-Match";
     String DELETE = "DELETE";
 
+    void pathParam(String name, String value);
+
     void queryParam(String name, Object value);
 
     void queryParam(String name, List<String> values);

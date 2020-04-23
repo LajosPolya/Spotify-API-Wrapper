@@ -7,6 +7,7 @@ import com.lajospolya.spotifyapiwrapper.component.SpotifyClientComponentsFactory
 
 abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 {
+    private static final String PATH_PARAM = "{type}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "me/top/{type}";
 
     GetUsersTop(ISpotifyRequestBuilder requestBuilder)
@@ -24,7 +25,8 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 
         ISpotifyRequestBuilder build(UsersTopType type)
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, type.getName());
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, type.getName());
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return spotifyRequestBuilder.GET();

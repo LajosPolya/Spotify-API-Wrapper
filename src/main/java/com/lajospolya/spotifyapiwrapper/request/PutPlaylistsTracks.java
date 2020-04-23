@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
 {
+    private static final String PATH_PARAM = "{playlist_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}/tracks";
 
     private PutPlaylistsTracks(ISpotifyRequestBuilder requestBuilder)
@@ -37,7 +38,8 @@ public class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylistsTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistId);
             spotifyRequestBuilder.contentType(APPLICATION_JSON_CONTENT_TYPE_HEADER_VALUE);
 
             return new PutPlaylistsTracks(

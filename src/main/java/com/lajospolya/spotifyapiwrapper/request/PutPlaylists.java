@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.component.SpotifyClientComponentsFactory
  */
 public class PutPlaylists extends AbstractSpotifyRequest<Void>
 {
+    private static final String PATH_PARAM = "{playlist_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}";
 
     private PutPlaylists(ISpotifyRequestBuilder requestBuilder)
@@ -36,7 +37,8 @@ public class PutPlaylists extends AbstractSpotifyRequest<Void>
         @Override
         public PutPlaylists build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistsId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistsId);
 
             return createRequest(spotifyRequestBuilder);
         }

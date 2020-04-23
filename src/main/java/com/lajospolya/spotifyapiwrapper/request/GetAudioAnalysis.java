@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.AudioAnalysis;
  */
 public class GetAudioAnalysis extends AbstractSpotifyRequest<AudioAnalysis>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "audio-analysis/{id}";
 
     private GetAudioAnalysis(ISpotifyRequestBuilder requestBuilder)
@@ -32,7 +33,8 @@ public class GetAudioAnalysis extends AbstractSpotifyRequest<AudioAnalysis>
         @Override
         public GetAudioAnalysis build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, trackId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, trackId);
 
             return new GetAudioAnalysis(spotifyRequestBuilder.GET());
         }

@@ -12,6 +12,7 @@ import com.lajospolya.spotifyapiwrapper.response.Playlist;
  */
 public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
 {
+    private static final String PATH_PARAM = "{playlist_id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "playlists/{playlist_id}";
 
     private GetPlaylist(ISpotifyRequestBuilder requestBuilder)
@@ -32,7 +33,8 @@ public class GetPlaylist extends AbstractSpotifyRequest<Playlist>
         @Override
         public GetPlaylist build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, playlistId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, playlistId);
             addEtagHeader(spotifyRequestBuilder);
             return new GetPlaylist(spotifyRequestBuilder.GET());
         }

@@ -13,6 +13,7 @@ import com.lajospolya.spotifyapiwrapper.response.SimplifiedTrack;
  */
 public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTrack>>
 {
+    private static final String PATH_PARAM = "{id}";
     private static final String REQUEST_URI_STRING = SPOTIFY_V1_API_URI +  "albums/{id}/tracks";
 
     private GetAlbumsTracks(ISpotifyRequestBuilder requestBuilder)
@@ -36,7 +37,8 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
         @Override
         public GetAlbumsTracks build()
         {
-            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING, albumId);
+            ISpotifyRequestBuilder spotifyRequestBuilder = SpotifyClientComponentsFactory.spotifyRequestBuilder(REQUEST_URI_STRING);
+            spotifyRequestBuilder.pathParam(PATH_PARAM, albumId);
             addOptionalQueryParams(spotifyRequestBuilder);
 
             return new GetAlbumsTracks(spotifyRequestBuilder.GET());
