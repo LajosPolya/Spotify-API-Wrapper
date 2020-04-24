@@ -1,7 +1,10 @@
 package com.lajospolya.spotifyapiwrapper.component;
 
+import com.google.gson.JsonSyntaxException;
 import com.lajospolya.spotifyapiwrapper.component.service.HttpResponseHelper;
+import com.lajospolya.spotifyapiwrapper.response.AuthenticationError;
 import com.lajospolya.spotifyapiwrapper.response.SpotifyErrorContainer;
+import com.lajospolya.spotifyapiwrapper.spotifyexception.SpotifyRequestAuthorizationException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -49,11 +52,20 @@ public class OkHttp4AsyncResponse<T> implements ISpotifyAsyncResponse<T>
                 int statusCode = response.code();
                 if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
                 {
-                    SpotifyErrorContainer body = helper.serializeBody(response.body().string(), response.headers().toMultimap(), SpotifyErrorContainer.class);
-                    if(errorConsumer != null)
+                    try
                     {
-                        errorConsumer.accept(body);
+                        SpotifyErrorContainer body = helper.serializeBody(response.body().string(), response.headers().toMultimap(), SpotifyErrorContainer.class);
+                        if(errorConsumer != null)
+                        {
+                            errorConsumer.accept(body);
+                        }
                     }
+                    catch (JsonSyntaxException e)
+                    {
+                        AuthenticationError authenticationError = helper.serializeBody(response.body().string(), response.headers().toMultimap(), AuthenticationError.class);
+                        throw new SpotifyRequestAuthorizationException(authenticationError.toString());
+                    }
+
                 }
                 else
                 {
