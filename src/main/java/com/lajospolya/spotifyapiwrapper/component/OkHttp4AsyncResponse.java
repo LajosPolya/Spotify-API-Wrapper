@@ -52,9 +52,10 @@ public class OkHttp4AsyncResponse<T> implements ISpotifyAsyncResponse<T>
                 int statusCode = response.code();
                 if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
                 {
+                    String stringBody = response.body().string();
                     try
                     {
-                        SpotifyErrorContainer body = helper.serializeBody(response.body().string(), response.headers().toMultimap(), SpotifyErrorContainer.class);
+                        SpotifyErrorContainer body = helper.serializeBody(stringBody, response.headers().toMultimap(), SpotifyErrorContainer.class);
                         if(errorConsumer != null)
                         {
                             errorConsumer.accept(body);
@@ -62,7 +63,7 @@ public class OkHttp4AsyncResponse<T> implements ISpotifyAsyncResponse<T>
                     }
                     catch (JsonSyntaxException e)
                     {
-                        AuthenticationError authenticationError = helper.serializeBody(response.body().string(), response.headers().toMultimap(), AuthenticationError.class);
+                        AuthenticationError authenticationError = helper.serializeBody(stringBody, response.headers().toMultimap(), AuthenticationError.class);
                         throw new SpotifyRequestAuthorizationException(authenticationError.toString());
                     }
 

@@ -42,13 +42,14 @@ public class OkHttp4Response<T> implements ISpotifyResponse<T>
         if(helper.isClientErrorStatusCode(statusCode) || helper.isServerErrorStatusCode(statusCode))
         {
             erroneous = true;
+            String body = response.body().string();
             try
             {
-                error = helper.serializeBody(response.body().string(), response.headers().toMultimap(), SpotifyErrorContainer.class);
+                error = helper.serializeBody(body, response.headers().toMultimap(), SpotifyErrorContainer.class);
             }
             catch (JsonSyntaxException e)
             {
-                AuthenticationError authenticationError = helper.serializeBody(response.body().string(), response.headers().toMultimap(), AuthenticationError.class);
+                AuthenticationError authenticationError = helper.serializeBody(body, response.headers().toMultimap(), AuthenticationError.class);
                 throw new SpotifyRequestAuthorizationException(authenticationError.toString());
             }
         }
