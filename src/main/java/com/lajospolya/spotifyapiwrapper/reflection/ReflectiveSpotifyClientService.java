@@ -45,10 +45,10 @@ public class ReflectiveSpotifyClientService implements IReflectiveSpotifyClientS
     }
 
     @Override
-    public <T, U> ISpotifyRequest<U> buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws InvocationTargetException, IllegalAccessException
+    public <T> ISpotifyRequest<?> buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws InvocationTargetException, IllegalAccessException
     {
         buildRequestMethod.setAccessible(true);
-        ISpotifyRequest<U> request =  (ISpotifyRequest<U>) buildRequestMethod.invoke(spotifyRequest, (Object[]) null);
+        ISpotifyRequest<?> request = (ISpotifyRequest<?>) buildRequestMethod.invoke(spotifyRequest, (Object[]) null);
         buildRequestMethod.setAccessible(false);
         return request;
     }
