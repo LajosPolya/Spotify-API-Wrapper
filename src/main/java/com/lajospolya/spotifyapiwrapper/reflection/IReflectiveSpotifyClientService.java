@@ -19,6 +19,7 @@ public interface IReflectiveSpotifyClientService
 
     /**
      * Via reflection, calls the private reflectiveBuildRequest method in order to build the request object
+     * @param <T> Type of object returned by the request
      * @param spotifyRequest the request to build
      * @return the built HTTP request
      * @throws InvocationTargetException thrown by the java.lang.reflect method calls
