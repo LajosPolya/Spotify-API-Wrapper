@@ -9,7 +9,7 @@ import java.util.Base64;
 
 public class SpotifyApiClientService implements ISpotifyApiClientService
 {
-    private ISpotifyClient client;
+    private final ISpotifyClient client;
 
     public SpotifyApiClientService()
     {
@@ -17,14 +17,14 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     }
 
     @Override
-    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
+    public <T, U> T sendRequestAndFetchResponse(ISpotifyRequest<U> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyResponse<T> response = client.send(request, typeOfReturnValue);
         return response.body();
     }
 
     @Override
-    public <T> ISpotifyAsyncResponse<T> sendRequestAndFetchResponseAsync(ISpotifyRequest<T> request, Type typeOfReturnValue) throws SpotifyResponseException
+    public <T, U> ISpotifyAsyncResponse<T> sendRequestAndFetchResponseAsync(ISpotifyRequest<U> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyAsyncResponse<T> asyncResponse = client.sendAsync(request, typeOfReturnValue);
         return  asyncResponse;

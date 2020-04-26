@@ -33,8 +33,8 @@ public class SpotifyApiClient
     private String bearerToken;
 
     private Long timeOfAuthorization;
-    private IReflectiveSpotifyClientService reflectiveSpotifyClientService;
-    private ISpotifyApiClientService spotifyApiClientService;
+    private final IReflectiveSpotifyClientService reflectiveSpotifyClientService;
+    private final ISpotifyApiClientService spotifyApiClientService;
 
     private static final String BASIC_AUTHORIZATION = "Basic ";
 
@@ -165,10 +165,10 @@ public class SpotifyApiClient
         }
     }
 
-    private <T> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T, U> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
-        ISpotifyRequest<T> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+        ISpotifyRequest<U> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
         Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
         return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
