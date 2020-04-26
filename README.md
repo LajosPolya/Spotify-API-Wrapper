@@ -8,9 +8,15 @@ Maven
 <dependency>
     <groupId>com.github.lajospolya</groupId>
     <artifactId>spotify-api-wrapper</artifactId>
-    <version>2.1.RELEASE</version>
+    <version>3.0.RELEASE</version>
 </dependency>
 ```
+
+Gradle
+```gradle
+implementation group: 'com.github.lajospolya', name: 'spotify-api-wrapper', version: '3.0.RELEASE'
+```
+Please note that only versions `3.0.RELEASE` and above are Android compatible.
 
 For other Dependency Management systems please check [Maven](https://mvnrepository.com/artifact/com.github.lajospolya/spotify-api-wrapper)
 or [Sonatype](https://search.maven.org/artifact/com.github.lajospolya/spotify-api-wrapper) repositories.
