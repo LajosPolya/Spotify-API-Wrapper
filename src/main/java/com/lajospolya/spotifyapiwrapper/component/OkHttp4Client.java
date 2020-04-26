@@ -27,7 +27,7 @@ public class OkHttp4Client implements ISpotifyClient
     }
 
     @Override
-    public <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<T> request, Type typeOfResponse)
+    public <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<?> request, Type typeOfResponse)
     {
         return new OkHttp4AsyncResponse<>(client.newCall((Request) request.get()), typeOfResponse);
     }

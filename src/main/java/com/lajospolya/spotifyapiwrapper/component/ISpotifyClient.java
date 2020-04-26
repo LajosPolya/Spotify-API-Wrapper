@@ -6,5 +6,5 @@ public interface ISpotifyClient
 {
     <T> ISpotifyResponse<T> send(ISpotifyRequest<?> request, Type typeOfResponse);
 
-    <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<T> request, Type typeOfResponse);
+    <T> ISpotifyAsyncResponse<T> sendAsync(ISpotifyRequest<?> request, Type typeOfResponse);
 }
