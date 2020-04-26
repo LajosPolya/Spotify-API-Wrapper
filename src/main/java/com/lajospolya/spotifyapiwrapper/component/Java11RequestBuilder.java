@@ -36,6 +36,7 @@ public class Java11RequestBuilder implements ISpotifyRequestBuilder
     public Java11RequestBuilder pathParam(String name, String value)
     {
         pathVars = new HashMap<>();
+        name = name.substring(1, name.length() - 1);
         pathVars.put(name, value);
         return this;
     }
