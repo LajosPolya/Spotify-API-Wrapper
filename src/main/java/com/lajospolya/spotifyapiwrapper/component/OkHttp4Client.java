@@ -12,7 +12,7 @@ public class OkHttp4Client implements ISpotifyClient
     private final OkHttpClient client = new OkHttpClient.Builder().build();
 
     @Override
-    public <T> ISpotifyResponse<T> send(ISpotifyRequest<T> request, Type typeOfResponse)
+    public <T> ISpotifyResponse<T> send(ISpotifyRequest<?> request, Type typeOfResponse)
     {
         Response response = null;
         try

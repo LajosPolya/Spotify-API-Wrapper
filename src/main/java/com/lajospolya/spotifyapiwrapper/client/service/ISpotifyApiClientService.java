@@ -24,7 +24,7 @@ public interface ISpotifyApiClientService
      * @throws IOException delegated exception
      * @throws InterruptedException delegated exception
      */
-    <T> T sendRequestAndFetchResponse(ISpotifyRequest<T> request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException;
+    <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws IOException, InterruptedException, SpotifyResponseException;
 
     /**
      * Sends the request and returns a serialized version of the response

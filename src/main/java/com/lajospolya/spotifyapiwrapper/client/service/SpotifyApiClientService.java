@@ -17,7 +17,7 @@ public class SpotifyApiClientService implements ISpotifyApiClientService
     }
 
     @Override
-    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<T> request, Type typeOfReturnValue) throws SpotifyResponseException
+    public <T> T sendRequestAndFetchResponse(ISpotifyRequest<?> request, Type typeOfReturnValue) throws SpotifyResponseException
     {
         ISpotifyResponse<T> response = client.send(request, typeOfReturnValue);
         return response.body();

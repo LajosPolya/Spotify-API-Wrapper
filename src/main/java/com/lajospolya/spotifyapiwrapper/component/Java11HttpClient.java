@@ -19,7 +19,7 @@ public class Java11HttpClient implements ISpotifyClient
     }
 
     @Override
-    public <T> ISpotifyResponse<T> send(ISpotifyRequest<T> request, Type typeOfResponse)
+    public <T> ISpotifyResponse<T> send(ISpotifyRequest<?> request, Type typeOfResponse)
     {
         try
         {

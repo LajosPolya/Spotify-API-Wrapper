@@ -24,7 +24,7 @@ public interface IReflectiveSpotifyClientService
      * @throws InvocationTargetException thrown by the java.lang.reflect method calls
      * @throws IllegalAccessException thrown by the java.lang.reflect method calls
      */
-    ISpotifyRequest<?> buildRequest(AbstractSpotifyRequest<?> spotifyRequest) throws InvocationTargetException, IllegalAccessException;
+    <T, U> ISpotifyRequest<U> buildRequest(AbstractSpotifyRequest<T> spotifyRequest) throws InvocationTargetException, IllegalAccessException;
 
     Type getParameterizedTypeOfRequest(AbstractSpotifyRequest<?> spotifyRequest);
 }

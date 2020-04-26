@@ -14,7 +14,7 @@ public abstract class AbstractSpotifyRequest<T>
 {
     static final String SPOTIFY_V1_API_URI = "https://api.spotify.com/v1/";
 
-    private ISpotifyRequestBuilder requestBuilder;
+    private final ISpotifyRequestBuilder requestBuilder;
     private String accessToken;
 
     AbstractSpotifyRequest(ISpotifyRequestBuilder requestBuilder)
@@ -29,7 +29,7 @@ public abstract class AbstractSpotifyRequest<T>
      * This method is private to simplify the interface for end users.
      * @return ISpotifyRequest the built request
      */
-    private ISpotifyRequest reflectiveBuildRequest()
+    private ISpotifyRequest<?> reflectiveBuildRequest()
     {
         if(accessToken == null)
         {
