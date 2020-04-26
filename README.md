@@ -101,7 +101,7 @@ client.reauthorize();
 client.reauthorizeAsync();
 ```
 
-#### Caching with Etags
+#### Caching with ETags
 Spotify has implemented [Contitional Requests](https://developer.spotify.com/documentation/web-api/#conditional-requests) 
 through the use of [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag).
 
