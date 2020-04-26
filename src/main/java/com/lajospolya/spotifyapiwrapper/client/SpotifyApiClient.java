@@ -149,12 +149,12 @@ public class SpotifyApiClient
         }
     }
 
-    private <T, U> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> T sendRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
         try
         {
-            ISpotifyRequest<U> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+            ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
             Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
             return spotifyApiClientService.sendRequestAndFetchResponse(request, genericType);
@@ -165,16 +165,16 @@ public class SpotifyApiClient
         }
     }
 
-    private <T, U> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyAsyncResponse<T> sendRequestAsync(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
             throws SpotifyRequestBuilderException, SpotifyResponseException
     {
-        ISpotifyRequest<U> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
+        ISpotifyRequest<?> request = authorizeAndBuildRequest(spotifyRequest, accessToken);
         Type genericType = reflectiveSpotifyClientService.getParameterizedTypeOfRequest(spotifyRequest);
 
         return spotifyApiClientService.sendRequestAndFetchResponseAsync(request, genericType);
     }
 
-    private <T, U> ISpotifyRequest<U> authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
+    private <T> ISpotifyRequest<?> authorizeAndBuildRequest(AbstractSpotifyRequest<T> spotifyRequest, String accessToken)
     {
         try
         {
