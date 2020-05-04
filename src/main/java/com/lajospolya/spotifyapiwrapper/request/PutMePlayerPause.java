@@ -18,7 +18,7 @@ public class PutMePlayerPause extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutMePlayerPause>
+    public static class Builder implements AbstractBuilder<PutMePlayerPause>
     {
         private String deviceId;
 

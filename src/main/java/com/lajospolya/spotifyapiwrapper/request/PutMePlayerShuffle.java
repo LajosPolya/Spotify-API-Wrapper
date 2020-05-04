@@ -18,14 +18,14 @@ public class PutMePlayerShuffle extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutMePlayerShuffle>
+    public static class Builder implements AbstractBuilder<PutMePlayerShuffle>
     {
         private final Boolean state;
         private String deviceId;
 
         public Builder(Boolean state) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(state);
+            //spotifyRequestParamValidationService.validateParametersNotNull(state);
             this.state = state;
         }
 

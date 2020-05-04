@@ -20,14 +20,14 @@ public class GetAlbum extends AbstractSpotifyRequest<Album>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetAlbum>
+    public static class Builder implements AbstractBuilder<GetAlbum>
     {
         private final String albumId;
         private String market;
 
         public Builder(String albumId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(albumId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(albumId);
             this.albumId = albumId;
         }
 

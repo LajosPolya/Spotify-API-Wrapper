@@ -20,13 +20,13 @@ public class PostRefreshToken extends AbstractSpotifyRequest<AuthorizingToken>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostRefreshToken>
+    public static class Builder implements AbstractBuilder<PostRefreshToken>
     {
         private final String refreshToken;
 
         public Builder(String refreshToken)
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(refreshToken);
+            //spotifyRequestParamValidationService.validateParametersNotNull(refreshToken);
             this.refreshToken = refreshToken;
         }
 

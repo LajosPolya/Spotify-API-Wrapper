@@ -19,7 +19,7 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetAllNewReleases>
+    public static class Builder implements AbstractBuilder<GetAllNewReleases>
     {
         private String country;
         private Integer limit;
@@ -60,14 +60,14 @@ public class GetAllNewReleases extends AbstractSpotifyRequest<NewReleases>
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

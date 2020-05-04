@@ -15,7 +15,7 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
         super(requestBuilder);
     }
 
-    abstract static class Builder<T> extends AbstractBuilder<T>
+    abstract static class Builder<T> implements AbstractBuilder<T>
     {
         private Integer limit;
         private Integer offset;
@@ -50,14 +50,14 @@ abstract class GetUsersTop<T> extends AbstractSpotifyRequest<T>
 
         Builder<T> limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         Builder<T> offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

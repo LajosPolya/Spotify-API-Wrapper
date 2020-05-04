@@ -21,15 +21,15 @@ public class GetMeFollowingContains extends AbstractSpotifyRequest<List<Boolean>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMeFollowingContains>
+    public static class Builder implements AbstractBuilder<GetMeFollowingContains>
     {
         private final FollowType type;
         private final List<String> ids;
 
         public Builder(FollowType type, List<String> ids) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(type, ids);
-            spotifyRequestParamValidationService.validateIds50(ids);
+            //spotifyRequestParamValidationService.validateParametersNotNull(type, ids);
+            //spotifyRequestParamValidationService.validateIds50(ids);
             this.type = type;
             this.ids = ids;
         }

@@ -23,7 +23,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetSearch>
+    public static class Builder implements AbstractBuilder<GetSearch>
     {
         private final String query;
         private final List<SearchItemType> searchItemTypes;
@@ -34,7 +34,7 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 
         public Builder(String query, List<SearchItemType> searchItemTypes) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(query, searchItemTypes);
+            //spotifyRequestParamValidationService.validateParametersNotNull(query, searchItemTypes);
             this.searchItemTypes = searchItemTypes;
             this.query = query;
         }
@@ -78,14 +78,14 @@ public class GetSearch extends AbstractSpotifyRequest<SearchResults>
 
         public GetSearch.Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public GetSearch.Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

@@ -22,15 +22,15 @@ public class PutPlaylistsTracks extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutPlaylistsTracks>
+    public static class Builder implements AbstractBuilder<PutPlaylistsTracks>
     {
         private final String playlistId;
         private final List<String> uris;
 
         public Builder(String playlistId, List<String> uris) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, uris);
-            spotifyRequestParamValidationService.validatePlaylistUris(uris);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId, uris);
+            //spotifyRequestParamValidationService.validatePlaylistUris(uris);
             this.playlistId = playlistId;
             this.uris = uris;
         }

@@ -19,14 +19,14 @@ public class PutMePlayerRepeat extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutMePlayerRepeat>
+    public static class Builder implements AbstractBuilder<PutMePlayerRepeat>
     {
         private final RepeatState state;
         private String deviceId;
 
         public Builder(RepeatState state) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(state);
+            //spotifyRequestParamValidationService.validateParametersNotNull(state);
             this.state = state;
         }
 

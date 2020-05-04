@@ -29,7 +29,7 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
 
         public Builder(String userId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(userId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(userId);
             this.userId = userId;
         }
 
@@ -58,14 +58,14 @@ public class GetUsersPlaylists extends AbstractSpotifyRequest<Paging<SimplifiedP
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

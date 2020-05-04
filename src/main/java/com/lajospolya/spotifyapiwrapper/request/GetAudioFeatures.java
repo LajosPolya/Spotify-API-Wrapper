@@ -20,13 +20,13 @@ public class GetAudioFeatures extends AbstractSpotifyRequest<AudioFeatures>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetAudioFeatures>
+    public static class Builder implements AbstractBuilder<GetAudioFeatures>
     {
         private final String trackId;
 
         public Builder(String trackId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(trackId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(trackId);
             this.trackId = trackId;
         }
 

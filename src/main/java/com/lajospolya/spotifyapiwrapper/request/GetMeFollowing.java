@@ -28,7 +28,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
 
         public Builder(FollowType type) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(type);
+            //spotifyRequestParamValidationService.validateParametersNotNull(type);
             this.type = type;
         }
 
@@ -56,7 +56,7 @@ public class GetMeFollowing extends AbstractSpotifyRequest<Following>
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }

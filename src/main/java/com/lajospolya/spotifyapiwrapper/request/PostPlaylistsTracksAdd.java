@@ -23,7 +23,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostPlaylistsTracksAdd>
+    public static class Builder implements AbstractBuilder<PostPlaylistsTracksAdd>
     {
         private final String playlistId;
         private List<String> uris;
@@ -31,7 +31,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 
@@ -49,7 +49,7 @@ public class PostPlaylistsTracksAdd extends AbstractSpotifyRequest<PlaylistSnaps
 
         public Builder uris(List<String> uris) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validatePlaylistUris(uris);
+            //spotifyRequestParamValidationService.validatePlaylistUris(uris);
             this.uris = uris;
             return this;
         }

@@ -22,15 +22,15 @@ public class DeleteFollow extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<DeleteFollow>
+    public static class Builder implements AbstractBuilder<DeleteFollow>
     {
         private final FollowType type;
         private final List<String> ids;
 
         public Builder(FollowType type, List<String> ids) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(type, ids);
-            spotifyRequestParamValidationService.validateIds50(ids);
+            //spotifyRequestParamValidationService.validateParametersNotNull(type, ids);
+            //spotifyRequestParamValidationService.validateIds50(ids);
             this.type = type;
             this.ids = ids;
         }

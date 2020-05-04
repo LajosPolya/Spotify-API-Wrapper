@@ -21,7 +21,7 @@ public class GetEpisodes extends AbstractSpotifyRequest<Episodes>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetEpisodes>
+    public static class Builder implements AbstractBuilder<GetEpisodes>
     {
         private final List<String> episodeIds;
 
@@ -29,8 +29,8 @@ public class GetEpisodes extends AbstractSpotifyRequest<Episodes>
 
         public Builder(List<String> episodeIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(episodeIds);
-            spotifyRequestParamValidationService.validateIds50(episodeIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(episodeIds);
+            //spotifyRequestParamValidationService.validateIds50(episodeIds);
             this.episodeIds = episodeIds;
         }
 

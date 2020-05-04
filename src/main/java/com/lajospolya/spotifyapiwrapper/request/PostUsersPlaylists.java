@@ -21,7 +21,7 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostUsersPlaylists>
+    public static class Builder implements AbstractBuilder<PostUsersPlaylists>
     {
         private final String userId;
         private final String name;
@@ -31,7 +31,7 @@ public class PostUsersPlaylists extends AbstractSpotifyRequest<Playlist>
 
         public Builder(String userId, String name) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(userId, name);
+            //spotifyRequestParamValidationService.validateParametersNotNull(userId, name);
             this.userId = userId;
             this.name = name;
         }

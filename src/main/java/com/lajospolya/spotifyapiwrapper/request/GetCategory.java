@@ -20,7 +20,7 @@ public class GetCategory extends AbstractSpotifyRequest<Category>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetCategory>
+    public static class Builder implements AbstractBuilder<GetCategory>
     {
         private final String categoryId;
         private String country;
@@ -28,7 +28,7 @@ public class GetCategory extends AbstractSpotifyRequest<Category>
 
         public Builder(String categoryId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(categoryId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(categoryId);
             this.categoryId = categoryId;
         }
 

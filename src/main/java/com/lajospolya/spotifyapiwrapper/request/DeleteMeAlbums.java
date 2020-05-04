@@ -21,14 +21,14 @@ public class DeleteMeAlbums extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<DeleteMeAlbums>
+    public static class Builder implements AbstractBuilder<DeleteMeAlbums>
     {
         private final List<String> albumIds;
 
         public Builder(List<String> albumIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(albumIds);
-            spotifyRequestParamValidationService.validateIds50(albumIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(albumIds);
+            //spotifyRequestParamValidationService.validateIds50(albumIds);
             this.albumIds = albumIds;
         }
 

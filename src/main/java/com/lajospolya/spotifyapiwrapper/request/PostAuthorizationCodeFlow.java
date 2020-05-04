@@ -20,14 +20,14 @@ public class PostAuthorizationCodeFlow extends AbstractSpotifyRequest<Authorizin
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostAuthorizationCodeFlow>
+    public static class Builder implements AbstractBuilder<PostAuthorizationCodeFlow>
     {
         private final String code;
         private final String redirectUri;
 
         public Builder(String code, String redirectUri) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(code, redirectUri);
+            //spotifyRequestParamValidationService.validateParametersNotNull(code, redirectUri);
             this.code = code;
             this.redirectUri = redirectUri;
         }

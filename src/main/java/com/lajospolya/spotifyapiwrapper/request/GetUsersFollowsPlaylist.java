@@ -21,15 +21,15 @@ public class GetUsersFollowsPlaylist extends AbstractSpotifyRequest<List<Boolean
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetUsersFollowsPlaylist>
+    public static class Builder implements AbstractBuilder<GetUsersFollowsPlaylist>
     {
         private final String playListId;
         private final List<String> userIds;
 
         public Builder(String playListId, List<String> userIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playListId, userIds);
-            spotifyRequestParamValidationService.validateUserIds(userIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playListId, userIds);
+            //spotifyRequestParamValidationService.validateUserIds(userIds);
             this.playListId = playListId;
             this.userIds = userIds;
         }

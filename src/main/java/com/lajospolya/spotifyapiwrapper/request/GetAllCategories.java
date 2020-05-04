@@ -19,7 +19,7 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetAllCategories>
+    public static class Builder implements AbstractBuilder<GetAllCategories>
     {
         private String country;
         private String locale;
@@ -71,14 +71,14 @@ public class GetAllCategories extends AbstractSpotifyRequest<Categories>
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

@@ -21,13 +21,13 @@ public class GetArtists extends AbstractSpotifyRequest<Artists>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetArtists>
+    public static class Builder implements AbstractBuilder<GetArtists>
     {
         private final List<String> artistIds;
 
         public Builder(List<String> artistIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(artistIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(artistIds);
             this.artistIds = artistIds;
         }
 

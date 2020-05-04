@@ -20,14 +20,14 @@ public class GetShow extends AbstractSpotifyRequest<Show>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetShow>
+    public static class Builder implements AbstractBuilder<GetShow>
     {
         private final String showId;
         private String market;
 
         public Builder(String showId)
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(showId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(showId);
             this.showId = showId;
         }
 

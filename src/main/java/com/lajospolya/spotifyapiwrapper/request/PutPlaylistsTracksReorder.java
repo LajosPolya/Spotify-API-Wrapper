@@ -21,7 +21,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutPlaylistsTracksReorder>
+    public static class Builder implements AbstractBuilder<PutPlaylistsTracksReorder>
     {
         private final String playlistId;
         private final Integer rangeStart;
@@ -31,7 +31,7 @@ public class PutPlaylistsTracksReorder extends AbstractSpotifyRequest<PlaylistSn
 
         public Builder(String playlistId, Integer rangeStart, Integer insertBefore) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, rangeStart, insertBefore);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId, rangeStart, insertBefore);
             this.playlistId = playlistId;
             this.rangeStart = rangeStart;
             this.insertBefore = insertBefore;

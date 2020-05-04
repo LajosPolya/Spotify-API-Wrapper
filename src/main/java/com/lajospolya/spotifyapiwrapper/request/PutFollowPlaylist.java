@@ -20,14 +20,14 @@ public class PutFollowPlaylist extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutFollowPlaylist>
+    public static class Builder implements AbstractBuilder<PutFollowPlaylist>
     {
         private final String playlistId;
         private Boolean isPublic = true;
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

@@ -23,7 +23,7 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetArtistsAlbums>
+    public static class Builder implements AbstractBuilder<GetArtistsAlbums>
     {
         private final String artistId;
         private Integer limit;
@@ -33,7 +33,7 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 
         public Builder(String artistId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(artistId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(artistId);
             this.artistId = artistId;
         }
 
@@ -69,14 +69,14 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }
@@ -89,7 +89,7 @@ public class GetArtistsAlbums extends AbstractSpotifyRequest<ArtistsAlbums>
 
         public Builder albumType(List<AlbumType> includeGroups)
         {
-            spotifyRequestParamValidationService.validateList(includeGroups);
+            //spotifyRequestParamValidationService.validateList(includeGroups);
             this.includeGroups = includeGroups;
             return this;
         }

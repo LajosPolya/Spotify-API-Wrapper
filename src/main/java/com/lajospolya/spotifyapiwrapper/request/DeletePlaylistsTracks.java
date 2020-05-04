@@ -23,7 +23,7 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<DeletePlaylistsTracks>
+    public static class Builder implements AbstractBuilder<DeletePlaylistsTracks>
     {
         private final String playlistId;
         private final List<String> trackIds;
@@ -31,8 +31,8 @@ public class DeletePlaylistsTracks extends AbstractSpotifyRequest<PlaylistSnapsh
 
         public Builder(String playlistId, List<String> trackIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, trackIds);
-            spotifyRequestParamValidationService.validateTrackUris(trackIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId, trackIds);
+            //spotifyRequestParamValidationService.validateTrackUris(trackIds);
             this.playlistId = playlistId;
             this.trackIds = trackIds;
         }

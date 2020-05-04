@@ -21,7 +21,7 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetAlbumsTracks>
+    public static class Builder implements AbstractBuilder<GetAlbumsTracks>
     {
         private final String albumId;
         private Integer limit;
@@ -30,7 +30,7 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
 
         public Builder(String albumId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(albumId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(albumId);
             this.albumId = albumId;
         }
 
@@ -62,14 +62,14 @@ public class GetAlbumsTracks extends AbstractSpotifyRequest<Paging<SimplifiedTra
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

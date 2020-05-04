@@ -31,7 +31,7 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 
@@ -68,14 +68,14 @@ public class GetPlaylistsTracks extends AbstractSpotifyRequest<Paging<PlaylistTr
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit100(limit);
+            //spotifyRequestParamValidationService.validateLimit100(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

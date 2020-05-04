@@ -19,13 +19,13 @@ public class GetMePlayerCurrentlyPlaying extends AbstractSpotifyRequest<Currentl
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMePlayerCurrentlyPlaying>
+    public static class Builder implements AbstractBuilder<GetMePlayerCurrentlyPlaying>
     {
         private final String market;
 
         public Builder(String market) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(market);
+            //spotifyRequestParamValidationService.validateParametersNotNull(market);
             this.market = market;
         }
 

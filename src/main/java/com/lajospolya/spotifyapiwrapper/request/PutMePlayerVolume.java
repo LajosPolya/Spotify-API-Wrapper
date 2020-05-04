@@ -18,15 +18,15 @@ public class PutMePlayerVolume extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutMePlayerVolume>
+    public static class Builder implements AbstractBuilder<PutMePlayerVolume>
     {
         private final Integer volumePercent;
         private String deviceId;
 
         public Builder(Integer volumePercent) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(volumePercent);
-            spotifyRequestParamValidationService.validateVolume(volumePercent);
+            //spotifyRequestParamValidationService.validateParametersNotNull(volumePercent);
+            //spotifyRequestParamValidationService.validateVolume(volumePercent);
             this.volumePercent = volumePercent;
         }
 

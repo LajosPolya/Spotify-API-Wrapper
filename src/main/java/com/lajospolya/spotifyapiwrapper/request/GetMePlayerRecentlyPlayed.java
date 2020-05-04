@@ -20,7 +20,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMePlayerRecentlyPlayed>
+    public static class Builder implements AbstractBuilder<GetMePlayerRecentlyPlayed>
     {
         private Integer limit;
         private Long after;
@@ -55,7 +55,7 @@ public class GetMePlayerRecentlyPlayed extends AbstractSpotifyRequest<PagingCurs
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }

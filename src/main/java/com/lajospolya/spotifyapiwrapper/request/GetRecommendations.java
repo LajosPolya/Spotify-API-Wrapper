@@ -24,7 +24,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetRecommendations>
+    public static class Builder implements AbstractBuilder<GetRecommendations>
     {
         private final List<String> seed_artists;
         private final List<String> seed_tracks;
@@ -38,7 +38,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 
         public Builder(List<String> seed_artists, List<String> seed_tracks, List<String> seed_genres) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(seed_artists, seed_tracks, seed_genres);
+            //spotifyRequestParamValidationService.validateParametersNotNull(seed_artists, seed_tracks, seed_genres);
             this.seed_artists = seed_artists;
             this.seed_tracks = seed_tracks;
             this.seed_genres = seed_genres;
@@ -72,7 +72,7 @@ public class GetRecommendations extends AbstractSpotifyRequest<Recommendation>
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit100(limit);
+            //spotifyRequestParamValidationService.validateLimit100(limit);
             this.limit = limit;
             return this;
         }

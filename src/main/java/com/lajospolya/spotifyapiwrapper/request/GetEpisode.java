@@ -20,7 +20,7 @@ public class GetEpisode extends AbstractSpotifyRequest<Episode>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetEpisode>
+    public static class Builder implements AbstractBuilder<GetEpisode>
     {
         private final String episodeId;
 
@@ -28,7 +28,7 @@ public class GetEpisode extends AbstractSpotifyRequest<Episode>
 
         public Builder(String episodeId)
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(episodeId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(episodeId);
             this.episodeId = episodeId;
         }
 

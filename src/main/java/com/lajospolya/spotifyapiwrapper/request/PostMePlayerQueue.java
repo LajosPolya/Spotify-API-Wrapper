@@ -18,14 +18,14 @@ public class PostMePlayerQueue extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostMePlayerQueue>
+    public static class Builder implements AbstractBuilder<PostMePlayerQueue>
     {
         private final String uri;
         private String deviceId;
 
         public Builder(String uri) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(uri);
+            //spotifyRequestParamValidationService.validateParametersNotNull(uri);
             this.uri = uri;
         }
 

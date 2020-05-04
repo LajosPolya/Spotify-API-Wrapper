@@ -21,14 +21,14 @@ public class PutMeTracks extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutMeTracks>
+    public static class Builder implements AbstractBuilder<PutMeTracks>
     {
         private final List<String> trackIds;
 
         public Builder(List<String> trackIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(trackIds);
-            spotifyRequestParamValidationService.validateIds50(trackIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(trackIds);
+            //spotifyRequestParamValidationService.validateIds50(trackIds);
             this.trackIds = trackIds;
         }
 

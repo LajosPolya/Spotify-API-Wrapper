@@ -19,7 +19,7 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetFeaturedPlaylists>
+    public static class Builder implements AbstractBuilder<GetFeaturedPlaylists>
     {
         private String country;
         private String locale;
@@ -76,14 +76,14 @@ public class GetFeaturedPlaylists extends AbstractSpotifyRequest<FeaturedPlaylis
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }

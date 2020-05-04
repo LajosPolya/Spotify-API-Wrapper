@@ -20,7 +20,7 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetCategorysPlaylists>
+    public static class Builder implements AbstractBuilder<GetCategorysPlaylists>
     {
         private final String categoryId;
         private String country;
@@ -28,7 +28,7 @@ public class GetCategorysPlaylists extends AbstractSpotifyRequest<CategorysPlayl
 
         public Builder(String categoryId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(categoryId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(categoryId);
             this.categoryId = categoryId;
         }
 

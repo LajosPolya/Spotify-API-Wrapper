@@ -19,7 +19,7 @@ public class GetRecomendationGenres extends AbstractSpotifyRequest<Recommendatio
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetRecomendationGenres>
+    public static class Builder implements AbstractBuilder<GetRecomendationGenres>
     {
         public Builder() {}
 

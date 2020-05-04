@@ -19,7 +19,7 @@ public class GetMe extends AbstractSpotifyRequest<UserPrivate>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMe>
+    public static class Builder implements AbstractBuilder<GetMe>
     {
 
         public Builder() { }

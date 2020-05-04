@@ -19,14 +19,14 @@ public class PutPlaylistsImages extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutPlaylistsImages>
+    public static class Builder implements AbstractBuilder<PutPlaylistsImages>
     {
         private final String playlistId;
         private final String base64image;
 
         public Builder(String playlistId, String base64image) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId, base64image);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId, base64image);
             this.playlistId = playlistId;
             // TODO: Restring image size to 256KB if possible
             this.base64image = base64image;

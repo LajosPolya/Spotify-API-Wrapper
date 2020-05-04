@@ -19,7 +19,7 @@ public class PostClientCredentialsFlow extends AbstractSpotifyRequest<Authorizin
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostClientCredentialsFlow>
+    public static class Builder implements AbstractBuilder<PostClientCredentialsFlow>
     {
         public Builder() { }
 

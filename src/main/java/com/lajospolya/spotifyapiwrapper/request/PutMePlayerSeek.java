@@ -18,14 +18,14 @@ public class PutMePlayerSeek extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PutMePlayerSeek>
+    public static class Builder implements AbstractBuilder<PutMePlayerSeek>
     {
         private final Integer positionMs;
         private String deviceId;
 
         public Builder(Integer positionMs) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(positionMs);
+            //spotifyRequestParamValidationService.validateParametersNotNull(positionMs);
             this.positionMs = positionMs;
         }
 

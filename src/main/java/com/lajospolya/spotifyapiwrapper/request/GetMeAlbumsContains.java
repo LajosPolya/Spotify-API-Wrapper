@@ -20,14 +20,14 @@ public class GetMeAlbumsContains extends AbstractSpotifyRequest<List<Boolean>>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetMeAlbumsContains>
+    public static class Builder implements AbstractBuilder<GetMeAlbumsContains>
     {
         private final List<String> albumIds;
 
         public Builder(List<String> albumIds) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(albumIds);
-            spotifyRequestParamValidationService.validateIds50(albumIds);
+            //spotifyRequestParamValidationService.validateParametersNotNull(albumIds);
+            //spotifyRequestParamValidationService.validateIds50(albumIds);
             this.albumIds = albumIds;
         }
 

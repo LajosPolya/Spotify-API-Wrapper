@@ -22,13 +22,13 @@ public class GetPlaylistsImages extends AbstractSpotifyRequest<List<Image>>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetPlaylistsImages>
+    public static class Builder implements AbstractBuilder<GetPlaylistsImages>
     {
         private final String playlistId;
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

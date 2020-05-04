@@ -18,7 +18,7 @@ public class PostMePlayerPrevious extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<PostMePlayerPrevious>
+    public static class Builder implements AbstractBuilder<PostMePlayerPrevious>
     {
         private String deviceId;
 

@@ -1,14 +1,11 @@
 package com.lajospolya.spotifyapiwrapper.request;
 
-import com.lajospolya.spotifyapiwrapper.request.service.ISpotifyRequestParamValidationService;
-import com.lajospolya.spotifyapiwrapper.request.service.SpotifyRequestParamValidationService;
-
 /**
  * This is the base class for all Request Builders
  * @author Lajos Polya
  * @param <T> The type of the request it buils
  */
-public abstract class AbstractBuilder<T>
+public interface AbstractBuilder<T>
 {
     static final String IDS_QUERY_PARAM = "ids";
     static final String MARKET_QUERY_PARAM = "market";
@@ -44,12 +41,12 @@ public abstract class AbstractBuilder<T>
     static final String QUERY = "q";
     static final String INCLUDE_EXTERNAL = "include_external";
 
-    ISpotifyRequestParamValidationService spotifyRequestParamValidationService;
+    //ISpotifyRequestParamValidationService spotifyRequestParamValidationService;
 
-    AbstractBuilder()
-    {
-        spotifyRequestParamValidationService = new SpotifyRequestParamValidationService();
-    }
+    //AbstractBuilder()
+    //{
+    //    spotifyRequestParamValidationService = new SpotifyRequestParamValidationService();
+    //}
 
     /**
      * Build the Spotify Request with all appropriate headers, params, body, etc

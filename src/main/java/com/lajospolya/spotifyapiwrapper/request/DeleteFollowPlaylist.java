@@ -19,13 +19,13 @@ public class DeleteFollowPlaylist extends AbstractSpotifyRequest<Void>
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<DeleteFollowPlaylist>
+    public static class Builder implements AbstractBuilder<DeleteFollowPlaylist>
     {
         private final String playlistId;
 
         public Builder(String playlistId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(playlistId);
             this.playlistId = playlistId;
         }
 

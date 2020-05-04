@@ -21,7 +21,7 @@ public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEp
         super(requestBuilder);
     }
 
-    public static class Builder extends AbstractBuilder<GetShowsEpisodes>
+    public static class Builder implements AbstractBuilder<GetShowsEpisodes>
     {
         private final String showId;
         private Integer limit;
@@ -30,7 +30,7 @@ public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEp
 
         public Builder(String showId) throws IllegalArgumentException
         {
-            spotifyRequestParamValidationService.validateParametersNotNull(showId);
+            //spotifyRequestParamValidationService.validateParametersNotNull(showId);
             this.showId = showId;
         }
 
@@ -62,14 +62,14 @@ public class GetShowsEpisodes extends AbstractSpotifyRequest<Paging<SimplifiedEp
 
         public Builder limit(Integer limit)
         {
-            spotifyRequestParamValidationService.validateLimit50(limit);
+            //spotifyRequestParamValidationService.validateLimit50(limit);
             this.limit = limit;
             return this;
         }
 
         public Builder offset(Integer offset)
         {
-            spotifyRequestParamValidationService.validateOffset(offset);
+            //spotifyRequestParamValidationService.validateOffset(offset);
             this.offset = offset;
             return this;
         }
