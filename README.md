@@ -18,20 +18,20 @@ implementation group: 'com.github.lajospolya', name: 'spotify-api-wrapper', vers
 ```
 Please note that only versions `3.0.RELEASE` and above are Android compatible.
 
-For other Dependency Management systems please check [Maven](https://mvnrepository.com/artifact/com.github.lajospolya/spotify-api-wrapper)
+For other Dependency Management systems, please check [Maven](https://mvnrepository.com/artifact/com.github.lajospolya/spotify-api-wrapper)
 or [Sonatype](https://search.maven.org/artifact/com.github.lajospolya/spotify-api-wrapper) repositories.
  
  ## General Usage
- The API-Wrapper consists of two basic parts; the Client and the Requests.
+ The API-Wrapper consists of two basic parts: the Client and the Requests.
 
 #### Client
-The Client is represented by the `SpotifyApiClient` class. The client can be authenticated using the 
+The client is represented by the `SpotifyApiClient` class. The client can be authenticated using the 
 [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow)
  or the 
  [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) 
  via two static factory methods.
 
-To read more about Spotify Authorization, please checkout [this link](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+To read more about Spotify Authorization, please check out [this link](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
 
 ##### Client Credentials Flow
 
@@ -52,7 +52,7 @@ SpotifyApiClient client = SpotifyApiClient
 All requests extend `AbstractSpotifyRequest<?>`
 
 Requests are built using the [Builder Pattern](https://en.wikipedia.org/wiki/Builder_pattern). All parameters for the `Builder` 
-constructor are mandatory to the request. All appended parameters (ex, market) are optional parameters.
+constructor are mandatory for the request. All appended parameters (ex, market) are optional parameters.
  
  for example
 
@@ -64,7 +64,7 @@ GetTrack getTrackRequest = new GetTrack.Builder(TRACK_ID)
 ```
 
 #### Sending a Synchronous Request (full example)
-The responses for all requests are typed.
+The responses to all requests are typed.
 
 ```java
 SpotifyApiClient client = SpotifyApiClient
@@ -105,9 +105,9 @@ client.reauthorizeAsync();
 Spotify has implemented [Conditional Requests](https://developer.spotify.com/documentation/web-api/concepts/api-calls#conditional-requests)
 through the use of [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag).
 
-Requests which support the use of ETags have an `etag` setter method. 
-Responses which support the use of ETags have a `getEtag` getter method. 
-If the ETag is set and the resource being requested hasn't changed then a null object will be returned.
+Requests that support ETags have an `etag` setter method. 
+Responses that support ETags have a `getEtag` getter method. 
+If the ETag is set and the resource being requested hasn't changed, then a null object will be returned.
 ```java
 SpotifyApiClient client = SpotifyApiClient
     .createAuthorizationFlowClient(CLIENT_ID, CLIENT_SECRET, CODE, REDIRECT_URL);
@@ -122,6 +122,6 @@ String etag = tracks.getEtag();
 GetMeTracks getUsersTracksCachedRequest = new GetMeTracks.Builder()
     .etag(etag) // set the etag
     .offset(0).limit(50).build();
-// If I haven't saved any tracks then tracksCached will be null
+// If I haven't saved any tracks, then tracksCached will be null
 Paging<SavedTrack> tracksCached = client.sendRequest(getUsersTracksCachedRequest);
 ```
