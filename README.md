@@ -102,7 +102,7 @@ client.reauthorizeAsync();
 ```
 
 #### Caching with ETags
-Spotify has implemented [Contitional Requests](https://developer.spotify.com/documentation/web-api/#conditional-requests) 
+Spotify has implemented [Conditional Requests](https://developer.spotify.com/documentation/web-api/concepts/api-calls#conditional-requests)
 through the use of [ETags](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag).
 
 Requests which support the use of ETags have an `etag` setter method. 
