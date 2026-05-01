@@ -1,5 +1,5 @@
 # Spotify-API-Wrapper
-An intuitive wrapper over the [Spotify Developer API](https://developer.spotify.com/documentation/web-api/reference/)
+An intuitive wrapper over the [Spotify Developer API](https://developer.spotify.com/documentation/web-api)
 
 ## Integrating with your App
 
